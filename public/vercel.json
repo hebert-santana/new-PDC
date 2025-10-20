@@ -45,6 +45,7 @@
     { "source": "/contato.html",                   "destination": "/pages/contato.html",                   "permanent": false },
     { "source": "/partidas.html",                  "destination": "/pages/partidas.html",                  "permanent": false },
     { "source": "/index.html", "destination": "/", "permanent": true },
-    { "source": "/pages/index.html", "destination": "/", "permanent": true }
+    { "source": "/pages/index.html", "destination": "/", "permanent": true },
+    { "source": "/admin.html", "destination": "/404", "permanent": false }
   ]
 }
