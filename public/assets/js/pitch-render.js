@@ -47,7 +47,7 @@
 
   // Carrega mercado
   async function loadMercado(){
-    const CANDIDATES = ['/data/mercado.images.json','/assets/data/mercado.images.json'];
+    const CANDIDATES = ['/assets/data/mercado.images.json'];
     for (const u of CANDIDATES){
       try{
         const arr = await jget(u);
@@ -121,7 +121,7 @@
 
   // ===== Lineups + override =====
   async function loadLineups(){
-    const base = await jget(`/data/lineups.json?t=${Date.now()}`).catch(()=>({version:1,tz:"-03:00",teams:{}}));
+    const base = await jget(`assets/data/lineups.json?t=${Date.now()}`).catch(()=>({version:1,tz:"-03:00",teams:{}}));
     try{
       const ov = JSON.parse(localStorage.getItem('lineups_override') || 'null');
       if (ov && ov.teams) base.teams = Object.assign(base.teams||{}, ov.teams);
