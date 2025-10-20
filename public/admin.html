@@ -28,11 +28,34 @@ header{padding:12px 16px;background:#fff;border-bottom:1px solid #e5e7eb}
   transform:scale(var(--zoom)); transform-origin:top left;
 }
 .pitch::after{content:""; position:absolute; left:var(--off-x); top:var(--off-y); width:var(--active-w); height:var(--active-h); outline:1px dashed rgba(14,165,183,.35); pointer-events:none}
-.player{position:absolute;transform:translate(-50%,-50%);text-align:center;width:var(--img)}
-.player img{display:block;width:var(--img);height:var(--img);border-radius:50%;background:#fff;border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.28)}
-.player.coach img{width:var(--img-coach);height:var(--img-coach)}
-.player .cap{margin-top:6px;font-size:.82rem;line-height:1.1;color:#0b192b;background:rgba(255,255,255,.96);border-radius:12px;padding:3px 8px;white-space:nowrap;max-width:160px;overflow:hidden;text-overflow:ellipsis}
-.player .alt-cap{margin-top:4px;font-size:.74rem;line-height:1.1;color:#111;background:rgba(255,255,255,.96);border-radius:10px;padding:2px 7px;display:inline-block}
+
+/* BALÃO DO JOGADOR FIXO */
+.player{
+  position:absolute; transform:translate(-50%,-50%); text-align:center;
+  width:var(--img); height:var(--img); overflow:visible;
+}
+.player img{
+  display:block; width:var(--img); height:var(--img);
+  border-radius:50%; background:#fff; border:2px solid #fff;
+  box-shadow:0 4px 14px rgba(0,0,0,.28);
+}
+.player.coach{ width:var(--img-coach); height:var(--img-coach); }
+.player.coach img{ width:var(--img-coach); height:var(--img-coach); margin:0 auto; }
+
+/* legendas fora do balão para não deslocar a foto */
+.player .cap{
+  position:absolute; left:50%; top:100%; transform:translateX(-50%);
+  margin-top:6px; font-size:.82rem; line-height:1.1; color:#0b192b;
+  background:rgba(255,255,255,.96); border-radius:12px; padding:3px 8px;
+  white-space:nowrap; max-width:160px; overflow:hidden; text-overflow:ellipsis;
+}
+.player .alt-cap{
+  position:absolute; left:50%; top:calc(100% + 24px); transform:translateX(-50%);
+  font-size:.74rem; line-height:1.1; color:#111;
+  background:rgba(255,255,255,.96); border-radius:10px; padding:2px 7px;
+  display:inline-block; white-space:nowrap;
+}
+
 .slot-chip{position:absolute;inset:auto auto 6px 6px;background:#111827;color:#fff;border-radius:8px;padding:2px 6px;font-size:.7rem;opacity:.9}
 .dragging{outline:2px dashed var(--ring);outline-offset:4px;cursor:grabbing}
 
@@ -43,6 +66,7 @@ header{padding:12px 16px;background:#fff;border-bottom:1px solid #e5e7eb}
 .guide.y{width:0;height:100%}.guide.y::after{top:0;bottom:0;width:2px;left:-1px}
 .grid-dot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--ring);opacity:.35;pointer-events:none;box-shadow:0 0 0 2px rgba(14,165,183,.2)}
 
+/* painel lateral */
 .side{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px;box-shadow:0 8px 18px rgba(2,6,23,.06);max-height:calc(100vh - 120px);overflow:auto}
 .cfg-row{display:grid;grid-template-columns:1.2fr .8fr .8fr auto;gap:8px}
 .slot-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
@@ -52,12 +76,9 @@ header{padding:12px 16px;background:#fff;border-bottom:1px solid #e5e7eb}
 .code{font-family:ui-monospace,Menlo,monospace;font-size:.84rem}
 
 /* status */
-.player.ok   img{ box-shadow:0 0 0 3px #22c55e, 0 6px 14px rgba(0,0,0,.28) }
+.player.ok img{ box-shadow:0 0 0 3px #22c55e, 0 6px 14px rgba(0,0,0,.28) }
 .player.doubt img{ box-shadow:0 0 0 3px #f59e0b, 0 6px 14px rgba(0,0,0,.28) }
 
-/* ajuste técnico centralizado */
-.player.coach{ width: calc(var(--img-coach) + 10px); }
-.player.coach img{ margin: 0 auto; }
 </style>
 </head>
 <body>
