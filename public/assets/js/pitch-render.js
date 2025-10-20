@@ -12,7 +12,7 @@
       .player.ok   img{ box-shadow:0 0 0 3px #22c55e, 0 6px 14px rgba(0,0,0,.28) }
       .player.doubt img{ box-shadow:0 0 0 3px #f59e0b, 0 6px 14px rgba(0,0,0,.28) }
       .player.coach{ width: var(--img-coach); }                /* figure do técnico = 64px */
-.player.coach img{ width: var(--img-coach); height: var(--img-coach); margin: 0 auto; } /* centraliza a foto */
+      .player.coach img{ width: var(--img-coach); height: var(--img-coach); margin: 0 auto; } /* centraliza a foto */
 
 }
 
@@ -121,7 +121,7 @@
 
   // ===== Lineups + override =====
   async function loadLineups(){
-    const base = await jget(`assets/data/lineups.json?t=${Date.now()}`).catch(()=>({version:1,tz:"-03:00",teams:{}}));
+    const base = await jget(`/assets/data/lineups.json?t=${Date.now()}`).catch(()=>({version:1,tz:"-03:00",teams:{}}));
     try{
       const ov = JSON.parse(localStorage.getItem('lineups_override') || 'null');
       if (ov && ov.teams) base.teams = Object.assign(base.teams||{}, ov.teams);
