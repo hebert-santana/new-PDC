@@ -5,14 +5,14 @@
   (function injectOnce(){
     if (document.getElementById('pitch-view-style')) return;
     const css = `
-      .player{position:absolute;transform:translate(-50%,-50%);text-align:center;width:92px}
-      .player img{display:block;width:92px;height:92px;border-radius:50%;background:#fff;border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.28)}
-      .player .cap{margin-top:6px;font-size:12.5px;line-height:1.1;color:#0b192b;background:rgba(255,255,255,.96);border-radius:12px;padding:3px 8px;white-space:nowrap;max-width:160px;display:inline-block}
-      .player .alt-cap{margin-top:4px;font-size:11.5px;line-height:1.1;color:#111;background:rgba(255,255,255,.96);border-radius:10px;padding:2px 7px;display:inline-block}
-      .player.ok   img{ box-shadow:0 0 0 3px #22c55e, 0 6px 14px rgba(0,0,0,.28) }
-      .player.doubt img{ box-shadow:0 0 0 3px #f59e0b, 0 6px 14px rgba(0,0,0,.28) }
-      .player.coach{ width: var(--img-coach); }                /* figure do técnico = 64px */
-      .player.coach img{ width: var(--img-coach); height: var(--img-coach); margin: 0 auto; } /* centraliza a foto */
+  .player{position:absolute;transform:translate(-50%,-50%);text-align:center;width:92px;height:92px;overflow:visible}
+  .player img{display:block;width:92px;height:92px;border-radius:50%;background:#fff;border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.28)}
+  .player .cap{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:6px;font-size:12.5px;line-height:1.1;color:#0b192b;background:rgba(255,255,255,.96);border-radius:12px;padding:3px 8px;white-space:nowrap;max-width:160px;display:inline-block}
+  .player .alt-cap{position:absolute;left:50%;top:calc(100% + 24px);transform:translateX(-50%);font-size:11.5px;line-height:1.1;color:#111;background:rgba(255,255,255,.96);border-radius:10px;padding:2px 7px;display:inline-block;white-space:nowrap}
+  .player.ok img{box-shadow:0 0 0 3px #22c55e,0 6px 14px rgba(0,0,0,.28)}
+  .player.doubt img{box-shadow:0 0 0 3px #f59e0b,0 6px 14px rgba(0,0,0,.28)}
+  .player.coach{width:70px;height:70px}
+  .player.coach img{width:70px;height:70px;margin:0 auto}
 
 }
 
