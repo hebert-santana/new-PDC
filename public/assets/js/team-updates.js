@@ -3,7 +3,7 @@
   'use strict';
 
   // Produção lê do /data; (se quiser, adicione '/assets/data/team-updates.json')
-  const SOURCES = ['assets/data/team-updates.json'];
+  const SOURCES = ['/assets/data/team-updates.json'];
 
   /* =============== UI helpers (chips) =============== */
   function ensureChipRow(colEl){
@@ -154,11 +154,45 @@
     }
   }
 
+
+
+  async function loadUpdatesOnce(){ return (await loadUpdates()) || { teams:{} }; }
+
+function clearChips(col){
+  col.querySelectorAll('.upd-chip,.chip-alert').forEach(n=>n.remove());
+}
+
+function applyChipsForTeam(col, updTeam){
+  clearChips(col);
+  const label = fmtHuman(updTeam?.last_update);
+  if (label) renderUpdatedChip(col, label);
+  const alertVal = updTeam?.alert ?? updTeam?.alert_msg ?? null;
+  if (alertVal) renderAlertChip(col, alertVal);
+}
+
+// Reaplica apenas para um teamKey
+async function refreshTeam(teamKey){
+  const data = await loadUpdatesOnce();
+  const updTeam = data?.teams?.[teamKey] || null;
+  document.querySelectorAll(`.lineup-col .status-card[data-team="${teamKey}"]`)
+    .forEach(sc => applyChipsForTeam(sc.closest('.lineup-col'), updTeam));
+}
+
+// canal: recebe {type:'refresh', teamKey}
+try{
+  const ch = new BroadcastChannel('lineups');
+  ch.onmessage = (e) => {
+    const k = e?.data?.teamKey || null;
+    if (e?.data?.type === 'refresh' && k) refreshTeam(k);
+  };
+}catch{}
+
+
   /* =============== Bootstrap =============== */
-  document.addEventListener('DOMContentLoaded', async () => {
-    const data = await loadUpdates();
-    await injectChips(data || {});
-  });
+ document.addEventListener('DOMContentLoaded', async () => {
+  const data = await loadUpdates();
+  await injectChips(data || {});
+});
 
   // util para gerar esqueleto no console
   window.TeamUpdates = {

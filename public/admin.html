@@ -499,11 +499,11 @@ $('btnSave').onclick = async () => {
   const payload = currentPayload(); // { version, tz, teams:{ [k]: {...} } }
 
   try {
-    const r = await fetch('/api/lineups', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ merge: true, teams: payload.teams })
+    const r = await fetch('/api/lineups',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ merge:true, teams: payload.teams })
     });
+    
     if (!r.ok) throw new Error('HTTP ' + r.status);
     alert('Salvo no servidor (lineups.json atualizado).');
   } catch (e) {
