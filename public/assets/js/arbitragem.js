@@ -1,6 +1,6 @@
 // assets/js/arbitragem.js
 (() => {
-  const SRC = '/data/arbitragem.json';
+  const SRC = 'assets/data/arbitragem.json';
   const fmt = v => Number(v).toFixed(2).replace('.', ',');
 
   // -------- helpers de estatística --------

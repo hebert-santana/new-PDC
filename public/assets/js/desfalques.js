@@ -4,14 +4,8 @@
 
   // Onde procurar o JSON (primeiro que responder é usado)
   const JSON_CANDIDATES = [
-    "/data/desfalques.json",
-    "data/desfalques.json",
-    "./data/desfalques.json",
-    // fallbacks (se mover a pasta no futuro)
     "/assets/data/desfalques.json",
     "assets/data/desfalques.json",
-    "/assets/js/desfalques.json",
-    "assets/js/desfalques.json",
   ];
 
   // Apelidos → slug oficial (cobre variações comuns)

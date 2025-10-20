@@ -3,7 +3,7 @@
   'use strict';
 
   // Produção lê do /data; (se quiser, adicione '/assets/data/team-updates.json')
-  const SOURCES = ['/data/team-updates.json'];
+  const SOURCES = ['assets/data/team-updates.json'];
 
   /* =============== UI helpers (chips) =============== */
   function ensureChipRow(colEl){

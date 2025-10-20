@@ -4,7 +4,7 @@
   if (window.__avisoEscInitDone) return;
   window.__avisoEscInitDone = true;
 
-  const CFGS = ['/data/aviso-escalacoes.json','/assets/data/aviso-escalacoes.json'];
+  const CFGS = ['/assets/data/aviso-escalacoes.json'];
   const BIA = 'https://www.biascore.com.br';
   const CUPOM = 'BIA50';
   const DEADLINE = new Date('2025-10-15T18:59:00-03:00').getTime();
