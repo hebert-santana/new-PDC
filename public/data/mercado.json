@@ -1,0 +1,6 @@
+{
+  "rodada": 29,
+  "status": 1,
+  "fechamentoISO": "2025-10-18T18:29:00-03:00",
+  "nota": "Atualizar o arquivo em cada rodada. status: 1=aberto, 2=fechado, 3=manutencao"
+}

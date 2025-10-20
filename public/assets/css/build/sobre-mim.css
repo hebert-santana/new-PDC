@@ -1,0 +1,199 @@
+/* ==========================================================
+   SOBRE-MIM — folha de estilos
+   Usa tokens do tema em styles.css (—laranja, —azul, —cinza-*)
+   ========================================================== */
+
+/* Base */
+html{ scroll-behavior:smooth; }
+body{
+  background:#f7f7f7;
+  color:var(--cinza-escuro);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
+  line-height:1.55;
+}
+
+/* ===== Layout principal */
+.page-wrap{ max-width:1200px; margin:28px auto; padding:0 16px; }
+.sobre-card{
+  background:#fff; border-radius:14px;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
+  padding:22px;
+}
+
+/* ===== Hero (foto + título) */
+.sobre-hero{
+  display:grid; grid-template-columns:140px 1fr; gap:16px; align-items:center;
+}
+.sobre-foto{
+  width:140px; height:140px; border-radius:12px; overflow:hidden;
+  background:#e9ecef; display:grid; place-items:center;
+  border:2px solid #fff; box-shadow:0 4px 14px rgba(64,168,176,.20);
+}
+.sobre-foto img{ width:100%; height:100%; object-fit:cover; }
+.sobre-titulo{ margin:0; font-weight:800; font-size:1.38rem; color:var(--cinza-escuro); }
+.sobre-sub{ margin:.25rem 0 0; color:var(--cinza-claro); font-size:.98rem; }
+
+/* ===== Corpo / tipografia */
+.sobre-body{ margin-top:16px; color:var(--cinza-escuro); line-height:1.65; }
+.sobre-body h2{
+  font-size:1.02rem; margin:18px 0 8px; font-weight:900; color:var(--laranja);
+  position:relative; display:inline-block; padding-right:.2rem;
+}
+.sobre-body h2::after{
+  content:""; display:block; height:2px; width:36px; background:var(--laranja);
+  border-radius:2px; margin-top:6px; opacity:.85;
+}
+
+/* Links de ação (chips) no topo */
+.sobre-links{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+.sobre-links a{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:8px 12px; border-radius:10px; text-decoration:none; font-weight:800;
+  border:2px solid var(--laranja); color:var(--laranja); background:#fff;
+  transition:transform .15s, background-color .15s, color .15s, border-color .15s;
+}
+.sobre-links a .bi{ font-size:1rem; color:inherit; }
+.sobre-links a:hover{ background:var(--laranja); color:#fff; transform:translateY(-1px); }
+.sobre-links a:focus-visible{ outline:2px solid var(--laranja); outline-offset:2px; }
+
+/* Links no texto */
+.sobre-body a{ color:var(--laranja); text-decoration:none; font-weight:700; }
+.sobre-body a:hover{ text-decoration:underline; }
+
+/* Listas enxutas */
+.sobre-body ul{ padding-left:18px; margin:6px 0 0; }
+.sobre-body li{ margin:4px 0; }
+.bullet-clean{ list-style:none; padding-left:0; margin:6px 0 14px; }
+.bullet-clean li{ position:relative; padding-left:18px; margin:6px 0; }
+.bullet-clean li::before,
+.agr-list li::before{
+  content:""; width:8px; height:8px; border-radius:50%; background:var(--laranja);
+  position:absolute; left:0; top:.7em;
+}
+
+/* Agradecimentos */
+.agr-list{ list-style:none; padding-left:0; margin:8px 0 0; }
+.agr-list li{ position:relative; padding-left:18px; margin:6px 0; }
+
+/* Agradecimento especial */
+.agr-especial{
+  margin-top:14px;
+  padding:10px 12px;
+  background:#fff;
+  border:1px dashed #eee;
+  border-radius:12px;
+  box-shadow:0 4px 14px rgba(0,0,0,.04);
+  color:#4b4b4b;
+  display:flex; align-items:flex-start; gap:.5rem;
+  line-height:1.45;
+}
+.agr-especial i{ color:var(--laranja); margin-top:2px; }
+.agr-especial p{ margin:0; font-weight:600; }
+.rb-egg{ margin-left:.15rem; opacity:.9; cursor:help; }
+
+/* Nota / navegação */
+.nota{
+  font-size:.92rem; color:#4b4b4b; background:#fff; border-radius:12px;
+  padding:12px; box-shadow:0 6px 20px rgba(0,0,0,.06); margin-top:14px;
+  border-left:4px solid var(--laranja);
+}
+
+/* ===== Contato & Parcerias (somente comercial) */
+.contato-cta{
+  margin-top:16px; background:#fff; border-radius:12px; padding:14px;
+  box-shadow:0 6px 20px rgba(0,0,0,.06); border-left:4px solid var(--laranja);
+}
+.contato-cta h2{
+  font-size:1.02rem; margin:0 0 6px; color:var(--laranja); font-weight:800;
+}
+.contato-sub{ margin:0 0 10px; color:var(--cinza-claro); }
+
+.contato-grid{
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px;
+}
+
+/* Cartões de contato */
+.cont-card{
+  position:relative; display:flex; flex-direction:column; gap:4px; text-decoration:none;
+  padding:12px; border-radius:12px; border:1px solid rgba(0,0,0,.06); background:#fff;
+  box-shadow:var(--shadow-2); color:var(--cinza-escuro); font-weight:800;
+  transition:transform .15s, box-shadow .15s, border-color .15s, background-color .15s;
+  padding-right:92px; /* reserva espaço pro selinho */
+}
+.cont-card i{ font-size:1.2rem; line-height:1; }
+.cont-card span{ font-size:.98rem; }
+.cont-card small{ font-weight:600; color:var(--cinza-claro); }
+.cont-card:hover{ transform:translateY(-1px); box-shadow:0 8px 22px rgba(0,0,0,.10); }
+
+/* Selinho “somente comercial” */
+.cont-badge{
+  position:absolute; top:10px; right:10px;
+  font-size:.62rem; font-weight:800; line-height:1;
+  padding:4px 6px; border-radius:999px;
+  background:#f7f7f7; border:1px dashed #eaeaea; color:#7A8A8E; pointer-events:none;
+}
+
+/* Cores por canal */
+.cont-card.-whats { border-color:#25D36633; background:#25D3660d; }
+.cont-card.-email { border-color:#ff7a0033; background:#ff7a000d; }
+.cont-card.-ig    { border-color:#e1306c33; background:#e1306c0d; }
+
+/* Info adicional */
+.contato-note{
+  display:block; line-height:1.35; margin:10px 0 2px; color:#6b6b6b; max-width:100%; overflow-wrap:anywhere;
+}
+.contato-note i{ float:left; margin:2px 8px 0 0; color:var(--azul); }
+.contato-note::after{ content:""; display:block; clear:both; }
+
+/* Email + botão copiar */
+.cont-card .cont-email{
+  display:flex; align-items:center; gap:8px; justify-content:space-between;
+  background:#fff; padding:8px 10px; border:1px dashed #eaeaea; border-radius:10px;
+  font-size:.8rem; font-weight:600; color:var(--cinza-claro); margin-top:4px; user-select:text; white-space:nowrap;
+}
+.copy-btn{
+  display:inline-flex; align-items:center; gap:.35rem; font-weight:800; font-size:.75rem; color:#253035;
+  background:#f7f7f7; border:1px solid #e6e6e6; border-radius:999px; padding:4px 8px; line-height:1; cursor:pointer;
+}
+.copy-btn:hover{ background:#efefef; }
+.copy-btn:focus-visible{ outline:2px solid rgba(64,168,176,.35); outline-offset:2px; }
+
+/* ===== Modo ultra-minimal (adicione .sobre-ultra no <body>) */
+.sobre-ultra .sobre-card{ padding:16px; box-shadow:0 4px 16px rgba(0,0,0,.07); }
+.sobre-ultra .sobre-hero{ grid-template-columns:120px 1fr; gap:12px; }
+.sobre-ultra .sobre-foto{ width:120px; height:120px; box-shadow:0 3px 10px rgba(64,168,176,.16); }
+.sobre-ultra .sobre-titulo{ font-size:1.18rem; }
+.sobre-ultra .sobre-sub{ font-size:.9rem; }
+.sobre-ultra .sobre-body h2{ font-size:.96rem; margin:12px 0 6px; }
+.sobre-ultra .sobre-links a{ padding:6px 10px; font-size:.95rem; border-width:1.5px; }
+.sobre-ultra .contato-cta{ padding:10px; }
+.sobre-ultra .cont-card{ padding:10px; }
+
+/* ===== Acessibilidade / Motion */
+@media (prefers-reduced-motion: reduce){
+  .sobre-links a, .cont-card{ transition:none; }
+  .sobre-links a:hover, .cont-card:hover{ transform:none; }
+}
+
+/* ===== Responsivo */
+@media (max-width:900px){
+  .contato-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:640px){
+  .sobre-hero{ grid-template-columns:1fr; }
+  .sobre-foto{ margin-inline:auto; }
+  .sobre-titulo, .sobre-sub{ text-align:center; }
+  .sobre-card{ padding:18px; }
+}
+@media (max-width:520px){
+  .contato-grid{ grid-template-columns:1fr; }
+  .cont-card .cont-email{ font-size:.75rem; text-align:center; display:block; margin-top:6px; }
+}
+@media (max-width:420px){
+  .cont-badge{ font-size:.58rem; padding:3px 6px; }
+  .cont-card{ padding-right:72px; }
+}
+@media (max-width:380px){
+  .sobre-links{ gap:8px; }
+  .sobre-links a{ padding:7px 10px; font-size:.95rem; }
+}

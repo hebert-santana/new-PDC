@@ -1,0 +1,63 @@
+<!-- /partials/botoes-nav.html -->
+<div class="container">
+  
+  <nav class="hero-buttons" aria-label="Navegação de páginas">
+
+     
+    <a href="/" class="btn-noticia btn-nav">
+      <i class="bi bi-people-fill me-1" aria-hidden="true"></i>
+      Prováveis Escalações
+    </a>
+
+    <!-- <a href="/pages/partidas.html" class="btn-noticia btn-nav">
+      <i class="bi bi-calendar2-event me-1" aria-hidden="true"></i>
+      Partidas da Rodada
+    </a> -->
+
+    <a href="/pages/mais-indicados-do-cartola.html" class="btn-noticia btn-nav">
+      <i class="bi bi-graph-up-arrow me-1" aria-hidden="true"></i>
+      Mais Indicados do Cartola
+    </a>
+
+    <a class="btn-noticia btn-nav" href="https://whatsapp.com/channel/0029VbBFrZ4Gk1FxlriZ7R2I" target="_blank"
+      rel="noopener">
+      Entrar no Canal
+      <i class="bi bi-whatsapp me-1" aria-hidden="true"></i>
+    </a>
+
+     
+        <!-- ============ LIVE ============ -->
+
+   <!-- <a class="btn-noticia btn-nav btn-live" 
+       href="https://www.youtube.com/watch?v=3P2FRjLN1mg" 
+       target="_blank" rel="noopener">
+      <i class="bi bi-broadcast-pin me-1" aria-hidden="true"></i>
+      LIVE AO VIVO
+    </a> -->
+
+    <!-- ============ /LIVE ============ -->
+    <!--
+    <button id="editToggle" class="btn-noticia btn-nav" type="button" aria-pressed="false">
+      <i class="bi bi-arrows-move me-1" aria-hidden="true"></i> Editar posições
+    </button>
+    -->
+  </nav>
+  
+</div>
+
+<script>
+  // marca o botão da página atual
+  (function () {
+    const norm = (u) => new URL(u, location.origin).pathname.replace(/\/index\.html$/, '/');
+    const here = norm(location.href);
+    document.querySelectorAll('.hero-buttons a.btn-nav').forEach(a => {
+      if (norm(a.href) === here) {
+        a.setAttribute('aria-current', 'page');
+        a.classList.add('is-active');
+      }
+    });
+  })();
+</script>
+
+
+

@@ -1,0 +1,622 @@
+.refresh-container{ 
+  text-align:center; 
+  margin:28px 0; 
+}
+
+/* botão base */
+.refresh-lineups{
+  display:inline-flex; flex-direction:column; align-items:center; gap:6px;
+  background:linear-gradient(135deg,#fb5904,#ff7a1a); color:#fff;
+  font-weight:800; font-size:18px; line-height:1.2;
+  padding:20px 40px; border:0; border-radius:20px; cursor:pointer;
+  box-shadow:0 10px 28px rgba(251,89,4,.35);
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  position:relative; overflow:hidden;
+  text-transform:uppercase;
+}
+
+/* leve brilho animado no gradiente */
+.refresh-lineups::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(120deg,rgba(255,255,255,.25) 0%,rgba(255,255,255,0) 60%);
+  transform:translateX(-100%);
+  animation:shine 3s infinite;
+}
+@keyframes shine{
+  to{ transform:translateX(100%); }
+}
+
+/* textos */
+.refresh-lineups .lbl{ letter-spacing:.5px; font-size:20px; }
+.refresh-lineups .sublbl{ font-weight:500; opacity:.95; font-size:13px }
+
+/* hover/focus */
+.refresh-lineups:hover{ transform:translateY(-3px) scale(1.02);
+  box-shadow:0 12px 32px rgba(251,89,4,.45); }
+.refresh-lineups:focus-visible{ outline:3px solid #ffb07a; outline-offset:4px; }
+
+/* pulsante (até o 1º clique) */
+.attn{ animation:pulse 1.6s ease-in-out infinite; }
+@keyframes pulse{
+  0%{ box-shadow:0 0 0 0 rgba(251,89,4,.45); }
+  70%{ box-shadow:0 0 0 16px rgba(251,89,4,0); }
+  100%{ box-shadow:0 0 0 0 rgba(251,89,4,0); }
+}
+
+/* carregando */
+.refresh-lineups.is-loading{ pointer-events:none; opacity:.9; }
+.refresh-lineups.is-loading i{ animation:spin .8s linear infinite; }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+/* sucesso */
+.refresh-lineups.is-done{
+  background:linear-gradient(135deg,#23a566,#27c079);
+  box-shadow:0 10px 28px rgba(35,165,102,.35);
+}
+
+/* responsivo */
+@media (max-width:768px){
+  .refresh-lineups{
+    width:90%;
+    padding:18px;
+    font-size:16px;
+  }
+  .refresh-lineups .lbl{ font-size:18px; }
+  .refresh-lineups .sublbl{ font-size:12px; }
+}
+
+
+
+
+
+
+
+/* arbitragem + botão */
+.btn-refresh{display:inline-flex;align-items:center;gap:.5rem;background:#fff;border:1px solid #e5e7eb;padding:.5rem .75rem;border-radius:10px;font-weight:600;line-height:1}
+.btn-refresh.attn{box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+.btn-refresh.is-loading{opacity:.7;pointer-events:none}
+.btn-refresh.is-done{background:#ecfdf5;border-color:#10b981}
+
+.arb-wrap{margin:12px 0}
+.arb-meta .match-chip{display:inline-flex;align-items:center;gap:.4rem;background:#f3f4f6;border:1px solid #e5e7eb;border-radius:9999px;padding:.25rem .6rem;margin:.5rem 0}
+.arb-card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:10px 12px}
+.arb-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.arb-badge{background:#111827;color:#fff;border-radius:9999px;padding:2px 8px;font-size:12px}
+.arb-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.arb-stat .val{font-weight:700}
+.arb-k--ok{color:#059669}
+.arb-k--bad{color:#dc2626}
+.arb-pill{display:flex;align-items:center;gap:.5rem;background:#f9fafb;border:1px solid #e5e7eb;border-radius:9999px;padding:.25rem .6rem}
+
+.custom-provaveis-item{overflow:visible}
+
+
+/* === Arbitragem: fallback visibilidade/estilo === */
+.arb-wrap{display:block; margin:12px auto; max-width:920px; position:relative; z-index:1}
+.arb-wrap.-micro{max-width:unset}
+.arb-card{background:#fff; border:1px solid #e9ecef; border-radius:12px; padding:12px}
+.arb-head{display:flex; align-items:center; gap:8px; margin-bottom:8px}
+.arb-badge{margin-left:auto; font-size:.75rem; background:#eef4ff; color:#0d47a1;
+  border-radius:999px; padding:.15rem .5rem}
+.arb-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:10px}
+.arb-stat .val{font-weight:700}
+.arb-k--ok{color:#198754}
+.arb-k--bad{color:#dc3545}
+
+/* Versão micro (pílula) */
+.arb-pill{display:inline-flex; align-items:center; gap:6px;
+  background:#f6f7fb; border:1px solid #e9ecef; border-radius:999px; padding:6px 10px;
+  font-size:.9rem}
+.arb-pill .sep{opacity:.55; padding:0 4px}
+
+/* Espaço entre arbitragem e campinhos */
+.custom-provaveis-item .arb-wrap + .lineups{margin-top:8px}
+
+/* Estado vazio (se aparecer) */
+.empty-card{background:#fff; border:1px dashed #e0e0e0; border-radius:12px; padding:16px}
+.arb-wrap{display:block; position:relative; z-index:1; margin:12px auto; max-width:920px}
+.custom-provaveis-item{position:relative}
+
+
+
+.backtop-lane{ display:flex; justify-content:center; margin:8px 0 4px }
+.backtop-btn{
+  display:inline-flex; align-items:center; gap:.25rem;
+  font-size:.85rem; color:#6b7280; background:#f9fafb;
+  border:1px solid #e5e7eb; border-radius:999px;
+  padding:.25rem .6rem; line-height:1; text-decoration:none;
+}
+.backtop-btn:hover{ background:#f3f4f6; color:#374151 }
+.backtop-btn i{ font-size:1rem; line-height:1 }
+
+
+/* — Botão "Topo" minimalista e central — */
+.arb-slot{padding-top:6px}
+.arb-slot .backtop-lane{display:flex;justify-content:center;margin-top:8px}
+
+.backtop-btn{
+  display:inline-flex;align-items:center;gap:.35rem;
+  background:#fff;border:1px solid #e5e7eb;border-radius:9999px;
+  padding:.3rem .6rem;font-weight:600;font-size:.85rem;color:#334155;
+  box-shadow:0 1px 2px rgba(0,0,0,.04); text-decoration:none;
+}
+.backtop-btn:hover{background:#f9fafb}
+.backtop-btn i{font-size:1rem;line-height:1}
+
+/* (opcional) um hairline bem sutil acima da pílula */
+.arb-topline{
+  height:1px; margin:6px 0 10px;
+  background:linear-gradient(90deg,transparent,#e5e7eb,transparent);
+}
+
+
+
+/* container do botão ocupa a largura toda */
+.arb-slot .backtop-lane{
+  display:flex;
+  justify-content:center;
+  margin-top:12px;
+  width:100%;
+}
+
+/* botão em si */
+.backtop-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:9999px;
+  padding:.3rem .9rem;
+  font-weight:600;
+  font-size:.85rem;
+  color:#334155;
+  box-shadow:0 1px 2px rgba(0,0,0,.04);
+  text-decoration:none;
+}
+.backtop-btn:hover{background:#f9fafb}
+.backtop-btn i{font-size:1rem;line-height:1}
+
+
+
+/* Market bar chip */
+.market-chip {
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  padding:.35rem .9rem;
+  border-radius:9999px;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  box-shadow:0 2px 4px rgba(0,0,0,.05);
+  font-size:.9rem;
+  font-weight:500;
+  color:#111827;
+}
+
+.market-chip i {
+  font-size:1rem;
+  color:#4b5563;
+}
+
+.market-chip .mb-label {
+  opacity:.8;
+}
+
+.market-chip .mb-status {
+  font-weight:700;
+  margin-left:2px;
+}
+
+.market-chip .dot {
+  opacity:.5;
+}
+
+.market-chip .mb-countdown {
+  font-size:.85rem;
+  color:#374151;
+}
+
+
+/* Market bar chip */
+.market-chip {
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  padding:.35rem .9rem;
+  border-radius:9999px;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  box-shadow:0 2px 4px rgba(0,0,0,.05);
+  font-size:.9rem;
+  font-weight:500;
+  color:#111827;
+}
+
+.market-chip i {
+  font-size:1rem;
+  color:#4b5563;
+}
+
+.market-chip .mb-label {
+  opacity:.8;
+}
+
+.market-chip .mb-status {
+  font-weight:700;
+  margin-left:2px;
+}
+
+/* cores dinâmicas */
+.market-chip .mb-status.open { color:#16a34a; }   /* verde */
+.market-chip .mb-status.closed { color:#dc2626; } /* vermelho */
+.market-chip .mb-status.waiting { color:#6b7280; }/* cinza */
+
+.market-chip .dot {
+  opacity:.5;
+}
+
+.market-chip .mb-countdown {
+  font-size:.85rem;
+  color:#374151;
+}
+
+
+
+
+
+/* JOGO DE MESTRE CTA */
+
+/* Imagem inteira vira link */
+.cta-img-link { display:block; width:100%; cursor:pointer; }
+.cta-img-link img { width:100%; height:auto; display:block; border-radius:12px; }
+.cta-img-link:focus-visible { outline:3px solid #7c3aed; outline-offset:4px; }
+/* Limite e centralização */
+.cta-wrap{width:min(90vw,1280px);margin:16px auto}
+
+/* Imagem clicável com efeitos */
+.cta-img-link{
+  position:relative;display:block;border-radius:16px;overflow:hidden;
+  box-shadow:0 6px 24px rgba(0,0,0,.18);transition:transform .22s, box-shadow .22s;
+  cursor:pointer
+}
+.cta-img-link img{display:block;width:100%;height:auto}
+
+/* Brilho que varre */
+.cta-img-link::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 0,rgba(255,255,255,.25) 20%,transparent 40%);
+  transform:translateX(-120%);transition:transform .6s
+}
+
+/* Dica “clique” discreta */
+.cta-hint{
+  position:absolute;left:50%;bottom:12px;transform:translateX(-50%);
+  padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;
+  font-weight:700;font-size:12px;letter-spacing:.4px;pointer-events:none;
+  opacity:.92
+}
+
+/* Hover: zoom leve + sombra + varredura */
+.cta-img-link:hover{transform:scale(1.015);box-shadow:0 14px 44px rgba(0,0,0,.28)}
+.cta-img-link:hover::after{transform:translateX(120%)}
+
+/* Acessibilidade no teclado */
+.cta-img-link:focus-visible{outline:3px solid #7c3aed;outline-offset:4px}
+
+
+
+
+
+
+
+/* ===== BIAScore CTA — IA premium futurista ===== */
+.biascore-cta.tech {
+  margin: 20px auto 34px;
+  max-width: 900px;
+  width: 100%;
+  padding: 24px 22px;
+  border-radius: 20px;
+  background:
+    radial-gradient(1200px 400px at 50% -20%, rgba(120,150,255,.15), transparent 70%),
+    linear-gradient(180deg, #0b0e19, #0a0d14);
+  border: 1px solid rgba(130,150,255,.18);
+  box-shadow:
+    0 0 40px rgba(20, 40, 80, .4),
+    inset 0 0 0 1px rgba(180,190,255,.05),
+    0 12px 28px rgba(10,15,30,.6);
+  color: #eaf0ff;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  animation: fadeIn .8s ease-out;
+  font-family: 'Inter', 'Poppins', system-ui, sans-serif;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Cabeçalho minimalista */
+.biascore-cta .cta-head {
+  display: flex; justify-content: center; align-items: center; gap: 10px;
+  margin-bottom: 8px;
+}
+.biascore-cta .brand {
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: .6px;
+  color: #8ca9ff;
+  text-shadow: 0 0 8px rgba(130,160,255,.4);
+}
+.biascore-cta .brand span {
+  color: #fff;
+  font-weight: 800;
+}
+.biascore-cta .tag {
+  font-size: .72rem;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(120,140,255,.15);
+  border: 1px solid rgba(120,140,255,.35);
+  color: #bcd0ff;
+  text-shadow: 0 0 4px rgba(150,180,255,.25);
+}
+
+/* Título e subtítulo */
+.biascore-cta .cta-title {
+  margin: 6px 0;
+  font-size: 1.22rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+.biascore-cta .cta-title b {
+  color: #89a9ff;
+  text-shadow: 0 0 10px rgba(130,160,255,.35);
+}
+.biascore-cta .cta-sub {
+  margin: 0 0 18px;
+  font-size: .95rem;
+  color: #cfd9ff;
+  opacity: .9;
+}
+
+/* Botão principal */
+.biascore-cta .cta-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.biascore-cta .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: .3px;
+  color: #fff;
+  background: linear-gradient(90deg, #3e6bff 0%, #8f5cff 100%);
+  box-shadow:
+    0 0 12px rgba(110,130,255,.6),
+    0 0 24px rgba(140,80,255,.3);
+  transition: transform .2s ease, box-shadow .25s ease, opacity .25s ease;
+}
+.biascore-cta .btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 0 16px rgba(120,150,255,.75),
+    0 0 32px rgba(140,80,255,.45);
+  opacity: .96;
+}
+.biascore-cta .btn-primary i {
+  font-size: 1.1rem;
+  filter: drop-shadow(0 0 3px rgba(255,255,255,.6));
+}
+
+/* Animação de brilho cíclico */
+.biascore-cta .btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.3) 50%, transparent 100%);
+  transform: translateX(-100%);
+  animation: sheen 4s infinite linear;
+  pointer-events: none;
+}
+@keyframes sheen { to { transform: translateX(100%); } }
+
+/* Cupom */
+.biascore-cta .coupon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.biascore-cta .coupon span {
+  font-size: .8rem;
+  color: #b9c3ff;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+}
+.biascore-cta .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(157,179,255,.18);
+  border: 1px solid rgba(157,179,255,.4);
+  color: #e8ecff;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  box-shadow: inset 0 0 10px rgba(150,160,255,.15);
+}
+.biascore-cta .pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 14px rgba(120,160,255,.4);
+  background: rgba(157,179,255,.25);
+}
+.biascore-cta .pill code {
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: .6px;
+}
+.biascore-cta .copied-tip {
+  color: #9dffa1;
+  font-weight: 700;
+}
+
+/* Deadline */
+.biascore-cta .cta-deadline {
+  font-size: .86rem;
+  color: #cbd3ff;
+  opacity: .95;
+  letter-spacing: .2px;
+  margin-top: 2px;
+}
+
+/* responsivo */
+@media(min-width:768px){
+  .biascore-cta .cta-actions{ flex-direction:row; justify-content:center; }
+}
+
+
+
+
+/* POSIÇÃO ANÚNCIOS */
+/* garante um grid flex saudável */
+.lineups {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;                /* opcional: espaço entre colunas */
+}
+
+/* colunas das escalações: ficam lado a lado, mas podem quebrar */
+.lineup-col {
+  flex: 1 1 340px;          /* cresce, encolhe; base ~340px */
+  min-width: 320px;
+}
+
+/* QUALQUER anúncio injetado dentro de .lineups vira “linha inteira” */
+.lineups .adsbygoogle,
+.lineups ins.adsbygoogle,
+.lineups [id^="google_ads_iframe_"],
+.lineups div[id^="google_ads_"] {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+  margin: 16px 0 !important; /* respiro acima/abaixo */
+}
+
+/* se o anúncio vier com um iframe interno, também força 100% */
+.lineups .adsbygoogle iframe {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+}
+
+.ad-slot.ad-inpage {
+  display: block;
+  width: 100%;
+  margin: 24px 0; /* respiro entre os jogos */
+  text-align: center;
+}
+
+
+
+
+/* EDIÇÃO DE URGÊNCIA */
+
+/* Urgência: barra + estados */
+.biascore-cta .cta-urgency{margin-top:6px}
+.biascore-cta .urg-track{
+  height:6px; border-radius:999px; overflow:hidden;
+  background:rgba(150,170,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(150,170,255,.12);
+  width: min(560px, 90%); margin: 0 auto 6px;
+}
+.biascore-cta .urg-track #urg-fill{
+  display:block; height:100%; width:0%;
+  background: linear-gradient(90deg,#7aa0ff,#9b7bff,#ff7f7f);
+  box-shadow: 0 0 14px rgba(120,160,255,.35);
+  transition: width .6s ease;
+}
+
+/* aviso visual conforme o tempo */
+.biascore-cta.is-warning .cta-deadline{ color:#ffd28a; }
+.biascore-cta.is-warning .btn-primary{ box-shadow:0 0 16px rgba(255,190,90,.35),0 0 32px rgba(140,80,255,.35); }
+
+.biascore-cta.is-critical .cta-deadline{ color:#ffb2b2; }
+.biascore-cta.is-critical .btn-primary{
+  animation: pulseCritical 1.1s ease-in-out infinite;
+  background: linear-gradient(90deg,#ff4d4d,#ff7b9a);
+}
+@keyframes pulseCritical{
+  0%{ transform:translateY(0) scale(1); box-shadow:0 0 18px rgba(255,85,85,.55),0 0 34px rgba(255,120,150,.35); }
+  50%{ transform:translateY(-1px) scale(1.02); box-shadow:0 0 26px rgba(255,85,85,.75),0 0 44px rgba(255,120,150,.45); }
+  100%{ transform:translateY(0) scale(1); }
+}
+
+
+
+/* contêiner com a imagem do campinho ao fundo */
+.pitch {
+  position: relative;
+  width: 631px;
+  height: 892px;
+  margin: 0 auto;
+  background: url('/assets/img/campinho.png') center/cover no-repeat;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.15);
+}
+
+/* jogador */
+.player {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 92px;
+}
+.player img {
+  display: block;
+  width: 92px; height: 92px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+.player .byline {
+  margin-top: 4px;
+  font-size: .85rem;
+  line-height: 1.1;
+  color: #0b192b;
+  background: rgba(255,255,255,.9);
+  border-radius: 10px;
+  padding: 2px 6px;
+  white-space: nowrap;
+  max-width: 120px;
+  transform: translateX(-14%);
+}
+
+/* técnico discreto */
+.player.coach img {
+  width: 64px; height: 64px;
+  box-shadow: none;
+}
+.player.coach .byline { font-size: .8rem; }
+
+
+.pitch{position:relative;width:631px;height:892px;margin:0 auto;
+  background:url('/assets/img/campinho.png') center/cover no-repeat;border-radius:16px;box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.player{position:absolute;transform:translate(-50%,-50%);text-align:center;width:92px}
+.player img{display:block;width:92px;height:92px;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.25);background:#fff}
+.player .byline{margin-top:4px;font-size:.85rem;line-height:1.1;color:#0b192b;background:rgba(255,255,255,.9);
+  border-radius:10px;padding:2px 6px;white-space:nowrap;max-width:120px;transform:translateX(-14%)}
+.player.coach img{width:64px;height:64px;box-shadow:none}
+.player.coach .byline{font-size:.8rem}

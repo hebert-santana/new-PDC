@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "tz": "-03:00",
+  "teams": {
+    "atletico-mg_v2": {
+      "last_update": "2025-10-18T17:32:16-03:00",
+      "alert": ""
+    },
+    "bahia_v2": {
+      "last_update": "2025-10-18T13:45:45-03:00",
+      "alert": ""
+    },
+    "botafogo_v2": {
+      "last_update": "2025-10-18T14:00:23-03:00",
+      "alert": ""
+    },
+    "bragantino_v2": {
+      "last_update": "2025-10-18T14:24:52-03:00",
+      "alert": ""
+    },
+    "ceara_v2": {
+      "last_update": "2025-10-17T23:30:16-03:00",
+      "alert": ""
+    },
+    "corinthians_v2": {
+      "last_update": "2025-10-18T14:52:21-03:00",
+      "alert": ""
+    },
+    "cruzeiro_v2": {
+      "last_update": "2025-10-18T16:36:11-03:00",
+      "alert": ""
+    },
+    "flamengo_v2": {
+      "last_update": "2025-10-18T15:33:13-03:00",
+      "alert": ""
+    },
+    "fluminense_v2": {
+      "last_update": "2025-10-17T23:30:16-03:00",
+      "alert": ""
+    },
+    "fortaleza_v2": {
+      "last_update": "2025-10-18T00:07:49-03:00",
+      "alert": ""
+    },
+    "gremio_v2": {
+      "last_update": "2025-10-18T14:51:30-03:00",
+      "alert": ""
+    },
+    "internacional_v2": {
+      "last_update": "2025-10-18T11:01:48-03:00",
+      "alert": ""
+    },
+    "juventude_v2": {
+      "last_update": "2025-10-18T14:16:09-03:00",
+      "alert": ""
+    },
+    "mirassol_v2": {
+      "last_update": "2025-10-18T14:16:09-03:00",
+      "alert": ""
+    },
+    "palmeiras_v2": {
+      "last_update": "2025-10-18T14:28:37-03:00",
+      "alert": ""
+    },
+    "santos_v2": {
+      "last_update": "2025-10-18T14:55:13-03:00",
+      "alert": ""
+    },
+    "sao-paulo_v2": {
+      "last_update": "2025-10-18T16:25:17-03:00",
+      "alert": ""
+    },
+    "sport_v2": {
+      "last_update": "2025-10-17T23:30:16-03:00",
+      "alert": ""
+    },
+    "vasco_v2": {
+      "last_update": "2025-10-18T14:31:10-03:00",
+      "alert": ""
+    },
+    "vitoria_v2": {
+      "last_update": "2025-10-17T23:30:16-03:00",
+      "alert": ""
+    }
+  }
+}

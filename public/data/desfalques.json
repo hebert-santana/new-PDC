@@ -1,0 +1,221 @@
+{
+  "comingSoon": false,
+  "message": "No fechamento (após boletins oficiais).",
+  "showSourceNote": true,
+  "hideWhenSoon": false,
+  "rodada": 29,
+  "generatedAt": "2025-10-17T08:49:30.509Z",
+  "corinthians": {
+    "suspensos": [
+      "Gustavo Henrique"
+    ],
+    "lesionados": [
+      "Vitinho"
+    ],
+    "timeProvavel": "Hugo Souza; Cacá, João Pedro, Matheuzinho e Matheus Bidu; Raniele, Breno Bidon e Garro; Yuri Alberto e Memphis Depay."
+  },
+  "atletico-mg": {
+    "suspensos": [],
+    "lesionados": [
+      "Alexsander",
+      "Caio Maia",
+      "Cuello",
+      "Júnior Santos",
+      "Lyanco",
+      "Patrick"
+    ],
+    "timeProvavel": "Everson; Vitor Hugo, Junior Alonso, Saravia e Guilherme Arana (?); Gustavo Scarpa, Igor Gomes e Bernard; Rony, Hulk (?) e Dudu (?)."
+  },
+  "cruzeiro": {
+    "suspensos": [
+      "Kaiki Bruno",
+      "Kaio Jorge"
+    ],
+    "lesionados": [
+      "Matheus Henrique",
+      "Sinisterra"
+    ],
+    "timeProvavel": "Léo Aragão; Villalba, Fabrício Bruno, William e Kauã Prates; Matheus Pereira, Lucas Romero e Christian; Gabriel, Wanderson (?) e Arroyo (?)."
+  },
+  "fortaleza": {
+    "suspensos": [
+      "Bareiro",
+      "Deyverson",
+      "Gastón Ávila",
+      "Kuscevic",
+      "Pablo Roberto"
+    ],
+    "lesionados": [
+      "João Ricardo"
+    ],
+    "timeProvavel": "Brenno; Lucas Gazal, Brítez, Mancuso e Diogo Barbosa; Lucas Sasha, Pochettino e Matheus Pereira; Breno Lopes e Lucero."
+  },
+  "flamengo": {
+    "suspensos": [],
+    "lesionados": ["Cebolinha"],
+    "timeProvavel": "Rossi; Léo Pereira, Léo Ortiz, Alex Sandro e Varela (?); Arrascaeta, Jorginho e De la Cruz (?); Pedro, Samuel Lino e Luiz Araújo (?)."
+  },
+  "palmeiras": {
+    "suspensos": [],
+    "lesionados": [
+      "Figueiredo",
+      "Lucas Evangelista",
+      "Paulinho"
+    ],
+    "timeProvavel": "Weverton; Gustavo Gómez, Murilo, Piquerez e Giay; Felipe Anderson, Andreas Pereira e Raphael Veiga; Vitor Roque e Flaco López."
+  },
+  "mirassol": {
+    "suspensos": [
+      "Alex Muralha",
+      "Negueba"
+    ],
+    "lesionados": [
+      "Edson Carioca",
+      "Lucas Ramon"
+    ],
+    "timeProvavel": "Walter; Jemmes, João Victor, Reinaldo e Daniel Borges; Neto Moura, Danielzinho e Guilherme Marques; Alesson, Cristian e Carlos Eduardo."
+  },
+  "sao-paulo": {
+    "suspensos": [],
+    "lesionados": [
+      "André Silva",
+      "Calleri",
+      "Luan Vinícius",
+      "Oscar",
+      "Ryan Francisco",
+      "Wendell"
+    ],
+    "timeProvavel": "Rafael; Ferraresi, Arboleda, Maílton e Patryck; Bobadilla, Rodriguinho e Marcos Antônio; Luciano e Tapia."
+  },
+  "internacional": {
+    "suspensos": [
+      "Óscar Romero"
+    ],
+    "lesionados": [
+      "Alan Rodríguez",
+      "Juninho",
+      "Rochet"
+    ],
+    "timeProvavel": "Anthoni; Victor Gabriel, Mercado, Bernabéi e Aguirre; Alan Patrick, Thiago Maia e Bruno Henrique; Carbonero e Vitinho."
+  },
+  "sport": {
+    "suspensos": [
+      "Aderlan"
+    ],
+    "lesionados": [
+      "Hereda",
+      "Hyoran"
+    ],
+    "timeProvavel": "Gabriel; Ramon Menezes, Rafael Thyere e Luan Cândido; Matheusinho, Lucas Lima e Zé Lucas; Derik Lacerda e Romarinho."
+  },
+  "ceara": {
+    "suspensos": [],
+    "lesionados": [
+      "Luiz Otávio"
+    ],
+    "timeProvavel": "Bruno Ferreira; Willian Machado, Marllon, Matheus Bahia e Fabiano Souza; Lucas Mugni, Lourenço e Richardson; Galeano, Pedro Henrique e Pedro Raul."
+  },
+  "botafogo": {
+    "suspensos": [
+      "Alexander Barboza",
+      "Marlon Freitas",
+      "Nathan Fernandes"
+    ],
+    "lesionados": [
+      "Bastos",
+      "Danilo",
+      "Kaio",
+      "Montoro",
+      "Neto"
+    ],
+    "timeProvavel": "Léo Linck; David Ricardo, Cuiabano e Vitinho; Santiago Rodríguez, Savarino e Newton; Arthur Cabral e Artur."
+  },
+  "bahia": {
+    "suspensos": [],
+    "lesionados": [
+      "Caio Alexandre",
+      "Everton Ribeiro"
+    ],
+    "timeProvavel": "Ronaldo; David Duarte, Gabriel Xavier, Iago e Gilberto (?); Jean Lucas, Acevedo e Michel Araújo (?); Willian José, Ademir e Sanabria."
+  },
+  "gremio": {
+    "suspensos": [
+      "Dodi"
+    ],
+    "lesionados": [
+      "Balbuena",
+      "Braithwaite",
+      "João Pedro",
+      "Rodrigo Ely",
+      "Villasanti",
+      "Willian"
+    ],
+    "timeProvavel": "Gabriel Grando; Kannemann, Marcos Rocha e Marlon; Cuéllar, Edenílson e Noriega; Carlos Vinícius, Amuzu e Pavón."
+  },
+  "juventude": {
+    "suspensos": [
+      "Alan Ruschel",
+      "Jandrei",
+      "Luis Mandaca"
+    ],
+    "lesionados": [
+      "Luan Freitas",
+      "Natã",
+      "Wilker Ángel"
+    ],
+    "timeProvavel": "Guruceaga; Abner, Rodrigo Sam, Marcelo Hermes e Reginaldo; Jadson, Nenê e Caíque; Gabriel Taliari e Ênio."
+  },
+  "bragantino": {
+    "suspensos": [
+      "Lucas Barbosa"
+    ],
+    "lesionados": [
+      "Eduardo Santos",
+      "Guzman"
+    ],
+    "timeProvavel": "Cleiton; Pedro Henrique, Juninho Capixaba, Vanderlan e Guzmán Rodríguez (?); Jhon Jhon, Gabriel e Eric Ramires; Thiago Borbas, Eduardo Sasha (?) e Henry Mosquera (?)."
+  },
+  "vasco": {
+    "suspensos": [
+      "Hugo Moura"
+    ],
+    "lesionados": [
+      "Adson",
+      "Jair",
+      "Paulinho",
+      "Paulo Ricardo",
+      "Thiago Mendes"
+    ],
+    "timeProvavel": "Léo Jardim; Carlos Cuesta, Robert Renan, Paulo Henrique e Lucas Piton; Philippe Coutinho, Barros e Mateus Carvalho; Rayan, Nuno Moreira e Vegetti (?)."
+  },
+  "fluminense": {
+    "suspensos": [],
+    "lesionados": [
+      "Ganso"
+    ],
+    "timeProvavel": "Fábio; Thiago Silva, Freytes, Renê e Samuel Xavier; Hércules, Martinelli e Lima (?); Serna, Canobbio e Cano (?)."
+  },
+  "santos": {
+    "suspensos": [
+      "João Schmidt"
+    ],
+    "lesionados": [
+      "Neymar",
+      "Rincón"
+    ],
+    "timeProvavel": "Gabriel Brazão; Luan Peres, Adonis Frías, Escobar e Igor Vinícius; Barreal, Zé Rafael e Rollheiser; Guilherme e Lautaro Díaz."
+  },
+  "vitoria": {
+    "suspensos": [
+      "Camutanga",
+      "Dudu",
+      "Erick",
+      "Renato Kayzer"
+    ],
+    "lesionados": [
+      "Fabri",
+      "Jamerson"
+    ],
+    "timeProvavel": "Lucas Arcanjo; Edu, Lucas Halter, Ramon e Raúl Cáceres; Baralhas, Ronald Lopes e Matheuzinho (?); Cantalapiedra, Renzo López e Osvaldo (?)."
+  }
+}

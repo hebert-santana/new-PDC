@@ -1,0 +1,70 @@
+{
+  "comingSoon": false,
+  "hideWhenSoon": false,
+  "style": "micro",
+  "message": "Arbitragem da 29ª rodada definida.",
+  "enabled": true,
+  "updated_at": "2025-10-17T17:00:00-03:00",
+  "matches": {
+    "jogo-01": {
+      "home": "Corinthians",
+      "away": "Atlético Mineiro",
+      "referee": "Alex Gomes Stefano",
+      "stats": { "fouls": 34.29, "yellows": 5.29, "reds": 0.35, "pens": 0.41 }
+    },
+    "jogo-02": {
+      "home": "Cruzeiro",
+      "away": "Fortaleza",
+      "referee": "Rodrigo Pereira de Lima",
+      "stats": { "fouls": 28.89, "yellows": 5.44, "reds": 0.11, "pens": 0.22 }
+    },
+    "jogo-03": {
+      "home": "Flamengo",
+      "away": "Palmeiras",
+      "referee": "Wilton Pereira Sampaio",
+      "stats": { "fouls": 27.50, "yellows": 5.44, "reds": 0.31, "pens": 0.19 }
+    },
+    "jogo-04": {
+      "home": "Mirassol",
+      "away": "São Paulo",
+      "referee": "Matheus Candançan",
+      "stats": { "fouls": 26.77, "yellows": 3.15, "reds": 0.54, "pens": 0.15 }
+    },
+    "jogo-05": {
+      "home": "Internacional",
+      "away": "Sport",
+      "referee": "Lucas Paulo Torezin",
+      "stats": { "fouls": 25.93, "yellows": 5.14, "reds": 0.21, "pens": 0.43 }
+    },
+    "jogo-06": {
+      "home": "Ceará",
+      "away": "Botafogo",
+      "referee": "Davi de Oliveira Lacerda",
+      "stats": { "fouls": 23.32, "yellows": 4.41, "reds": 0.09, "pens": 0.23 }
+    },
+    "jogo-07": {
+      "home": "Bahia",
+      "away": "Grêmio",
+      "referee": "Raphael Claus",
+      "stats": { "fouls": 23.19, "yellows": 4.06, "reds": 0.19, "pens": 0.38 }
+    },
+    "jogo-08": {
+      "home": "Juventude",
+      "away": "Red Bull Bragantino",
+      "referee": "Felipe Fernandes de Lima",
+      "stats": { "fouls": 30.07, "yellows": 4.21, "reds": 0.07, "pens": 0.29 }
+    },
+    "jogo-09": {
+      "home": "Vasco da Gama",
+      "away": "Fluminense",
+      "referee": "Wagner do Nascimento Magalhães",
+      "stats": { "fouls": 27.67, "yellows": 6.00, "reds": 0.00, "pens": 0.33 }
+    },
+    "jogo-10": {
+      "home": "Santos",
+      "away": "Vitória",
+      "referee": "Rafael Rodrigo Klein",
+      "stats": { "fouls": 29.13, "yellows": 4.38, "reds": 0.13, "pens": 0.06 }
+    }
+  }
+}

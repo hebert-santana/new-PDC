@@ -1,0 +1,22 @@
+# dependências locais
+node_modules/
+/public/node_modules/
+.vercel/
+
+# builds/temp
+dist/
+.cache/
+*.log
+
+# editor
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+
+# mapas de fonte (não expor em prod)
+*.map
+
+# testes/coverage
+coverage/
+!public/data/team-updates.json

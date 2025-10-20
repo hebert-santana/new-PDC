@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://www.provaveisdocartola.com.br/</loc>
+    <lastmod>2025-08-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.provaveisdocartola.com.br/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.provaveisdocartola.com.br/"/>
+  </url>
+
+  <url>
+    <loc>https://www.provaveisdocartola.com.br/pages/mais-indicados-do-cartola.html</loc>
+    <lastmod>2025-08-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.provaveisdocartola.com.br/pages/mais-indicados-do-cartola.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.provaveisdocartola.com.br/pages/mais-indicados-do-cartola.html"/>
+  </url>
+
+  <url>
+    <loc>https://www.provaveisdocartola.com.br/pages/sobre-mim.html</loc>
+    <lastmod>2025-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.provaveisdocartola.com.br/pages/sobre-mim.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.provaveisdocartola.com.br/pages/sobre-mim.html"/>
+  </url>
+
+  <url>
+    <loc>https://www.provaveisdocartola.com.br/pages/contato.html</loc>
+    <lastmod>2025-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.provaveisdocartola.com.br/pages/contato.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.provaveisdocartola.com.br/pages/contato.html"/>
+  </url>
+
+</urlset>
