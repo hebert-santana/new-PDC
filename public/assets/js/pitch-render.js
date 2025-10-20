@@ -5,62 +5,69 @@
 (function injectOnce(){
   if (document.getElementById('pitch-view-style')) return;
   const css = `
+:root{
+  --font-ui: system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Arial,sans-serif;
+  /* tamanhos fluidos */
+  --img: clamp(56px, 9vw, 92px);
+  --img-coach: clamp(44px, 7vw, 70px);
+}
+html,body,.player .cap,.player .alt-cap,.status-card{
+  font-family:var(--font-ui);
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+}
 
-  :root{ --font-ui: system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Arial,sans-serif; }
-html,body,.player .cap,.player .alt-cap,.status-card{ font-family:var(--font-ui); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+/* avatar */
+.player{position:absolute;transform:translate(-50%,-50%);text-align:center;width:var(--img);height:var(--img);overflow:visible}
+.player img{display:block;width:var(--img);height:var(--img);border-radius:50%;background:#fff;border:2px solid #fff;outline:1px solid rgba(15,23,42,.08);box-shadow:0 4px 14px rgba(0,0,0,.28)}
 
-
-.player{position:absolute;transform:translate(-50%,-50%);text-align:center;width:92px;height:92px;overflow:visible}
-.player img{display:block;width:92px;height:92px;border-radius:50%;background:#fff;border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.28)}
-
-/* sombra oval 3D sob o jogador */
-.player::before{content:"";position:absolute;left:50%;top:100%;transform:translate(-50%,-40%);width:70%;height:20px;background:radial-gradient(ellipse at center, rgba(0,0,0,.25) 0%, rgba(0,0,0,0) 80%);filter:blur(4px);opacity:.45;pointer-events:none;z-index:0}
-.player img,.player .cap,.player .alt-cap{position:relative;z-index:1}
-.player img{ border:2px solid #fff; outline:1px solid rgba(15,23,42,.08); }
-
-
-.player .cap{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:6px;padding:4px 10px;font-size:13px;font-weight:600;line-height:1.05;letter-spacing:.1px;color:#0a1324;background:rgba(255,255,255,.98);border:1px solid rgba(15,23,42,.12);border-radius:12px;box-shadow:0 4px 10px rgba(2,6,23,.18);white-space:nowrap;max-width:160px;overflow:hidden;text-overflow:ellipsis;backdrop-filter:saturate(120%) blur(2px)}
-.player .alt-cap{position:absolute;left:50%;top:calc(100% + 28px);transform:translateX(-50%);padding:3px 8px;font-size:12px;font-weight:500;line-height:1.05;color:#111;background:rgba(255,255,255,.96);border:1px solid rgba(15,23,42,.12);border-radius:10px;box-shadow:0 3px 8px rgba(2,6,23,.14);white-space:nowrap}
-
-.player.ok    img{ box-shadow:0 0 0 3px #22c55e,0 6px 14px rgba(0,0,0,.28) }
-.player.doubt img{ box-shadow:0 0 0 3px #f59e0b,0 6px 14px rgba(0,0,0,.28) }
-.player.coach{width:70px;height:70px}
-.player.coach img{width:70px;height:70px;margin:0 auto}
-
-.status-card .sg-title{font-weight:700}
-.status-card .tag-list{display:flex;flex-wrap:wrap;gap:6px}
-.status-card .tag-list>*{display:inline-block;padding:4px 10px;font-size:13px;font-weight:600;line-height:1.05;letter-spacing:.1px;color:#0a1324;background:#fff;border:1px solid rgba(15,23,42,.12);border-radius:12px;box-shadow:0 3px 8px rgba(2,6,23,.10)}
-
-
+/* sombra oval 3D (única) */
 .player::before{
   content:""; position:absolute; left:50%; top:100%; transform:translate(-50%,-38%);
   width:76%; height:18px; background:radial-gradient(ellipse at center, rgba(0,0,0,.28) 0%, rgba(0,0,0,0) 70%);
   filter:blur(5px); opacity:.55; pointer-events:none; z-index:0;
 }
+.player img,.player .cap,.player .alt-cap{position:relative;z-index:1}
 
+/* pílulas */
 .player .cap{
-  border:1px solid rgba(15,23,42,.14);
+  position:absolute; left:50%; top:100%; transform:translateX(-50%);
+  margin-top:6px; padding:4px 10px; font-size:13px; font-weight:600; line-height:1.05; letter-spacing:.15px;
+  color:#0a1324; background:rgba(255,255,255,.98);
+  border:1px solid rgba(15,23,42,.14); border-radius:12px;
   box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 4px 10px rgba(2,6,23,.18);
-  letter-spacing:.15px;
+  white-space:nowrap; max-width:160px; overflow:hidden; text-overflow:ellipsis; backdrop-filter:saturate(120%) blur(2px);
+}
+.player .alt-cap{
+  position:absolute; left:50%; top:calc(100% + 28px); transform:translateX(-50%);
+  padding:3px 8px; font-size:12px; font-weight:500; line-height:1.05; color:#111;
+  background:rgba(255,255,255,.96); border:1px solid rgba(15,23,42,.12); border-radius:10px; box-shadow:0 3px 8px rgba(2,6,23,.14); white-space:nowrap;
 }
 
+/* status */
+.player.ok img{ box-shadow:0 0 0 3px #22c55e,0 6px 14px rgba(0,0,0,.28) }
+.player.doubt img{ box-shadow:0 0 0 3px #f59e0b,0 6px 14px rgba(0,0,0,.28) }
 
+/* técnico */
+.player.coach{width:var(--img-coach);height:var(--img-coach)}
+.player.coach img{width:var(--img-coach);height:var(--img-coach);margin:0 auto}
+
+/* hover sutil (desktop) */
 .pitch .player:hover img{ transform:scale(1.03); transition:transform .12s ease; }
 
+/* chips de status */
+.status-card .sg-title{font-weight:700}
+.status-card .tag-list{display:flex;flex-wrap:wrap;gap:6px}
+.status-card .tag-list>*{
+  display:inline-block;padding:4px 10px;font-size:13px;font-weight:600;line-height:1.05;letter-spacing:.1px;
+  color:#0a1324;background:#fff;border:1px solid rgba(15,23,42,.12);border-radius:12px;box-shadow:0 3px 8px rgba(2,6,23,.10)
+}
 
-.player .cap,.player .alt-cap{ white-space:nowrap; max-width:160px; text-overflow:ellipsis; overflow:hidden; }
+/* ajustes mobile */
 @media (max-width:420px){ .player .cap{ max-width:130px } }
 
 
-.status-card .tag-list>*{
-  padding:4px 10px; font-size:13px; font-weight:600; color:#0a1324;
-  background:#fff; border:1px solid rgba(15,23,42,.12);
-  border-radius:12px; box-shadow:0 3px 8px rgba(2,6,23,.10);
-}
-
-
-
 `;
+
   const s = document.createElement('style');
   s.id = 'pitch-view-style';
   s.textContent = css;
@@ -78,6 +85,22 @@ html,body,.player .cap,.player .alt-cap,.status-card{ font-family:var(--font-ui)
     'ATA-L':{x:35,y:30}, 'ATA-C':{x:50,y:25}, 'ATA-R':{x:65,y:30},
     TEC:{x:92,y:96}
   };
+
+  // Presets específicos para mobile (ajuste como preferir)
+const MPRESETS = {
+  '4-3-3': {'GOL':[50,92],'ZAG-L':[32,77],'ZAG-C':[50,77],'ZAG-R':[68,77],'LAT-L':[16,74],'LAT-R':[84,74],
+            'MEI-L':[26,52],'MEI-C':[50,30],'MEI-R':[74,52],'ATA-L':[22,10],'ATA-C':[50,10],'ATA-R':[78,10],'TEC':[10,80]},
+  '4-4-2': {'GOL':[50,92],'ZAG-L':[32,77],'ZAG-C':[50,77],'ZAG-R':[68,77],'LAT-L':[16,74],'LAT-R':[84,74],
+            'VOL':[50,62],'MEI-L':[26,44],'MEI-C':[50,34],'MEI-R':[74,44],'ATA-L':[36,12],'ATA-R':[64,12],'TEC':[10,94]},
+  '3-5-2': {'GOL':[50,92],'ZAG-L':[26,77],'ZAG-C':[50,74],'ZAG-R':[74,77],'LAT-L':[16,47],'LAT-R':[84,47],
+            'VOL':[50,57],'MEI-L':[36,57],'MEI-C':[50,38],'MEI-R':[64,57],'ATA-L':[36,16],'ATA-R':[64,16],'TEC':[10,94]},
+  '4-2-3-1': {'GOL':[50,92],'ZAG-L':[40,77],'ZAG-R':[60,77],'LAT-L':[22,79],'LAT-R':[78,79],
+              'VOL':[40,66],'VOL2':[60,66],'MEI-L':[36,57],'MEI-C':[50,54],'MEI-R':[64,57],'ATA-C':[50,32],'TEC':[10,94]},
+};
+const IS_MOBILE = matchMedia('(max-width: 430px)').matches;
+const clamp = (v,a=0,b=100)=>Math.max(a,Math.min(b,v));
+
+
   const PCT = v => `${v}%`;
 
   // Não mostrar a legenda da posição no index
@@ -158,8 +181,12 @@ html,body,.player .cap,.player .alt-cap,.status-card{ font-family:var(--font-ui)
     return el;
   }
 
-  function place(el, slot, xy){
-    const p = xy || POS[slot] || POS['MEI-C'];
+ function place(el, slot, xy, formacao){
+   let p = xy || POS[slot] || POS['MEI-C'];
+   if (IS_MOBILE) {
+     const mp = (MPRESETS[formacao] || {})[slot];
+     if (Array.isArray(mp)) p = { x: clamp(+mp[0]), y: clamp(+mp[1]) };
+   }
     el.style.left = PCT(p.x);
     el.style.top  = PCT(p.y);
   }
@@ -205,7 +232,7 @@ html,body,.player .cap,.player .alt-cap,.status-card{ font-family:var(--font-ui)
 
         const el = playerEl({ id, slot, sit, duvidaCom: p.duvida_com });
         const xy = (p.x!=null && p.y!=null) ? {x:+p.x, y:+p.y} : null;
-        place(el, slot, xy);
+        place(el, slot, xy, team.formacao || '');
         pitch.appendChild(el);
       }
 

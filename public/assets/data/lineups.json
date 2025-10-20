@@ -102,20 +102,6 @@
           "sit": "provavel"
         },
         {
-          "slot": "LAT-L",
-          "id": 87228,
-          "x": 15,
-          "y": 72,
-          "sit": "provavel"
-        },
-        {
-          "slot": "LAT-R",
-          "id": 96725,
-          "x": 85,
-          "y": 72,
-          "sit": "provavel"
-        },
-        {
           "slot": "ZAG-L",
           "id": 88312,
           "x": 35,
@@ -124,51 +110,65 @@
         },
         {
           "slot": "ZAG-R",
-          "id": 100842,
+          "id": 72605,
           "x": 65,
           "y": 75,
           "sit": "provavel"
         },
         {
+          "slot": "LAT-L",
+          "id": 87228,
+          "x": 15,
+          "y": 72,
+          "sit": "provavel"
+        },
+        {
+          "slot": "LAT-R",
+          "id": 107554,
+          "x": 85,
+          "y": 72,
+          "sit": "provavel"
+        },
+        {
           "slot": "VOL",
-          "id": 39656,
+          "id": 107950,
           "x": 50,
           "y": 60,
           "sit": "provavel"
         },
         {
           "slot": "MEI-L",
-          "id": 100084,
+          "id": 39656,
           "x": 25,
-          "y": 45,
+          "y": 40,
           "sit": "provavel"
         },
         {
           "slot": "MEI-C",
-          "id": 87999,
+          "id": 96725,
           "x": 50,
-          "y": 35,
+          "y": 30,
           "sit": "provavel"
         },
         {
           "slot": "MEI-R",
-          "id": 107950,
+          "id": 87999,
           "x": 75,
-          "y": 45,
-          "sit": "provavel"
-        },
-        {
-          "slot": "ATA-L",
-          "id": 91607,
-          "x": 35,
-          "y": 15,
+          "y": 40,
           "sit": "provavel"
         },
         {
           "slot": "ATA-R",
-          "id": 39148,
+          "id": 91607,
           "x": 65,
-          "y": 15,
+          "y": 10,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ATA-L",
+          "id": 39148,
+          "x": 35,
+          "y": 10,
           "sit": "provavel"
         },
         {
@@ -271,5 +271,5 @@
       ]
     }
   },
-  "updated_at": "2025-10-20T05:07:21.056Z"
+  "updated_at": "2025-10-20T05:42:58.527Z"
 }

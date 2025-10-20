@@ -7,81 +7,97 @@
 <title>Admin — Lineups</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <style>
+
+/* ===== Admin apenas ===== */
 :root{
   --pitch-w:631px; --pitch-h:892px;
   --active-w:575px; --active-h:813px; --off-x:28px; --off-y:40px;
   --ring:#0ea5b7; --img:92px; --img-coach:70px; --panel:#f7f7f8;
   --zoom:1;
 }
-*{box-sizing:border-box}
-body{background:#eef1f4;color:#0f172a}
-header{padding:12px 16px;background:#fff;border-bottom:1px solid #e5e7eb}
+body.admin{ background:#eef1f4; color:#0f172a }
+body.admin header{ padding:12px 16px; background:#fff; border-bottom:1px solid #e5e7eb }
 
 /* layout */
-.wrap{max-width:1500px;margin:18px auto;padding:0 16px;display:grid;grid-template-columns:minmax(560px,1fr) minmax(520px,1.2fr);gap:16px}
-@media (max-width:1100px){.wrap{grid-template-columns:1fr}}
+body.admin .wrap{ max-width:1500px; margin:18px auto; padding:0 16px;
+  display:grid; grid-template-columns:minmax(560px,1fr) minmax(520px,1.2fr); gap:16px }
+@media (max-width:1100px){ body.admin .wrap{ grid-template-columns:1fr }}
 
-.pitch{
-  position:relative;width:var(--pitch-w);height:var(--pitch-h);
-  background:url('/assets/img/campinhos/campinho.png') left top / var(--pitch-w) var(--pitch-h) no-repeat;
+/* campo fixo do editor (com zoom) */
+body.admin .pitch{
+  position:relative; width:var(--pitch-w); height:var(--pitch-h);
+  background:url('/assets/img/campinhos/campinho.png') 0 0 / var(--pitch-w) var(--pitch-h) no-repeat;
   border-radius:16px; box-shadow:0 6px 24px rgba(0,0,0,.12); overflow:hidden;
   transform:scale(var(--zoom)); transform-origin:top left;
 }
-.pitch::after{content:""; position:absolute; left:var(--off-x); top:var(--off-y); width:var(--active-w); height:var(--active-h); outline:1px dashed rgba(14,165,183,.35); pointer-events:none}
+body.admin .pitch::after{
+  content:""; position:absolute; left:var(--off-x); top:var(--off-y);
+  width:var(--active-w); height:var(--active-h);
+  outline:1px dashed rgba(14,165,183,.35); pointer-events:none;
+}
 
-/* BALÃO DO JOGADOR FIXO */
-.player{
+/* balão do jogador (fixo, não desloca ao mostrar nomes) */
+body.admin .player{
   position:absolute; transform:translate(-50%,-50%); text-align:center;
   width:var(--img); height:var(--img); overflow:visible;
 }
-.player img{
+body.admin .player img{
   display:block; width:var(--img); height:var(--img);
   border-radius:50%; background:#fff; border:2px solid #fff;
   box-shadow:0 4px 14px rgba(0,0,0,.28);
 }
-.player.coach{ width:var(--img-coach); height:var(--img-coach); }
-.player.coach img{ width:var(--img-coach); height:var(--img-coach); margin:0 auto; }
+body.admin .player.coach{ width:var(--img-coach); height:var(--img-coach) }
+body.admin .player.coach img{ width:var(--img-coach); height:var(--img-coach); margin:0 auto }
 
-/* legendas fora do balão para não deslocar a foto */
-.player .cap{
+/* legendas fora do círculo */
+body.admin .player .cap{
   position:absolute; left:50%; top:100%; transform:translateX(-50%);
   margin-top:6px; font-size:.82rem; line-height:1.1; color:#0b192b;
   background:rgba(255,255,255,.96); border-radius:12px; padding:3px 8px;
   white-space:nowrap; max-width:160px; overflow:hidden; text-overflow:ellipsis;
 }
-.player .alt-cap{
+body.admin .player .alt-cap{
   position:absolute; left:50%; top:calc(100% + 24px); transform:translateX(-50%);
   font-size:.74rem; line-height:1.1; color:#111;
-  background:rgba(255,255,255,.96); border-radius:10px; padding:2px 7px;
-  display:inline-block; white-space:nowrap;
+  background:rgba(255,255,255,.96); border-radius:10px; padding:2px 7px; white-space:nowrap;
 }
 
-.slot-chip{position:absolute;inset:auto auto 6px 6px;background:#111827;color:#fff;border-radius:8px;padding:2px 6px;font-size:.7rem;opacity:.9}
-.dragging{outline:2px dashed var(--ring);outline-offset:4px;cursor:grabbing}
+body.admin .slot-chip{ position:absolute; inset:auto auto 6px 6px; background:#111827; color:#fff;
+  border-radius:8px; padding:2px 6px; font-size:.7rem; opacity:.9 }
+body.admin .dragging{ outline:2px dashed var(--ring); outline-offset:4px; cursor:grabbing }
 
 /* guias */
-.guide{position:absolute;background:transparent;pointer-events:none}
-.guide.x::after,.guide.y::after{content:"";position:absolute;background:var(--ring);opacity:.8}
-.guide.x{height:0;width:100%}.guide.x::after{left:0;right:0;height:2px;top:-1px}
-.guide.y{width:0;height:100%}.guide.y::after{top:0;bottom:0;width:2px;left:-1px}
-.grid-dot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--ring);opacity:.35;pointer-events:none;box-shadow:0 0 0 2px rgba(14,165,183,.2)}
+body.admin .guide{ position:absolute; background:transparent; pointer-events:none }
+body.admin .guide.x::after, body.admin .guide.y::after{ content:""; position:absolute; background:var(--ring); opacity:.8 }
+body.admin .guide.x{ height:0; width:100% } .admin .guide.x::after{ left:0; right:0; height:2px; top:-1px }
+body.admin .guide.y{ width:0; height:100% } .admin .guide.y::after{ top:0; bottom:0; width:2px; left:-1px }
+body.admin .grid-dot{ position:absolute; width:7px; height:7px; border-radius:50%;
+  background:var(--ring); opacity:.35; pointer-events:none; box-shadow:0 0 0 2px rgba(14,165,183,.2) }
 
 /* painel lateral */
-.side{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px;box-shadow:0 8px 18px rgba(2,6,23,.06);max-height:calc(100vh - 120px);overflow:auto}
-.cfg-row{display:grid;grid-template-columns:1.2fr .8fr .8fr auto;gap:8px}
-.slot-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-@media (min-width:1400px){.slot-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.slot-card{border:1px solid #e5e7eb;border-radius:10px;padding:10px;background:var(--panel)}
-.mini{font-size:.8rem}
-.code{font-family:ui-monospace,Menlo,monospace;font-size:.84rem}
+body.admin .side{ background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:12px;
+  box-shadow:0 8px 18px rgba(2,6,23,.06); max-height:calc(100vh - 120px); overflow:auto }
+body.admin .cfg-row{ display:grid; grid-template-columns:1.2fr .8fr .8fr auto; gap:8px }
+body.admin .slot-list{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px }
+@media (min-width:1400px){ body.admin .slot-list{ grid-template-columns:repeat(3,minmax(0,1fr)) }}
+body.admin .slot-card{ border:1px solid #e5e7eb; border-radius:10px; padding:10px; background:var(--panel) }
+body.admin .mini{ font-size:.8rem }
+body.admin .code{ font-family:ui-monospace,Menlo,monospace; font-size:.84rem }
 
-/* status */
-.player.ok img{ box-shadow:0 0 0 3px #22c55e, 0 6px 14px rgba(0,0,0,.28) }
-.player.doubt img{ box-shadow:0 0 0 3px #f59e0b, 0 6px 14px rgba(0,0,0,.28) }
+/* status visual */
+body.admin .player.ok img{ box-shadow:0 0 0 3px #22c55e, 0 6px 14px rgba(0,0,0,.28) }
+body.admin .player.doubt img{ box-shadow:0 0 0 3px #f59e0b, 0 6px 14px rgba(0,0,0,.28) }
+
+/* experiência melhor no mobile do admin: desliga zoom */
+@media (max-width:640px){
+  body.admin .pitch{ transform:none }
+}
+
+
 
 </style>
 </head>
-<body>
+<body class="admin">
 <header class="d-flex align-items-center justify-content-between">
   <div class="d-flex align-items-center gap-3">
     <strong>Admin de Lineups</strong><span class="badge bg-info">Beta</span>
@@ -170,16 +186,17 @@ header{padding:12px 16px;background:#fff;border-bottom:1px solid #e5e7eb}
 <script>
 (()=>{'use strict';
 
+
 /* util */
 const fold=s=>(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\p{L}\p{N}\s.]/gu,'');
 const PITCH_W=631,PITCH_H=892,ACTIVE_W=575,ACTIVE_H=813,OFF_X=28,OFF_Y=40;
 const TOL=8,GRID_X=[20,30,35,40,50,60,65,70,80],GRID_Y=[90,78,75,65,60,58,55,40,35,30,25];
 const CANON=['GOL','ZAG-L','ZAG-C','ZAG-R','LAT-L','LAT-R','VOL','MEI-L','MEI-C','MEI-R','ATA-L','ATA-C','ATA-R','TEC'];
 const PRESETS={
- '4-3-3':{'GOL':[50,90],'ZAG-L':[35,75],'ZAG-C':[50,75],'ZAG-R':[65,75],'LAT-L':[15,72],'LAT-R':[85,72],'MEI-L':[25,55],'MEI-C':[50,35],'MEI-R':[75,55],'ATA-L':[20,20],'ATA-R':[80,20],'ATA-C':[50,10],'TEC':[10,93]},
- '4-4-2':{'GOL':[50,90],'ZAG-L':[35,75],'ZAG-C':[50,75],'ZAG-R':[65,75],'LAT-L':[15,72],'LAT-R':[85,72],'VOL':[50,60],'MEI-L':[25,45],'MEI-C':[50,35],'MEI-R':[75,45],'ATA-L':[35,15],'ATA-R':[65,15],'TEC':[10,93]},
- '3-5-2':{'GOL':[50,90],'ZAG-L':[25,75],'ZAG-C':[50,72],'ZAG-R':[75,75], 'LAT-L':[15,45],'LAT-R':[85,45],'VOL':[50,55],'MEI-L':[35,55],'MEI-C':[50,35],'MEI-R':[65,55],'ATA-L':[35,15],'ATA-R':[65,15],'TEC':[10,93]},
- '4-2-3-1':{'GOL':[50,90],'ZAG-L':[40,75],'ZAG-R':[60,75],'LAT-L':[22,78],'LAT-R':[78,78],'VOL':[40,64],'VOL2':[60,64],'MEI-L':[35,55],'MEI-C':[50,52],'MEI-R':[65,55],'ATA-C':[50,30],'TEC':[10,93]}
+ '4-3-3':{'GOL':[50,90],'ZAG-L':[35,75],'ZAG-C':[50,75],'ZAG-R':[65,75],'LAT-L':[15,72],'LAT-R':[85,72],'MEI-L':[25,55],'MEI-C':[50,35],'MEI-R':[75,55],'ATA-L':[20,20],'ATA-R':[80,20],'ATA-C':[50,10],'TEC':[10,91]},
+ '4-4-2':{'GOL':[50,85],'ZAG-L':[35,65],'ZAG-C':[50,65],'ZAG-R':[65,65],'LAT-L':[15,60],'LAT-R':[85,60],'VOL':[50,45],'MEI-L':[25,40],'MEI-C':[50,30],'MEI-R':[75,40],'ATA-L':[35,10],'ATA-R':[65,10],'TEC':[10,88]},
+ '3-5-2':{'GOL':[50,90],'ZAG-L':[25,75],'ZAG-C':[50,72],'ZAG-R':[75,75], 'LAT-L':[15,45],'LAT-R':[85,45],'VOL':[50,55],'MEI-L':[35,55],'MEI-C':[50,35],'MEI-R':[65,55],'ATA-L':[35,15],'ATA-R':[65,15],'TEC':[10,91]},
+ '4-2-3-1':{'GOL':[50,90],'ZAG-L':[40,75],'ZAG-R':[60,75],'LAT-L':[22,78],'LAT-R':[78,78],'VOL':[40,64],'VOL2':[60,64],'MEI-L':[35,55],'MEI-C':[50,52],'MEI-R':[65,55],'ATA-C':[50,30],'TEC':[10,91]}
 };
 
 const state={teamKey:null,formacao:'4-3-3',lineup:[],tecnico:null,alin:'rows',mercado:null,lineupsJson:null};
@@ -503,7 +520,7 @@ $('btnSave').onclick = async () => {
     method:'POST',headers:{'Content-Type':'application/json'},
     body: JSON.stringify({ merge:true, teams: payload.teams })
     });
-    
+
     if (!r.ok) throw new Error('HTTP ' + r.status);
     alert('Salvo no servidor (lineups.json atualizado).');
   } catch (e) {

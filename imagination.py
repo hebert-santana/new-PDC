@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 # caminhos do projeto
-SRC = Path("public/data/mercado_cartola.json")
+SRC = Path("public/data/mercado.json")
 DST = Path("public/data/mercado.images.json")
 
 # onde estão as imagens físicas

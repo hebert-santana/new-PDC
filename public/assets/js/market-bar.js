@@ -10,7 +10,7 @@
   const elTxt    = el.querySelector('.mb-ctxt');
   const wrapCtd  = el.querySelector('.mb-countdown');
 
-  const JSONF = 'assets/data/mercado.json';
+  const JSONF = 'assets/data/mercado_status.json';
   const TZ    = 'America/Sao_Paulo';
 
   let tick = null;
