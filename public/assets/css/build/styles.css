@@ -681,7 +681,7 @@ header p{margin-bottom:0}
 
 /* Micro-pill mais leve */
 .arb-pill.arb-micro{
-  font-size:.60rem;
+  font-size:.8rem;
   padding:5px 10px;
   border-color:#eaeaea;
   box-shadow:none;
