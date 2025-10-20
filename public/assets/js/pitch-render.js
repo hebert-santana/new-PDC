@@ -5,16 +5,21 @@
   (function injectOnce(){
     if (document.getElementById('pitch-view-style')) return;
     const css = `
-  .player{position:absolute;transform:translate(-50%,-50%);text-align:center;width:92px;height:92px;overflow:visible}
-  .player img{display:block;width:92px;height:92px;border-radius:50%;background:#fff;border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.28)}
-  .player .cap{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:6px;font-size:12.5px;line-height:1.1;color:#0b192b;background:rgba(255,255,255,.96);border-radius:12px;padding:3px 8px;white-space:nowrap;max-width:160px;display:inline-block}
-  .player .alt-cap{position:absolute;left:50%;top:calc(100% + 24px);transform:translateX(-50%);font-size:11.5px;line-height:1.1;color:#111;background:rgba(255,255,255,.96);border-radius:10px;padding:2px 7px;display:inline-block;white-space:nowrap}
-  .player.ok img{box-shadow:0 0 0 3px #22c55e,0 6px 14px rgba(0,0,0,.28)}
-  .player.doubt img{box-shadow:0 0 0 3px #f59e0b,0 6px 14px rgba(0,0,0,.28)}
-  .player.coach{width:70px;height:70px}
-  .player.coach img{width:70px;height:70px;margin:0 auto}
-
-}
+.player{position:absolute;transform:translate(-50%,-50%);text-align:center;width:92px;height:92px;overflow:visible}
+.player img{display:block;width:92px;height:92px;border-radius:50%;background:#fff;border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.28)}
+.player .cap{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:6px;padding:4px 10px;font-size:13px;font-weight:600;line-height:1.05;letter-spacing:.1px;color:#0a1324;background:rgba(255,255,255,.98);border:1px solid rgba(15,23,42,.12);border-radius:12px;box-shadow:0 4px 10px rgba(2,6,23,.18);white-space:nowrap;max-width:160px;overflow:hidden;text-overflow:ellipsis;backdrop-filter:saturate(120%) blur(2px)}
+.player .alt-cap{position:absolute;left:50%;top:calc(100% + 28px);transform:translateX(-50%);padding:3px 8px;font-size:12px;font-weight:500;line-height:1.05;color:#111;background:rgba(255,255,255,.96);border:1px solid rgba(15,23,42,.12);border-radius:10px;box-shadow:0 3px 8px rgba(2,6,23,.14);white-space:nowrap}
+.player.ok img{box-shadow:0 0 0 3px #22c55e,0 6px 14px rgba(0,0,0,.28)}
+.player.doubt img{box-shadow:0 0 0 3px #f59e0b,0 6px 14px rgba(0,0,0,.28)}
+.player.coach{width:70px;height:70px}
+.player.coach img{width:70px;height:70px;margin:0 auto}
+.status-card .sg-title{ font-weight:700; }
+.status-card .tag-list{ display:flex; flex-wrap:wrap; gap:6px; }
+.status-card .tag-list > *{
+  display:inline-block; padding:4px 10px;
+  font-size:13px; font-weight:600; line-height:1.05; letter-spacing:.1px;
+  color:#0a1324; background:#fff; border:1px solid rgba(15,23,42,.12);
+  border-radius:12px; box-shadow:0 3px 8px rgba(2,6,23,.10);
 
     `;
     const s = document.createElement('style');
