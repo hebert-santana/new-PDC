@@ -63,6 +63,14 @@ html,body,.player .cap,.player .alt-cap,.status-card{
 }
 
 /* ajustes mobile */
+@media (max-width:768px){
+  .player .cap{      font-size:11px; padding:3px 8px;  max-width:80px; }
+  .player .alt-cap{  font-size:10px; padding:2px 7px;  top:calc(100% + 22px); }
+}
+@media (max-width:480px){
+  .player .cap{      font-size:9px;  padding:2px 6px;  max-width:68px; }
+  .player .alt-cap{  font-size:8.5px;padding:2px 5px;  top:calc(100% + 18px); }
+}
 @media (max-width:420px){ .player .cap{ max-width:130px } }
 
 
