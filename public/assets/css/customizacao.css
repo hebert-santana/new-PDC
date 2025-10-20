@@ -242,7 +242,7 @@
 }
 @media (max-width:430px){
   :root{--img:clamp(30px,7vw,52px);--img-coach:clamp(30px,4.5vw,42px)}
-  .lineup-card{--img:46px;--img-coach:30px} /* tamanho da imagem dos jogadores no mobile */
+  .lineup-card{--img:48px;--img-coach:34px} /* tamanho da imagem dos jogadores no mobile */
   .player .cap,.player .byline{font-size:7px;max-width:120px;padding:3px}
   .player .alt-cap{font-size:7px;top:calc(100% + 20px)}
 }
