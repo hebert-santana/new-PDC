@@ -2,31 +2,71 @@
   'use strict';
 
   // ===== Estilo mínimo injetado para o index (pílula branca do nome) =====
-  (function injectOnce(){
-    if (document.getElementById('pitch-view-style')) return;
-    const css = `
+(function injectOnce(){
+  if (document.getElementById('pitch-view-style')) return;
+  const css = `
+
+  :root{ --font-ui: system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Arial,sans-serif; }
+html,body,.player .cap,.player .alt-cap,.status-card{ font-family:var(--font-ui); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+
 .player{position:absolute;transform:translate(-50%,-50%);text-align:center;width:92px;height:92px;overflow:visible}
 .player img{display:block;width:92px;height:92px;border-radius:50%;background:#fff;border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.28)}
+
+/* sombra oval 3D sob o jogador */
+.player::before{content:"";position:absolute;left:50%;top:100%;transform:translate(-50%,-40%);width:70%;height:20px;background:radial-gradient(ellipse at center, rgba(0,0,0,.25) 0%, rgba(0,0,0,0) 80%);filter:blur(4px);opacity:.45;pointer-events:none;z-index:0}
+.player img,.player .cap,.player .alt-cap{position:relative;z-index:1}
+.player img{ border:2px solid #fff; outline:1px solid rgba(15,23,42,.08); }
+
+
 .player .cap{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:6px;padding:4px 10px;font-size:13px;font-weight:600;line-height:1.05;letter-spacing:.1px;color:#0a1324;background:rgba(255,255,255,.98);border:1px solid rgba(15,23,42,.12);border-radius:12px;box-shadow:0 4px 10px rgba(2,6,23,.18);white-space:nowrap;max-width:160px;overflow:hidden;text-overflow:ellipsis;backdrop-filter:saturate(120%) blur(2px)}
 .player .alt-cap{position:absolute;left:50%;top:calc(100% + 28px);transform:translateX(-50%);padding:3px 8px;font-size:12px;font-weight:500;line-height:1.05;color:#111;background:rgba(255,255,255,.96);border:1px solid rgba(15,23,42,.12);border-radius:10px;box-shadow:0 3px 8px rgba(2,6,23,.14);white-space:nowrap}
-.player.ok img{box-shadow:0 0 0 3px #22c55e,0 6px 14px rgba(0,0,0,.28)}
-.player.doubt img{box-shadow:0 0 0 3px #f59e0b,0 6px 14px rgba(0,0,0,.28)}
+
+.player.ok    img{ box-shadow:0 0 0 3px #22c55e,0 6px 14px rgba(0,0,0,.28) }
+.player.doubt img{ box-shadow:0 0 0 3px #f59e0b,0 6px 14px rgba(0,0,0,.28) }
 .player.coach{width:70px;height:70px}
 .player.coach img{width:70px;height:70px;margin:0 auto}
-.status-card .sg-title{ font-weight:700; }
-.status-card .tag-list{ display:flex; flex-wrap:wrap; gap:6px; }
-.status-card .tag-list > *{
-  display:inline-block; padding:4px 10px;
-  font-size:13px; font-weight:600; line-height:1.05; letter-spacing:.1px;
-  color:#0a1324; background:#fff; border:1px solid rgba(15,23,42,.12);
-  border-radius:12px; box-shadow:0 3px 8px rgba(2,6,23,.10);
 
-    `;
-    const s = document.createElement('style');
-    s.id = 'pitch-view-style';
-    s.textContent = css;
-    document.head.appendChild(s);
-  })();
+.status-card .sg-title{font-weight:700}
+.status-card .tag-list{display:flex;flex-wrap:wrap;gap:6px}
+.status-card .tag-list>*{display:inline-block;padding:4px 10px;font-size:13px;font-weight:600;line-height:1.05;letter-spacing:.1px;color:#0a1324;background:#fff;border:1px solid rgba(15,23,42,.12);border-radius:12px;box-shadow:0 3px 8px rgba(2,6,23,.10)}
+
+
+.player::before{
+  content:""; position:absolute; left:50%; top:100%; transform:translate(-50%,-38%);
+  width:76%; height:18px; background:radial-gradient(ellipse at center, rgba(0,0,0,.28) 0%, rgba(0,0,0,0) 70%);
+  filter:blur(5px); opacity:.55; pointer-events:none; z-index:0;
+}
+
+.player .cap{
+  border:1px solid rgba(15,23,42,.14);
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 4px 10px rgba(2,6,23,.18);
+  letter-spacing:.15px;
+}
+
+
+.pitch .player:hover img{ transform:scale(1.03); transition:transform .12s ease; }
+
+
+.player .cap,.player .alt-cap{ white-space:nowrap; max-width:160px; text-overflow:ellipsis; overflow:hidden; }
+@media (max-width:420px){ .player .cap{ max-width:130px } }
+
+
+.status-card .tag-list>*{
+  padding:4px 10px; font-size:13px; font-weight:600; color:#0a1324;
+  background:#fff; border:1px solid rgba(15,23,42,.12);
+  border-radius:12px; box-shadow:0 3px 8px rgba(2,6,23,.10);
+}
+
+
+
+`;
+  const s = document.createElement('style');
+  s.id = 'pitch-view-style';
+  s.textContent = css;
+  document.head.appendChild(s);
+})();
+
 
   // ===== Layout padrão em % =====
   const POS = {
