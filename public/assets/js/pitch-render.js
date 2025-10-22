@@ -8,8 +8,8 @@
 :root{
   --font-ui: system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Arial,sans-serif;
   /* tamanhos fluidos */
-  --img: clamp(56px, 9vw, 92px);
-  --img-coach: clamp(44px, 7vw, 70px);
+  --img: clamp(56px, 5.5vw, 92px);
+  --img-coach: clamp(44px, 4vw, 70px);
 }
 html,body,.player .cap,.player .alt-cap,.status-card{
   font-family:var(--font-ui);

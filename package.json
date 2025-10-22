@@ -5,30 +5,23 @@
   "type": "module",
   "scripts": {
     "dev": "vercel dev",
-
     "start": "node server.js",
-
     "img:webp": "sharp-cli \"public/assets/img/escalacoes/*.png\" --webp -q 85 --overwrite",
     "img:webp:escudos": "sharp-cli \"public/assets/img/escudos/*.png\" --webp -q 85 --overwrite",
-
     "build:esc-manifest": "node scripts/hash-escalacoes.mjs",
-
     "precommit:updates": "node scripts/mark-updates.mjs",
-
     "build": "npm run build:esc-manifest",
-
     "predeploy": "npm run img:webp && npm run img:webp:escudos && npm run build",
     "deploy": "npm run predeploy && vercel --prod",
-
     "reset": "rm -rf node_modules package-lock.json && npm install"
   },
   "dependencies": {
-    "express": "^4.19.2",
-    "@vercel/analytics": "^1.5.0"
+    "@vercel/analytics": "^1.5.0",
+    "express": "^4.21.2"
   },
   "devDependencies": {
-    "sharp-cli": "^5.2.0",
-    "fast-glob": "^3.3.3"
+    "fast-glob": "^3.3.3",
+    "sharp-cli": "^5.2.0"
   },
   "engines": {
     "node": ">=18.0.0"
