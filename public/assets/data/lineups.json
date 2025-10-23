@@ -269,7 +269,97 @@
           "sit": "provavel"
         }
       ]
+    },
+    "vasco_v2": {
+      "formacao": "4-3-3",
+      "titulares": [
+        {
+          "slot": "GOL",
+          "id": 87008,
+          "x": 50,
+          "y": 87,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ZAG-L",
+          "id": 115141,
+          "x": 35,
+          "y": 71,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ZAG-R",
+          "id": 97095,
+          "x": 65,
+          "y": 71,
+          "sit": "provavel"
+        },
+        {
+          "slot": "LAT-L",
+          "id": 105584,
+          "x": 15,
+          "y": 66,
+          "sit": "provavel"
+        },
+        {
+          "slot": "LAT-R",
+          "id": 93716,
+          "x": 85,
+          "y": 66,
+          "sit": "provavel"
+        },
+        {
+          "slot": "MEI-L",
+          "id": 101594,
+          "x": 25,
+          "y": 48,
+          "sit": "provavel"
+        },
+        {
+          "slot": "MEI-R",
+          "id": 122485,
+          "x": 75,
+          "y": 48,
+          "sit": "provavel"
+        },
+        {
+          "slot": "MEI-C",
+          "id": 68899,
+          "x": 50,
+          "y": 30,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ATA-C",
+          "id": 99198,
+          "x": 50,
+          "y": 10,
+          "sit": "duvida",
+          "duvida_com": 116706
+        },
+        {
+          "slot": "ATA-R",
+          "id": 122486,
+          "x": 80,
+          "y": 20,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ATA-L",
+          "id": 142279,
+          "x": 20,
+          "y": 20,
+          "sit": "provavel"
+        },
+        {
+          "slot": "TEC",
+          "id": 72391,
+          "x": 10,
+          "y": 88,
+          "sit": "provavel"
+        }
+      ]
     }
   },
-  "updated_at": "2025-10-20T08:28:26.810Z"
+  "updated_at": "2025-10-23T15:07:25.999Z"
 }

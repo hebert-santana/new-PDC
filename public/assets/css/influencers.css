@@ -1,0 +1,8 @@
+.pitch .jogador{cursor:grab}
+.pitch .jogador:active{cursor:grabbing}
+.influ-hint{position:sticky;top:8px;background:#0b192b;color:#fff;padding:6px 10px;border-radius:8px;font-size:.9rem}
+
+
+/* influencers.css */
+.pitch .player, .pitch .jogador { cursor: grab; }
+.pitch .player:active, .pitch .jogador:active { cursor: grabbing; }

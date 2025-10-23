@@ -3,8 +3,8 @@ import json
 from pathlib import Path
 
 # caminhos do projeto
-SRC = Path("public/data/mercado.json")
-DST = Path("public/data/mercado.images.json")
+SRC = Path("public/assets/data/mercado.json")
+DST = Path("public/assets/data/mercado.images.json")
 
 # onde estão as imagens físicas
 ATH_DIR = Path("public/assets/img/atletas")           # ex.: public/assets/img/atletas/39148.jpeg

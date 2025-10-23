@@ -1,0 +1,205 @@
+<!-- public/influencers.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- básico -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta name="generator" content="handmade" />
+
+  <!-- PRIVADO/SEM SEO -->
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+
+  <!-- Título/OG específicos -->
+  <title>Influenciadores — Campinho Interativo (Prováveis do Cartola FC)</title>
+  <meta name="description" content="Área restrita para influenciadores: visualizar escalações e usar o campinho com arrastar e soltar (client-side)." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Prováveis do Cartola FC" />
+  <meta property="og:title" content="Influenciadores — Campinho Interativo" />
+  <meta property="og:description" content="Área restrita para influenciadores com campinho interativo (drag & drop)." />
+  <meta property="og:image" content="https://www.provaveisdocartola.com.br/assets/img/ui/og-cover.jpg" />
+
+  <!-- ícone -->
+  <link rel="icon" href="/assets/img/icons/icon.ico" type="image/x-icon" />
+
+  <!-- CSS (CDN + local) -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/build/styles.css" />
+  <link rel="stylesheet" href="/assets/css/build/club-grid.css" />
+  <link rel="stylesheet" href="/assets/css/customizacao.css?v=29">
+    <link rel="stylesheet" href="/assets/css/influencers.css">
+
+  <!-- GA4 (opcional; manter se quiser medir uso da página privada) -->
+  <link rel="preconnect" href="https://www.google-analytics.com" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6TJ11HJVRG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-6TJ11HJVRG', { send_page_view: false });
+
+    (function () {
+      const DEBUG_GA = false;
+      let lastHash = null;
+      function sendPV(){
+        const hash = location.hash || '';
+        if (hash === lastHash) return;
+        lastHash = hash;
+        const team = (hash.replace(/^#/, '') || '(home)');
+        gtag('event', 'page_view', {
+          page_title: document.title,
+          page_location: location.href,
+          page_path: location.pathname + location.search + hash,
+          team,
+          ...(DEBUG_GA ? { debug_mode: true } : {})
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', sendPV);
+      } else {
+        sendPV();
+      }
+      window.addEventListener('load', sendPV);
+      window.addEventListener('hashchange', sendPV);
+      document.addEventListener('click', (e) => {
+        const a = e.target.closest('a.club-btn[href^="#"]');
+        if (!a) return;
+        gtag('event', 'select_team', {
+          team: a.getAttribute('href').slice(1),
+          ...(DEBUG_GA ? { debug_mode: true } : {})
+        });
+      });
+    })();
+  </script>
+
+  <!-- limpador de parâmetros -->
+  <script>window.__CLEAN_PARAMS__ = true;</script>
+  <script defer src="/assets/js/clean-params.js"></script>
+
+  <!-- dados estruturados básicos -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Prováveis do Cartola FC",
+    "url":"https://www.provaveisdocartola.com.br/",
+    "logo":"https://www.provaveisdocartola.com.br/assets/img/icons/icon.ico",
+    "sameAs":[
+      "https://www.youtube.com/@canal_especialista",
+      "https://instagram.com/canal_especialista"
+    ]
+  }
+  </script>
+
+  <!-- Config global dos dados -->
+  <script>
+    window.LINEUPS_JSON = '/assets/data/lineups.json';
+  </script>
+
+  <style>
+    /* Toque visual para deixar claro que é versão de influenciadores */
+    .influ-hint{position:sticky;top:8px;background:#0b192b;color:#fff;padding:6px 10px;border-radius:8px;font-size:.9rem;margin-bottom:10px}
+    .pitch .jogador{cursor:grab}
+    .pitch .jogador:active{cursor:grabbing}
+  </style>
+</head>
+
+<body>
+  <noscript style="display:block;padding:8px;background:#222;color:#eee;text-align:center">
+    Esta página precisa de JavaScript para renderizar as escalações.
+  </noscript>
+
+  <!-- header -->
+  <header class="container" id="main-image-container">
+    <div class="col-12 d-flex justify-content-center">
+      <h1 id="header-especialista" class="custom-provaveis-item">
+        <span class="visually-hidden">Influenciadores — Campinho Interativo</span>
+        <img src="/assets/img/ui/provaveisdocartola.svg" alt="" role="presentation" class="provaveis-image" width="600" height="200" loading="eager" decoding="async" />
+      </h1>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="influ-hint">
+      Versão para influenciadores. Arraste os jogadores no campinho. As posições ficam salvas apenas neste navegador.
+      <span class="d-none d-sm-inline">Dica: segure <kbd>Ctrl</kbd> para “grudar” na grade de 5%.</span>
+    </div>
+
+    <div class="utility-row">
+      <span class="u-chip u-ok has-tip">
+        <i class="bi bi-patch-check-fill" aria-hidden="true"></i>
+        <b id="acertos-num">+33</b> acertos
+        <small>a mais que o aplicativo oficial</small>
+        <span class="tip" role="tooltip">
+          Contabilizado a partir da rodada 22 |
+          <b class="k-ok">88,0% de taxa de acertos</b> (site Prováveis)
+        </span>
+      </span>
+
+      <span id="market-bar" class="market-chip">
+        <i class="bi bi-graph-up-arrow"></i>
+        <span class="mb-label">Mercado:</span>
+        <b class="mb-status">—</b>
+        <span class="dot">•</span>
+        <i class="bi bi-clock"></i>
+        <span class="mb-countdown"><span class="mb-ctxt">carregando…</span></span>
+      </span>
+    </div>
+  </div>
+
+  <!-- include: botões -->
+  <div class="container" id="provaveis-container">
+    <div data-include="botoes-nav"></div>
+    <div data-include="navbar-equipes"></div>
+
+    <div class="esconde-campinho" hidden></div>
+    <div class="ad-guard" aria-hidden="true"></div>
+
+    <!-- onde os jogos são renderizados -->
+    <div id="jogos-root"></div>
+
+    <!-- includes: CTA e footer -->
+    <div data-include="cta"></div>
+    <div data-include="aviso-apoiadores"></div>
+    <div data-include="footer"></div>
+  </div>
+
+  <!-- JS (ordem) -->
+  <script defer src="/assets/js/layout.js"></script>
+  <script defer src="/assets/js/market-bar.js?v=1"></script>
+
+  <!-- dados dos jogos -->
+  <script defer src="/assets/js/jogos.data.js"></script>
+
+  <!-- render dos jogos -->
+  <script defer src="/assets/js/render-jogos.js?v=2"></script>
+  <script defer src="/assets/js/club-grid.js"></script>
+
+  <!-- meta de atualização / desfalques / arbitragem -->
+  <script defer src="/assets/js/team-updates.js"></script>
+  <script defer src="/assets/js/desfalques.js"></script>
+  <script defer src="/assets/js/arbitragem.js?v=28"></script>
+  <script defer src="/assets/js/aviso-escalacoes.js"></script>
+
+  <!-- loader de mercado (corrigido para /assets/data) -->
+  <script>
+  (async () => {
+    try {
+      const r = await fetch('/assets/data/mercado.images.json', { cache: 'no-store' });
+      if (!r.ok) return;
+      const arr = await r.json();
+      window.MERCADO = { byId: new Map(arr.map(a => [a.atleta_id, a])) };
+    } catch {}
+  })();
+  </script>
+
+<script defer src="/assets/js/pitch-render-influencers.js"></script>
+<script>window.DRAG_ENABLED = true;</script>
+<script defer src="/assets/js/drag-players.js?v=6"></script>
+
+</body>
+</html>
