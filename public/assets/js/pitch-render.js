@@ -7,9 +7,12 @@
   const css = `
 :root{
   --font-ui: system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Arial,sans-serif;
-  /* tamanhos fluidos */
   --img: clamp(56px, 5.5vw, 92px);
   --img-coach: clamp(44px, 4vw, 70px);
+  /* cores do anel */
+  --ring-ok:#16a34a;
+  --ring-duv:#f59e0b;
+  --ring:#16a34a;               /* default */
 }
 html,body,.player .cap,.player .alt-cap,.status-card{
   font-family:var(--font-ui);
@@ -29,6 +32,13 @@ html,body,.player .cap,.player .alt-cap,.status-card{
 .player img,.player .cap,.player .alt-cap{position:relative;z-index:1}
 
 /* pílulas */
+
+/* avatar base */
+.player{
+  position:absolute;transform:translate(-50%,-50%);text-align:center;
+  width:var(--img);height:var(--img);overflow:visible;
+}
+  
 .player .cap{
   position:absolute; left:50%; top:100%; transform:translateX(-50%);
   margin-top:6px; padding:4px 10px; font-size:13px; font-weight:600; line-height:1.05; letter-spacing:.15px;
