@@ -201,5 +201,67 @@
 <script src="/assets/js/pitch-render-influencers.js" defer></script>
 <script src="/assets/js/drag-players.js" defer></script>
 
+<script>
+// mapa base de posições
+const POS = {
+  GOL:{x:50,y:90},
+  'ZAG-L':{x:35,y:75}, 'ZAG-C':{x:50,y:75}, 'ZAG-R':{x:65,y:75},
+  'LAT-L':{x:20,y:78}, 'LAT-R':{x:80,y:78},
+  VOL:{x:50,y:65},
+  'MEI-L':{x:30,y:58}, 'MEI-C':{x:50,y:55}, 'MEI-R':{x:70,y:58},
+  'ATA-L':{x:35,y:30}, 'ATA-C':{x:50,y:25}, 'ATA-R':{x:65,y:30},
+  TEC:{x:92,y:96}
+};
+
+// limpa qualquer persistência local de drag
+function clearDragStorage(){
+  localStorage.removeItem('pitch_drag_positions');
+  sessionStorage.removeItem('pitch_drag_positions');
+}
+
+// aplica posição do preset no elemento
+function applyPresetPos(el){
+  const slot = el.dataset.slot; // ex.: "MEI-C"
+  const p = POS[slot];
+  if (!p) return;
+  el.style.left = p.x + '%';
+  el.style.top  = p.y + '%';
+}
+
+// reseta todos os jogadores
+function resetAllPlayers(){
+  document.querySelectorAll('.player').forEach(el=>{
+    // remove coordenadas livres e inline anteriores
+    el.removeAttribute('data-free-x');
+    el.removeAttribute('data-free-y');
+    el.style.left = '';
+    el.style.top  = '';
+    applyPresetPos(el);
+  });
+}
+
+// F5: volta sempre para o preset
+window.addEventListener('DOMContentLoaded', () => {
+  clearDragStorage();
+  resetAllPlayers();
+
+  // clique único no nome para resetar aquele jogador
+  document.querySelectorAll('.player .cap').forEach(cap=>{
+    cap.addEventListener('click', (e)=>{
+      const el = e.currentTarget.closest('.player');
+      el.removeAttribute('data-free-x');
+      el.removeAttribute('data-free-y');
+      el.style.left = '';
+      el.style.top  = '';
+      applyPresetPos(el);
+    }, {once:false});
+  });
+});
+
+// Se usa drag com salvamento, garanta que o módulo de drag NÃO grave no storage nesta página.
+// Caso precise manter no admin somente, condicione por pathname ou ?persist=1.
+</script>
+
+
 </body>
 </html>
