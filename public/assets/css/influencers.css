@@ -45,3 +45,8 @@
   .player .stat{font-size:9px;top:calc(100% + 20px)}
   .player .alt-cap{font-size:8.5px;top:calc(100% + 36px)}
 }
+
+
+
+/* ocultar médias quando o pitch tiver a classe */
+.pitch.hide-stat .stat{ display:none }
