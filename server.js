@@ -7,6 +7,34 @@ import process from 'node:process';
 const app = express();
 app.use(express.json());
 
+// gate para /influencers.html
+function getCookie(req, name){
+  const c = req.headers.cookie || "";
+  const m = c.match(new RegExp('(?:^|; )'+name+'=([^;]*)'));
+  return m ? decodeURIComponent(m[1]) : null;
+}
+function isTokenValid(tok) {
+  try {
+    const json = Buffer.from(tok, 'base64').toString('utf8');
+    const { exp } = JSON.parse(json);
+    return typeof exp === 'number' && Date.now() < exp;
+  } catch {
+    return false;
+  }
+}
+
+app.use((req,res,next)=>{
+  if (req.path === '/influencers.html') {
+    const tok = getCookie(req,'influ_auth');
+    if (!tok || !isTokenValid(tok)) {
+      const nextUrl = encodeURIComponent(req.originalUrl||'/influencers.html');
+      return res.redirect(`/login.html?next=${nextUrl}`);
+    }
+  }
+  next();
+});
+
+
 // site/painel estático
 app.use(express.static('public', { extensions: ['html'] }));
 

@@ -27,7 +27,7 @@
       --img:clamp(56px,5.5vw,92px);
       --img-coach:clamp(44px,4vw,70px);
       --laranja:#FB5904; --azul:#40A8B0;
-      --gap-label:24px;
+      --gap-label:26px;
     }
     .player{
       position:absolute; transform:translate(-50%,-50%);
@@ -64,35 +64,55 @@
 
     /* Média */
     .player .stat{
-      top:calc(100% + var(--gap-label));
-      font-size:10px; font-weight:700; letter-spacing:.1px;
-      background:rgba(255,255,255,.95);
-      border:1px solid rgba(15,23,42,.12); border-radius:10px; padding:2px 6px;
-      box-shadow:0 2px 6px rgba(2,6,23,.12);
-    }
-    .player .stat.green{ color:#16a34a; border-color:rgba(22,163,74,.25) }
-    .player .stat.amber{ color:#f59e0b; border-color:rgba(245,158,11,.25) }
-    .player .stat.red{ color:#ef4444; border-color:rgba(239,68,68,.25) }
+  top:calc(100% + var(--gap-label));
+  font-size:10px; font-weight:700; letter-spacing:.1px;
+  color:#0a1324; /* texto escuro no balão neutro */
+  background:rgba(255,255,255,.95);
+  border:1px solid rgba(15,23,42,.12);
+  border-radius:10px; padding:2px 6px;
+  box-shadow:0 2px 6px rgba(2,6,23,.12);
+}
+
+/* regra de cor por pontuação – agora pinta o BALÃO e deixa texto branco */
+.player .stat.green{
+  color:#fff;
+  background:#16a34a;
+  border-color:rgba(22,163,74,.6);
+}
+.player .stat.amber{
+  color:#fff;
+  background:#f59e0b;
+  border-color:rgba(245,158,11,.6);
+}
+.player .stat.red{
+  color:#fff;
+  background:#ef4444;
+  border-color:rgba(239,68,68,.6);
+}
+
 
     /* Reserva */
     .player .alt-cap{
-      top:calc(100% + (var(--gap-label) * 2));
+      top:calc(100% + (var(--gap-label) * 1.8));
       padding:3px 8px; font-size:12px; font-weight:500; color:#111;
       background:rgba(255,255,255,.96);
       border:1px solid rgba(15,23,42,.12); border-radius:10px;
       box-shadow:0 3px 8px rgba(2,6,23,.14);
     }
-    .player .alt-stat{
-      top:calc(100% + (var(--gap-label) * 3));
-      font-size:10px; font-weight:700; letter-spacing:.1px;
-      background:rgba(255,255,255,.95);
-      border:1px solid rgba(15,23,42,.12); border-radius:10px; padding:2px 6px;
-      box-shadow:0 2px 6px rgba(2,6,23,.12);
-      display:none;
-    }
-    .player .alt-stat.green{ color:#16a34a; border-color:rgba(22,163,74,.25) }
-    .player .alt-stat.amber{ color:#f59e0b; border-color:rgba(245,158,11,.25) }
-    .player .alt-stat.red{ color:#ef4444; border-color:rgba(239,68,68,.25) }
+   .player .alt-stat{
+  top:calc(100% + (var(--gap-label) * 2.55));
+  font-size:10px; font-weight:700; letter-spacing:.1px;
+  color:#0a1324;
+  background:rgba(255,255,255,.95);
+  border:1px solid rgba(15,23,42,.12);
+  border-radius:10px; padding:2px 6px;
+  box-shadow:0 2px 6px rgba(2,6,23,.12);
+  display:none;
+}
+.player .alt-stat.green{ color:#fff; background:#16a34a; border-color:rgba(22,163,74,.6) }
+.player .alt-stat.amber{ color:#fff; background:#f59e0b; border-color:rgba(245,158,11,.6) }
+.player .alt-stat.red{ color:#fff; background:#ef4444; border-color:rgba(239,68,68,.6) }
+
 
     /* Visibilidade */
     .pitch.hide-stat .player .stat{ display:none }
@@ -370,30 +390,37 @@
     return base;
   }
 
-  async function drawAll(){
-    const CURRENT = await loadLineups();
-    window.CURRENT_LINEUPS = CURRENT;
+async function drawAll() {
+  const CURRENT = await loadLineups();
+  window.CURRENT_LINEUPS = CURRENT;
 
-    await new Promise(res=>{
-      const tick = () => document.querySelectorAll('.pitch[data-team]').length ? res() : setTimeout(tick, 40);
-      tick();
-    });
+  await new Promise(res => {
+    const tick = () => document.querySelectorAll('.pitch[data-team]').length ? res() : setTimeout(tick, 40);
+    tick();
+  });
 
-    document.querySelectorAll('.pitch[data-team]').forEach(pitch=>{
-      const rawKey = pitch.getAttribute('data-team') || '';
-      const team = CURRENT?.teams?.[rawKey];
-      const key = team ? rawKey : (Object.keys(CURRENT.teams||{})[0] || rawKey);
-      pitch.dataset.scope = key;
-      pitch.dataset.formacao = team?.formacao || '';
+  document.querySelectorAll('.pitch[data-team]').forEach(pitch => {
+    const rawKey = pitch.getAttribute('data-team') || '';
+    const team = CURRENT?.teams?.[rawKey];
+    const key = team ? rawKey : (Object.keys(CURRENT.teams || {})[0] || rawKey);
+    pitch.dataset.scope = key;
+    pitch.dataset.formacao = team?.formacao || '';
 
-      if (!team) { pitch.innerHTML = ''; return; }
+    if (!team) {
+      pitch.innerHTML = '';
+      return;
+    }
 
-      pitch.classList.add('pitch');
-      if (!pitch.style.position) pitch.style.position = 'relative';
+    pitch.classList.add('pitch');
+    pitch.classList.add('hide-stat'); // <<< oculta médias por padrão
 
-      ensureToolbar(pitch);
-      drawPitch(pitch, team);
-    });
+    if (!pitch.style.position)
+      pitch.style.position = 'relative';
+
+    ensureToolbar(pitch);
+    drawPitch(pitch, team);
+  });
+
 
     // reforço: garante que nada ficou salvo após montar
     try{
