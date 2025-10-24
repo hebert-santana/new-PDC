@@ -76,6 +76,32 @@ app.post('/api/lineups', async (req, res) => {
   return res.status(400).json({ ok:false, error:'payload inválido' });
 });
 
+
+// NOVA ROTA — Atualizar horário manualmente via botão
+app.post('/api/team-updates', async (req, res) => {
+  try {
+    const { teamKey, alert = "" } = req.body || {};
+    if (!teamKey) return res.status(400).json({ error: 'teamKey required' });
+
+    const nowISO = new Date().toISOString();
+    const upd = await readJsonSafe(TEAM_UPD);
+
+    upd.version = 1;
+    upd.tz = '-03:00';
+    upd.teams = upd.teams || {};
+
+    const prev = upd.teams[teamKey] || {};
+    upd.teams[teamKey] = { ...prev, last_update: nowISO, alert };
+
+    await writeJsonAtomic(TEAM_UPD, upd);
+    res.json({ ok: true, teamKey, last_update: nowISO });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: String(err?.message || err) });
+  }
+});
+
+
 // start
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`[painel] http://localhost:${PORT}`));

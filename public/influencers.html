@@ -101,10 +101,32 @@
   </script>
 
   <style>
-    /* Toque visual para deixar claro que é versão de influenciadores */
-    .influ-hint{position:sticky;top:8px;background:#0b192b;color:#fff;padding:6px 10px;border-radius:8px;font-size:.9rem;margin-bottom:10px}
-    .pitch .jogador{cursor:grab}
-    .pitch .jogador:active{cursor:grabbing}
+    /* substituir o CSS de .influ-hint */
+.influ-banner{
+  max-width:90%;
+  margin:0 auto 20px;
+  padding:8px 14px;
+  text-align:center;
+  color:#eaf3ff;
+  border-radius:14px;
+  background:
+    linear-gradient(#0b192b,#0b192b) padding-box,
+    linear-gradient(90deg,#22d3ee,#2ee59d) border-box;
+  border:1px solid transparent;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  animation:fadeSlide .35s ease-out;
+}
+.influ-banner .bi{color:#2ee59d;margin-right:6px}
+.influ-banner .sep{opacity:.5;margin:0 8px}
+.influ-banner kbd{
+  background:#0b1420;border:1px solid #1e2b3c;color:#eaf3ff;
+  padding:1px 6px;border-radius:6px
+}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media (max-width:576px){
+  .influ-banner{font-size:.92rem;padding:8px 10px}
+}
+
   </style>
 </head>
 
@@ -124,36 +146,43 @@
   </header>
 
   <div class="container">
-    <div class="influ-hint">
-      Versão para influenciadores. Arraste os jogadores no campinho. As posições ficam salvas apenas neste navegador.
-      <span class="d-none d-sm-inline">Dica: segure <kbd>Ctrl</kbd> para “grudar” na grade de 5%.</span>
-    </div>
-
-    <div class="utility-row">
-      <span class="u-chip u-ok has-tip">
-        <i class="bi bi-patch-check-fill" aria-hidden="true"></i>
-        <b id="acertos-num">+33</b> acertos
-        <small>a mais que o aplicativo oficial</small>
-        <span class="tip" role="tooltip">
-          Contabilizado a partir da rodada 22 |
-          <b class="k-ok">88,0% de taxa de acertos</b> (site Prováveis)
-        </span>
-      </span>
-
-      <span id="market-bar" class="market-chip">
-        <i class="bi bi-graph-up-arrow"></i>
-        <span class="mb-label">Mercado:</span>
-        <b class="mb-status">—</b>
-        <span class="dot">•</span>
-        <i class="bi bi-clock"></i>
-        <span class="mb-countdown"><span class="mb-ctxt">carregando…</span></span>
-      </span>
-    </div>
+    <!-- substituir a .influ-hint atual -->
+<div class="influ-banner" role="status" aria-live="polite">
+  <i class="bi bi-shield-lock-fill" aria-hidden="true"></i>
+  <strong>Área exclusiva para influenciadores</strong>
+  <span class="sep">•</span>
+  <span>Arraste os jogadores no campinho</span>
+  <span class="sep d-none d-sm-inline">•</span>
+  <span class="d-none d-sm-inline">Dica: <kbd>duplo clique</kbd> restaura a posição</span>
+</div>
   </div>
 
   <!-- include: botões -->
   <div class="container" id="provaveis-container">
-    <div data-include="botoes-nav"></div>
+<div class="container">
+  
+  <nav class="hero-buttons" aria-label="Navegação de páginas">     
+    <a href="/influencers.html" class="btn-noticia btn-nav">
+      <i class="bi bi-people-fill me-1" aria-hidden="true"></i>
+      Prováveis Escalações
+    </a>
+  </nav>
+  
+</div>
+
+<script>
+  // marca o botão da página atual
+  (function () {
+    const norm = (u) => new URL(u, location.origin).pathname.replace(/\/index\.html$/, '/');
+    const here = norm(location.href);
+    document.querySelectorAll('.hero-buttons a.btn-nav').forEach(a => {
+      if (norm(a.href) === here) {
+        a.setAttribute('aria-current', 'page');
+        a.classList.add('is-active');
+      }
+    });
+  })();
+</script>
     <div data-include="navbar-equipes"></div>
 
     <div class="esconde-campinho" hidden></div>
@@ -163,7 +192,6 @@
     <div id="jogos-root"></div>
 
     <!-- includes: CTA e footer -->
-    <div data-include="cta"></div>
     <div data-include="aviso-apoiadores"></div>
     <div data-include="footer"></div>
   </div>
