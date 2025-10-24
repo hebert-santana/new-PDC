@@ -170,7 +170,7 @@
 .u-chip small{font-size:.78rem;color:#6b7280;margin-left:2px}
 .u-chip .dot{opacity:.45;margin:0 2px}
 .u-ok i,.u-ok b{color:#16a34a}
-@media (max-width:768px){.utility-row{gap:8px;margin:8px auto 14px}.u-chip{padding:7px 10px;font-size:.92rem}.u-chip small{display:none}}
+@media (max-width:768px){.utility-row{gap:8px;margin:8px auto 0px}.u-chip{padding:7px 10px;font-size:.92rem}.u-chip small{display:none}}
 .u-chip[title]{position:relative}
 .u-chip[title]:hover::after{
   content:attr(title);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);
@@ -189,6 +189,13 @@
 /* Market bar ajustes locais */
 #market-bar .mb-label{font-weight:700}
 #market-bar .dot{display:none}
+
+@media (max-width: 768px) {
+  #acertos-num,
+  .u-chip.u-ok {
+    display: none !important;
+  }
+}
 
 /* ======================================================================
    LINEUP CARD + PITCH + PLAYERS
