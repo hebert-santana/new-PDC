@@ -9,7 +9,7 @@
           "slot": "GOL",
           "id": 101574,
           "x": 50,
-          "y": 87,
+          "y": 89,
           "sit": "provavel"
         },
         {
@@ -23,7 +23,7 @@
           "slot": "ZAG-C",
           "id": 102340,
           "x": 50,
-          "y": 71,
+          "y": 70,
           "sit": "provavel"
         },
         {
@@ -35,7 +35,7 @@
         },
         {
           "slot": "LAT-L",
-          "id": 105531,
+          "id": 143452,
           "x": 15,
           "y": 45,
           "sit": "provavel"
@@ -48,24 +48,45 @@
           "sit": "provavel"
         },
         {
-          "slot": "VOL",
-          "id": 95556,
-          "x": 50,
-          "y": 55,
-          "sit": "provavel"
-        },
-        {
           "slot": "MEI-C",
           "id": 117632,
           "x": 50,
-          "y": 35,
+          "y": 30,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ATA-L",
+          "id": 85048,
+          "x": 35,
+          "y": 12,
           "sit": "provavel"
         },
         {
           "slot": "ATA-R",
           "id": 100652,
           "x": 65,
-          "y": 15,
+          "y": 12,
+          "sit": "provavel"
+        },
+        {
+          "slot": "TEC",
+          "id": 40990,
+          "x": 10,
+          "y": 88,
+          "sit": "provavel"
+        },
+        {
+          "slot": "MEI-L",
+          "id": 97642,
+          "x": 35,
+          "y": 50,
+          "sit": "provavel"
+        },
+        {
+          "slot": "MEI-R",
+          "id": 117910,
+          "x": 65,
+          "y": 50,
           "sit": "provavel"
         }
       ]
@@ -340,5 +361,5 @@
       ]
     }
   },
-  "updated_at": "2025-10-24T16:31:28.737Z"
+  "updated_at": "2025-10-24T18:00:44.401Z"
 }
