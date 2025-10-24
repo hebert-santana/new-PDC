@@ -92,26 +92,33 @@
       ]
     },
     "atletico-mg_v2": {
-      "formacao": "4-4-2",
+      "formacao": "3-5-2",
       "titulares": [
         {
           "slot": "GOL",
           "id": 72294,
           "x": 50,
-          "y": 87,
+          "y": 88,
           "sit": "provavel"
         },
         {
           "slot": "ZAG-L",
           "id": 88312,
-          "x": 35,
+          "x": 25,
           "y": 71,
           "sit": "provavel"
         },
         {
-          "slot": "ZAG-R",
+          "slot": "ZAG-C",
           "id": 72605,
-          "x": 65,
+          "x": 50,
+          "y": 70,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ZAG-R",
+          "id": 96725,
+          "x": 75,
           "y": 71,
           "sit": "provavel"
         },
@@ -119,57 +126,51 @@
           "slot": "LAT-L",
           "id": 87228,
           "x": 15,
-          "y": 66,
-          "sit": "provavel"
-        },
-        {
-          "slot": "LAT-R",
-          "id": 96725,
-          "x": 85,
-          "y": 66,
-          "sit": "provavel"
-        },
-        {
-          "slot": "VOL",
-          "id": 39656,
-          "x": 50,
-          "y": 55,
+          "y": 48,
           "sit": "provavel"
         },
         {
           "slot": "MEI-L",
+          "id": 39656,
+          "x": 35,
+          "y": 50,
+          "sit": "provavel"
+        },
+        {
+          "slot": "MEI-R",
           "id": 100084,
-          "x": 25,
-          "y": 40,
+          "x": 65,
+          "y": 50,
+          "sit": "provavel"
+        },
+        {
+          "slot": "LAT-R",
+          "id": 87999,
+          "x": 85,
+          "y": 48,
           "sit": "provavel"
         },
         {
           "slot": "MEI-C",
-          "id": 87999,
+          "id": 72460,
           "x": 50,
           "y": 30,
           "sit": "provavel"
         },
         {
-          "slot": "MEI-R",
-          "id": 103767,
-          "x": 75,
-          "y": 40,
-          "sit": "provavel"
-        },
-        {
           "slot": "ATA-L",
-          "id": 91607,
+          "id": 68920,
           "x": 35,
-          "y": 10,
+          "y": 12,
           "sit": "provavel"
         },
         {
           "slot": "ATA-R",
           "id": 39148,
           "x": 65,
-          "y": 10,
-          "sit": "provavel"
+          "y": 12,
+          "sit": "duvida",
+          "duvida_com": 91607
         },
         {
           "slot": "TEC",
@@ -361,5 +362,5 @@
       ]
     }
   },
-  "updated_at": "2025-10-24T18:00:44.401Z"
+  "updated_at": "2025-10-24T18:06:50.980Z"
 }
