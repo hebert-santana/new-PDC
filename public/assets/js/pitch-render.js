@@ -74,12 +74,12 @@ html,body,.player .cap,.player .alt-cap,.status-card{
 
 /* ajustes mobile */
 @media (max-width:768px){
-  .player .cap{      font-size:11px; padding:3px 8px;  max-width:80px; }
+  .player .cap{      font-size:10px; padding:3px 8px;  max-width:80px; }
   .player .alt-cap{  font-size:10px; padding:2px 7px;  top:calc(100% + 22px); }
 }
 @media (max-width:480px){
-  .player .cap{      font-size:9px;  padding:2px 6px;  max-width:68px; margin-top: -5px }
-  .player .alt-cap{  font-size:8.5px;padding:2px 5px;  top:calc(100% + 8px); }
+  .player .cap{      font-size:8.5px;  padding:2px 6px;  max-width:68px; margin-top: -5px }
+  .player .alt-cap{  font-size:8.5px;  padding:2px 5px;  top:calc(100% + 8px); }
 }
 @media (max-width:420px){ .player .cap{ max-width:130px } }
 
@@ -106,14 +106,14 @@ html,body,.player .cap,.player .alt-cap,.status-card{
 
   // Presets específicos para mobile (ajuste como preferir)
 const MPRESETS = {
-  '4-3-3': {'GOL':[50,88],'ZAG-L':[33,72],'ZAG-C':[50,72],'ZAG-R':[67,72],'LAT-L':[12,66],'LAT-R':[88,66],
-            'MEI-L':[26,48],'MEI-C':[50,35],'MEI-R':[74,48],'ATA-L':[22,20],'ATA-C':[50,10],'ATA-R':[78,20],'TEC':[12,92]},
-  '4-4-2': {'GOL':[50,88],'ZAG-L':[33,72],'ZAG-C':[50,72],'ZAG-R':[67,72],'LAT-L':[12,66],'LAT-R':[88,66],
-            'VOL':[50,55],'MEI-L':[26,46],'MEI-C':[50,30],'MEI-R':[74,46],'ATA-L':[36,10],'ATA-R':[64,10],'TEC':[12,92]},
-  '3-5-2': {'GOL':[50,88],'ZAG-L':[26,70],'ZAG-C':[50,68],'ZAG-R':[74,70],'LAT-L':[12,47],'LAT-R':[88,47],
-            'VOL':[50,57],'MEI-L':[36,47],'MEI-C':[50,30],'MEI-R':[64,47],'ATA-L':[36,10],'ATA-R':[64,10],'TEC':[12,92]},
-  '4-2-3-1': {'GOL':[50,92],'ZAG-L':[40,77],'ZAG-R':[60,77],'LAT-L':[22,79],'LAT-R':[78,79],
-              'VOL':[40,66],'VOL2':[60,66],'MEI-L':[36,57],'MEI-C':[50,54],'MEI-R':[64,57],'ATA-C':[50,32],'TEC':[10,92]},
+  '4-3-3': {'GOL':[50,89],'ZAG-L':[33,72],'ZAG-C':[50,72],'ZAG-R':[67,72],'LAT-L':[12,66],'LAT-R':[88,66],
+            'MEI-L':[26,48],'MEI-C':[50,35],'MEI-R':[74,48],'ATA-L':[22,20],'ATA-C':[50,13],'ATA-R':[78,20],'TEC':[12,92.5]},
+  '4-4-2': {'GOL':[50,89],'ZAG-L':[33,72],'ZAG-C':[50,72],'ZAG-R':[67,72],'LAT-L':[12,66],'LAT-R':[88,66],
+            'VOL':[50,55],'MEI-L':[26,44],'MEI-C':[50,30],'MEI-R':[74,44],'ATA-L':[32,13],'ATA-R':[68,13],'TEC':[12,92.5]},
+  '3-5-2': {'GOL':[50,89],'ZAG-L':[26,70],'ZAG-C':[50,68],'ZAG-R':[74,70],'LAT-L':[12,47],'LAT-R':[88,47],
+            'VOL':[50,57],'MEI-L':[36,47],'MEI-C':[50,30],'MEI-R':[64,47],'ATA-L':[32,13],'ATA-R':[68,13],'TEC':[12,92.5]},
+  '4-2-3-1': {'GOL':[50,89],'ZAG-L':[40,77],'ZAG-R':[60,77],'LAT-L':[22,79],'LAT-R':[78,79],
+              'VOL':[40,66],'VOL2':[60,66],'MEI-L':[36,57],'MEI-C':[50,54],'MEI-R':[64,57],'ATA-C':[50,32],'TEC':[12,92.5]},
 };
 const IS_MOBILE = matchMedia('(max-width: 430px)').matches;
 const clamp = (v,a=0,b=100)=>Math.max(a,Math.min(b,v));

@@ -47,7 +47,7 @@ function lineupCol(side){
   const name = side.name || "";
   const alt  = `Escalação provável do ${name} — rodada ${window.RODADA || ""}`;
   const overlay = `${ESC_BASE}/${key}.png`;
-  const fieldBg = `/assets/img/campinhos/campinho.png`;
+  const fieldBg = `/assets/img/campinhos/campinho.webp`;
 
   return `
     <div class="lineup-col">

@@ -195,7 +195,7 @@
    ====================================================================== */
 .lineup-card{
   position:relative;width:100%;max-width:631px;aspect-ratio:631/892;
-  background:center/contain no-repeat url("/assets/img/campinhos/campinho.png");
+  background:center/contain no-repeat url("/assets/img/campinhos/campinho.webp");
   border-radius:18px;box-shadow:0 6px 24px rgba(0,0,0,.12);overflow:hidden
 }
 .lineup-card .lineup-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:transparent !important;display:block}
@@ -212,7 +212,7 @@
 /* Pitch responsivo dentro do card */
 .lineup-card .pitch{
   position:relative;width:100% !important;max-width:631px;height:auto !important;aspect-ratio:631/892;
-  background:url('/assets/img/campinhos/campinho.png') 0 0/100% 100% no-repeat;border-radius:16px;
+  background:url('/assets/img/campinhos/campinho.webp') 0 0/100% 100% no-repeat;border-radius:16px;
   box-shadow:0 6px 24px rgba(0,0,0,.12);overflow:hidden;transform:none !important
 }
 .lineup-card .pitch::after{display:none}
