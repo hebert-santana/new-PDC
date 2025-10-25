@@ -8,7 +8,7 @@
   const clamp = (v,a=0,b=100)=>Math.max(a,Math.min(b,v));
   const PCT = v => `${v}%`;
 
-  // 1) LIMPA e BLOQUEIA persistência do drag nesta página
+  // bloqueia qualquer persistência de drag nesta página
   try{
     localStorage.removeItem(SAVE_KEY);
     localStorage.removeItem('pitch_drag_positions');
@@ -19,153 +19,168 @@
     localStorage.getItem = (k)=> (k===SAVE_KEY ? null : __get(k));
   }catch{}
 
-  // 2) CSS injetado
+  // ===== CSS =====
   (() => {
     if (document.getElementById('pitch-view-style')) return;
     const css = `
-    :root{
-      --img:clamp(56px,5.5vw,92px);
-      --img-coach:clamp(44px,4vw,70px);
-      --laranja:#FB5904; --azul:#40A8B0;
-      --gap-label:26px;
-    }
-    .player{
-      position:absolute; transform:translate(-50%,-50%);
-      text-align:center; width:var(--img); height:var(--img);
-      overflow:visible; touch-action:manipulation;
-    }
-    .player img{
-      display:block; width:var(--img); height:var(--img);
-      border-radius:50%; background:#fff; border:2px solid #fff;
-      outline:1px solid rgba(15,23,42,.08);
-      box-shadow:0 4px 14px rgba(0,0,0,.28);
-    }
-    .player.ok img{ box-shadow:0 0 0 3px #22c55e,0 6px 14px rgba(0,0,0,.28) }
-    .player.doubt img{ box-shadow:0 0 0 3px #f59e0b,0 6px 14px rgba(0,0,0,.28) }
-    .player.coach{ width:var(--img-coach); height:var(--img-coach) }
-    .player.coach img{ width:var(--img-coach); height:var(--img-coach) }
+  :root{
+    --img:clamp(56px,5.5vw,92px);
+    --img-coach:clamp(44px,4vw,70px);
+    --laranja:#FB5904; --azul:#40A8B0;
+    --gap-label:26px;
+    --chip-size:24px;
+    --chip-ring:#ffd54a;
+    --chip-fg:#0b192b;
+  }
 
-    .player .cap, .player .stat, .player .alt-cap, .player .alt-stat{
-      position:absolute; left:50%; transform:translateX(-50%);
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:160px;
-    }
-    /* clique habilitado no nome */
-    .player .cap, .player .alt-cap{ pointer-events:auto; cursor:pointer }
-    .player .stat, .player .alt-stat{ pointer-events:none }
+  .player{
+    position:absolute; transform:translate(-50%,-50%);
+    text-align:center; width:var(--img); height:var(--img);
+    overflow:visible; touch-action:manipulation;
+  }
+  .player img{
+    display:block; width:var(--img); height:var(--img);
+    border-radius:50%; background:#fff; border:2px solid #fff;
+    outline:1px solid rgba(15,23,42,.08);
+    box-shadow:0 4px 14px rgba(0,0,0,.28);
+    pointer-events:none; user-select:none;
+  }
+  .player.ok img{ box-shadow:0 0 0 3px #22c55e,0 6px 14px rgba(0,0,0,.28) }
+  .player.doubt img{ box-shadow:0 0 0 3px #f59e0b,0 6px 14px rgba(0,0,0,.28) }
+  .player.coach{ width:var(--img-coach); height:var(--img-coach) }
+  .player.coach img{ width:var(--img-coach); height:var(--img-coach) }
 
-    /* Nome */
-    .player .cap{
-      top:calc(100% + 0px);
-      padding:4px 10px; font-size:13px; font-weight:600; color:#0a1324;
-      background:rgba(255,255,255,.98);
-      border:1px solid rgba(15,23,42,.14); border-radius:12px;
-      box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 4px 10px rgba(2,6,23,.18);
-    }
+  .player .cap, .player .stat, .player .alt-cap, .player .alt-stat{
+    position:absolute; left:50%; transform:translateX(-50%);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:160px;
+  }
+  .player .cap, .player .alt-cap{ pointer-events:auto; cursor:pointer }
+  .player .stat, .player .alt-stat{ pointer-events:none }
 
-    /* Média */
-    .player .stat{
-  top:calc(100% + var(--gap-label));
-  font-size:10px; font-weight:700; letter-spacing:.1px;
-  color:#0a1324; /* texto escuro no balão neutro */
-  background:rgba(255,255,255,.95);
-  border:1px solid rgba(15,23,42,.12);
-  border-radius:10px; padding:2px 6px;
-  box-shadow:0 2px 6px rgba(2,6,23,.12);
-}
+  .player .cap{
+    top:calc(100% + 0px);
+    padding:4px 10px; font-size:13px; font-weight:600; color:#0a1324;
+    background:rgba(255,255,255,.98);
+    border:1px solid rgba(15,23,42,.14); border-radius:12px;
+    box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 4px 10px rgba(2,6,23,.18);
+  }
+  .player .stat{
+    top:calc(100% + var(--gap-label));
+    font-size:10px; font-weight:700; letter-spacing:.1px;
+    color:#fff; background:#16a34a; border:1px solid rgba(22,163,74,.6);
+    border-radius:10px; padding:2px 6px; box-shadow:0 2px 6px rgba(2,6,23,.12);
+  }
+  .player .stat.amber{ background:#f59e0b; border-color:rgba(245,158,11,.6) }
+  .player .stat.red{ background:#ef4444; border-color:rgba(239,68,68,.6) }
 
-/* regra de cor por pontuação – agora pinta o BALÃO e deixa texto branco */
-.player .stat.green{
-  color:#fff;
-  background:#16a34a;
-  border-color:rgba(22,163,74,.6);
-}
-.player .stat.amber{
-  color:#fff;
-  background:#f59e0b;
-  border-color:rgba(245,158,11,.6);
-}
-.player .stat.red{
-  color:#fff;
-  background:#ef4444;
-  border-color:rgba(239,68,68,.6);
-}
+  .player .alt-cap{
+    top:calc(100% + (var(--gap-label) * 1.8));
+    padding:3px 8px; font-size:12px; font-weight:500; color:#111;
+    background:rgba(255,255,255,.96);
+    border:1px solid rgba(15,23,42,.12); border-radius:10px;
+    box-shadow:0 3px 8px rgba(2,6,23,.14);
+  }
+  .player .alt-stat{
+    top:calc(100% + (var(--gap-label) * 2.55));
+    font-size:10px; font-weight:700; letter-spacing:.1px;
+    color:#fff; background:#16a34a; border:1px solid rgba(22,163,74,.6);
+    border-radius:10px; padding:2px 6px; box-shadow:0 2px 6px rgba(2,6,23,.12);
+    display:none;
+  }
+  .player .alt-stat.amber{ background:#f59e0b; border-color:rgba(245,158,11,.6) }
+  .player .alt-stat.red{ background:#ef4444; border-color:rgba(239,68,68,.6) }
 
+  .pitch.hide-stat .player .stat{ display:none }
+  .pitch.hide-stat .player .alt-cap{ top:calc(100% + var(--gap-label)) }
+  .pitch.hide-doubt .player .alt-cap, .pitch.hide-doubt .player .alt-stat{ display:none }
+  .pitch:not(.hide-stat):not(.hide-doubt) .player .alt-cap + .alt-stat{ display:block }
 
-    /* Reserva */
-    .player .alt-cap{
-      top:calc(100% + (var(--gap-label) * 1.8));
-      padding:3px 8px; font-size:12px; font-weight:500; color:#111;
-      background:rgba(255,255,255,.96);
-      border:1px solid rgba(15,23,42,.12); border-radius:10px;
-      box-shadow:0 3px 8px rgba(2,6,23,.14);
-    }
-   .player .alt-stat{
-  top:calc(100% + (var(--gap-label) * 2.55));
-  font-size:10px; font-weight:700; letter-spacing:.1px;
-  color:#0a1324;
-  background:rgba(255,255,255,.95);
-  border:1px solid rgba(15,23,42,.12);
-  border-radius:10px; padding:2px 6px;
-  box-shadow:0 2px 6px rgba(2,6,23,.12);
-  display:none;
-}
-.player .alt-stat.green{ color:#fff; background:#16a34a; border-color:rgba(22,163,74,.6) }
-.player .alt-stat.amber{ color:#fff; background:#f59e0b; border-color:rgba(245,158,11,.6) }
-.player .alt-stat.red{ color:#fff; background:#ef4444; border-color:rgba(239,68,68,.6) }
+  @media (max-width:768px){
+    :root{ --gap-label:20px }
+    .player .cap{ max-width:120px }
+  }
+  @media (max-width:480px){
+    :root{ --gap-label:18px }
+    .player .cap, .player .alt-cap{ max-width:90px }
+  }
 
+  /* ===== Toolbar ===== */
+  .pitch-toolbar{
+    position:absolute; right:8px; top:8px;
+    display:flex; align-items:center; gap:8px; z-index:9;
+  }
 
-    /* Visibilidade */
-    .pitch.hide-stat .player .stat{ display:none }
-    .pitch.hide-stat .player .alt-cap{ top:calc(100% + var(--gap-label)) }
-    .pitch.hide-doubt .player .alt-cap,
-    .pitch.hide-doubt .player .alt-stat{ display:none }
-    .pitch:not(.hide-stat):not(.hide-doubt) .player .alt-cap + .alt-stat{ display:block }
+  /* chips circulares: M, ?, P(docked) */
+  .pitch-toolbar .btn-chip{
+    width:var(--chip-size); height:var(--chip-size);
+    border-radius:999px; display:inline-flex; align-items:center; justify-content:center;
+    font:800 12px/1 system-ui; color:var(--chip-fg);
+    background:rgba(255,255,255,.96);
+    border:2px solid rgba(11,25,43,.22);
+    box-shadow:0 1px 4px rgba(2,6,23,.14), 0 0 0 2px rgba(255,255,255,.6) inset;
+    cursor:pointer; user-select:none; padding:0;
+    transition:transform .05s ease, background .12s ease, box-shadow .12s ease, border-color .12s ease;
+  }
+  .pitch-toolbar .btn-chip:hover{ background:#fff }
+  .pitch-toolbar .btn-chip:active{ transform:translateY(1px) }
 
-    /* Responsivo */
-    @media (max-width:768px){
-      :root{ --gap-label:20px }
-      .player .cap{ max-width:120px }
-    }
-    @media (max-width:480px){
-      :root{ --gap-label:18px }
-      .player .cap, .player .alt-cap{ max-width:90px }
-    }
+  .pitch-toolbar .btn-chip.stat.active{
+    color:#111;
+    background:linear-gradient(135deg,#ffd37a,#ffb24e 60%,#ffa34a);
+    border-color:rgba(251,89,4,.35);
+    box-shadow:0 2px 10px rgba(251,89,4,.22), 0 0 0 2px var(--chip-ring) inset;
+  }
+  .pitch-toolbar .btn-chip.doubt.active{
+    color:#072024;
+    background:linear-gradient(135deg,#8ee2e6,#67c4ca 60%,#40a8b0);
+    border-color:rgba(64,168,176,.35);
+    box-shadow:0 2px 10px rgba(165, 176, 64, 0.22), 0 0 0 2px var(--chip-ring) inset;
+  }
 
-    /* Toolbar */
-    .pitch-toolbar{
-      position:absolute; right:8px; top:8px; display:flex; gap:6px; z-index:5;
-    }
-    .pitch-toolbar .btn{
-      font:700 10px system-ui; padding:4px 8px; border-radius:999px; cursor:pointer;
-      border:1px solid #e5e7eb; background:#fff; color:#0b192b;
-      box-shadow:0 2px 6px rgba(2,6,23,.08), inset 0 0 0 1px rgba(255,255,255,.6);
-      transition:transform .05s ease, background .12s ease, box-shadow .12s ease;
-    }
-    .pitch-toolbar .btn:hover{ background:#f7f7f8 }
-    .pitch-toolbar .btn:active{ transform:translateY(1px) }
-    .pitch-toolbar .btn-stat.active{
-      background:linear-gradient(135deg,var(--laranja),#ff8a3d 50%,#ffc08a 100%);
-      border-color:rgba(251,89,4,.4); color:#111;
-    }
-    .pitch-toolbar .btn-doubt.active{
-      background:linear-gradient(135deg,var(--azul),#67c4ca 50%,#a9e0e3 100%);
-      border-color:rgba(64,168,176,.4); color:#072024;
-    }
+  /* P docked — idêntico aos chips */
+  .pen-marker.docked{
+    position:static; transform:none; box-sizing:border-box;
+    width:var(--chip-size); height:var(--chip-size);
+    margin:0; padding:0;
+    display:inline-flex; align-items:center; justify-content:center; vertical-align:middle;
+    border-radius:999px; font:800 12px/1 system-ui; color:#0b192b;
+    background:radial-gradient(circle at 30% 30%, #fff, #ffe68a);
+    border:2px solid rgba(11,25,43,.22);
+    box-shadow:0 1px 4px rgba(2,6,23,.14), 0 0 0 2px rgba(255,255,255,.6) inset;
+    cursor:grab; user-select:none; touch-action:none;
+  }
 
-    /* chips de status */
-    .status-card .sg-title{ font-weight:700 }
-    .status-card .tag-list{ display:flex; flex-wrap:wrap; gap:6px }
-    .status-card .tag-list>*{
-      display:inline-block; padding:4px 10px; font-size:13px; font-weight:600; line-height:1.05; letter-spacing:.1px;
-      color:#0a1324; background:#fff; border:1px solid rgba(15,23,42,.12); border-radius:12px; box-shadow:0 3px 8px rgba(2,6,23,.10);
-    }`;
+  /* P solto no campo */
+  .pen-marker:not(.docked){
+    position:absolute; transform:translate(-50%,-50%); z-index:4;
+    width:28px; height:28px; border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #f8fc07ff, #ffe68a);
+    border:2px solid #111; color:#111; font:900 14px/28px system-ui;
+    text-align:center; user-select:none; touch-action:none; cursor:grab;
+    box-shadow:0 6px 16px rgba(0,0,0,.30), 0 0 0 2px var(--chip-ring) inset;
+  }
+  .pen-marker:active{ cursor:grabbing }
+
+  /* badge de atualização */
+  .upd-badge{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:3px 8px; border-radius:999px;
+    font:700 11px system-ui; letter-spacing:.1px;
+    color:#eaf3ff;
+    background:rgba(11,25,43,.55);
+    border:1px solid rgba(255,255,255,.16);
+    box-shadow:0 8px 18px rgba(0,0,0,.25);
+    backdrop-filter:saturate(120%) blur(2px);
+  }
+  .upd-badge .bi{ opacity:.9 }
+    `;
     const s = document.createElement('style');
     s.id = 'pitch-view-style';
     s.textContent = css;
     document.head.appendChild(s);
   })();
 
-  // 3) Presets
+  // ===== Presets =====
   const POS = {
     GOL:{x:50,y:90},
     'ZAG-L':{x:35,y:75}, 'ZAG-C':{x:50,y:75}, 'ZAG-R':{x:65,y:75},
@@ -186,7 +201,7 @@
                 'VOL':[40,66],'VOL2':[60,66],'MEI-L':[36,57],'MEI-C':[50,54],'MEI-R':[64,57],'ATA-C':[50,32],'TEC':[10,92]},
   };
 
-  // 4) Helpers
+  // ===== helpers de dados =====
   async function jget(url){
     const r = await fetch(url, { cache:'no-store' });
     if(!r.ok) throw new Error(`fetch ${url} ${r.status}`);
@@ -203,8 +218,7 @@
   const clubIdOf = id => getA(id)?.clube_id ?? 0;
   const foto = id => (getA(id)?.foto || '').trim() || `/assets/img/escudos/cartola/${clubIdOf(id)}.jpg`;
   const mediaNum = id => Number(getA(id)?.media_num ?? NaN);
-  const fmtMedia = v => Number.isFinite(v) ? `Média: ${v.toFixed(1).replace('.',',')}` : 'Média: —';
-  const statClass = v => !Number.isFinite(v) ? '' : (v>5?'green':(v>=3?'amber':'red'));
+  const statClass = v => !Number.isFinite(v) ? '' : (v>5?'':(v>=3?'amber':'red'));
 
   function place(el, slot, xy, formacao){
     let p = xy || POS[slot] || POS['MEI-C'];
@@ -216,7 +230,7 @@
     el.style.top  = PCT(p.y);
   }
 
-  // 5) Nó do jogador
+  // ===== Player node =====
   function ensurePlayerEl(pitch, {id, slot, sit, duvidaCom}){
     let el = pitch.querySelector(`#p-${id}`);
     const clsBase = 'player jogador';
@@ -227,8 +241,7 @@
       el.id = `p-${id}`;
       el.dataset.id = String(id);
       el.dataset.slot = slot;
-      el.className = `${clsBase} ${clsSit}`;
-      if (slot === 'TEC') el.classList.add('coach');
+      el.className = `${clsBase} ${clsSit}` + (slot === 'TEC' ? ' coach' : '');
 
       const img = document.createElement('img');
       img.loading = 'lazy';
@@ -237,20 +250,16 @@
       img.alt = nome(id);
       img.src = foto(id);
       img.onerror = () => { img.onerror = null; img.src = `/assets/img/escudos/cartola/${clubIdOf(id)}.jpg`; };
-      img.setAttribute('draggable','false');
-      img.style.webkitUserDrag = 'none';
-      img.style.userSelect = 'none';
-      img.style.pointerEvents = 'none';
 
       const cap = document.createElement('figcaption');
       cap.className = 'cap';
       cap.textContent = nome(id);
 
       const stat = document.createElement('div');
-      stat.className = 'stat';
       const m = mediaNum(id);
-      stat.textContent = fmtMedia(m);
-      if (statClass(m)) stat.classList.add(statClass(m));
+      stat.textContent = Number.isFinite(m) ? `Média: ${m.toFixed(1).replace('.',',')}` : 'Média: —';
+      stat.className = 'stat';
+      const sc = statClass(m); if (sc) stat.classList.add(sc);
 
       el.appendChild(img);
       el.appendChild(cap);
@@ -262,18 +271,17 @@
       const stat = el.querySelector('.stat');
       if (stat){
         const m = mediaNum(id);
-        stat.textContent = fmtMedia(m);
-        stat.classList.remove('green','amber','red');
-        if (statClass(m)) stat.classList.add(statClass(m));
+        stat.textContent = Number.isFinite(m) ? `Média: ${m.toFixed(1).replace('.',',')}` : 'Média: —';
+        stat.classList.remove('amber','red');
+        const sc = statClass(m); if (sc) stat.classList.add(sc);
       }
       const img = el.querySelector('img'); if (img){ img.alt = nome(id); img.src = foto(id); }
     }
 
-    // alternativo (dúvida)
+    // seção de dúvida
     el.querySelectorAll('.alt-cap, .alt-stat').forEach(n => n.remove());
     if (sit === 'duvida' && Number.isFinite(+duvidaCom)) {
       const altId = +duvidaCom;
-
       const altCap = document.createElement('div');
       altCap.className = 'alt-cap';
       altCap.textContent = nome(altId);
@@ -284,7 +292,7 @@
       altStat.className = 'alt-stat';
       if (Number.isFinite(altM)) {
         altStat.textContent = `Média: ${altM.toFixed(1).replace('.', ',')}`;
-        altStat.classList.add(altM>5?'green':(altM>=3?'amber':'red'));
+        const sc = (altM>5?'':(altM>=3?'amber':'red')); if (sc) altStat.classList.add(sc);
       } else {
         altStat.textContent = 'Média: —';
       }
@@ -294,7 +302,112 @@
     return el;
   }
 
-  // 6) Toolbar
+  // ===== Penalty marker (dockable) =====
+  function ensurePenaltyMarker(pitch, toolbar){
+    let m = pitch.querySelector('.pen-marker, .pitch-toolbar .pen-marker');
+    if (m) return m;
+
+    m = document.createElement('div');
+    m.className = 'pen-marker docked';
+    m.textContent = 'P';
+    m.title = 'Arraste para o cobrador. Duplo clique para voltar ao dock.';
+    toolbar.appendChild(m);
+
+    const on = (t,ev,fn,opts)=>t.addEventListener(ev,fn,opts||false);
+    let dragging = false, moved = false, offX=0, offY=0, sx=0, sy=0;
+    const THRESH = 4; // px para considerar arrasto
+
+    function pctFromClient(x, y){
+      const r = pitch.getBoundingClientRect();
+      const px = Math.max(0, Math.min(r.width,  x - r.left));
+      const py = Math.max(0, Math.min(r.height, y - r.top ));
+      return { x: (px / r.width) * 100, y: (py / r.height) * 100 };
+    }
+    function findNearestPlayer(){
+      const r = pitch.getBoundingClientRect();
+      let best=null, bestD2=Infinity;
+      const cx = r.left + r.width  * (parseFloat(m.style.left||'50')/100);
+      const cy = r.top  + r.height * (parseFloat(m.style.top ||'18')/100);
+      pitch.querySelectorAll('.player').forEach(p=>{
+        const pr = p.getBoundingClientRect();
+        const px = pr.left + pr.width/2;
+        const py = pr.top  + pr.height/2;
+        const dx = px - cx, dy = py - cy;
+        const d2 = dx*dx + dy*dy;
+        if (d2 < bestD2){ bestD2 = d2; best = p; }
+      });
+      return {el:best, d:Math.sqrt(bestD2)};
+    }
+    function snapAbove(playerEl){
+      if (!playerEl) return;
+      const pr = playerEl.getBoundingClientRect();
+      const cx = pr.left + pr.width/2;
+      const top = pr.top - Math.min(18, pr.height*0.25);
+      const {x,y} = pctFromClient(cx, top);
+      m.style.left = x + '%';
+      m.style.top  = y + '%';
+      m.classList.add('attached');
+      m.dataset.to = playerEl.id || '';
+    }
+    function detach(){ m.classList.remove('attached'); m.dataset.to=''; }
+    function undockAtPointer(clientX, clientY){
+      if (!m.classList.contains('docked')) return;
+      pitch.appendChild(m);
+      m.classList.remove('docked');
+      const {x,y} = pctFromClient(clientX, clientY);
+      m.style.left = x + '%';
+      m.style.top  = y + '%';
+    }
+    function redock(){
+      detach();
+      m.removeAttribute('style');
+      m.classList.add('docked');
+      toolbar.prepend(m); // sempre primeiro
+    }
+
+    on(m,'pointerdown',e=>{
+      e.preventDefault();
+      dragging = true; moved = false;
+      sx = e.clientX; sy = e.clientY;
+      const r = m.getBoundingClientRect();
+      offX = e.clientX - r.left;
+      offY = e.clientY - r.top;
+      m.setPointerCapture?.(e.pointerId);
+    });
+
+    on(window,'pointermove',e=>{
+      if (!dragging) return;
+      if (!moved){
+        const dx = Math.abs(e.clientX - sx), dy = Math.abs(e.clientY - sy);
+        if (dx < THRESH && dy < THRESH) return;
+        moved = true;
+        if (m.classList.contains('docked')) undockAtPointer(sx, sy);
+      }
+      const r = pitch.getBoundingClientRect();
+      const x = Math.max(r.left, Math.min(r.right, e.clientX - offX + m.offsetWidth/2));
+      const y = Math.max(r.top , Math.min(r.bottom, e.clientY - offY + m.offsetHeight/2));
+      const {x:xp,y:yp} = pctFromClient(x, y);
+      m.style.left = xp + '%';
+      m.style.top  = yp + '%';
+      detach();
+    });
+
+    on(window,'pointerup',()=>{
+      if (!dragging) return;
+      dragging = false;
+      if (!moved) return; // clique simples não faz nada
+      if (m.classList.contains('docked')) return;
+      const {el,d} = findNearestPlayer();
+      const SNAP = (IS_MOBILE ? 70 : 92) * 1.3;
+      if (d <= SNAP) snapAbove(el);
+    });
+
+    on(m,'dblclick', redock);
+
+    return m;
+  }
+
+  // ===== Toolbar =====
   function ensureToolbar(pitch){
     let tb = pitch.querySelector('.pitch-toolbar');
     if (!tb){
@@ -304,38 +417,40 @@
     }
     tb.innerHTML = '';
 
+    // P primeiro
+    const marker = ensurePenaltyMarker(pitch, tb);
+    tb.prepend(marker);
+
+    // M — médias
     const bStat = document.createElement('button');
     bStat.type = 'button';
-    bStat.className = 'btn btn-stat';
+    bStat.className = 'btn-chip stat';
+    bStat.textContent = 'M';
     const syncStat = () => {
       const hidden = pitch.classList.contains('hide-stat');
-      bStat.textContent = hidden ? 'Mostrar média' : 'Ocultar média';
       bStat.classList.toggle('active', !hidden);
+      bStat.title = hidden ? 'Mostrar média' : 'Ocultar média';
+      bStat.setAttribute('aria-label', bStat.title);
     };
-    bStat.addEventListener('click', ()=>{
-      pitch.classList.toggle('hide-stat');
-      syncStat();
-    });
-    syncStat();
-    tb.appendChild(bStat);
+    bStat.onclick = ()=>{ pitch.classList.toggle('hide-stat'); syncStat(); };
+    tb.appendChild(bStat); syncStat();
 
+    // ? — dúvidas
     const bDoubt = document.createElement('button');
     bDoubt.type = 'button';
-    bDoubt.className = 'btn btn-doubt';
+    bDoubt.className = 'btn-chip doubt';
+    bDoubt.textContent = '?';
     const syncDoubt = () => {
       const hidden = pitch.classList.contains('hide-doubt');
-      bDoubt.textContent = hidden ? 'Mostrar dúvidas' : 'Ocultar dúvidas';
       bDoubt.classList.toggle('active', !hidden);
+      bDoubt.title = hidden ? 'Mostrar dúvidas' : 'Ocultar dúvidas';
+      bDoubt.setAttribute('aria-label', bDoubt.title);
     };
-    bDoubt.addEventListener('click', ()=>{
-      pitch.classList.toggle('hide-doubt');
-      syncDoubt();
-    });
-    syncDoubt();
-    tb.appendChild(bDoubt);
+    bDoubt.onclick = ()=>{ pitch.classList.toggle('hide-doubt'); syncDoubt(); };
+    tb.appendChild(bDoubt); syncDoubt();
   }
 
-  // 7) Reset local
+  // ===== Reset por clique no nome =====
   function bindCapReset(pitch){
     pitch.querySelectorAll('.player .cap').forEach(cap=>{
       cap.onclick = (e)=>{
@@ -348,7 +463,7 @@
     });
   }
 
-  // 8) Render
+  // ===== Draw team =====
   function drawPitch(pitch, team){
     pitch.querySelectorAll('.player[id^="p-"]').forEach(n=>n.remove());
 
@@ -381,6 +496,7 @@
     bindCapReset(pitch);
   }
 
+  // ===== Load lineups =====
   async function loadLineups(){
     const base = await jget(`/assets/data/lineups.json?t=${Date.now()}`).catch(()=>({version:1,teams:{}}));
     try{
@@ -390,39 +506,36 @@
     return base;
   }
 
-async function drawAll() {
-  const CURRENT = await loadLineups();
-  window.CURRENT_LINEUPS = CURRENT;
+  // ===== Orquestração =====
+  async function drawAll() {
+    const CURRENT = await loadLineups();
+    window.CURRENT_LINEUPS = CURRENT;
 
-  await new Promise(res => {
-    const tick = () => document.querySelectorAll('.pitch[data-team]').length ? res() : setTimeout(tick, 40);
-    tick();
-  });
+    await new Promise(res => {
+      const tick = () => document.querySelectorAll('.pitch[data-team]').length ? res() : setTimeout(tick, 40);
+      tick();
+    });
 
-  document.querySelectorAll('.pitch[data-team]').forEach(pitch => {
-    const rawKey = pitch.getAttribute('data-team') || '';
-    const team = CURRENT?.teams?.[rawKey];
-    const key = team ? rawKey : (Object.keys(CURRENT.teams || {})[0] || rawKey);
-    pitch.dataset.scope = key;
-    pitch.dataset.formacao = team?.formacao || '';
+    document.querySelectorAll('.pitch[data-team]').forEach(pitch => {
+      const rawKey = pitch.getAttribute('data-team') || '';
+      const team = CURRENT?.teams?.[rawKey];
+      const key = team ? rawKey : (Object.keys(CURRENT.teams || {})[0] || rawKey);
+      pitch.dataset.scope = key;
+      pitch.dataset.formacao = team?.formacao || '';
 
-    if (!team) {
-      pitch.innerHTML = '';
-      return;
-    }
+      if (!team) {
+        pitch.innerHTML = '';
+        return;
+      }
 
-    pitch.classList.add('pitch');
-    pitch.classList.add('hide-stat'); // <<< oculta médias por padrão
+      pitch.classList.add('pitch');
+      pitch.classList.add('hide-stat'); // médias ocultas por padrão
+      if (!pitch.style.position) pitch.style.position = 'relative';
 
-    if (!pitch.style.position)
-      pitch.style.position = 'relative';
+      ensureToolbar(pitch);
+      drawPitch(pitch, team);
+    });
 
-    ensureToolbar(pitch);
-    drawPitch(pitch, team);
-  });
-
-
-    // reforço: garante que nada ficou salvo após montar
     try{
       localStorage.removeItem(SAVE_KEY);
       localStorage.removeItem('pitch_drag_positions');

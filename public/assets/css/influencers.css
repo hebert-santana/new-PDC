@@ -48,6 +48,7 @@
 
 
 
-/* ocultar médias quando o pitch tiver a classe */
-.pitch.hide-stat .stat{ display:none }
+/* ocultar médias dos jogadores, não a toolbar */
+.pitch.hide-stat .player .stat{ display:none !important; }
+
 
