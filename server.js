@@ -27,12 +27,13 @@ app.use((req,res,next)=>{
   if (req.path === '/influencers.html') {
     const tok = getCookie(req,'influ_auth');
     if (!tok || !isTokenValid(tok)) {
-      const nextUrl = encodeURIComponent(req.originalUrl||'/influencers.html');
-      return res.redirect(`/login.html?next=${nextUrl}`);
+      const nextUrl = encodeURIComponent(req.originalUrl || '/influencers.html');
+      return res.redirect(302, `/login.html?next=${nextUrl}`);
     }
   }
   next();
 });
+
 
 
 // site/painel estático

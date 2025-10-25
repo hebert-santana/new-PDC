@@ -1,7 +1,6 @@
 <!-- public/login.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,303 +17,55 @@
   <link rel="stylesheet" href="/assets/css/customizacao.css?v=29" />
 
   <style>
-    :root {
-      --panel: #0e1620;
-      --line: #203044;
-      --txt: #eaf3ff;
-      --muted: #9bb0c9;
-      --accent: #2ee59d;
-      --danger: #ef4444;
-    }
-
-    body {
-      background: #070c12;
-      color: var(--txt);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      padding: 18px 0
-    }
-
-    .login-wrap {
-      flex: 1;
-      display: grid;
-      place-items: center;
-      padding: 24px 16px;
-    }
-
-    .login-card {
-      width: 100%;
-      max-width: 420px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 22px;
-      box-shadow: 0 24px 50px rgba(0, 0, 0, .45), inset 0 0 0 1px rgba(255, 255, 255, .02);
-      position: relative
-    }
-
-    .login-card .brand {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 6px
-    }
-
-    .login-card h1 {
-      font-size: 1.15rem;
-      margin: 8px 0 14px;
-      text-align: center;
-      color: var(--txt)
-    }
-
-    .badge-invite {
-      font-size: .7rem;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 999px;
-      color: #061a14;
-      background: linear-gradient(135deg, #22d3ee, #2ee59d)
-    }
-
-    .form-label {
-      color: var(--muted);
-      font-weight: 600;
-      font-size: .92rem
-    }
-
-    .form-control {
-      background: #0b1420;
-      border: 1px solid #1e2b3c;
-      color: var(--txt)
-    }
-
-    .form-control:focus {
-      border-color: #35527a;
-      box-shadow: none
-    }
-
-    .btn-login {
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      font-weight: 800;
-      background: linear-gradient(135deg, #22d3ee, #2ee59d);
-      color: #06231a;
-      border: 0;
-      border-radius: 12px;
-      padding: 10px 14px;
-      box-shadow: 0 10px 24px rgba(46, 229, 157, .22)
-    }
-
-    .btn-login:active {
-      transform: translateY(1px)
-    }
-
-    .helper {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: .9rem
-    }
-
-    .err {
-      display: none;
-      margin: 10px 0 0;
-      color: #fff;
-      background: rgba(239, 68, 68, .14);
-      border: 1px solid rgba(239, 68, 68, .45);
-      padding: 8px 10px;
-      border-radius: 8px;
-      font-size: .92rem
-    }
-
-    .hint {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: .86rem
-    }
-
-    .toggle-pass {
-      cursor: pointer;
-      user-select: none;
-      background: none;
-      border: 0;
-      color: #7dd3fc;
-      padding: 0
-    }
-
-    .toggle-pass:focus {
-      outline: 2px solid #35527a;
-      outline-offset: 2px
-    }
-
-    /* Footer personalizado */
-    .login-footer-scope {
-      background: #070c12;
-      color: var(--txt);
-      padding: 28px 0 16px;
-      text-align: center;
-      border-top: 1px solid #203044
-    }
-
-    .login-footer-scope .container {
-      max-width: 1280px;
-      width: 90%;
-      margin: 0 auto
-    }
-
-    .login-footer-scope .footer-text {
-      font-size: 1rem;
-      color: var(--muted);
-      margin-bottom: 12px
-    }
-
-    .login-footer-scope .footer-small-text {
-      font-size: .85rem;
-      color: var(--muted);
-      margin-top: 6px
-    }
-
-    /* Exclusividade + Live */
-    .exclusive-ribbon {
-      position: sticky;
-      top: 0;
-      z-index: 5;
-      text-align: center;
-      background: linear-gradient(90deg, #0ea5b7 0%, #22d3ee 50%, #2ee59d 100%);
-      color: #05161c;
-      font-weight: 900;
-      letter-spacing: .3px;
-      padding: 6px 10px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, .35)
-    }
-
-    .exclusive-ribbon .lock {
-      margin-right: 6px
-    }
-
-    .exclusive-ribbon+header {
-      margin-top: 6px
-    }
-
-    .bg-vignette::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(80vw 60vh at 50% -10%, rgba(34, 211, 238, .12), transparent 60%),
-        radial-gradient(50vw 40vh at 10% 110%, rgba(46, 229, 157, .10), transparent 60%),
-        radial-gradient(50vw 40vh at 90% 110%, rgba(14, 165, 183, .10), transparent 60%)
-    }
-
-    body.bg-vignette {
-      isolation: isolate
-    }
-
-    .login-card.live {
-      border: 1px solid transparent;
-      background:
-        linear-gradient(#0e1620, #0e1620) padding-box,
-        linear-gradient(135deg, #22d3ee, #2ee59d) border-box;
-      box-shadow: 0 20px 60px rgba(46, 229, 157, .18), 0 0 0 6px rgba(34, 211, 238, .06) inset
-    }
-
-    .live-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-weight: 800;
-      font-size: .78rem;
-      color: #061a14;
-      background: linear-gradient(135deg, #fb7185, #f43f5e);
-      box-shadow: 0 10px 24px rgba(244, 63, 94, .25)
-    }
-
-    .live-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #fff;
-      box-shadow: 0 0 0 0 rgba(255, 255, 255, .8);
-      animation: pulse 1.4s ease-in-out infinite
-    }
-
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(255, 255, 255, .8)
-      }
-
-      70% {
-        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0)
-      }
-
-      100% {
-        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0)
-      }
-    }
-
-    @media (prefers-reduced-motion:reduce) {
-      .live-dot {
-        animation: none
-      }
-    }
-
-    .live-meta {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin: 8px 0 0;
-      color: var(--muted);
-      font-size: .88rem
-    }
-
-    .live-meta .sep {
-      opacity: .4
-    }
-
-    .btn-login.live {
-      background: linear-gradient(135deg, #f43f5e, #fb923c 45%, #2ee59d 100%);
-      box-shadow: 0 10px 28px rgba(244, 63, 94, .28), inset 0 0 0 1px rgba(255, 255, 255, .06)
-    }
-
-    .exclusive-note {
-      margin-top: 8px;
-      color: #92a8c4;
-      font-size: .8rem;
-      text-align: center
-    }
-
-    /* Marca “EXCLUSIVO” no cartão */
-    .login-card::after {
-      content: "EXCLUSIVO";
-      position: absolute;
-      top: 10px;
-      right: 12px;
-      font-size: .6rem;
-      letter-spacing: .18em;
-      color: rgba(234, 243, 255, .35);
-      border: 1px solid rgba(234, 243, 255, .18);
-      padding: 2px 6px;
-      border-radius: 999px
-    }
+    :root{--panel:#0e1620;--line:#203044;--txt:#eaf3ff;--muted:#9bb0c9;--accent:#2ee59d;--danger:#ef4444}
+    body{background:#070c12;color:var(--txt);min-height:100vh;display:flex;flex-direction:column}
+    header{padding:18px 0}
+    .login-wrap{flex:1;display:grid;place-items:center;padding:24px 16px}
+    .login-card{width:100%;max-width:420px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 24px 50px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.02);position:relative}
+    .login-card .brand{display:flex;justify-content:center;margin-bottom:6px}
+    .login-card h1{font-size:1.15rem;margin:8px 0 14px;text-align:center;color:var(--txt)}
+    .badge-invite{font-size:.7rem;font-weight:800;padding:3px 8px;border-radius:999px;color:#061a14;background:linear-gradient(135deg,#22d3ee,#2ee59d)}
+    .form-label{color:var(--muted);font-weight:600;font-size:.92rem}
+    .form-control{background:#0b1420;border:1px solid #1e2b3c;color:var(--txt)}
+    .form-control:focus{border-color:#35527a;box-shadow:none}
+    .btn-login{display:inline-flex;gap:8px;align-items:center;justify-content:center;width:100%;font-weight:800;background:linear-gradient(135deg,#22d3ee,#2ee59d);color:#06231a;border:0;border-radius:12px;padding:10px 14px;box-shadow:0 10px 24px rgba(46,229,157,.22)}
+    .btn-login:active{transform:translateY(1px)}
+    .helper{display:flex;justify-content:space-between;align-items:center;margin-top:8px;color:var(--muted);font-size:.9rem}
+    .err{display:none;margin:10px 0 0;color:#fff;background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.45);padding:8px 10px;border-radius:8px;font-size:.92rem}
+    .hint{margin-top:10px;color:var(--muted);font-size:.86rem}
+    .toggle-pass{cursor:pointer;user-select:none;background:none;border:0;color:#7dd3fc;padding:0}
+    .toggle-pass:focus{outline:2px solid #35527a;outline-offset:2px}
+    .login-footer-scope{background:#070c12;color:var(--txt);padding:28px 0 16px;text-align:center;border-top:1px solid #203044}
+    .login-footer-scope .container{max-width:1280px;width:90%;margin:0 auto}
+    .login-footer-scope .footer-text{font-size:1rem;color:var(--muted);margin-bottom:12px}
+    .login-footer-scope .footer-small-text{font-size:.85rem;color:var(--muted);margin-top:6px}
+    .exclusive-ribbon{position:sticky;top:0;z-index:5;text-align:center;background:linear-gradient(90deg,#0ea5b7 0%,#22d3ee 50%,#2ee59d 100%);color:#05161c;font-weight:900;letter-spacing:.3px;padding:6px 10px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+    .exclusive-ribbon .lock{margin-right:6px}
+    .exclusive-ribbon+header{margin-top:6px}
+    .bg-vignette::before{content:"";position:fixed;inset:0;pointer-events:none;background:
+      radial-gradient(80vw 60vh at 50% -10%,rgba(34,211,238,.12),transparent 60%),
+      radial-gradient(50vw 40vh at 10% 110%,rgba(46,229,157,.10),transparent 60%),
+      radial-gradient(50vw 40vh at 90% 110%,rgba(14,165,183,.10),transparent 60%)}
+    body.bg-vignette{isolation:isolate}
+    .login-card.live{border:1px solid transparent;background:
+      linear-gradient(#0e1620,#0e1620) padding-box,
+      linear-gradient(135deg,#22d3ee,#2ee59d) border-box;
+      box-shadow:0 20px 60px rgba(46,229,157,.18),0 0 0 6px rgba(34,211,238,.06) inset}
+    .live-pill{display:inline-flex;align-items:center;gap:8px;padding:4px 10px;border-radius:999px;font-weight:800;font-size:.78rem;color:#061a14;background:linear-gradient(135deg,#fb7185,#f43f5e);box-shadow:0 10px 24px rgba(244,63,94,.25)}
+    .live-dot{width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 0 0 rgba(255,255,255,.8);animation:pulse 1.4s ease-in-out infinite}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.8)}70%{box-shadow:0 0 0 10px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+    @media (prefers-reduced-motion:reduce){.live-dot{animation:none}}
+    .live-meta{display:flex;gap:10px;justify-content:center;margin:8px 0 0;color:var(--muted);font-size:.88rem}
+    .live-meta .sep{opacity:.4}
+    .btn-login.live{background:linear-gradient(135deg,#f43f5e,#fb923c 45%,#2ee59d 100%);box-shadow:0 10px 28px rgba(244,63,94,.28),inset 0 0 0 1px rgba(255,255,255,.06)}
+    .exclusive-note{margin-top:8px;color:#92a8c4;font-size:.8rem;text-align:center}
+    .login-card::after{content:"EXCLUSIVO";position:absolute;top:10px;right:12px;font-size:.6rem;letter-spacing:.18em;color:rgba(234,243,255,.35);border:1px solid rgba(234,243,255,.18);padding:2px 6px;border-radius:999px}
   </style>
 
   <script>window.__CLEAN_PARAMS__ = false;</script>
   <script defer src="/assets/js/clean-params.js"></script>
 </head>
-
 <body>
-
   <div class="exclusive-ribbon">
     <i class="bi bi-shield-lock-fill lock"></i> Acesso exclusivo para convidados • LIVE de análises do Cartola FC
   </div>
@@ -323,15 +74,13 @@
     <div class="col-12 d-flex justify-content-center">
       <h1 id="header-especialista" class="custom-provaveis-item" style="margin:0">
         <span class="visually-hidden">Login Influenciadores</span>
-        <img src="/assets/img/ui/provaveisdocartola_login.png" alt="" role="presentation" class="provaveis-image"
-          width="520" height="180" loading="eager" decoding="async" />
+        <img src="/assets/img/ui/provaveisdocartola_login.png" alt="" role="presentation" class="provaveis-image" width="520" height="180" loading="eager" decoding="async" />
       </h1>
     </div>
   </header>
 
   <main class="login-wrap">
     <section class="login-card">
-
       <div class="d-flex justify-content-center">
         <span class="live-pill" id="live-pill" hidden><span class="live-dot"></span> AO VIVO</span>
       </div>
@@ -344,19 +93,16 @@
       <form id="login-form" novalidate>
         <div class="mb-3">
           <label for="email" class="form-label">E-mail</label>
-          <input type="email" inputmode="email" id="email" class="form-control" placeholder="seuemail@dominio.com"
-            autocomplete="username" required />
+          <input type="email" inputmode="email" id="email" class="form-control" placeholder="seuemail@dominio.com" autocomplete="username" required />
         </div>
 
         <div class="mb-1">
           <label for="senha" class="form-label d-flex justify-content-between">
             <span>Senha</span>
-            <button type="button" class="toggle-pass" id="toggle-pass" aria-controls="senha"
-              aria-expanded="false">mostrar</button>
+            <button type="button" class="toggle-pass" id="toggle-pass" aria-controls="senha" aria-expanded="false">mostrar</button>
           </label>
           <div class="input-group">
-            <input type="password" id="senha" class="form-control" placeholder="••••••••••"
-              autocomplete="current-password" required />
+            <input type="password" id="senha" class="form-control" placeholder="••••••••••" autocomplete="current-password" required />
           </div>
         </div>
 
@@ -383,8 +129,7 @@
 
   <footer class="login-footer-scope">
     <div class="container">
-      <p class="footer-text">Desenvolvida para facilitar o trabalho dos influenciadores em suas lives e análises do
-        Cartola FC.</p>
+      <p class="footer-text">Desenvolvida para facilitar o trabalho dos influenciadores em suas lives e análises do Cartola FC.</p>
       <p class="footer-small-text">© 2025 Prováveis do Cartola | Todos os direitos reservados</p>
     </div>
   </footer>
@@ -392,7 +137,7 @@
   <script>
     // ===== Config =====
     const URLP = new URLSearchParams(location.search);
-    const PASS_B64 = "cHJvdmF2ZWlzMjAyNg=="; // "provaveis2026"
+    const PASS_B64 = "YW1pZ29zZG9zcHJvdmF2ZWlz";
     const ALLOWED_EMAILS_B64 = new Set([
       "aW5mbHVlbmNlckBleGVtcGxvLmNvbQ==",
       "aGViZXJ0LmZzYW50YW5hQGdtYWlsLmNvbQ==",
@@ -401,6 +146,10 @@
     // ===== Base64 seguro (Unicode) =====
     const toB64 = (s) => btoa(String.fromCharCode(...new TextEncoder().encode((s || "").trim())));
     const fromB64 = (b) => new TextDecoder().decode(Uint8Array.from(atob(b), c => c.charCodeAt(0)));
+
+    // ===== Decodifique constantes e prepare conjuntos =====
+    const PASS_PLAIN = fromB64(PASS_B64);
+    const ALLOWED_EMAILS = new Set([...ALLOWED_EMAILS_B64].map(fromB64));
 
     // ===== Token com TTL =====
     function issueToken(email, ttlHours = 12) {
@@ -429,30 +178,42 @@
     // ===== Login =====
     const form = document.getElementById('login-form');
     const errBox = document.getElementById('err');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      errBox.style.display = 'none';
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  errBox.style.display = 'none';
 
-      const email = (document.getElementById('email').value || '').trim().toLowerCase();
-      const senha = document.getElementById('senha').value || '';
-      const remember = document.getElementById('remember').checked;
+  const rawEmail = (document.getElementById('email').value || '');
+  const rawPass  = (document.getElementById('senha').value || '');
+  const remember = document.getElementById('remember').checked;
 
-      if (!email || !senha) { errBox.textContent = 'Preencha e-mail e senha.'; errBox.style.display = 'block'; return; }
+  const email = rawEmail.trim().toLowerCase();
+  const senha = rawPass.trim();
 
-      const emailOk = ALLOWED_EMAILS_B64.has(toB64(email));
-      const passOk = toB64(senha) === PASS_B64;
-      if (!emailOk || !passOk) { errBox.textContent = 'Credenciais inválidas.'; errBox.style.display = 'block'; return; }
+  if (!email || !senha) {
+    errBox.textContent = 'Preencha e-mail e senha.'; errBox.style.display = 'block'; return;
+  }
 
-      const token = issueToken(email, remember ? 720 : 12); // 30 dias se marcar
-      saveSession(token, remember);
+  // declare primeiro, use depois
+  const emailOk = ALLOWED_EMAILS.has(email);
+  const passOk  = senha === PASS_PLAIN;
 
-      // novo: cookie para o servidor enxergar
-      const maxAge = (remember ? 720 : 12) * 3600; // s
-      document.cookie = `influ_auth=${encodeURIComponent(token)}; Path=/; Max-Age=${maxAge}; SameSite=Lax${location.protocol === 'https:' ? '; Secure' : ''}`;
+  // debug SÓ depois de inicializar
+  // console.log({ email, PASS_PLAIN, allowed:[...ALLOWED_EMAILS], emailOk, passOk });
 
-      const next = URLP.get('next');
-      location.href = next || '/influencers.html';
-    });
+  if (!emailOk || !passOk) {
+    errBox.textContent = 'Credenciais inválidas.'; errBox.style.display = 'block'; return;
+  }
+
+  const token = issueToken(email, remember ? 720 : 12);
+  saveSession(token, remember);
+
+  const maxAge = (remember ? 720 : 12) * 3600;
+  document.cookie = `influ_auth=${encodeURIComponent(token)}; Path=/; Max-Age=${maxAge}; SameSite=Lax${location.protocol === 'https:' ? '; Secure' : ''}`;
+
+  const next = URLP.get('next');
+  location.href = next || '/influencers.html';
+});
+
 
     // ===== Auto-bypass se já logado =====
     (function autoBypass() {
@@ -490,12 +251,16 @@
       viewersEl.textContent = `${viewers} assistindo`;
       setInterval(() => {
         viewers += (Math.random() < .5 ? -1 : 1) * Math.floor(Math.random() * 3);
-        viewers = Math.max(1, viewers); viewersEl.textContent = `${viewers} assistindo`;
+        viewers = Math.max(1, viewers);
+        viewersEl.textContent = `${viewers} assistindo`;
       }, 3000);
 
-      let dots = 0; setInterval(() => { dots = (dots + 1) % 4; ticker.textContent = 'Sincronizando com a sala' + '.'.repeat(dots); }, 900);
+      let dots = 0;
+      setInterval(() => {
+        dots = (dots + 1) % 4;
+        ticker.textContent = 'Sincronizando com a sala' + '.'.repeat(dots);
+      }, 900);
     })();
   </script>
 </body>
-
 </html>
