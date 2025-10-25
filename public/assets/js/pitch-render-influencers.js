@@ -1,4 +1,3 @@
-// /assets/js/pitch-render-influencers.js
 (() => {
   'use strict';
 
@@ -110,7 +109,7 @@
     display:flex; align-items:center; gap:8px; z-index:9;
   }
 
-  /* chips circulares: M, ?, P(docked) */
+  /* chips circulares: M, ?, P(docked), MM, MV, A */
   .pitch-toolbar .btn-chip{
     width:var(--chip-size); height:var(--chip-size);
     border-radius:999px; display:inline-flex; align-items:center; justify-content:center;
@@ -124,20 +123,14 @@
   .pitch-toolbar .btn-chip:hover{ background:#fff }
   .pitch-toolbar .btn-chip:active{ transform:translateY(1px) }
 
-  .pitch-toolbar .btn-chip.stat.active{
+  .pitch-toolbar .btn-chip.active{
     color:#111;
     background:linear-gradient(135deg,#ffd37a,#ffb24e 60%,#ffa34a);
     border-color:rgba(251,89,4,.35);
     box-shadow:0 2px 10px rgba(251,89,4,.22), 0 0 0 2px var(--chip-ring) inset;
   }
-  .pitch-toolbar .btn-chip.doubt.active{
-    color:#072024;
-    background:linear-gradient(135deg,#8ee2e6,#67c4ca 60%,#40a8b0);
-    border-color:rgba(64,168,176,.35);
-    box-shadow:0 2px 10px rgba(165, 176, 64, 0.22), 0 0 0 2px var(--chip-ring) inset;
-  }
 
-  /* P docked — idêntico aos chips */
+  /* P docked */
   .pen-marker.docked{
     position:static; transform:none; box-sizing:border-box;
     width:var(--chip-size); height:var(--chip-size);
@@ -161,18 +154,24 @@
   }
   .pen-marker:active{ cursor:grabbing }
 
-  /* badge de atualização */
-  .upd-badge{
-    display:inline-flex; align-items:center; gap:6px;
-    padding:3px 8px; border-radius:999px;
-    font:700 11px system-ui; letter-spacing:.1px;
-    color:#eaf3ff;
-    background:rgba(11,25,43,.55);
-    border:1px solid rgba(255,255,255,.16);
-    box-shadow:0 8px 18px rgba(0,0,0,.25);
-    backdrop-filter:saturate(120%) blur(2px);
+  /* popover últimos jogos */
+  .games-pop{
+    position:absolute; z-index:20;
+    transform:translate(-50%,-8px);
+    min-width:180px; max-width:260px;
+    background:#fff; color:#0b192b;
+    border:1px solid rgba(15,23,42,.14);
+    border-radius:10px; padding:8px; font:600 12px/1.35 system-ui;
+    box-shadow:0 10px 24px rgba(0,0,0,.25);
+    max-height: 60vh;        /* novo */
+    overflow:auto;           /* novo */
   }
-  .upd-badge .bi{ opacity:.9 }
+  .games-pop h4{ margin:0 0 6px 0; font:800 12px/1 system-ui }
+  .games-pop ul{ margin:0; padding:0; list-style:none }
+  .games-pop li{ padding:3px 0; border-top:1px solid rgba(2,6,23,.06) }
+  .games-pop li:first-child{ border-top:0 }
+  .games-pop .loc{ font-weight:800 }
+  .games-pop .neg{ color:#b91c1c } .games-pop .pos{ color:#15803d }
     `;
     const s = document.createElement('style');
     s.id = 'pitch-view-style';
@@ -213,6 +212,14 @@
       window.MERCADO = { byId: new Map(arr.map(a => [a.atleta_id, a])) };
     }catch{ window.MERCADO = { byId: new Map() }; }
   }
+  // MM/MV JSON
+  async function loadMMMV(){
+    try{
+      const data = await jget('/assets/data/mandante_visitante_by_atleta.json');
+      window.MMV = data || {};
+    }catch{ window.MMV = {}; }
+  }
+
   const getA = id => window.MERCADO?.byId?.get(+id) || null;
   const nome = id => getA(id)?.apelido_abreviado || getA(id)?.apelido || getA(id)?.nome || String(id);
   const clubIdOf = id => getA(id)?.clube_id ?? 0;
@@ -228,6 +235,65 @@
     }
     el.style.left = PCT(p.x);
     el.style.top  = PCT(p.y);
+  }
+
+  // média exibida conforme modo
+  function currentStatValue(atletaId, mode){
+    const mmv = window.MMV?.[atletaId];
+    if (mode === 'MM' && mmv?.MM != null) return Number(mmv.MM);
+    if (mode === 'MV' && mmv?.MV != null) return Number(mmv.MV);
+    return mediaNum(atletaId);
+  }
+  function updateCardStat(el, mode){
+    const id = +el.dataset.id;
+    const stat = el.querySelector('.stat');
+    if (!stat) return;
+    const m = currentStatValue(id, mode);
+    stat.textContent = Number.isFinite(m) ? `Média: ${m.toFixed(1).replace('.',',')}` : 'Média: —';
+    stat.classList.remove('amber','red');
+    const sc = statClass(m); if (sc) stat.classList.add(sc);
+  }
+  // média do jogador em dúvida conforme modo
+  function updateAltStat(pitch, el){
+    const alt = el.querySelector('.alt-stat');
+    if (!alt) return;
+    const mode = pitch.dataset.modeStat || 'ALL';
+    const altId = +el.dataset.altId || NaN;
+    const m = Number.isFinite(altId) ? currentStatValue(altId, mode) : NaN;
+    alt.textContent = Number.isFinite(m) ? `Média: ${m.toFixed(1).replace('.',',')}` : 'Média: —';
+    alt.classList.remove('amber','red');
+    const sc = statClass(m); if (sc) alt.classList.add(sc);
+  }
+
+  // popover últimos jogos
+  function closeAnyPop(){ document.querySelectorAll('.games-pop').forEach(n=>n.remove()); }
+  function showLastGames(pitch, el){
+    const mode = pitch.dataset.modeStat || 'ALL';
+    const id = +el.dataset.id;
+    const pack = window.MMV?.[id];
+    if (!pack) return;
+    let rows = (pack.ultimos?.geral || []);
+    if (mode === 'MM') rows = rows.filter(r => r.local === true);
+    if (mode === 'MV') rows = rows.filter(r => r.local === false);
+
+    closeAnyPop();
+    const pop = document.createElement('div');
+    pop.className = 'games-pop';
+    const title = mode==='ALL' ? 'Últimos jogos' : (mode==='MM'?'Últimos Mandante':'Últimos Visitante');
+    const li = rows.map(r=>{
+      const s = Number.isFinite(+r.pontos) ? +r.pontos : null;
+      const cls = s==null ? '' : (s>=0?'pos':'neg');
+      const loc = r.local===true?'M':'V';
+      const adv = r.adv_id!=null ? ` x ${r.adv_id}` : '';
+      return `<li><span class="loc">${loc}</span> R${r.rodada ?? '—'}${adv} · <span class="${cls}">${s==null?'—':s.toFixed(2)}</span></li>`;
+    }).join('');
+    pop.innerHTML = `<h4>${title}</h4><ul>${li || '<li>Sem dados</li>'}</ul>`;
+
+    const pr = el.getBoundingClientRect();
+    const pitchR = pitch.getBoundingClientRect();
+    pop.style.left = ( (pr.left + pr.width/2) - pitchR.left ) + 'px';
+    pop.style.top  = ( (pr.top) - pitchR.top ) + 'px';
+    pitch.appendChild(pop);
   }
 
   // ===== Player node =====
@@ -256,10 +322,7 @@
       cap.textContent = nome(id);
 
       const stat = document.createElement('div');
-      const m = mediaNum(id);
-      stat.textContent = Number.isFinite(m) ? `Média: ${m.toFixed(1).replace('.',',')}` : 'Média: —';
       stat.className = 'stat';
-      const sc = statClass(m); if (sc) stat.classList.add(sc);
 
       el.appendChild(img);
       el.appendChild(cap);
@@ -268,36 +331,36 @@
     } else {
       el.className = `${clsBase} ${clsSit}` + (slot === 'TEC' ? ' coach' : '');
       const cap = el.querySelector('.cap'); if (cap) cap.textContent = nome(id);
-      const stat = el.querySelector('.stat');
-      if (stat){
-        const m = mediaNum(id);
-        stat.textContent = Number.isFinite(m) ? `Média: ${m.toFixed(1).replace('.',',')}` : 'Média: —';
-        stat.classList.remove('amber','red');
-        const sc = statClass(m); if (sc) stat.classList.add(sc);
-      }
       const img = el.querySelector('img'); if (img){ img.alt = nome(id); img.src = foto(id); }
     }
 
     // seção de dúvida
     el.querySelectorAll('.alt-cap, .alt-stat').forEach(n => n.remove());
+    delete el.dataset.altId;
     if (sit === 'duvida' && Number.isFinite(+duvidaCom)) {
       const altId = +duvidaCom;
+      el.dataset.altId = String(altId);
+
       const altCap = document.createElement('div');
       altCap.className = 'alt-cap';
       altCap.textContent = nome(altId);
       el.appendChild(altCap);
 
-      const altM = mediaNum(altId);
       const altStat = document.createElement('div');
       altStat.className = 'alt-stat';
-      if (Number.isFinite(altM)) {
-        altStat.textContent = `Média: ${altM.toFixed(1).replace('.', ',')}`;
-        const sc = (altM>5?'':(altM>=3?'amber':'red')); if (sc) altStat.classList.add(sc);
-      } else {
-        altStat.textContent = 'Média: —';
-      }
       el.appendChild(altStat);
+
+      updateAltStat(pitch, el);
     }
+
+    // atualiza estatística conforme modo atual
+    updateCardStat(el, pitch.dataset.modeStat || 'ALL');
+
+    // dblclick avançado
+    el.ondblclick = () => {
+      if (pitch.dataset.adv !== '1') return;
+      showLastGames(pitch, el);
+    };
 
     return el;
   }
@@ -315,7 +378,7 @@
 
     const on = (t,ev,fn,opts)=>t.addEventListener(ev,fn,opts||false);
     let dragging = false, moved = false, offX=0, offY=0, sx=0, sy=0;
-    const THRESH = 4; // px para considerar arrasto
+    const THRESH = 4;
 
     function pctFromClient(x, y){
       const r = pitch.getBoundingClientRect();
@@ -362,7 +425,7 @@
       detach();
       m.removeAttribute('style');
       m.classList.add('docked');
-      toolbar.prepend(m); // sempre primeiro
+      toolbar.prepend(m);
     }
 
     on(m,'pointerdown',e=>{
@@ -395,7 +458,7 @@
     on(window,'pointerup',()=>{
       if (!dragging) return;
       dragging = false;
-      if (!moved) return; // clique simples não faz nada
+      if (!moved) return;
       if (m.classList.contains('docked')) return;
       const {el,d} = findNearestPlayer();
       const SNAP = (IS_MOBILE ? 70 : 92) * 1.3;
@@ -421,33 +484,60 @@
     const marker = ensurePenaltyMarker(pitch, tb);
     tb.prepend(marker);
 
-    // M — médias
+    // chips helper
+    const setMode = (mode) => {
+      pitch.dataset.modeStat = mode; // 'ALL' | 'MM' | 'MV'
+      pitch.querySelectorAll('.player').forEach(el=>{
+        updateCardStat(el, mode);
+        updateAltStat(pitch, el);
+      });
+      closeAnyPop();
+    };
+    const toggleAdv = () => {
+      pitch.dataset.adv = (pitch.dataset.adv==='1'?'0':'1');
+      aBtn.classList.toggle('active', pitch.dataset.adv==='1');
+      closeAnyPop();
+    };
+
+    // M — médias gerais on/off
     const bStat = document.createElement('button');
     bStat.type = 'button';
-    bStat.className = 'btn-chip stat';
+    bStat.className = 'btn-chip stat active';
     bStat.textContent = 'M';
-    const syncStat = () => {
-      const hidden = pitch.classList.contains('hide-stat');
-      bStat.classList.toggle('active', !hidden);
-      bStat.title = hidden ? 'Mostrar média' : 'Ocultar média';
-      bStat.setAttribute('aria-label', bStat.title);
-    };
-    bStat.onclick = ()=>{ pitch.classList.toggle('hide-stat'); syncStat(); };
-    tb.appendChild(bStat); syncStat();
+    bStat.title = 'Mostrar/ocultar média';
+    bStat.onclick = ()=>{ pitch.classList.toggle('hide-stat'); bStat.classList.toggle('active', !pitch.classList.contains('hide-stat')); };
+    tb.appendChild(bStat);
 
-    // ? — dúvidas
-    const bDoubt = document.createElement('button');
-    bDoubt.type = 'button';
-    bDoubt.className = 'btn-chip doubt';
-    bDoubt.textContent = '?';
-    const syncDoubt = () => {
-      const hidden = pitch.classList.contains('hide-doubt');
-      bDoubt.classList.toggle('active', !hidden);
-      bDoubt.title = hidden ? 'Mostrar dúvidas' : 'Ocultar dúvidas';
-      bDoubt.setAttribute('aria-label', bDoubt.title);
+    // MM
+    const mmBtn = document.createElement('button');
+    mmBtn.type = 'button'; mmBtn.className = 'btn-chip'; mmBtn.textContent = 'MM';
+    mmBtn.title = 'Média Mandante';
+    mmBtn.onclick = ()=>{ mmBtn.classList.add('active'); mvBtn.classList.remove('active'); setMode('MM'); };
+    tb.appendChild(mmBtn);
+
+    // MV
+    const mvBtn = document.createElement('button');
+    mvBtn.type = 'button'; mvBtn.className = 'btn-chip'; mvBtn.textContent = 'MV';
+    mvBtn.title = 'Média Visitante';
+    mvBtn.onclick = ()=>{ mvBtn.classList.add('active'); mmBtn.classList.remove('active'); setMode('MV'); };
+    tb.appendChild(mvBtn);
+
+    // dblclick no botão ativo volta para ALL
+    const resetIfActive = (btn, other) => {
+      btn.addEventListener('dblclick', ()=>{ btn.classList.remove('active'); setMode('ALL'); });
     };
-    bDoubt.onclick = ()=>{ pitch.classList.toggle('hide-doubt'); syncDoubt(); };
-    tb.appendChild(bDoubt); syncDoubt();
+    resetIfActive(mmBtn, mvBtn); resetIfActive(mvBtn, mmBtn);
+
+    // A — ativação avançada
+    const aBtn = document.createElement('button');
+    aBtn.type = 'button'; aBtn.className = 'btn-chip'; aBtn.textContent = 'A';
+    aBtn.title = 'Ativação avançada: duplo clique mostra últimos jogos';
+    aBtn.onclick = toggleAdv;
+    tb.appendChild(aBtn);
+
+    // estado inicial
+    pitch.dataset.modeStat = 'ALL';
+    pitch.dataset.adv = '0';
   }
 
   // ===== Reset por clique no nome =====
@@ -459,6 +549,9 @@
         el.removeAttribute('data-free-y');
         const slot = el.dataset.slot;
         place(el, slot, null, pitch.dataset.formacao||'');
+        updateCardStat(el, pitch.dataset.modeStat || 'ALL');
+        updateAltStat(pitch, el);
+        closeAnyPop();
       };
     });
   }
@@ -534,6 +627,10 @@
 
       ensureToolbar(pitch);
       drawPitch(pitch, team);
+
+      pitch.addEventListener('click', (e)=>{
+        if (!e.target.closest('.games-pop') && !e.target.closest('.player')) closeAnyPop();
+      });
     });
 
     try{
@@ -546,7 +643,7 @@
   }
 
   async function bootstrap(){
-    await loadMercado();
+    await Promise.all([loadMercado(), loadMMMV()]);
     await drawAll();
   }
   if (document.readyState === 'loading') {
