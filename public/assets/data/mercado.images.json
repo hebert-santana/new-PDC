@@ -3,7 +3,7 @@
     "atleta_id": 132553,
     "apelido_abreviado": "Jemmes",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/132553.jpeg",
     "media_num": 4.63,
     "preco_num": 6.1,
     "posicao_id": 3
@@ -21,7 +21,7 @@
     "atleta_id": 131753,
     "apelido_abreviado": "F. Longo",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/131753.jpeg",
     "media_num": -0.4,
     "preco_num": 0.76,
     "posicao_id": 1
@@ -48,7 +48,7 @@
     "atleta_id": 132264,
     "apelido_abreviado": "Arroyo",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/132264.jpg",
     "media_num": 3.48,
     "preco_num": 6.71,
     "posicao_id": 5
@@ -147,7 +147,7 @@
     "atleta_id": 131617,
     "apelido_abreviado": "A. Silva",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/131617.jpg",
     "media_num": 4.32,
     "preco_num": 6.73,
     "posicao_id": 5
@@ -183,7 +183,7 @@
     "atleta_id": 136306,
     "apelido_abreviado": "L. Otávio",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/136306.jpeg",
     "media_num": 2.04,
     "preco_num": 3.53,
     "posicao_id": 4
@@ -264,7 +264,7 @@
     "atleta_id": 137618,
     "apelido_abreviado": "C. Sampaio",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/137618.jpeg",
     "media_num": 2.81,
     "preco_num": 4.59,
     "posicao_id": 3
@@ -570,7 +570,7 @@
     "atleta_id": 141451,
     "apelido_abreviado": "Allan",
     "clube_id": 275,
-    "foto": "/assets/img/escudos/cartola/275.jpeg",
+    "foto": "/assets/img/atletas/141451.jpg",
     "media_num": 3.18,
     "preco_num": 4.77,
     "posicao_id": 4
@@ -597,7 +597,7 @@
     "atleta_id": 141611,
     "apelido_abreviado": "Maik",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/141611.jpg",
     "media_num": 7.57,
     "preco_num": 6.44,
     "posicao_id": 2
@@ -615,7 +615,7 @@
     "atleta_id": 141467,
     "apelido_abreviado": "Pablo",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/141467.jpeg",
     "media_num": 0,
     "preco_num": 1,
     "posicao_id": 2
@@ -1416,7 +1416,7 @@
     "atleta_id": 42234,
     "apelido_abreviado": "Cássio",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/42234.jpeg",
     "media_num": 5.24,
     "preco_num": 9.22,
     "posicao_id": 1
@@ -1479,7 +1479,7 @@
     "atleta_id": 51413,
     "apelido_abreviado": "Walter",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/51413.jpeg",
     "media_num": 7.07,
     "preco_num": 11.29,
     "posicao_id": 1
@@ -1488,7 +1488,7 @@
     "atleta_id": 63008,
     "apelido_abreviado": "R. Tolói",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/63008.jpg",
     "media_num": 5.63,
     "preco_num": 9.37,
     "posicao_id": 3
@@ -1533,7 +1533,7 @@
     "atleta_id": 68685,
     "apelido_abreviado": "A. Patrick",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/68685.jpeg",
     "media_num": 6.75,
     "preco_num": 13.26,
     "posicao_id": 4
@@ -1578,7 +1578,7 @@
     "atleta_id": 42500,
     "apelido_abreviado": "Fagner",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/42500.jpeg",
     "media_num": 6.1,
     "preco_num": 8.51,
     "posicao_id": 2
@@ -1596,7 +1596,7 @@
     "atleta_id": 68928,
     "apelido_abreviado": "Rafael",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/68928.jpg",
     "media_num": 4.87,
     "preco_num": 9.62,
     "posicao_id": 1
@@ -1650,7 +1650,7 @@
     "atleta_id": 68920,
     "apelido_abreviado": "Dudu",
     "clube_id": 282,
-    "foto": "/assets/img/escudos/cartola/282.jpeg",
+    "foto": "/assets/img/atletas/68920.jpg",
     "media_num": 2.21,
     "preco_num": 7.77,
     "posicao_id": 5
@@ -1668,7 +1668,7 @@
     "atleta_id": 68708,
     "apelido_abreviado": "Eduardo",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/68708.jpeg",
     "media_num": 1.32,
     "preco_num": 3.21,
     "posicao_id": 4
@@ -1713,7 +1713,7 @@
     "atleta_id": 68811,
     "apelido_abreviado": "Oscar",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/68811.jpg",
     "media_num": 1.67,
     "preco_num": 11.39,
     "posicao_id": 4
@@ -1740,7 +1740,7 @@
     "atleta_id": 70164,
     "apelido_abreviado": "L. Moura",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/70164.jpg",
     "media_num": 3.78,
     "preco_num": 6.48,
     "posicao_id": 4
@@ -1911,7 +1911,7 @@
     "atleta_id": 73318,
     "apelido_abreviado": "D. Borges",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/73318.jpg",
     "media_num": 4.29,
     "preco_num": 5.85,
     "posicao_id": 2
@@ -1929,7 +1929,7 @@
     "atleta_id": 72951,
     "apelido_abreviado": "Mercado",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/72951.jpeg",
     "media_num": 3.2,
     "preco_num": 6.03,
     "posicao_id": 3
@@ -1965,7 +1965,7 @@
     "atleta_id": 72460,
     "apelido_abreviado": "Bernard",
     "clube_id": 282,
-    "foto": "/assets/img/escudos/cartola/282.jpeg",
+    "foto": "/assets/img/atletas/72460.jpg",
     "media_num": 1.02,
     "preco_num": 3.35,
     "posicao_id": 4
@@ -2010,7 +2010,7 @@
     "atleta_id": 77485,
     "apelido_abreviado": "Carrillo",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/77485.jpg",
     "media_num": 3.06,
     "preco_num": 6.96,
     "posicao_id": 4
@@ -2037,7 +2037,7 @@
     "atleta_id": 78850,
     "apelido_abreviado": "Reinaldo",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/78850.jpeg",
     "media_num": 8.17,
     "preco_num": 13.03,
     "posicao_id": 2
@@ -2046,7 +2046,7 @@
     "atleta_id": 78248,
     "apelido_abreviado": "G. Henrique",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/78248.jpg",
     "media_num": 3.71,
     "preco_num": 7.35,
     "posicao_id": 3
@@ -2064,7 +2064,7 @@
     "atleta_id": 73781,
     "apelido_abreviado": "G. Marques",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/73781.jpg",
     "media_num": 1.62,
     "preco_num": 4.28,
     "posicao_id": 4
@@ -2172,7 +2172,7 @@
     "atleta_id": 80287,
     "apelido_abreviado": "Luciano",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/80287.jpg",
     "media_num": 5.32,
     "preco_num": 8.9,
     "posicao_id": 5
@@ -2199,7 +2199,7 @@
     "atleta_id": 79066,
     "apelido_abreviado": "A. Muralha",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/79066.jpg",
     "media_num": 2.12,
     "preco_num": 2.82,
     "posicao_id": 1
@@ -2226,7 +2226,7 @@
     "atleta_id": 79701,
     "apelido_abreviado": "L. Silva",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/79701.jpeg",
     "media_num": 2.45,
     "preco_num": 4.91,
     "posicao_id": 4
@@ -2244,7 +2244,7 @@
     "atleta_id": 81845,
     "apelido_abreviado": "Alisson",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/81845.jpg",
     "media_num": 1.87,
     "preco_num": 4.29,
     "posicao_id": 4
@@ -2298,7 +2298,7 @@
     "atleta_id": 80061,
     "apelido_abreviado": "Saúl",
     "clube_id": 262,
-    "foto": "/assets/img/escudos/cartola/262.jpeg",
+    "foto": "/assets/img/atletas/80061.jpg",
     "media_num": 4.14,
     "preco_num": 9.52,
     "posicao_id": 4
@@ -2307,7 +2307,7 @@
     "atleta_id": 85403,
     "apelido_abreviado": "Danielzinho",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/85403.jpeg",
     "media_num": 3.01,
     "preco_num": 5.91,
     "posicao_id": 4
@@ -2379,7 +2379,7 @@
     "atleta_id": 83257,
     "apelido_abreviado": "Gabriel",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/83257.jpeg",
     "media_num": 3.41,
     "preco_num": 7.16,
     "posicao_id": 5
@@ -2397,7 +2397,7 @@
     "atleta_id": 83528,
     "apelido_abreviado": "L. Pereira",
     "clube_id": 262,
-    "foto": "/assets/img/escudos/cartola/262.jpeg",
+    "foto": "/assets/img/atletas/83528.jpg",
     "media_num": 5.06,
     "preco_num": 9.05,
     "posicao_id": 3
@@ -2406,7 +2406,7 @@
     "atleta_id": 82775,
     "apelido_abreviado": "L. Ramon",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/82775.jpeg",
     "media_num": 6.12,
     "preco_num": 9.24,
     "posicao_id": 2
@@ -2415,7 +2415,7 @@
     "atleta_id": 84558,
     "apelido_abreviado": "L. Romero",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/84558.jpeg",
     "media_num": 4.44,
     "preco_num": 8.07,
     "posicao_id": 4
@@ -2451,7 +2451,7 @@
     "atleta_id": 84735,
     "apelido_abreviado": "Jorginho",
     "clube_id": 262,
-    "foto": "/assets/img/escudos/cartola/262.jpeg",
+    "foto": "/assets/img/atletas/84735.jpg",
     "media_num": 2.33,
     "preco_num": 8.39,
     "posicao_id": 4
@@ -2514,7 +2514,7 @@
     "atleta_id": 85048,
     "apelido_abreviado": "M. Depay",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/85048.jpg",
     "media_num": 4.94,
     "preco_num": 12.8,
     "posicao_id": 5
@@ -2577,7 +2577,7 @@
     "atleta_id": 96342,
     "apelido_abreviado": "Charles",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/96342.jpg",
     "media_num": 1.37,
     "preco_num": 2.95,
     "posicao_id": 4
@@ -2586,7 +2586,7 @@
     "atleta_id": 70944,
     "apelido_abreviado": "B. Henrique",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/70944.jpeg",
     "media_num": 2.88,
     "preco_num": 7.05,
     "posicao_id": 4
@@ -2667,7 +2667,7 @@
     "atleta_id": 86292,
     "apelido_abreviado": "Bolasie",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/86292.jpeg",
     "media_num": 0.65,
     "preco_num": 3.04,
     "posicao_id": 5
@@ -2730,7 +2730,7 @@
     "atleta_id": 86863,
     "apelido_abreviado": "L. Otávio",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/86863.jpg",
     "media_num": 0,
     "preco_num": 4,
     "posicao_id": 3
@@ -2793,7 +2793,7 @@
     "atleta_id": 87742,
     "apelido_abreviado": "N. Moura",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/87742.jpg",
     "media_num": 3.36,
     "preco_num": 4.84,
     "posicao_id": 4
@@ -2901,7 +2901,7 @@
     "atleta_id": 89275,
     "apelido_abreviado": "William",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/89275.jpeg",
     "media_num": 7.5,
     "preco_num": 14.86,
     "posicao_id": 2
@@ -2910,7 +2910,7 @@
     "atleta_id": 88479,
     "apelido_abreviado": "Walace",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/88479.jpeg",
     "media_num": 0.51,
     "preco_num": 2.64,
     "posicao_id": 4
@@ -2919,7 +2919,7 @@
     "atleta_id": 89274,
     "apelido_abreviado": "A. Pereira",
     "clube_id": 275,
-    "foto": "/assets/img/escudos/cartola/275.jpeg",
+    "foto": "/assets/img/atletas/89274.jpg",
     "media_num": 2.91,
     "preco_num": 9.6,
     "posicao_id": 4
@@ -2937,7 +2937,7 @@
     "atleta_id": 89637,
     "apelido_abreviado": "T. Maia",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/89637.jpeg",
     "media_num": 2.93,
     "preco_num": 4.95,
     "posicao_id": 4
@@ -3018,7 +3018,7 @@
     "atleta_id": 89840,
     "apelido_abreviado": "Calleri",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/89840.jpg",
     "media_num": -0.77,
     "preco_num": 5.78,
     "posicao_id": 5
@@ -3126,7 +3126,7 @@
     "atleta_id": 90768,
     "apelido_abreviado": "F. Bruno",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/90768.jpeg",
     "media_num": 4.67,
     "preco_num": 8.79,
     "posicao_id": 3
@@ -3180,7 +3180,7 @@
     "atleta_id": 91573,
     "apelido_abreviado": "Arboleda",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/91573.jpg",
     "media_num": 5.31,
     "preco_num": 8.7,
     "posicao_id": 3
@@ -3207,7 +3207,7 @@
     "atleta_id": 90608,
     "apelido_abreviado": "C. Costa",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/90608.jpg",
     "media_num": 4.14,
     "preco_num": 7.3,
     "posicao_id": 5
@@ -3252,7 +3252,7 @@
     "atleta_id": 92075,
     "apelido_abreviado": "R. Díaz",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/92075.jpg",
     "media_num": 5.64,
     "preco_num": 10.11,
     "posicao_id": 6
@@ -3261,7 +3261,7 @@
     "atleta_id": 92182,
     "apelido_abreviado": "Juninho",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/92182.jpeg",
     "media_num": 3.1,
     "preco_num": 5.31,
     "posicao_id": 3
@@ -3315,7 +3315,7 @@
     "atleta_id": 92440,
     "apelido_abreviado": "A. Ramalho",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/92440.jpg",
     "media_num": 3.6,
     "preco_num": 6.21,
     "posicao_id": 3
@@ -3378,7 +3378,7 @@
     "atleta_id": 92087,
     "apelido_abreviado": "Lyanco",
     "clube_id": 282,
-    "foto": "/assets/img/escudos/cartola/282.jpeg",
+    "foto": "/assets/img/atletas/92087.jpg",
     "media_num": 5.08,
     "preco_num": 8.87,
     "posicao_id": 3
@@ -3432,7 +3432,7 @@
     "atleta_id": 93478,
     "apelido_abreviado": "Wanderson",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/93478.jpeg",
     "media_num": 1.96,
     "preco_num": 5.02,
     "posicao_id": 5
@@ -3450,7 +3450,7 @@
     "atleta_id": 92811,
     "apelido_abreviado": "B. Rodrigues",
     "clube_id": 275,
-    "foto": "/assets/img/escudos/cartola/275.jpeg",
+    "foto": "/assets/img/atletas/92811.jpg",
     "media_num": 0.6,
     "preco_num": 5.19,
     "posicao_id": 5
@@ -3468,7 +3468,7 @@
     "atleta_id": 94154,
     "apelido_abreviado": "Maycon",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/94154.jpg",
     "media_num": 2.45,
     "preco_num": 5.34,
     "posicao_id": 4
@@ -3594,7 +3594,7 @@
     "atleta_id": 95556,
     "apelido_abreviado": "Raniele",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/95556.jpg",
     "media_num": 4.25,
     "preco_num": 7.16,
     "posicao_id": 4
@@ -3684,7 +3684,7 @@
     "atleta_id": 96610,
     "apelido_abreviado": "M. Pereira",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/96610.jpg",
     "media_num": 7.55,
     "preco_num": 14.21,
     "posicao_id": 4
@@ -3711,7 +3711,7 @@
     "atleta_id": 88136,
     "apelido_abreviado": "Ivan",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/88136.jpg",
     "media_num": 8.9,
     "preco_num": 7.09,
     "posicao_id": 1
@@ -3729,7 +3729,7 @@
     "atleta_id": 92854,
     "apelido_abreviado": "Borré",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/92854.jpeg",
     "media_num": 3.89,
     "preco_num": 11.12,
     "posicao_id": 5
@@ -3738,7 +3738,7 @@
     "atleta_id": 96870,
     "apelido_abreviado": "E. Royal",
     "clube_id": 262,
-    "foto": "/assets/img/escudos/cartola/262.jpeg",
+    "foto": "/assets/img/atletas/96870.jpg",
     "media_num": 6.05,
     "preco_num": 10.79,
     "posicao_id": 2
@@ -3765,7 +3765,7 @@
     "atleta_id": 97321,
     "apelido_abreviado": "Alesson",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/97321.jpg",
     "media_num": 4.53,
     "preco_num": 7.73,
     "posicao_id": 5
@@ -3774,7 +3774,7 @@
     "atleta_id": 97460,
     "apelido_abreviado": "J. Victor",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/97460.jpg",
     "media_num": 3.05,
     "preco_num": 4,
     "posicao_id": 3
@@ -3792,7 +3792,7 @@
     "atleta_id": 97653,
     "apelido_abreviado": "Murilo",
     "clube_id": 275,
-    "foto": "/assets/img/escudos/cartola/275.jpeg",
+    "foto": "/assets/img/atletas/97653.jpg",
     "media_num": 3.55,
     "preco_num": 7.8,
     "posicao_id": 3
@@ -3855,7 +3855,7 @@
     "atleta_id": 97642,
     "apelido_abreviado": "F. Torres",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/97642.jpg",
     "media_num": 3.72,
     "preco_num": 6.74,
     "posicao_id": 3
@@ -3882,7 +3882,7 @@
     "atleta_id": 97898,
     "apelido_abreviado": "Maílton",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/97898.jpg",
     "media_num": 2.24,
     "preco_num": 4.46,
     "posicao_id": 2
@@ -3963,7 +3963,7 @@
     "atleta_id": 98873,
     "apelido_abreviado": "S. Lino",
     "clube_id": 262,
-    "foto": "/assets/img/escudos/cartola/262.jpeg",
+    "foto": "/assets/img/atletas/98873.jpg",
     "media_num": 6.23,
     "preco_num": 13.82,
     "posicao_id": 5
@@ -3972,7 +3972,7 @@
     "atleta_id": 98720,
     "apelido_abreviado": "Angileri",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/98720.jpg",
     "media_num": 2.99,
     "preco_num": 5.31,
     "posicao_id": 2
@@ -4008,7 +4008,7 @@
     "atleta_id": 105047,
     "apelido_abreviado": "J. Marcelo",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/105047.jpeg",
     "media_num": 0.6,
     "preco_num": 5.91,
     "posicao_id": 3
@@ -4035,7 +4035,7 @@
     "atleta_id": 98384,
     "apelido_abreviado": "Negueba",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/98384.jpg",
     "media_num": 4.12,
     "preco_num": 6.33,
     "posicao_id": 5
@@ -4179,7 +4179,7 @@
     "atleta_id": 100652,
     "apelido_abreviado": "Y. Alberto",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/100652.jpg",
     "media_num": 5.41,
     "preco_num": 11.54,
     "posicao_id": 5
@@ -4188,7 +4188,7 @@
     "atleta_id": 100742,
     "apelido_abreviado": "M. Henrique",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/100742.jpeg",
     "media_num": 2.18,
     "preco_num": 5.9,
     "posicao_id": 4
@@ -4206,7 +4206,7 @@
     "atleta_id": 99889,
     "apelido_abreviado": "A. Franco",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/99889.jpg",
     "media_num": 2.37,
     "preco_num": 5.46,
     "posicao_id": 3
@@ -4215,7 +4215,7 @@
     "atleta_id": 100842,
     "apelido_abreviado": "Ruan",
     "clube_id": 282,
-    "foto": "/assets/img/escudos/cartola/282.jpeg",
+    "foto": "/assets/img/atletas/100842.jpg",
     "media_num": 3.93,
     "preco_num": 6.67,
     "posicao_id": 3
@@ -4305,7 +4305,7 @@
     "atleta_id": 101574,
     "apelido_abreviado": "H. Souza",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/101574.jpg",
     "media_num": 3.58,
     "preco_num": 8.3,
     "posicao_id": 1
@@ -4368,7 +4368,7 @@
     "atleta_id": 101290,
     "apelido_abreviado": "Ferreira",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/101290.jpg",
     "media_num": 4.62,
     "preco_num": 8.85,
     "posicao_id": 5
@@ -4386,7 +4386,7 @@
     "atleta_id": 101727,
     "apelido_abreviado": "Matheuzinho",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/101727.jpg",
     "media_num": 6.15,
     "preco_num": 10.59,
     "posicao_id": 2
@@ -4404,7 +4404,7 @@
     "atleta_id": 101708,
     "apelido_abreviado": "F. Jonatan",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/101708.jpg",
     "media_num": -0.3,
     "preco_num": 4.68,
     "posicao_id": 2
@@ -4449,7 +4449,7 @@
     "atleta_id": 101960,
     "apelido_abreviado": "Vitinho",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/101960.jpeg",
     "media_num": 3.29,
     "preco_num": 6.53,
     "posicao_id": 5
@@ -4485,7 +4485,7 @@
     "atleta_id": 102950,
     "apelido_abreviado": "F. Torres",
     "clube_id": 275,
-    "foto": "/assets/img/escudos/cartola/275.jpeg",
+    "foto": "/assets/img/atletas/102950.jpg",
     "media_num": 3.94,
     "preco_num": 9.03,
     "posicao_id": 5
@@ -4512,7 +4512,7 @@
     "atleta_id": 102340,
     "apelido_abreviado": "Cacá",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/102340.jpg",
     "media_num": 3.75,
     "preco_num": 6.82,
     "posicao_id": 3
@@ -4611,7 +4611,7 @@
     "atleta_id": 103445,
     "apelido_abreviado": "K. Jorge",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/103445.jpeg",
     "media_num": 8.85,
     "preco_num": 14.59,
     "posicao_id": 5
@@ -4620,7 +4620,7 @@
     "atleta_id": 104075,
     "apelido_abreviado": "Sabino",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/104075.jpg",
     "media_num": 4.08,
     "preco_num": 6.35,
     "posicao_id": 3
@@ -4692,7 +4692,7 @@
     "atleta_id": 104084,
     "apelido_abreviado": "C. Miguel",
     "clube_id": 275,
-    "foto": "/assets/img/escudos/cartola/275.jpeg",
+    "foto": "/assets/img/atletas/104084.jpg",
     "media_num": -1.7,
     "preco_num": 4.78,
     "posicao_id": 1
@@ -4782,7 +4782,7 @@
     "atleta_id": 104502,
     "apelido_abreviado": "Christian",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/104502.jpeg",
     "media_num": 4.33,
     "preco_num": 8.09,
     "posicao_id": 4
@@ -4809,7 +4809,7 @@
     "atleta_id": 104758,
     "apelido_abreviado": "E. Díaz",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/104758.jpg",
     "media_num": 5.9,
     "preco_num": 8.7,
     "posicao_id": 2
@@ -4845,7 +4845,7 @@
     "atleta_id": 97900,
     "apelido_abreviado": "Vitão",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/97900.jpeg",
     "media_num": 2.93,
     "preco_num": 7.28,
     "posicao_id": 3
@@ -4944,7 +4944,7 @@
     "atleta_id": 105300,
     "apelido_abreviado": "Ferraresi",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/105300.jpg",
     "media_num": 6.53,
     "preco_num": 8.85,
     "posicao_id": 3
@@ -4953,7 +4953,7 @@
     "atleta_id": 105175,
     "apelido_abreviado": "Khellven",
     "clube_id": 275,
-    "foto": "/assets/img/escudos/cartola/275.jpeg",
+    "foto": "/assets/img/atletas/105175.jpg",
     "media_num": 4.52,
     "preco_num": 8.13,
     "posicao_id": 2
@@ -5007,7 +5007,7 @@
     "atleta_id": 105531,
     "apelido_abreviado": "M. Bidu",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/105531.jpg",
     "media_num": 5.88,
     "preco_num": 10.24,
     "posicao_id": 2
@@ -5016,7 +5016,7 @@
     "atleta_id": 105436,
     "apelido_abreviado": "Carrascal",
     "clube_id": 262,
-    "foto": "/assets/img/escudos/cartola/262.jpeg",
+    "foto": "/assets/img/atletas/105436.jpg",
     "media_num": 5.07,
     "preco_num": 8.69,
     "posicao_id": 4
@@ -5034,7 +5034,7 @@
     "atleta_id": 105949,
     "apelido_abreviado": "Rochet",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/105949.jpeg",
     "media_num": 4.01,
     "preco_num": 8.51,
     "posicao_id": 1
@@ -5061,7 +5061,7 @@
     "atleta_id": 105786,
     "apelido_abreviado": "T. Magno",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/105786.jpg",
     "media_num": 2.8,
     "preco_num": 5.83,
     "posicao_id": 5
@@ -5133,7 +5133,7 @@
     "atleta_id": 106202,
     "apelido_abreviado": "B. Gomes",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/106202.jpeg",
     "media_num": 5,
     "preco_num": 8.11,
     "posicao_id": 2
@@ -5142,7 +5142,7 @@
     "atleta_id": 106294,
     "apelido_abreviado": "M. Antônio",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/106294.jpg",
     "media_num": 1.97,
     "preco_num": 3.7,
     "posicao_id": 4
@@ -5160,7 +5160,7 @@
     "atleta_id": 106593,
     "apelido_abreviado": "Villalba",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/106593.jpeg",
     "media_num": 5.09,
     "preco_num": 8.22,
     "posicao_id": 3
@@ -5187,7 +5187,7 @@
     "atleta_id": 105903,
     "apelido_abreviado": "J. Aldo",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/105903.jpg",
     "media_num": 1.84,
     "preco_num": 3.21,
     "posicao_id": 4
@@ -5241,7 +5241,7 @@
     "atleta_id": 107179,
     "apelido_abreviado": "M. Donelli",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/107179.jpg",
     "media_num": 3.08,
     "preco_num": 4.42,
     "posicao_id": 1
@@ -5259,7 +5259,7 @@
     "atleta_id": 106681,
     "apelido_abreviado": "L. Pereira",
     "clube_id": 292,
-    "foto": "/assets/img/atletas/106681.jpg",
+    "foto": "/assets/img/escudos/cartola/292.jpeg",
     "media_num": 2.6,
     "preco_num": 4.1,
     "posicao_id": 5
@@ -5304,7 +5304,7 @@
     "atleta_id": 107174,
     "apelido_abreviado": "B. Tabata",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/107174.jpeg",
     "media_num": 3.88,
     "preco_num": 6.08,
     "posicao_id": 4
@@ -5340,7 +5340,7 @@
     "atleta_id": 107873,
     "apelido_abreviado": "Bobadilla",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/107873.jpg",
     "media_num": 3.49,
     "preco_num": 5.38,
     "posicao_id": 4
@@ -5349,7 +5349,7 @@
     "atleta_id": 107989,
     "apelido_abreviado": "Carbonero",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/107989.jpeg",
     "media_num": 5.32,
     "preco_num": 7.4,
     "posicao_id": 5
@@ -5358,7 +5358,7 @@
     "atleta_id": 107950,
     "apelido_abreviado": "F. Vera",
     "clube_id": 282,
-    "foto": "/assets/img/escudos/cartola/282.jpeg",
+    "foto": "/assets/img/atletas/107950.jpg",
     "media_num": 2.48,
     "preco_num": 5.92,
     "posicao_id": 4
@@ -5457,7 +5457,7 @@
     "atleta_id": 108588,
     "apelido_abreviado": "Tapia",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/108588.jpg",
     "media_num": 4.52,
     "preco_num": 6.74,
     "posicao_id": 5
@@ -5466,7 +5466,7 @@
     "atleta_id": 107908,
     "apelido_abreviado": "Hugo",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/107908.jpg",
     "media_num": 2.78,
     "preco_num": 5.52,
     "posicao_id": 2
@@ -5583,7 +5583,7 @@
     "atleta_id": 110426,
     "apelido_abreviado": "Bernabéi",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/110426.jpeg",
     "media_num": 5.84,
     "preco_num": 13.98,
     "posicao_id": 2
@@ -5601,7 +5601,7 @@
     "atleta_id": 110510,
     "apelido_abreviado": "Aguirre",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/110510.jpeg",
     "media_num": 4.83,
     "preco_num": 8.39,
     "posicao_id": 2
@@ -5619,7 +5619,7 @@
     "atleta_id": 110311,
     "apelido_abreviado": "J. Martínez",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/110311.jpg",
     "media_num": 2.2,
     "preco_num": 4.02,
     "posicao_id": 4
@@ -5673,7 +5673,7 @@
     "atleta_id": 110760,
     "apelido_abreviado": "Biel",
     "clube_id": 282,
-    "foto": "/assets/img/escudos/cartola/282.jpeg",
+    "foto": "/assets/img/atletas/110760.jpg",
     "media_num": 2.41,
     "preco_num": 6.06,
     "posicao_id": 5
@@ -5691,7 +5691,7 @@
     "atleta_id": 111594,
     "apelido_abreviado": "Micael",
     "clube_id": 275,
-    "foto": "/assets/img/escudos/cartola/275.jpeg",
+    "foto": "/assets/img/atletas/111594.jpg",
     "media_num": 3.3,
     "preco_num": 6.42,
     "posicao_id": 3
@@ -5709,7 +5709,7 @@
     "atleta_id": 111466,
     "apelido_abreviado": "V. Gabriel",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/111466.jpg",
     "media_num": 5.1,
     "preco_num": 9.15,
     "posicao_id": 3
@@ -5745,7 +5745,7 @@
     "atleta_id": 111683,
     "apelido_abreviado": "Anthoni",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/111683.jpeg",
     "media_num": 1.7,
     "preco_num": 3.72,
     "posicao_id": 1
@@ -5781,7 +5781,7 @@
     "atleta_id": 111832,
     "apelido_abreviado": "Jefté",
     "clube_id": 275,
-    "foto": "/assets/img/escudos/cartola/275.jpeg",
+    "foto": "/assets/img/atletas/111832.jpg",
     "media_num": 3.05,
     "preco_num": 5.92,
     "posicao_id": 2
@@ -5826,7 +5826,7 @@
     "atleta_id": 112709,
     "apelido_abreviado": "K. Bruno",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/112709.jpeg",
     "media_num": 7.64,
     "preco_num": 10.64,
     "posicao_id": 2
@@ -5853,7 +5853,7 @@
     "atleta_id": 112863,
     "apelido_abreviado": "R. Sosa",
     "clube_id": 275,
-    "foto": "/assets/img/escudos/cartola/275.jpeg",
+    "foto": "/assets/img/atletas/112863.jpg",
     "media_num": 2.89,
     "preco_num": 6.36,
     "posicao_id": 5
@@ -5952,7 +5952,7 @@
     "atleta_id": 113359,
     "apelido_abreviado": "P. Maia",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/113359.jpg",
     "media_num": 1.96,
     "preco_num": 4.63,
     "posicao_id": 4
@@ -6006,7 +6006,7 @@
     "atleta_id": 114405,
     "apelido_abreviado": "Sinisterra",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/114405.jpg",
     "media_num": 3.65,
     "preco_num": 7.75,
     "posicao_id": 5
@@ -6033,7 +6033,7 @@
     "atleta_id": 114334,
     "apelido_abreviado": "Gamarra",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/114334.jpeg",
     "media_num": 2.35,
     "preco_num": 4.83,
     "posicao_id": 3
@@ -6141,7 +6141,7 @@
     "atleta_id": 117404,
     "apelido_abreviado": "Otávio",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/117404.jpeg",
     "media_num": 0,
     "preco_num": 1,
     "posicao_id": 1
@@ -6195,7 +6195,7 @@
     "atleta_id": 117632,
     "apelido_abreviado": "Garro",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/117632.jpg",
     "media_num": 3.71,
     "preco_num": 13.44,
     "posicao_id": 4
@@ -6204,7 +6204,7 @@
     "atleta_id": 117910,
     "apelido_abreviado": "B. Bidon",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/117910.jpg",
     "media_num": 3.89,
     "preco_num": 7.46,
     "posicao_id": 4
@@ -6231,7 +6231,7 @@
     "atleta_id": 117403,
     "apelido_abreviado": "R. Marques",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/117403.jpg",
     "media_num": 2.2,
     "preco_num": 3.58,
     "posicao_id": 5
@@ -6267,7 +6267,7 @@
     "atleta_id": 118774,
     "apelido_abreviado": "Alexsander",
     "clube_id": 282,
-    "foto": "/assets/img/escudos/cartola/282.jpeg",
+    "foto": "/assets/img/atletas/118774.jpg",
     "media_num": 3.77,
     "preco_num": 6.97,
     "posicao_id": 4
@@ -6294,7 +6294,7 @@
     "atleta_id": 118563,
     "apelido_abreviado": "Rodriguinho",
     "clube_id": 276,
-    "foto": "/assets/img/escudos/cartola/276.jpeg",
+    "foto": "/assets/img/atletas/118563.jpg",
     "media_num": 2.16,
     "preco_num": 3.04,
     "posicao_id": 4
@@ -6321,7 +6321,7 @@
     "atleta_id": 122302,
     "apelido_abreviado": "Cristian",
     "clube_id": 2305,
-    "foto": "/assets/img/escudos/cartola/2305.jpeg",
+    "foto": "/assets/img/atletas/122302.jpg",
     "media_num": 3.22,
     "preco_num": 4.78,
     "posicao_id": 5
@@ -6690,7 +6690,7 @@
     "atleta_id": 124369,
     "apelido_abreviado": "L. Aragão",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/124369.jpeg",
     "media_num": 6.73,
     "preco_num": 6.88,
     "posicao_id": 1
@@ -6735,7 +6735,7 @@
     "atleta_id": 124264,
     "apelido_abreviado": "Kauan",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/124264.jpeg",
     "media_num": 0,
     "preco_num": 1,
     "posicao_id": 1
@@ -6753,7 +6753,7 @@
     "atleta_id": 124912,
     "apelido_abreviado": "J. Jesus",
     "clube_id": 283,
-    "foto": "/assets/img/escudos/cartola/283.jpeg",
+    "foto": "/assets/img/atletas/124912.jpeg",
     "media_num": 2.39,
     "preco_num": 4.08,
     "posicao_id": 3
@@ -6771,7 +6771,7 @@
     "atleta_id": 124271,
     "apelido_abreviado": "G. Prado",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/124271.jpeg",
     "media_num": 2.61,
     "preco_num": 4.3,
     "posicao_id": 4
@@ -6780,7 +6780,7 @@
     "atleta_id": 124280,
     "apelido_abreviado": "R. Mathias",
     "clube_id": 285,
-    "foto": "/assets/img/escudos/cartola/285.jpeg",
+    "foto": "/assets/img/atletas/124280.jpeg",
     "media_num": 2.56,
     "preco_num": 4.78,
     "posicao_id": 5
@@ -6807,7 +6807,7 @@
     "atleta_id": 125488,
     "apelido_abreviado": "J. Pedro",
     "clube_id": 264,
-    "foto": "/assets/img/escudos/cartola/264.jpeg",
+    "foto": "/assets/img/atletas/125488.jpg",
     "media_num": 3.84,
     "preco_num": 6.24,
     "posicao_id": 3
@@ -6834,7 +6834,7 @@
     "atleta_id": 124661,
     "apelido_abreviado": "I. Román",
     "clube_id": 282,
-    "foto": "/assets/img/escudos/cartola/282.jpeg",
+    "foto": "/assets/img/atletas/124661.jpg",
     "media_num": 2.77,
     "preco_num": 3.62,
     "posicao_id": 3
