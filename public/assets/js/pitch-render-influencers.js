@@ -237,33 +237,51 @@
     el.style.top  = PCT(p.y);
   }
 
-  // média exibida conforme modo
-  function currentStatValue(atletaId, mode){
-    const mmv = window.MMV?.[atletaId];
-    if (mode === 'MM' && mmv?.MM != null) return Number(mmv.MM);
-    if (mode === 'MV' && mmv?.MV != null) return Number(mmv.MV);
-    return mediaNum(atletaId);
+// === obter valor conforme modo; sem fallback para ALL quando for MM/MV
+function currentStatValue(atletaId, mode){
+  const mmv = window.MMV?.[atletaId];
+  if (mode === 'MM') return (mmv && mmv.MM != null) ? Number(mmv.MM) : NaN;
+  if (mode === 'MV') return (mmv && mmv.MV != null) ? Number(mmv.MV) : NaN;
+  return mediaNum(atletaId); // ALL
+}
+
+// === atualizar média principal
+function updateCardStat(el, mode){
+  const id = +el.dataset.id;
+  const stat = el.querySelector('.stat');
+  if (!stat) return;
+  const m = currentStatValue(id, mode);
+
+  // mostra "—" se não houver média no modo atual
+  stat.textContent = Number.isFinite(m)
+    ? `Média: ${m.toFixed(1).replace('.', ',')}`
+    : 'Média: —';
+
+  stat.classList.remove('amber','red');
+  if (Number.isFinite(m)) {
+    const sc = statClass(m);
+    if (sc) stat.classList.add(sc);
   }
-  function updateCardStat(el, mode){
-    const id = +el.dataset.id;
-    const stat = el.querySelector('.stat');
-    if (!stat) return;
-    const m = currentStatValue(id, mode);
-    stat.textContent = Number.isFinite(m) ? `Média: ${m.toFixed(1).replace('.',',')}` : 'Média: —';
-    stat.classList.remove('amber','red');
-    const sc = statClass(m); if (sc) stat.classList.add(sc);
+}
+
+// === atualizar média do jogador em dúvida
+function updateAltStat(pitch, el){
+  const alt = el.querySelector('.alt-stat');
+  if (!alt) return;
+  const mode = pitch.dataset.modeStat || 'ALL';
+  const altId = +el.dataset.altId || NaN;
+  const m = Number.isFinite(altId) ? currentStatValue(altId, mode) : NaN;
+
+  alt.textContent = Number.isFinite(m)
+    ? `Média: ${m.toFixed(1).replace('.', ',')}`
+    : 'Média: —';
+
+  alt.classList.remove('amber','red');
+  if (Number.isFinite(m)) {
+    const sc = statClass(m);
+    if (sc) alt.classList.add(sc);
   }
-  // média do jogador em dúvida conforme modo
-  function updateAltStat(pitch, el){
-    const alt = el.querySelector('.alt-stat');
-    if (!alt) return;
-    const mode = pitch.dataset.modeStat || 'ALL';
-    const altId = +el.dataset.altId || NaN;
-    const m = Number.isFinite(altId) ? currentStatValue(altId, mode) : NaN;
-    alt.textContent = Number.isFinite(m) ? `Média: ${m.toFixed(1).replace('.',',')}` : 'Média: —';
-    alt.classList.remove('amber','red');
-    const sc = statClass(m); if (sc) alt.classList.add(sc);
-  }
+}
 
   // popover últimos jogos
   function closeAnyPop(){ document.querySelectorAll('.games-pop').forEach(n=>n.remove()); }

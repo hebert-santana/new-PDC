@@ -972,7 +972,185 @@
           "sit": "provavel"
         }
       ]
+    },
+    "botafogo_v2": {
+      "formacao": "4-3-3",
+      "titulares": [
+        {
+          "slot": "GOL",
+          "id": 107183,
+          "x": 50,
+          "y": 88,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ZAG-L",
+          "id": 97468,
+          "x": 35,
+          "y": 71,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ZAG-R",
+          "id": 99274,
+          "x": 65,
+          "y": 71,
+          "sit": "provavel"
+        },
+        {
+          "slot": "LAT-R",
+          "id": 100898,
+          "x": 85,
+          "y": 66,
+          "sit": "provavel"
+        },
+        {
+          "slot": "LAT-L",
+          "id": 116065,
+          "x": 15,
+          "y": 66,
+          "sit": "provavel"
+        },
+        {
+          "slot": "MEI-L",
+          "id": 104693,
+          "x": 25,
+          "y": 45,
+          "sit": "provavel"
+        },
+        {
+          "slot": "MEI-R",
+          "id": 93790,
+          "x": 75,
+          "y": 45,
+          "sit": "provavel"
+        },
+        {
+          "slot": "MEI-C",
+          "id": 98672,
+          "x": 50,
+          "y": 35,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ATA-L",
+          "id": 105214,
+          "x": 20,
+          "y": 20,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ATA-C",
+          "id": 92171,
+          "x": 50,
+          "y": 12,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ATA-R",
+          "id": 95799,
+          "x": 80,
+          "y": 20,
+          "sit": "provavel"
+        },
+        {
+          "slot": "TEC",
+          "id": 145269,
+          "x": 10,
+          "y": 87.5,
+          "sit": "provavel"
+        }
+      ]
+    },
+    "sport_v2": {
+      "formacao": "4-3-3",
+      "titulares": [
+        {
+          "slot": "ATA-C",
+          "id": 126216,
+          "x": 50,
+          "y": 12,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ATA-L",
+          "id": 84523,
+          "x": 20,
+          "y": 20,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ATA-R",
+          "id": 107726,
+          "x": 80,
+          "y": 20,
+          "sit": "provavel"
+        },
+        {
+          "slot": "MEI-C",
+          "id": 85931,
+          "x": 50,
+          "y": 35,
+          "sit": "provavel"
+        },
+        {
+          "slot": "MEI-R",
+          "id": 77664,
+          "x": 75,
+          "y": 45,
+          "sit": "provavel"
+        },
+        {
+          "slot": "MEI-L",
+          "id": 100085,
+          "x": 25,
+          "y": 45,
+          "sit": "provavel"
+        },
+        {
+          "slot": "LAT-L",
+          "id": 100848,
+          "x": 15,
+          "y": 66,
+          "sit": "provavel"
+        },
+        {
+          "slot": "LAT-R",
+          "id": 88423,
+          "x": 85,
+          "y": 66,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ZAG-L",
+          "id": 88087,
+          "x": 35,
+          "y": 71,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ZAG-R",
+          "id": 83048,
+          "x": 65,
+          "y": 71,
+          "sit": "provavel"
+        },
+        {
+          "slot": "GOL",
+          "id": 70449,
+          "x": 50,
+          "y": 88,
+          "sit": "provavel"
+        },
+        {
+          "slot": "TEC",
+          "id": 92702,
+          "x": 10,
+          "y": 87.5,
+          "sit": "provavel"
+        }
+      ]
     }
   },
-  "updated_at": "2025-10-26T02:21:11.468Z"
+  "updated_at": "2025-10-26T02:43:07.068Z"
 }
