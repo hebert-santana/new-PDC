@@ -803,7 +803,7 @@
       ]
     },
     "vitoria_v2": {
-      "formacao": "3-5-2",
+      "formacao": "3-4-3",
       "titulares": [
         {
           "slot": "GOL",
@@ -815,7 +815,7 @@
         {
           "slot": "ZAG-L",
           "id": 90943,
-          "x": 25,
+          "x": 28,
           "y": 71,
           "sit": "provavel"
         },
@@ -829,7 +829,7 @@
         {
           "slot": "ZAG-R",
           "id": 96793,
-          "x": 75,
+          "x": 72,
           "y": 71,
           "sit": "provavel"
         },
@@ -850,36 +850,43 @@
         {
           "slot": "MEI-L",
           "id": 81952,
-          "x": 35,
-          "y": 50,
+          "x": 28,
+          "y": 53,
           "sit": "provavel"
         },
         {
           "slot": "MEI-R",
           "id": 100969,
-          "x": 65,
-          "y": 50,
+          "x": 72,
+          "y": 53,
           "sit": "provavel"
         },
         {
           "slot": "ATA-R",
           "id": 97810,
-          "x": 75,
-          "y": 21.2291,
+          "x": 70,
+          "y": 25,
           "sit": "provavel"
         },
         {
           "slot": "ATA-L",
           "id": 93411,
-          "x": 25,
-          "y": 21.2291,
+          "x": 30,
+          "y": 25,
           "sit": "provavel"
         },
         {
           "slot": "ATA-C",
           "id": 92696,
           "x": 50,
-          "y": 13.2144,
+          "y": 15,
+          "sit": "provavel"
+        },
+        {
+          "slot": "TEC",
+          "id": 92180,
+          "x": 10,
+          "y": 87.5,
           "sit": "provavel"
         }
       ]
@@ -1152,5 +1159,5 @@
       ]
     }
   },
-  "updated_at": "2025-10-26T02:43:07.068Z"
+  "updated_at": "2025-10-26T15:12:28.685Z"
 }

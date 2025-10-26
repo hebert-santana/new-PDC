@@ -2,7 +2,7 @@
 (() => {
   if (!window.DRAG_ENABLED) return;
 
-  const SAVE_KEY = 'pitch_positions_v6';
+  const SAVE_KEY = 'pitch_positions_v7';
   const SEL = '.jogador, .player';
   const saved = safeParse(localStorage.getItem(SAVE_KEY)) || {};
   const seen = new WeakSet();

@@ -5,38 +5,62 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Admin — Lineups</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<style>
 
-/* ===== Admin apenas ===== */
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+<style>
+/* ============================================================================
+   ADMIN: ESTILO DO EDITOR
+   - Canvas fixo do campo com área útil demarcada
+   - Painel lateral com controles e listas
+   - Jogadores com avatar, rótulos e estado visual
+   ========================================================================== */
+
+/* ---- Tokens do editor (tamanhos e cores do canvas) ---- */
 :root{
-  --pitch-w:631px; --pitch-h:892px;
-  --active-w:575px; --active-h:813px; --off-x:28px; --off-y:40px;
-  --ring:#0ea5b7; --img:92px; --img-coach:70px; --panel:#f7f7f8;
-  --zoom:1;
+  --pitch-w:631px;                  /* largura da imagem do campo */
+  --pitch-h:892px;                  /* altura da imagem do campo */
+  --active-w:575px;                 /* largura da área útil dentro do campo */
+  --active-h:813px;                 /* altura da área útil dentro do campo */
+  --off-x:28px;                     /* offset X da área útil */
+  --off-y:40px;                     /* offset Y da área útil */
+
+  --img:92px;                       /* diâmetro do avatar do jogador */
+  --img-coach:70px;                 /* diâmetro do avatar do técnico */
+  --ring:#0ea5b7;                   /* cor das guias e realces */
+  --panel:#f7f7f8;                  /* fundo dos cards do painel */
+  --zoom:1;                         /* zoom do canvas (controlado pelo range) */
 }
+
+/* ---- Base do admin ---- */
 body.admin{ background:#eef1f4; color:#0f172a }
 body.admin header{ padding:12px 16px; background:#fff; border-bottom:1px solid #e5e7eb }
 
-/* layout */
-body.admin .wrap{ max-width:1500px; margin:18px auto; padding:0 16px;
-  display:grid; grid-template-columns:minmax(560px,1fr) minmax(520px,1.2fr); gap:16px }
-@media (max-width:1100px){ body.admin .wrap{ grid-template-columns:1fr }}
+/* ---- Grid principal: campo à esquerda, painel à direita ---- */
+body.admin .wrap{
+  max-width:1500px; margin:18px auto; padding:0 16px;
+  display:grid; grid-template-columns:minmax(560px,1fr) minmax(520px,1.2fr); gap:16px;
+}
+@media (max-width:1100px){
+  body.admin .wrap{ grid-template-columns:1fr; }
+}
 
-/* campo fixo do editor (com zoom) */
+/* ---- Canvas do campo (imagem fixa + área útil demarcada) ---- */
 body.admin .pitch{
   position:relative; width:var(--pitch-w); height:var(--pitch-h);
   background:url('/assets/img/campinhos/campinho.png') 0 0 / var(--pitch-w) var(--pitch-h) no-repeat;
   border-radius:16px; box-shadow:0 6px 24px rgba(0,0,0,.12); overflow:hidden;
-  transform:scale(var(--zoom)); transform-origin:top left;
+  transform:scale(var(--zoom)); transform-origin:top left; /* zoom ajustável */
 }
 body.admin .pitch::after{
+  /* retângulo da área útil (debug visual) */
   content:""; position:absolute; left:var(--off-x); top:var(--off-y);
   width:var(--active-w); height:var(--active-h);
   outline:1px dashed rgba(14,165,183,.35); pointer-events:none;
 }
 
-/* balão do jogador (fixo, não desloca ao mostrar nomes) */
+/* ---- Nó do jogador: avatar centralizado por translate(-50%,-50%) ---- */
 body.admin .player{
   position:absolute; transform:translate(-50%,-50%); text-align:center;
   width:var(--img); height:var(--img); overflow:visible;
@@ -49,7 +73,7 @@ body.admin .player img{
 body.admin .player.coach{ width:var(--img-coach); height:var(--img-coach) }
 body.admin .player.coach img{ width:var(--img-coach); height:var(--img-coach); margin:0 auto }
 
-/* legendas fora do círculo */
+/* ---- Rótulos (balões) abaixo do avatar ---- */
 body.admin .player .cap{
   position:absolute; left:50%; top:100%; transform:translateX(-50%);
   margin-top:6px; font-size:.82rem; line-height:1.1; color:#0b192b;
@@ -62,41 +86,48 @@ body.admin .player .alt-cap{
   background:rgba(255,255,255,.96); border-radius:10px; padding:2px 7px; white-space:nowrap;
 }
 
-body.admin .slot-chip{ position:absolute; inset:auto auto 6px 6px; background:#111827; color:#fff;
-  border-radius:8px; padding:2px 6px; font-size:.7rem; opacity:.9 }
+/* ---- Chip com o nome do slot no rodapé do avatar ---- */
+body.admin .slot-chip{
+  position:absolute; inset:auto auto 6px 6px; background:#111827; color:#fff;
+  border-radius:8px; padding:2px 6px; font-size:.7rem; opacity:.9;
+}
+
+/* ---- Estado visual durante drag ---- */
 body.admin .dragging{ outline:2px dashed var(--ring); outline-offset:4px; cursor:grabbing }
 
-/* guias */
+/* ---- Guias de alinhamento (linhas + pontos de grade) ---- */
 body.admin .guide{ position:absolute; background:transparent; pointer-events:none }
 body.admin .guide.x::after, body.admin .guide.y::after{ content:""; position:absolute; background:var(--ring); opacity:.8 }
 body.admin .guide.x{ height:0; width:100% } .admin .guide.x::after{ left:0; right:0; height:2px; top:-1px }
 body.admin .guide.y{ width:0; height:100% } .admin .guide.y::after{ top:0; bottom:0; width:2px; left:-1px }
-body.admin .grid-dot{ position:absolute; width:7px; height:7px; border-radius:50%;
-  background:var(--ring); opacity:.35; pointer-events:none; box-shadow:0 0 0 2px rgba(14,165,183,.2) }
+body.admin .grid-dot{
+  position:absolute; width:7px; height:7px; border-radius:50%;
+  background:var(--ring); opacity:.35; pointer-events:none; box-shadow:0 0 0 2px rgba(14,165,183,.2)
+}
 
-/* painel lateral */
-body.admin .side{ background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:12px;
-  box-shadow:0 8px 18px rgba(2,6,23,.06); max-height:calc(100vh - 120px); overflow:auto }
+/* ---- Painel lateral com controles ---- */
+body.admin .side{
+  background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:12px;
+  box-shadow:0 8px 18px rgba(2,6,23,.06); max-height:calc(100vh - 120px); overflow:auto;
+}
 body.admin .cfg-row{ display:grid; grid-template-columns:1.2fr .8fr .8fr auto; gap:8px }
 body.admin .slot-list{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px }
-@media (min-width:1400px){ body.admin .slot-list{ grid-template-columns:repeat(3,minmax(0,1fr)) }}
+@media (min-width:1400px){ body.admin .slot-list{ grid-template-columns:repeat(3,minmax(0,1fr)) } }
 body.admin .slot-card{ border:1px solid #e5e7eb; border-radius:10px; padding:10px; background:var(--panel) }
 body.admin .mini{ font-size:.8rem }
 body.admin .code{ font-family:ui-monospace,Menlo,monospace; font-size:.84rem }
 
-/* status visual */
-body.admin .player.ok img{ box-shadow:0 0 0 3px #22c55e, 0 6px 14px rgba(0,0,0,.28) }
+/* ---- Estados de provável/dúvida no avatar ---- */
+body.admin .player.ok img{   box-shadow:0 0 0 3px #22c55e, 0 6px 14px rgba(0,0,0,.28) }
 body.admin .player.doubt img{ box-shadow:0 0 0 3px #f59e0b, 0 6px 14px rgba(0,0,0,.28) }
 
-/* experiência melhor no mobile do admin: desliga zoom */
+/* ---- No mobile admin, desligue o zoom para caber melhor ---- */
 @media (max-width:640px){
   body.admin .pitch{ transform:none }
 }
-
-
-
 </style>
 </head>
+
 <body class="admin">
 <header class="d-flex align-items-center justify-content-between">
   <div class="d-flex align-items-center gap-3">
@@ -106,49 +137,61 @@ body.admin .player.doubt img{ box-shadow:0 0 0 3px #f59e0b, 0 6px 14px rgba(0,0,
 </header>
 
 <div class="wrap">
-  <!-- Campo -->
+  <!-- ======================== Coluna: Campo (Canvas) ======================== -->
   <div>
+    <!-- Controle de Zoom -->
     <div class="d-flex align-items-center gap-2 mb-2">
-      <label class="mini text-muted">Zoom</label>
-      <input id="zoom" type="range" min="0.6" max="1.2" step="0.02" value="1" class="form-range" style="width:200px">
+      <label class="mini text-muted" for="zoom">Zoom</label>
+      <input id="zoom" type="range" min="0.6" max="1.2" step="0.02" value="1" class="form-range" style="width:200px" aria-label="Zoom do campo">
     </div>
-    <div class="pitch" id="pitch" aria-label="Editor">
-      <div class="guide x" hidden></div><div class="guide y" hidden></div>
+
+    <!-- Canvas do campo -->
+    <div class="pitch" id="pitch" aria-label="Editor de posicionamento">
+      <!-- Guias horizontais e verticais (mostradas sob demanda) -->
+      <div class="guide x" hidden></div>
+      <div class="guide y" hidden></div>
     </div>
-    <div class="mt-2 mini text-muted">Imagens: <code>/assets/img/atletas</code> • IDs devem existir no mercado</div>
+
+    <div class="mt-2 mini text-muted">
+      Imagens: <code>/assets/img/atletas</code> • IDs devem existir no mercado
+    </div>
   </div>
 
-  <!-- Painel -->
+  <!-- ======================== Coluna: Painel lateral ======================== -->
   <div>
     <div class="side">
+      <!-- Linha de config principal -->
       <div class="cfg-row align-items-center mb-2">
         <div>
-          <label class="form-label">Time</label>
-          <select id="teamSelect" class="form-select"></select>
+          <label class="form-label" for="teamSelect">Time</label>
+          <select id="teamSelect" class="form-select" aria-label="Seleção de time"></select>
         </div>
+
         <div>
-          <label class="form-label">Formação</label>
-          <select id="formacao" class="form-select">
-            <option>4-3-3</option><option>4-4-2</option><option>3-5-2</option><option>4-2-3-1</option>
+          <label class="form-label" for="formacao">Formação</label>
+          <select id="formacao" class="form-select" aria-label="Seleção de formação">
+            <option>4-3-3</option><option>4-4-2</option><option>3-5-2</option><option>3-4-3</option><option>4-2-3-1</option>
           </select>
         </div>
+
         <div>
-          <label class="form-label">Alinhamento</label>
-          <select id="alinhamento" class="form-select">
+          <label class="form-label" for="alinhamento">Alinhamento</label>
+          <select id="alinhamento" class="form-select" aria-label="Modo de alinhamento">
             <option value="rows" selected>Linhas</option>
             <option value="grid">Grade</option>
             <option value="free">Livre</option>
           </select>
         </div>
+
         <div class="d-flex gap-1 align-self-end">
-          <button id="btnLoad" class="btn btn-outline-secondary btn-sm">Carregar</button>
-          <button id="btnSave" class="btn btn-primary btn-sm">Salvar</button>
+          <button id="btnLoad"  class="btn btn-outline-secondary btn-sm">Carregar</button>
+          <button id="btnSave"  class="btn btn-primary btn-sm">Salvar</button>
           <button id="btnApply" class="btn btn-success btn-sm">Atualizar formação</button>
           <button id="btnTouch" class="btn btn-warning btn-sm">Atualizar horário</button>
-
         </div>
       </div>
 
+      <!-- Toggles de UX -->
       <div class="d-flex align-items-center mb-2">
         <div class="form-check me-3">
           <input class="form-check-input" type="checkbox" id="snapPeers" checked>
@@ -164,21 +207,28 @@ body.admin .player.doubt img{ box-shadow:0 0 0 3px #f59e0b, 0 6px 14px rgba(0,0,
         </div>
       </div>
 
+      <!-- Busca por atleta -->
       <div class="mb-2">
-        <label class="form-label">Buscar atleta por nome ou ID</label>
-        <input id="q" class="form-control" placeholder="Ex.: Hulk, Scarpa, 39148"/>
+        <label class="form-label" for="q">Buscar atleta por nome ou ID</label>
+        <input id="q" class="form-control" placeholder="Ex.: Hulk, Scarpa, 39148" aria-label="Buscar atleta"/>
         <div id="qList" class="mt-2" style="max-height:260px;overflow:auto"></div>
       </div>
 
+      <!-- Lista de slots configuráveis -->
       <div class="slot-list" id="slotList"></div>
       <hr/>
+
+      <!-- Ações diversas -->
       <div class="d-flex gap-2 flex-wrap align-items-center">
         <button id="btnExport" class="btn btn-outline-secondary btn-sm">Exportar JSON</button>
+
         <label class="btn btn-outline-secondary btn-sm mb-0">Importar JSON
           <input id="fileImport" type="file" accept="application/json" hidden>
         </label>
+
         <button id="btnClear" class="btn btn-outline-danger btn-sm">Limpar time</button>
         <button id="btnClearCache" class="btn btn-outline-warning btn-sm">Limpar cache local</button>
+
         <span class="mini text-muted ms-auto">Endpoint: <span class="code">POST /api/lineups</span></span>
       </div>
     </div>
@@ -186,429 +236,661 @@ body.admin .player.doubt img{ box-shadow:0 0 0 3px #f59e0b, 0 6px 14px rgba(0,0,
 </div>
 
 <script>
-(()=>{'use strict';
+(() => {
+  'use strict';
 
+  /* ===========================================================================
+     UTILITÁRIOS E CONSTANTES DO ADMIN
+     - Conversões px% para a área de canvas
+     - Grade e tolerâncias de alinhamento
+     ======================================================================== */
+  const fold = s => (s||'').toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'') /* remove acentos */
+    .replace(/[^\p{L}\p{N}\s.]/gu,'');              /* remove símbolos */
 
-/* util */
-const fold=s=>(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\p{L}\p{N}\s.]/gu,'');
-const PITCH_W=631,PITCH_H=892,ACTIVE_W=575,ACTIVE_H=813,OFF_X=28,OFF_Y=40;
-const TOL=8,GRID_X=[20,30,35,40,50,60,65,70,80],GRID_Y=[90,78,75,65,60,58,55,40,35,30,25];
-const CANON=['GOL','ZAG-L','ZAG-C','ZAG-R','LAT-L','LAT-R','VOL','MEI-L','MEI-C','MEI-R','ATA-L','ATA-C','ATA-R','TEC'];
-const PRESETS={
- '4-3-3':{'GOL':[50,88],'ZAG-L':[35,71],'ZAG-C':[50,71],'ZAG-R':[65,71],'LAT-L':[15,66],'LAT-R':[85,66],'MEI-L':[25,45],'MEI-C':[50,35],'MEI-R':[75,45],'ATA-L':[20,20],'ATA-R':[80,20],'ATA-C':[50,12],'TEC':[10,87.5]},
- '4-4-2':{'GOL':[50,88],'ZAG-L':[35,71],'ZAG-C':[50,71],'ZAG-R':[65,71],'LAT-L':[15,66],'LAT-R':[85,66],'VOL':[50,55],'MEI-L':[25,40],'MEI-C':[50,30],'MEI-R':[75,40],'ATA-L':[35,12],'ATA-R':[65,12],'TEC':[10,87.5]},
- '3-5-2':{'GOL':[50,88],'ZAG-L':[25,71],'ZAG-C':[50,70],'ZAG-R':[75,71], 'LAT-L':[15,46],'LAT-R':[85,46],'VOL':[50,55],'MEI-L':[35,50],'MEI-C':[50,30],'MEI-R':[65,50],'ATA-L':[35,12],'ATA-R':[65,12],'TEC':[10,87.5]},
- '4-2-3-1':{'GOL':[50,88],'ZAG-L':[35,71],'ZAG-R':[65,71],'LAT-L':[15,66],'LAT-R':[85,66],'VOL':[40,64],'VOL2':[60,64],'MEI-L':[35,55],'MEI-C':[50,30],'MEI-R':[65,55],'ATA-C':[50,12],'TEC':[10,87.5]}
+  // Canvas fixo do admin (espelha os tokens CSS)
+  const PITCH_W=631, PITCH_H=892, ACTIVE_W=575, ACTIVE_H=813, OFF_X=28, OFF_Y=40;
+
+  // Grade e tolerâncias de snap
+  const TOL=8;
+  const GRID_X=[20,30,35,40,50,60,65,70,80];
+  const GRID_Y= [90,78,75,65,60,58,55,40,35,30,25,20,15];
+  
+  // Slots canônicos
+  const CANON=['GOL','ZAG-L','ZAG-C','ZAG-R','LAT-L','LAT-R','VOL','MEI-L','MEI-C','MEI-R','ATA-L','ATA-C','ATA-R','TEC'];
+
+  // Presets de formação para o ADMIN (podem diferir do render público)
+  const PRESETS={
+    '4-3-3':{'GOL':[50,88],'ZAG-L':[35,71],'ZAG-C':[50,71],'ZAG-R':[65,71],'LAT-L':[15,66],'LAT-R':[85,66],
+             'MEI-L':[25,45],'MEI-C':[50,35],'MEI-R':[75,45],'ATA-L':[20,20],'ATA-R':[80,20],'ATA-C':[50,12],'TEC':[10,87.5]},
+    '4-4-2':{'GOL':[50,88],'ZAG-L':[35,71],'ZAG-C':[50,71],'ZAG-R':[65,71],'LAT-L':[15,66],'LAT-R':[85,66],
+             'VOL':[50,55],'MEI-L':[25,40],'MEI-C':[50,30],'MEI-R':[75,40],'ATA-L':[35,12],'ATA-R':[65,12],'TEC':[10,87.5]},
+    '3-5-2':{'GOL':[50,88],'ZAG-L':[25,71],'ZAG-C':[50,70],'ZAG-R':[75,71],'LAT-L':[15,46],'LAT-R':[85,46],
+             'VOL':[50,55],'MEI-L':[35,50],'MEI-C':[50,30],'MEI-R':[65,50],'ATA-L':[35,12],'ATA-R':[65,12],'TEC':[10,87.5]},
+    '4-2-3-1':{'GOL':[50,88],'ZAG-L':[35,71],'ZAG-R':[65,71],'LAT-L':[15,66],'LAT-R':[85,66],
+               'VOL':[40,64],'VOL2':[60,64],'MEI-L':[35,55],'MEI-C':[50,30],'MEI-R':[65,55],'ATA-C':[50,12],'TEC':[10,87.5]},
+    '3-4-3':{'GOL': [50, 88],'ZAG-L': [28, 71],'ZAG-C': [50, 70],'ZAG-R': [72, 71],'MEI-L': [28, 53],'VOL': [50, 46],
+              'MEI-R': [72, 53],'ATA-L': [30, 25],'ATA-C': [50, 15],'ATA-R': [70, 25],'TEC': [10, 87.5]},
 };
 
-const state={teamKey:null,formacao:'4-3-3',lineup:[],tecnico:null,alin:'rows',mercado:null,lineupsJson:null};
-const $=id=>document.getElementById(id),qs=(s,r=document)=>r.querySelector(s),qsa=(s,r=document)=>Array.from(r.querySelectorAll(s));
-const pct=v=>`${v}%`,clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),px2pctX=px=>(px/PITCH_W)*100,px2pctY=px=>(px/PITCH_H)*100,pct2pxX=p=>(p/100)*PITCH_W,pct2pxY=p=>(p/100)*PITCH_H;
+  // Estado global do painel
+  const state = {
+    teamKey:null,            // chave do time escolhido
+    formacao:'4-3-3',        // formação atual
+    lineup:[],               // jogadores titulares [{slot,id,x,y,sit,duvida_com}]
+    tecnico:null,            // id do técnico
+    alin:'rows',             // modo de alinhamento: rows|grid|free
+    mercado:null,            // { byId:Map, byClub:Record<clubId,Array> }
+    lineupsJson:null         // JSON combinado (servidor + override local)
+  };
 
-/* dados */
-const foto=id=>{
-  const a=state.mercado?.byId?.get(+id);
-  const cid=a?.clube_id??0;
-  const f=(a?.foto||'').trim();
-  return f || `/assets/img/escudos/cartola/${cid}.jpg`;
-};
-const nome=id=>{
-  const a=state.mercado?.byId?.get(+id);
-  return a?.apelido_abreviado||a?.apelido||a?.nome||String(id);
-};
+  // Shorthands DOM
+  const $  = id => document.getElementById(id);
+  const qs = (s,r=document)=>r.querySelector(s);
+  const qsa= (s,r=document)=>Array.from(r.querySelectorAll(s));
 
-async function loadMercado(){
-  const urls = ['/assets/data/mercado.images.json','/data/mercado.images.json'];
-  for (const u of urls){
+  // Converters px<->% no canvas
+  const pct      = v => `${v}%`;
+  const clamp    = (v,a,b)=>Math.max(a,Math.min(b,v));
+  const px2pctX  = px => (px/PITCH_W)*100;
+  const px2pctY  = px => (px/PITCH_H)*100;
+  const pct2pxX  = p  => (p/100)*PITCH_W;
+  const pct2pxY  = p  => (p/100)*PITCH_H;
+
+  /* ===========================================================================
+     DADOS: MERCADO E JOGOS
+     - Mercado: nomes/fotos/clubes por atleta_id
+     - Jogos: mapeia teamKey -> clube_id para "só do clube"
+     ======================================================================== */
+  const foto = id => {
+    const a=state.mercado?.byId?.get(+id);
+    const cid=a?.clube_id??0;
+    const f=(a?.foto||'').trim();
+    return f || `/assets/img/escudos/cartola/${cid}.jpg`;
+  };
+  const nome = id => {
+    const a=state.mercado?.byId?.get(+id);
+    return a?.apelido_abreviado||a?.apelido||a?.nome||String(id);
+  };
+
+  async function loadMercado(){
+    // tenta duas rotas possíveis
+    const urls = ['/assets/data/mercado.images.json','/data/mercado.images.json'];
+    for (const u of urls){
+      try{
+        const r = await fetch(u, { cache:'no-store' });
+        if (!r.ok) continue;
+        const arr = await r.json();
+        window.MERCADO = arr;
+        state.mercado = {
+          byId:   new Map(arr.map(a => [a.atleta_id, a])),
+          byClub: arr.reduce((m,a)=>{ (m[a.clube_id]??=[]).push(a); return m; },{})
+        };
+        // ordena nomes por clube
+        for (const k in state.mercado.byClub){
+          state.mercado.byClub[k].sort((a,b)=>
+            (a.apelido_abreviado||a.apelido||a.nome||'')
+            .localeCompare(b.apelido_abreviado||b.apelido||b.nome||'','pt-BR'));
+        }
+        return;
+      }catch{}
+    }
+  }
+
+  // Carrega script com dados de jogos (define window.JOGOS)
+  async function loadJogos(){
+    return new Promise(res=>{
+      const s=document.createElement('script');
+      s.src='/assets/js/jogos.data.js?_='+Date.now();
+      s.onload=s.onerror=()=>res();
+      document.head.appendChild(s);
+    });
+  }
+
+  // Popula select de times a partir de window.JOGOS
+  function buildTeamSelect(){
+    const sel=$('teamSelect'); sel.innerHTML='';
+    const teams=new Map();
+    (window.JOGOS||[]).forEach(j=>{
+      if (j.home) teams.set(j.home.key, j.home.name);
+      if (j.away) teams.set(j.away.key, j.away.name);
+    });
+    [...teams.entries()]
+      .sort((a,b)=>a[1].localeCompare(b[1],'pt-BR'))
+      .forEach(([k,n])=>{
+        const o=document.createElement('option'); o.value=k; o.textContent=n; sel.appendChild(o);
+      });
+  }
+
+  // Obtém clube_id do time atual (ajuda no filtro "só do clube")
+  function currentClubId(){
+    const k = state.teamKey;
+    for (const j of (window.JOGOS||[])){
+      if (j.home?.key===k) return j.home.clube_id || window.TEAMKEY_TO_CLUBEID?.[k] || null;
+      if (j.away?.key===k) return j.away.clube_id || window.TEAMKEY_TO_CLUBEID?.[k] || null;
+    }
+    return window.TEAMKEY_TO_CLUBEID?.[k] || null;
+  }
+
+  // Roster prioritário: os do clube, senão todos do mercado
+  function clubRoster(){
+    const cid = currentClubId();
+    const all = Array.from(state.mercado?.byId?.values() || []);
+    return (cid && state.mercado?.byClub?.[cid]) ? state.mercado.byClub[cid] : all;
+  }
+
+  /* ===========================================================================
+     LINEUPS MERGE: servidor + override local
+     ======================================================================== */
+  async function getMergedLineups(){
+    let base={version:1,tz:'-03:00',teams:{}};
     try{
-      const r = await fetch(u, { cache:'no-store' });
-      if (!r.ok) continue;
-      const arr = await r.json();
-      window.MERCADO = arr;
-      state.mercado = {
-        byId: new Map(arr.map(a => [a.atleta_id, a])),
-        byClub: arr.reduce((m,a)=>{ (m[a.clube_id]??=[]).push(a); return m; },{})
-      };
-      for (const k in state.mercado.byClub){
-        state.mercado.byClub[k].sort((a,b)=>(a.apelido_abreviado||a.apelido||a.nome||'')
-          .localeCompare(b.apelido_abreviado||b.apelido||b.nome||'','pt-BR'));
-      }
-      return;
+      const r=await fetch('/assets/data/lineups.json',{cache:'no-store'});
+      if(r.ok) base=await r.json();
     }catch{}
+    const ov=JSON.parse(localStorage.getItem('lineups_override')||'{"teams":{}}');
+    base.teams=Object.assign({},base.teams||{},ov.teams||{});
+    return base;
   }
-}
-
-async function loadJogos(){
-  return new Promise(res=>{
-    const s=document.createElement('script');
-    s.src='/assets/js/jogos.data.js?_='+Date.now();
-    s.onload=s.onerror=()=>res();
-    document.head.appendChild(s);
-  });
-}
-
-function buildTeamSelect(){
-  const sel=$('teamSelect'); sel.innerHTML='';
-  const teams=new Map();
-  (window.JOGOS||[]).forEach(j=>{
-    if(j.home)teams.set(j.home.key,j.home.name);
-    if(j.away)teams.set(j.away.key,j.away.name);
-  });
-  [...teams.entries()].sort((a,b)=>a[1].localeCompare(b[1],'pt-BR')).forEach(([k,n])=>{
-    const o=document.createElement('option'); o.value=k; o.textContent=n; sel.appendChild(o);
-  });
-}
-
-function currentClubId(){
-  const k = state.teamKey;
-  for (const j of (window.JOGOS||[])){
-    if (j.home?.key===k) return j.home.clube_id || window.TEAMKEY_TO_CLUBEID?.[k] || null;
-    if (j.away?.key===k) return j.away.clube_id || window.TEAMKEY_TO_CLUBEID?.[k] || null;
+  function saveOverrideLocal(payload){
+    const prev=JSON.parse(localStorage.getItem('lineups_override')||'{"version":1,"tz":"-03:00","teams":{}}');
+    prev.teams=Object.assign(prev.teams||{},payload.teams||{});
+    localStorage.setItem('lineups_override',JSON.stringify(prev));
   }
-  return window.TEAMKEY_TO_CLUBEID?.[k] || null;
-}
-
-function clubRoster(){
-  const cid = currentClubId();
-  const all = Array.from(state.mercado?.byId?.values() || []);
-  return (cid && state.mercado?.byClub?.[cid]) ? state.mercado.byClub[cid] : all;
-}
-
-/* lineups.json merge local + servidor */
-async function getMergedLineups(){
-  let base={version:1,tz:'-03:00',teams:{}};
-  try{
-    const r=await fetch('/assets/data/lineups.json',{cache:'no-store'});
-    if(r.ok) base=await r.json();
-  }catch{}
-  const ov=JSON.parse(localStorage.getItem('lineups_override')||'{"teams":{}}');
-  base.teams=Object.assign({},base.teams||{},ov.teams||{});
-  return base;
-}
-function saveOverrideLocal(payload){
-  const prev=JSON.parse(localStorage.getItem('lineups_override')||'{"version":1,"tz":"-03:00","teams":{}}');
-  prev.teams=Object.assign(prev.teams||{},payload.teams||{});
-  localStorage.setItem('lineups_override',JSON.stringify(prev));
-}
-function mergeIntoState(payload){
-  state.lineupsJson??={version:1,tz:'-03:00',teams:{}};
-  state.lineupsJson.teams=Object.assign({},state.lineupsJson.teams||{},payload.teams||{});
-}
-
-/* busca global */
-function searchRows(query,onlyClub){
-  const s=fold(query||'');
-  const pool=onlyClub?clubRoster():Array.from(state.mercado?.byId?.values()||[]);
-  if(!s) return onlyClub?pool.map(a=>({id:a.atleta_id,nome:a.apelido_abreviado||a.apelido||a.nome})):[];
-  const rows=[];
-  for(const a of pool){
-    const t=fold(`${a.apelido_abreviado||a.apelido||a.nome||''} ${a.atleta_id}`);
-    if(t.includes(s)) rows.push({id:a.atleta_id,nome:a.apelido_abreviado||a.apelido||a.nome});
-    if(rows.length>=60) break;
+  function mergeIntoState(payload){
+    state.lineupsJson??={version:1,tz:'-03:00',teams:{}};
+    state.lineupsJson.teams=Object.assign({},state.lineupsJson.teams||{},payload.teams||{});
   }
-  return rows;
-}
-function wireSearch(){
-  const q=$('q'),list=$('qList');
-  const render=(rows,targetSlot=null)=>{
-    list.innerHTML='';
-    rows.forEach(r=>{
-      const btn=document.createElement('button');
-      btn.className='btn btn-sm btn-light w-100 text-start mb-1';
-      btn.textContent=`${r.nome} — ${r.id}`;
-      btn.onclick=()=>{
-        const slot=targetSlot||(CANON.find(s=>!state.lineup.some(p=>p.slot===s))||'MEI-C');
-        upsertPlayer(slot,r.id); buildSlotList(); renderPitch();
+
+  /* ===========================================================================
+     BUSCA E LISTAGEM
+     - Busca por nome/ID, com opção "só do clube"
+     - Lista de slots para montar escalação
+     ======================================================================== */
+  function searchRows(query,onlyClub){
+    const s=fold(query||'');
+    const pool=onlyClub?clubRoster():Array.from(state.mercado?.byId?.values()||[]);
+    if(!s) return onlyClub ? pool.map(a=>({id:a.atleta_id,nome:a.apelido_abreviado||a.apelido||a.nome})) : [];
+    const rows=[];
+    for(const a of pool){
+      const t=fold(`${a.apelido_abreviado||a.apelido||a.nome||''} ${a.atleta_id}`);
+      if(t.includes(s)) rows.push({id:a.atleta_id,nome:a.apelido_abreviado||a.apelido||a.nome});
+      if(rows.length>=60) break;
+    }
+    return rows;
+  }
+
+  function wireSearch(){
+    const q=$('q'), list=$('qList');
+    const render=(rows,targetSlot=null)=>{
+      list.innerHTML='';
+      rows.forEach(r=>{
+        const btn=document.createElement('button');
+        btn.className='btn btn-sm btn-light w-100 text-start mb-1';
+        btn.textContent=`${r.nome} — ${r.id}`;
+        btn.onclick=()=>{
+          // Preenche no próximo slot vago ou no alvo indicado
+          const slot=targetSlot||(CANON.find(s=>!state.lineup.some(p=>p.slot===s))||'MEI-C');
+          upsertPlayer(slot,r.id);
+          buildSlotList(); renderPitch();
+        };
+        list.appendChild(btn);
+      });
+    };
+    const run=()=>render(searchRows(q.value,$('onlyClub').checked));
+    q.oninput=run; $('onlyClub').onchange=run; render(searchRows('',true));
+  }
+
+  // Constrói <option> para selects de atleta/duvida
+  function buildSelectOptions(sel, value){
+    sel.innerHTML='';
+    const opt0=document.createElement('option'); opt0.value=''; opt0.textContent='— selecionar —';
+    sel.appendChild(opt0);
+    for(const a of clubRoster()){
+      const o=document.createElement('option');
+      o.value=String(a.atleta_id);
+      o.textContent=`${a.apelido_abreviado||a.apelido||a.nome} — ${a.atleta_id}`;
+      sel.appendChild(o);
+    }
+    if(value) sel.value=String(value);
+  }
+
+  // UI dos slots (cada posição tem: atleta, situação e "dúvida com")
+  function buildSlotList(){
+    const box=$('slotList'); box.innerHTML='';
+    const slots=Array.from(new Set([...CANON, ...Object.keys(PRESETS[state.formacao]||{})]));
+
+    for(const slot of slots){
+      const p=state.lineup.find(x=>x.slot===slot);
+      const sitVal=p?.sit ?? 'provavel';
+
+      // Card do slot
+      const row=document.createElement('div'); row.className='slot-card';
+      const wrap=document.createElement('div'); wrap.className='d-flex flex-wrap align-items-center gap-2';
+      wrap.innerHTML=`
+        <div class="fw-semibold" style="min-width:60px">${slot}</div>
+
+        <select class="form-select form-select-sm" style="width:240px" data-slot-sel="${slot}" aria-label="Selecionar atleta para ${slot}"></select>
+
+        <select class="form-select form-select-sm" style="width:110px" data-sit="${slot}" aria-label="Situação do atleta em ${slot}">
+          <option value="provavel"${sitVal==='provavel'?' selected':''}>Provável</option>
+          <option value="duvida"${sitVal==='duvida'?' selected':''}>Dúvida</option>
+          <option value="normal"${sitVal==='normal'?' selected':''}>Normal</option>
+        </select>
+
+        <select class="form-select form-select-sm" style="width:260px;${sitVal==='duvida'?'':'display:none'}" data-duvsel="${slot}" aria-label="Dúvida com para ${slot}"></select>
+
+        <button class="btn btn-sm btn-outline-secondary" data-act="focus" data-slot="${slot}">Focar</button>
+        <button class="btn btn-sm btn-outline-danger" data-act="clear" data-slot="${slot}">Limpar</button>
+      `;
+      row.appendChild(wrap); box.appendChild(row);
+
+      // Select principal: atleta
+      const sel=qs(`select[data-slot-sel="${slot}"]`,row);
+      buildSelectOptions(sel,p?.id||'');
+      sel.onchange=()=>{
+        const val=Number(sel.value||0); if(!val) return;
+        upsertPlayer(slot,val); renderPitch();
+        const duvSel=qs(`select[data-duvsel="${slot}"]`,row);
+        if(duvSel) buildSelectOptions(duvSel, state.lineup.find(x=>x.slot===slot)?.duvida_com || '');
       };
-      list.appendChild(btn);
-    });
-  };
-  const run=()=>render(searchRows(q.value,$('onlyClub').checked));
-  q.oninput=run; $('onlyClub').onchange=run; render(searchRows('',true));
-}
 
-/* selects de atleta e de "dúvida com" */
-function buildSelectOptions(sel, value){
-  sel.innerHTML='';
-  const opt0=document.createElement('option');opt0.value='';opt0.textContent='— selecionar —';
-  sel.appendChild(opt0);
-  for(const a of clubRoster()){
-    const o=document.createElement('option');
-    o.value=String(a.atleta_id);
-    o.textContent=`${a.apelido_abreviado||a.apelido||a.nome} — ${a.atleta_id}`;
-    sel.appendChild(o);
-  }
-  if(value) sel.value=String(value);
-}
-
-/* painel de slots */
-function buildSlotList(){
-  const box=$('slotList'); box.innerHTML='';
-  const slots=Array.from(new Set([...CANON, ...Object.keys(PRESETS[state.formacao]||{})]));
-  for(const slot of slots){
-    const p=state.lineup.find(x=>x.slot===slot);
-    const sitVal=p?.sit ?? 'provavel';
-    const row=document.createElement('div'); row.className='slot-card';
-    const wrap=document.createElement('div'); wrap.className='d-flex flex-wrap align-items-center gap-2';
-    wrap.innerHTML=`
-      <div class="fw-semibold" style="min-width:60px">${slot}</div>
-      <select class="form-select form-select-sm" style="width:240px" data-slot-sel="${slot}"></select>
-      <select class="form-select form-select-sm" style="width:110px" data-sit="${slot}">
-        <option value="provavel"${sitVal==='provavel'?' selected':''}>Provável</option>
-        <option value="duvida"${sitVal==='duvida'?' selected':''}>Dúvida</option>
-        <option value="normal"${sitVal==='normal'?' selected':''}>Normal</option>
-      </select>
-      <select class="form-select form-select-sm" style="width:260px;${sitVal==='duvida'?'':'display:none'}" data-duvsel="${slot}"></select>
-      <button class="btn btn-sm btn-outline-secondary" data-act="focus" data-slot="${slot}">Focar</button>
-      <button class="btn btn-sm btn-outline-danger" data-act="clear" data-slot="${slot}">Limpar</button>
-    `;
-    row.appendChild(wrap); box.appendChild(row);
-
-    const sel=qs(`select[data-slot-sel="${slot}"]`,row);
-    buildSelectOptions(sel,p?.id||'');
-    sel.onchange=()=>{
-      const val=Number(sel.value||0); if(!val) return;
-      upsertPlayer(slot,val); renderPitch();
+      // Select de "dúvida com"
       const duvSel=qs(`select[data-duvsel="${slot}"]`,row);
-      if(duvSel) buildSelectOptions(duvSel, state.lineup.find(x=>x.slot===slot)?.duvida_com || '');
+      const wireDuvSel=()=>{
+        const cur=state.lineup.find(x=>x.slot===slot);
+        duvSel.style.display=(cur?.sit==='duvida')?'':'none';
+        if(cur?.sit==='duvida') buildSelectOptions(duvSel, cur?.duvida_com || '');
+      };
+      wireDuvSel();
+      duvSel.onchange=()=>{
+        const pl=state.lineup.find(x=>x.slot===slot); if(!pl) return;
+        pl.duvida_com=Number(duvSel.value||0)||undefined; renderPitch();
+      };
+    }
+
+    // Troca de situação atualiza visibilidade do "dúvida com"
+    box.onchange=(e)=>{
+      const sel=e.target.closest('select[data-sit]'); if(!sel) return;
+      const p=state.lineup.find(x=>x.slot===sel.dataset.sit); if(!p) return;
+      p.sit=sel.value;
+      const duvSel=qs(`select[data-duvsel="${sel.dataset.sit}"]`,box);
+      if(duvSel){
+        duvSel.style.display=(p.sit==='duvida')?'':'none';
+        if(p.sit==='duvida') buildSelectOptions(duvSel, p.duvida_com || '');
+        else p.duvida_com=undefined;
+      }
+      renderPitch();
     };
 
-    const duvSel=qs(`select[data-duvsel="${slot}"]`,row);
-    const wireDuvSel=()=>{
-      const cur=state.lineup.find(x=>x.slot===slot);
-      duvSel.style.display=(cur?.sit==='duvida')?'':'none';
-      if(cur?.sit==='duvida') buildSelectOptions(duvSel, cur?.duvida_com || '');
-    };
-    wireDuvSel();
-    duvSel.onchange=()=>{
-      const pl=state.lineup.find(x=>x.slot===slot); if(!pl) return;
-      pl.duvida_com=Number(duvSel.value||0)||undefined; renderPitch();
+    // Botões do card do slot
+    box.onclick=(e)=>{
+      const btn=e.target.closest('button[data-act]'); if(!btn) return;
+      const slot=btn.dataset.slot;
+      if(btn.dataset.act==='clear'){ removePlayer(slot); buildSlotList(); renderPitch(); }
+      if(btn.dataset.act==='focus'){ focusSlot(slot); }
     };
   }
 
-  box.onchange=(e)=>{
-    const sel=e.target.closest('select[data-sit]'); if(!sel) return;
-    const p=state.lineup.find(x=>x.slot===sel.dataset.sit); if(!p) return;
-    p.sit=sel.value;
-    const duvSel=qs(`select[data-duvsel="${sel.dataset.sit}"]`,box);
-    if(duvSel){
-      duvSel.style.display=(p.sit==='duvida')?'':'none';
-      if(p.sit==='duvida') buildSelectOptions(duvSel, p.duvida_com || '');
-      else p.duvida_com=undefined;
-    }
-    renderPitch();
-  };
-
-  box.onclick=(e)=>{
-    const btn=e.target.closest('button[data-act]'); if(!btn) return;
-    const slot=btn.dataset.slot;
-    if(btn.dataset.act==='clear'){ removePlayer(slot); buildSlotList(); renderPitch(); }
-    if(btn.dataset.act==='focus'){ focusSlot(slot); }
-  };
-}
-
-/* helpers lineup */
-function focusSlot(slot){
-  const el=qs(`.player[data-slot="${slot}"]`,$('pitch')); if(!el) return;
-  el.scrollIntoView({behavior:'smooth',block:'center'});
-  el.animate([{transform:'translate(-50%,-50%) scale(1)'},{transform:'translate(-50%,-50%) scale(1.06)'}],{duration:220,direction:'alternate',iterations:2});
-}
-function applyPreset(){
-  const P=PRESETS[state.formacao]||{};
-  state.lineup=state.lineup.map(p=>P[p.slot]?{...p,x:P[p.slot][0],y:P[p.slot][1]}:p);
-}
-function upsertPlayer(slot,id){
-  const ex=state.lineup.find(p=>p.slot===slot);
-  if(ex){ ex.id=id; }
-  else{
-    const d=(PRESETS[state.formacao]||{})[slot]||[50,55];
-    state.lineup.push({slot,id,x:d[0],y:d[1],sit:'provavel'});
+  /* ===========================================================================
+     HELPERS DE LINEUP
+     ======================================================================== */
+  function focusSlot(slot){
+    const el=qs(`.player[data-slot="${slot}"]`,$('pitch')); if(!el) return;
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+    el.animate([{transform:'translate(-50%,-50%) scale(1)'},{transform:'translate(-50%,-50%) scale(1.06)'}],
+               {duration:220,direction:'alternate',iterations:2});
   }
-}
-function removePlayer(slot){ state.lineup=state.lineup.filter(p=>p.slot!==slot); }
-
-/* render */
-function renderPitch(){
-  const pitch=$('pitch'); pitch.querySelectorAll('.player').forEach(n=>n.remove());
-  for(const p of state.lineup){
-    const fig=document.createElement('figure');
-    fig.className=`player ${p.sit==='duvida'?'doubt':'ok'}`; if(p.slot==='TEC') fig.classList.add('coach');
-    fig.dataset.slot=p.slot; fig.dataset.id=p.id; fig.style.left=pct(p.x); fig.style.top=pct(p.y);
-    const img=new Image(); img.loading='lazy'; img.decoding='async'; img.width=92; img.height=92; img.alt=nome(p.id); img.src=foto(p.id);
-    img.onerror=()=>{const cid=state.mercado?.byId?.get(+p.id)?.clube_id??0; img.onerror=null; img.src=`/assets/img/escudos/cartola/${cid}.jpg`;};
-    const nm=document.createElement('figcaption'); nm.className='cap'; nm.textContent=nome(p.id);
-    fig.appendChild(img); fig.appendChild(nm);
-    if(p.sit==='duvida' && p.duvida_com){const alt=document.createElement('div'); alt.className='alt-cap'; alt.textContent=nome(p.duvida_com); fig.appendChild(alt);}
-    const chip=document.createElement('span'); chip.className='slot-chip'; chip.textContent=p.slot; fig.appendChild(chip);
-    enableDrag(fig,p); pitch.appendChild(fig);
+  function applyPreset(){
+    const P=PRESETS[state.formacao]||{};
+    state.lineup=state.lineup.map(p=>P[p.slot]?{...p,x:P[p.slot][0],y:P[p.slot][1]}:p);
   }
-  toggleGuides();
-  qsa('select[data-slot-sel]').forEach(sel=>{const slot=sel.getAttribute('data-slot-sel');const p=state.lineup.find(x=>x.slot===slot);buildSelectOptions(sel,p?.id||'');});
-  qsa('select[data-duvsel]').forEach(sel=>{const slot=sel.getAttribute('data-duvsel');const p=state.lineup.find(x=>x.slot===slot);buildSelectOptions(sel,p?.duvida_com||''); sel.style.display=(p?.sit==='duvida')?'':'none';});
-}
-
-/* drag + guias */
-function enableDrag(el,model){
-  let sx=0,sy=0,ox=0,oy=0; const gx=qs('.guide.x',$('pitch')),gy=qs('.guide.y',$('pitch'));
-  function onDown(ev){const p=point(ev);sx=p.x;sy=p.y;ox=pct2pxX(model.x);oy=pct2pxY(model.y);el.classList.add('dragging');window.addEventListener('pointermove',onMove);window.addEventListener('pointerup',onUp,{once:true});el.setPointerCapture(ev.pointerId);}
-  function onMove(ev){
-    const p=point(ev);let nx=clamp(ox+(p.x-sx),0,PITCH_W);let ny=clamp(oy+(p.y-sy),0,PITCH_H);
-    if(state.alin!=='free'){
-      const sx1=snapList(nx,GRID_X.map(pct2pxX),TOL);
-      const sy1=snapList(ny,GRID_Y.map(pct2pxY),TOL);
-      if((state.alin==='grid'||state.alin==='rows')&&sx1.snapped)nx=sx1.value;
-      if(state.alin==='rows'&&sy1.snapped)ny=sy1.value;
+  function upsertPlayer(slot,id){
+    const ex=state.lineup.find(p=>p.slot===slot);
+    if(ex){ ex.id=id; }
+    else{
+      const d=(PRESETS[state.formacao]||{})[slot]||[50,55];
+      state.lineup.push({slot,id,x:d[0],y:d[1],sit:'provavel'});
     }
-    if($('snapPeers').checked){
-      const peers=state.lineup.filter(pp=>pp!==model);
-      const xs=peers.map(pp=>pct2pxX(pp.x)); const ys=peers.map(pp=>pct2pxY(pp.y));
-      const sx2=snapList(nx,xs,TOL),sy2=snapList(ny,ys,TOL);
-      if(sx2.snapped)nx=sx2.value; if(sy2.snapped)ny=sy2.value;
-    }
-    el.style.left=pct(px2pctX(nx)); el.style.top=pct(px2pctY(ny));
-    if($('showGuides').checked){gx.style.visibility='visible'; gy.style.visibility='visible'; gx.style.top=`${ny}px`; gy.style.left=`${nx}px`;}
   }
-  function onUp(){const left=parseFloat(el.style.left),top=parseFloat(el.style.top);model.x=clamp(left,0,100);model.y=clamp(top,0,100);el.classList.remove('dragging');showGuides(false);window.removeEventListener('pointermove',onMove);}
-  el.addEventListener('pointerdown',onDown);
-}
-function point(ev){
-  const r=$('pitch').getBoundingClientRect();
-  let x=ev.clientX-r.left,y=ev.clientY-r.top;
-  x=clamp(x,OFF_X,OFF_X+ACTIVE_W); y=clamp(y,OFF_Y,OFF_Y+ACTIVE_H);
-  return{x,y};
-}
-function snapList(v,list,tol){let best={dist:Infinity,value:v,snapped:false};for(const t of list){const d=Math.abs(v-t);if(d<best.dist)best={dist:d,value:t,snapped:d<=tol};}return best;}
+  function removePlayer(slot){ state.lineup=state.lineup.filter(p=>p.slot!==slot); }
 
-function toggleGuides(){
-  const on=$('showGuides').checked,p=$('pitch');
-  qsa('.guide,.grid-dot',p).forEach(n=>n.remove()); if(!on) return;
-  GRID_X.forEach(px=>GRID_Y.forEach(py=>{
-    const d=document.createElement('div'); d.className='grid-dot'; d.style.left=`${pct2pxX(px)}px`; d.style.top=`${pct2pxY(py)}px`; p.appendChild(d);
-  }));
-  const gx=document.createElement('div'); gx.className='guide x';
-  const gy=document.createElement('div'); gy.className='guide y';
-  p.appendChild(gx); p.appendChild(gy);
-}
-function showGuides(active){
-  const on=$('showGuides').checked;
-  qsa('.guide',$('pitch')).forEach(g=>g.style.visibility=(on&&active)?'visible':'hidden');
-}
+  /* ===========================================================================
+     RENDERIZA O CANVAS
+     - Cria DOM dos jogadores
+     - Ativa drag com guias e snap
+     ======================================================================== */
+  function renderPitch(){
+    const pitch=$('pitch');
+    pitch.querySelectorAll('.player').forEach(n=>n.remove());
 
-/* persistência */
-function currentPayload(){
-  const k=state.teamKey, out={version:1,tz:'-03:00',teams:{}};
-  out.teams[k]={
-    formacao:state.formacao,
-    titulares:state.lineup.map(p=>({slot:p.slot,id:p.id,x:+p.x,y:+p.y,sit:p.sit||'provavel',duvida_com:p.duvida_com||undefined})),
-    tecnico:state.tecnico||undefined
-  };
-  return out;
-}
-const CH=new BroadcastChannel('lineups');
-function notifyClients(){try{CH.postMessage({type:'refresh',teamKey:state.teamKey,ts:Date.now()});}catch{}}
+    for(const p of state.lineup){
+      const fig=document.createElement('figure');
+      fig.className=`player ${p.sit==='duvida'?'doubt':'ok'}`;
+      if(p.slot==='TEC') fig.classList.add('coach');
 
-/* botões */
-$('btnApply').onclick=()=>{
-  const payload=currentPayload();
-  saveOverrideLocal(payload); mergeIntoState(payload); notifyClients();
-  alert('Formação aplicada localmente.');
-};
-$('btnSave').onclick = async () => {
-  const k = state.teamKey;
-  const payload = currentPayload(); // { version, tz, teams:{ [k]: {...} } }
+      fig.dataset.slot=p.slot;
+      fig.dataset.id=p.id;
+      fig.style.left=pct(p.x);
+      fig.style.top=pct(p.y);
 
-  try {
-    const r = await fetch('/api/lineups',{
-    method:'POST',headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ merge:true, teams: payload.teams })
+      // Imagem
+      const img=new Image();
+      img.loading='lazy'; img.decoding='async';
+      img.width=92; img.height=92;
+      img.alt=nome(p.id);
+      img.src=foto(p.id);
+      img.onerror=()=>{
+        const cid=state.mercado?.byId?.get(+p.id)?.clube_id??0;
+        img.onerror=null; img.src=`/assets/img/escudos/cartola/${cid}.jpg`;
+      };
+
+      // Rótulos
+      const nm=document.createElement('figcaption'); nm.className='cap'; nm.textContent=nome(p.id);
+      fig.appendChild(img); fig.appendChild(nm);
+
+      if(p.sit==='duvida' && p.duvida_com){
+        const alt=document.createElement('div'); alt.className='alt-cap'; alt.textContent=nome(p.duvida_com);
+        fig.appendChild(alt);
+      }
+
+      // Chip do slot
+      const chip=document.createElement('span'); chip.className='slot-chip'; chip.textContent=p.slot;
+      fig.appendChild(chip);
+
+      // Drag
+      enableDrag(fig,p);
+      pitch.appendChild(fig);
+    }
+
+    // Re-sincroniza selects com a lineup corrente
+    qsa('select[data-slot-sel]').forEach(sel=>{
+      const slot=sel.getAttribute('data-slot-sel');
+      const p=state.lineup.find(x=>x.slot===slot);
+      buildSelectOptions(sel,p?.id||'');
+    });
+    qsa('select[data-duvsel]').forEach(sel=>{
+      const slot=sel.getAttribute('data-duvsel');
+      const p=state.lineup.find(x=>x.slot===slot);
+      buildSelectOptions(sel,p?.duvida_com||'');
+      sel.style.display=(p?.sit==='duvida')?'':'none';
     });
 
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    alert('Salvo no servidor (lineups.json atualizado).');
-  } catch (e) {
-    // fallback: download do JSON do time
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `lineup-${k}.json`;
-    a.click();
-    URL.revokeObjectURL(a.href);
-    alert('Servidor indisponível. Baixei o JSON do time.');
-  } finally {
+    toggleGuides();
+  }
+
+  /* ===========================================================================
+     DRAG + GUIAS
+     - Drag com snap a grade, linhas ou colegas (conforme toggles)
+     ======================================================================== */
+  function enableDrag(el,model){
+    let sx=0,sy=0,ox=0,oy=0;
+    const gx=qs('.guide.x',$('pitch')), gy=qs('.guide.y',$('pitch'));
+
+    function onDown(ev){
+      const p=point(ev);
+      sx=p.x; sy=p.y;
+      ox=pct2pxX(model.x); oy=pct2pxY(model.y);
+      el.classList.add('dragging');
+      window.addEventListener('pointermove',onMove);
+      window.addEventListener('pointerup',onUp,{once:true});
+      el.setPointerCapture(ev.pointerId);
+    }
+    function onMove(ev){
+      const p=point(ev);
+      let nx=clamp(ox+(p.x-sx),0,PITCH_W);
+      let ny=clamp(oy+(p.y-sy),0,PITCH_H);
+
+      // Snap por modo (rows/grid) e por colegas
+      if(state.alin!=='free'){
+        const sx1=snapList(nx,GRID_X.map(pct2pxX),TOL);
+        const sy1=snapList(ny,GRID_Y.map(pct2pxY),TOL);
+        if((state.alin==='grid'||state.alin==='rows')&&sx1.snapped) nx=sx1.value;
+        if(state.alin==='rows'&&sy1.snapped) ny=sy1.value;
+      }
+      if($('snapPeers').checked){
+        const peers=state.lineup.filter(pp=>pp!==model);
+        const xs=peers.map(pp=>pct2pxX(pp.x));
+        const ys=peers.map(pp=>pct2pxY(pp.y));
+        const sx2=snapList(nx,xs,TOL), sy2=snapList(ny,ys,TOL);
+        if(sx2.snapped) nx=sx2.value;
+        if(sy2.snapped) ny=sy2.value;
+      }
+
+      el.style.left=pct(px2pctX(nx));
+      el.style.top =pct(px2pctY(ny));
+
+      if($('showGuides').checked){
+        gx.style.visibility='visible';
+        gy.style.visibility='visible';
+        gx.style.top =`${ny}px`;
+        gy.style.left=`${nx}px`;
+      }
+    }
+    function onUp(){
+      const left=parseFloat(el.style.left), top=parseFloat(el.style.top);
+      model.x=clamp(left,0,100);
+      model.y=clamp(top ,0,100);
+      el.classList.remove('dragging');
+      showGuides(false);
+      window.removeEventListener('pointermove',onMove);
+    }
+
+    el.addEventListener('pointerdown',onDown);
+  }
+
+  // Converte evento pointer para coordenadas limitadas à área útil
+  function point(ev){
+    const r=$('pitch').getBoundingClientRect();
+    let x=ev.clientX-r.left, y=ev.clientY-r.top;
+    x=clamp(x,OFF_X,OFF_X+ACTIVE_W);
+    y=clamp(y,OFF_Y,OFF_Y+ACTIVE_H);
+    return {x,y};
+  }
+  function snapList(v,list,tol){
+    let best={dist:Infinity,value:v,snapped:false};
+    for(const t of list){
+      const d=Math.abs(v-t);
+      if(d<best.dist) best={dist:d,value:t,snapped:d<=tol};
+    }
+    return best;
+  }
+
+  // Liga/desliga as guias (pontos e linhas)
+  function toggleGuides(){
+    const on=$('showGuides').checked, p=$('pitch');
+    qsa('.guide,.grid-dot',p).forEach(n=>n.remove());
+    if(!on) return;
+
+    // Pontos da grade
+    GRID_X.forEach(px=>GRID_Y.forEach(py=>{
+      const d=document.createElement('div');
+      d.className='grid-dot';
+      d.style.left=`${pct2pxX(px)}px`;
+      d.style.top =`${pct2pxY(py)}px`;
+      p.appendChild(d);
+    }));
+
+    // Linhas cruzadas (visíveis durante drag)
+    const gx=document.createElement('div'); gx.className='guide x';
+    const gy=document.createElement('div'); gy.className='guide y';
+    p.appendChild(gx); p.appendChild(gy);
+  }
+  function showGuides(active){
+    const on=$('showGuides').checked;
+    qsa('.guide',$('pitch')).forEach(g=>g.style.visibility=(on&&active)?'visible':'hidden');
+  }
+
+  /* ===========================================================================
+     PERSISTÊNCIA E BROADCAST
+     ======================================================================== */
+  function currentPayload(){
+    const k=state.teamKey;
+    const out={version:1,tz:'-03:00',teams:{}};
+    out.teams[k]={
+      formacao:state.formacao,
+      titulares:state.lineup.map(p=>({
+        slot:p.slot, id:p.id, x:+p.x, y:+p.y, sit:p.sit||'provavel', duvida_com:p.duvida_com||undefined
+      })),
+      tecnico:state.tecnico||undefined
+    };
+    return out;
+  }
+
+  const CH=new BroadcastChannel('lineups');
+  function notifyClients(){
+    try{ CH.postMessage({type:'refresh',teamKey:state.teamKey,ts:Date.now()}); }catch{}
+  }
+
+  /* ===========================================================================
+     AÇÕES DOS BOTÕES
+     ======================================================================== */
+  $('btnApply').onclick=()=>{
+    const payload=currentPayload();
     saveOverrideLocal(payload);
     mergeIntoState(payload);
-  }
-};
+    notifyClients();
+    alert('Formação aplicada localmente.');
+  };
 
-$('btnTouch').onclick = async () => {
-  const k = state.teamKey;
-  if (!k) { alert('Selecione um time.'); return; }
+  $('btnSave').onclick = async () => {
+    const k = state.teamKey;
+    const payload = currentPayload(); // { version, tz, teams:{ [k]: {...} } }
 
-  try {
-    const r = await fetch('/api/team-updates', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ teamKey:k }) // opcional: { teamKey:k, alert:'texto curto' }
-    });
-    if (!r.ok) throw new Error('HTTP '+r.status);
-    const j = await r.json();
-    alert(`Atualizado: ${k} → ${j.last_update}`);
-  } catch (e) {
-    const patch = { version:1, teams:{ [k]: { last_update:new Date().toISOString(), alert:"" } } };
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([JSON.stringify(patch,null,2)],{type:'application/json'}));
-    a.download = `team-updates-patch-${k}.json`;
+    try {
+      const r = await fetch('/api/lineups',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ merge:true, teams: payload.teams })
+      });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      alert('Salvo no servidor (lineups.json atualizado).');
+    } catch {
+      // fallback: baixa JSON do time
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `lineup-${k}.json`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      alert('Servidor indisponível. Baixei o JSON do time.');
+    } finally {
+      saveOverrideLocal(payload);
+      mergeIntoState(payload);
+    }
+  };
+
+  $('btnTouch').onclick = async () => {
+    const k = state.teamKey;
+    if (!k) { alert('Selecione um time.'); return; }
+
+    try {
+      const r = await fetch('/api/team-updates', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ teamKey:k }) // opcional: { teamKey:k, alert:'texto curto' }
+      });
+      if (!r.ok) throw new Error('HTTP '+r.status);
+      const j = await r.json();
+      alert(`Atualizado: ${k} → ${j.last_update}`);
+    } catch {
+      // fallback: baixa um patch de atualização
+      const patch = { version:1, teams:{ [k]: { last_update:new Date().toISOString(), alert:"" } } };
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([JSON.stringify(patch,null,2)],{type:'application/json'}));
+      a.download = `team-updates-patch-${k}.json`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      alert('Servidor indisponível. Baixei um patch JSON.');
+    }
+  };
+
+  $('btnExport').onclick=()=>{
+    const blob=new Blob([JSON.stringify(currentPayload(),null,2)],{type:'application/json'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download=`lineup-${state.teamKey}.json`;
     a.click();
     URL.revokeObjectURL(a.href);
-    alert('Servidor indisponível. Baixei um patch JSON.');
-  }
-};
+  };
 
-$('btnExport').onclick=()=>{
-  const blob=new Blob([JSON.stringify(currentPayload(),null,2)],{type:'application/json'});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`lineup-${state.teamKey}.json`; a.click(); URL.revokeObjectURL(a.href);
-};
-$('fileImport').onchange=async e=>{
-  const f=e.target.files?.[0]; if(!f) return;
-  state.lineupsJson=JSON.parse(await f.text()); loadTeam();
-};
-$('btnClear').onclick=()=>{ if(confirm('Limpar escalação deste time?')){ state.lineup=[]; buildSlotList(); renderPitch(); } };
-$('btnClearCache').onclick=()=>{ localStorage.removeItem('lineups_override'); alert('Cache local apagado.'); };
-$('zoom').oninput=e=>{ document.documentElement.style.setProperty('--zoom',e.target.value); };
+  $('fileImport').onchange=async e=>{
+    const f=e.target.files?.[0]; if(!f) return;
+    state.lineupsJson=JSON.parse(await f.text());
+    loadTeam();
+  };
 
-/* ciclo de carga */
-async function loadTeam(){
-  const team=state.lineupsJson?.teams?.[state.teamKey]||null;
-  if(team){
-    state.formacao=team.formacao||'4-3-3'; $('formacao').value=state.formacao;
-    state.lineup=Array.isArray(team.titulares)
-      ? team.titulares.map(p=>({slot:p.slot,id:+p.id,x:+p.x||50,y:+p.y||55,sit:p.sit||'provavel',duvida_com:p.duvida_com||undefined}))
-      : [];
-    state.tecnico=Number.isFinite(team.tecnico)?team.tecnico:null;
-    if(Number.isFinite(state.tecnico)&&!state.lineup.some(p=>p.slot==='TEC')){
-      const d=(PRESETS[state.formacao]||{}).TEC||[92,96];
-      state.lineup.push({slot:'TEC',id:state.tecnico,x:d[0],y:d[1],sit:'normal'});
+  $('btnClear').onclick=()=>{
+    if(confirm('Limpar escalação deste time?')){
+      state.lineup=[]; buildSlotList(); renderPitch();
     }
-  }else{
-    state.lineup=[]; state.tecnico=null;
-  }
-  buildSlotList(); renderPitch(); wireSearch();
-}
-$('formacao').onchange=()=>{ state.formacao=$('formacao').value; applyPreset(); buildSlotList(); renderPitch(); };
-$('alinhamento').onchange=()=>{ state.alin=$('alinhamento').value; };
-$('showGuides').onchange=toggleGuides;
-$('btnLoad').onclick=loadTeam;
-$('teamSelect').onchange=()=>{ state.teamKey=$('teamSelect').value; loadTeam(); };
+  };
 
-(async function boot(){
-  await loadMercado();
-  await loadJogos();
-  state.lineupsJson=await getMergedLineups();
-  buildTeamSelect();
-  state.teamKey=$('teamSelect').value;
-  wireSearch();
-  await loadTeam();
-})();
+  $('btnClearCache').onclick=()=>{
+    localStorage.removeItem('lineups_override');
+    alert('Cache local apagado.');
+  };
+
+  $('zoom').oninput=e=>{
+    document.documentElement.style.setProperty('--zoom', e.target.value);
+  };
+
+  /* ===========================================================================
+     CICLO DE CARGA DO TIME
+     ======================================================================== */
+  async function loadTeam(){
+    const team=state.lineupsJson?.teams?.[state.teamKey]||null;
+
+    if(team){
+      state.formacao=team.formacao||'4-3-3';
+      $('formacao').value=state.formacao;
+
+      state.lineup = Array.isArray(team.titulares)
+        ? team.titulares.map(p=>({
+            slot:p.slot, id:+p.id,
+            x:+p.x||50, y:+p.y||55,
+            sit:p.sit||'provavel',
+            duvida_com:p.duvida_com||undefined
+          }))
+        : [];
+
+      state.tecnico = Number.isFinite(team.tecnico) ? team.tecnico : null;
+
+      // insere técnico se não estiver listado
+      if(Number.isFinite(state.tecnico) && !state.lineup.some(p=>p.slot==='TEC')){
+        const d=(PRESETS[state.formacao]||{}).TEC||[92,96];
+        state.lineup.push({slot:'TEC',id:state.tecnico,x:d[0],y:d[1],sit:'normal'});
+      }
+    }else{
+      state.lineup=[]; state.tecnico=null;
+    }
+
+    buildSlotList();
+    renderPitch();
+    wireSearch();
+  }
+
+  /* ===========================================================================
+     EVENTOS DE UI
+     ======================================================================== */
+  $('formacao').onchange=()=>{ state.formacao=$('formacao').value; applyPreset(); buildSlotList(); renderPitch(); };
+  $('alinhamento').onchange=()=>{ state.alin=$('alinhamento').value; };
+  $('showGuides').onchange=toggleGuides;
+  $('btnLoad').onclick=loadTeam;
+  $('teamSelect').onchange=()=>{ state.teamKey=$('teamSelect').value; loadTeam(); };
+
+  /* ===========================================================================
+     BOOTSTRAP
+     ======================================================================== */
+  (async function boot(){
+    await loadMercado();
+    await loadJogos();
+    state.lineupsJson=await getMergedLineups();
+    buildTeamSelect();
+    state.teamKey=$('teamSelect').value;
+    wireSearch();
+    await loadTeam();
+  })();
 })();
 </script>
 </body>

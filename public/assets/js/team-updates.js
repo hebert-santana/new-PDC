@@ -29,7 +29,7 @@
     const row  = ensureChipRow(colEl);
     const chip = document.createElement('span');
     chip.className = 'upd-chip';
-    chip.innerHTML = `<i class="bi bi-clock-history" aria-hidden="true"></i> Atualizado ${label}`;
+    chip.innerHTML = `<i class="bi bi-clock-history" aria-hidden="true"></i> ${label}`; /* removi Atualizado */
     row.appendChild(chip);
   }
 
