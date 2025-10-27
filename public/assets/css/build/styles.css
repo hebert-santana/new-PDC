@@ -86,6 +86,7 @@ i{transition:.2s ease}
 .match-chip,.arb-pill{background:var(--surface-2);color:var(--cinza-escuro)}
 .match-chip i,.arb-pill i{color:var(--azul)!important}
 
+
 /* Ícones semânticos rápidos */
 .ico-fouls i{color:var(--laranja)!important}
 .ico-pen i{color:var(--verde)!important}

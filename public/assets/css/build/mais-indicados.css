@@ -382,3 +382,50 @@
 .ad-guard + iframe[id^="aswift_"]{display:none!important}
 .ad-guard + div:has(> ins.adsbygoogle),
 .ad-guard + div:has(> iframe[id^="aswift_"]){display:none!important}
+
+
+
+
+
+/* troque o seletor global */
+.lineup-card .player img{
+  width:var(--img); height:var(--img); border-radius:50%;
+  box-shadow:0 4px 14px rgba(0,0,0,.28);
+  border:2px solid #fff; background:#fff;
+}
+
+
+/* coloque em mais-indicados.css após os imports */
+.page-mais-indicados .player .shirt,
+.page-mais-indicados .resv-shirt{
+  border-radius:0 !important;
+  border:none !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+
+/* CAPITÃO: posicionado relativo ao centro (que coincide com a camisa) */
+#campinho-mais-indicados .player { position:absolute; }
+#campinho-mais-indicados .player .mark{
+  position:absolute;
+  left:40%;              /* eixo no centro da camisa */
+  top:20%;                 /* topo da camisa */
+  transform:
+    translate(
+      calc(var(--shirt-size-desktop)/2 - 6px),  /* empurra até a quina direita */
+      -40%                                     /* sobe um pouco */
+    );
+  right:auto;            /* cancela antigos right:-8px */
+}
+
+/* Mobile: usa o tamanho de camisa do mobile */
+@media (max-width:768px){
+  #campinho-mais-indicados .player .mark{
+    transform:
+      translate(
+        calc(var(--shirt-size-mobile)/2 - 16px),
+        35%
+      );
+  }
+}
