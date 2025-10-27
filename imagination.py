@@ -15,7 +15,7 @@ ATH_URL = "/assets/img/atletas"           # ex.: /assets/img/atletas/39148.jpeg
 ESC_URL = "/assets/img/escudos/cartola"   # ex.: /assets/img/escudos/cartola/282.jpeg
 
 # ordem de tentativa para atletas
-EXTS = [".jpeg", ".jpg", ".png", ".webp"]
+EXTS = [".webp", ".jpg", ".jpeg", ".png"]
 
 def athlete_url_or_badge(atleta_id: int, clube_id: int) -> str:
     # tenta achar a foto do atleta por extensão
