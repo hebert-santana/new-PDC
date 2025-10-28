@@ -199,7 +199,7 @@ header p{margin-bottom:0}
 .sg-title .ico-injury i{color:#DC3545!important}
 .sg-title .ico-susp i{color:#FFC107!important}
 .tag-list{display:flex;flex-wrap:wrap;gap:6px}
-.tag{display:inline-flex;align-items:center;gap:.35rem;padding:4px 10px;border-radius:999px;background:#fff;border:1px solid rgba(0,0,0,.08);font-size:.6rem;font-weight:500;color:var(--cinza-escuro)}
+.tag{display:inline-flex;align-items:center;gap:.35rem;padding:4px 10px;border-radius:999px;background:#fff;border:1px solid rgba(0,0,0,.08);font-size:.8rem;font-weight:500;color:var(--cinza-escuro)}
 .tag.-out{background:rgba(220,53,69,.08);border-color:rgba(220,53,69,.20)}
 .tag.-susp{background:rgba(255,193,7,.10);border-color:rgba(255,193,7,.28)}
 .tag.-soon{background:rgba(251,89,4,.10);border-color:rgba(251,89,4,.28);color:var(--laranja);font-weight:800;white-space:nowrap}

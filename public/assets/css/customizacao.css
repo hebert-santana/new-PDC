@@ -378,7 +378,7 @@
 
 /* Chips fixos no topo do card */
 .lineup-card>.chip-stack{
-  position:absolute; top:8px; left:8px; z-index:20;
+  position:absolute; top:4px; left:8px; z-index:20;
   display:flex; gap:6px; flex-wrap:wrap; margin:0;
 }
 .upd-chip{
@@ -868,3 +868,5 @@
     clip-path:none;        /* remove o recorte que encolhia a arte */
   }
 }
+
+

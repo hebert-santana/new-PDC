@@ -3,83 +3,83 @@
   "tz": "-03:00",
   "teams": {
     "atletico-mg_v2": {
-      "last_update": "2025-10-26T01:46:06.276Z",
+      "last_update": "2025-10-28T02:53:00.385Z",
       "alert": ""
     },
     "bahia_v2": {
-      "last_update": "2025-10-24T17:53:02.522Z",
+      "last_update": "2025-10-28T02:49:55.580Z",
       "alert": ""
     },
     "botafogo_v2": {
-      "last_update": "2025-10-26T02:40:45.693Z",
+      "last_update": "2025-10-28T02:44:03.057Z",
       "alert": ""
     },
     "bragantino_v2": {
-      "last_update": "2025-10-18T14:24:52-03:00",
+      "last_update": "2025-10-28T02:50:49.746Z",
       "alert": ""
     },
     "ceara_v2": {
-      "last_update": "2025-10-17T23:30:16-03:00",
+      "last_update": "2025-10-28T02:51:23.257Z",
       "alert": ""
     },
     "corinthians_v2": {
-      "last_update": "2025-10-26T01:47:15.065Z",
+      "last_update": "2025-10-28T02:45:33.425Z",
       "alert": ""
     },
     "cruzeiro_v2": {
-      "last_update": "2025-10-26T01:38:15.872Z",
+      "last_update": "2025-10-27T14:05:46.121Z",
       "alert": ""
     },
     "flamengo_v2": {
-      "last_update": "2025-10-26T01:00:43.225Z",
+      "last_update": "2025-10-28T02:44:52.838Z",
       "alert": ""
     },
     "fluminense_v2": {
-      "last_update": "2025-10-17T23:30:16-03:00",
+      "last_update": "2025-10-28T02:51:58.873Z",
       "alert": ""
     },
     "fortaleza_v2": {
-      "last_update": "2025-10-26T14:48:49.386Z",
+      "last_update": "2025-10-28T03:01:49.406Z",
       "alert": ""
     },
     "gremio_v2": {
-      "last_update": "2025-10-18T14:51:30-03:00",
+      "last_update": "2025-10-27T14:19:37.620Z",
       "alert": ""
     },
     "internacional_v2": {
-      "last_update": "2025-10-27T13:42:57.056Z",
+      "last_update": "2025-10-28T02:52:37.833Z",
       "alert": ""
     },
     "juventude_v2": {
-      "last_update": "2025-10-18T14:16:09-03:00",
+      "last_update": "2025-10-27T14:29:10.749Z",
       "alert": ""
     },
     "mirassol_v2": {
-      "last_update": "2025-10-26T01:49:49.061Z",
+      "last_update": "2025-10-28T02:43:27.314Z",
       "alert": ""
     },
     "palmeiras_v2": {
-      "last_update": "2025-10-26T01:26:10.284Z",
+      "last_update": "2025-10-28T02:53:48.093Z",
       "alert": ""
     },
     "santos_v2": {
-      "last_update": "2025-10-26T02:14:37.045Z",
+      "last_update": "2025-10-28T02:41:18.094Z",
       "alert": ""
     },
     "sao-paulo_v2": {
-      "last_update": "2025-10-18T16:25:17-03:00",
+      "last_update": "2025-10-28T02:55:37.325Z",
       "alert": ""
     },
     "sport_v2": {
-      "last_update": "2025-10-26T02:43:10.116Z",
+      "last_update": "2025-10-27T14:15:33.068Z",
       "alert": ""
     },
     "vasco_v2": {
-      "last_update": "2025-10-23T15:07:25.999Z",
+      "last_update": "2025-10-28T02:54:29.409Z",
       "alert": ""
     },
     "vitoria_v2": {
-      "last_update": "2025-10-26T15:12:31.204Z",
+      "last_update": "2025-10-28T02:43:02.166Z",
       "alert": ""
     }
   }
