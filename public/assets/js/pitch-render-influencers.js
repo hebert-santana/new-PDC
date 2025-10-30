@@ -95,69 +95,70 @@
   backdrop-filter:saturate(120%) blur(2px);
 }
 
-/* ===== Balões de MÉDIA ===== */
+/* ===== Balões de MÉDIA — DARK GLASS, SEM BORDA ===== */
 .player .stat,
 .player .alt-stat{
-  --accent:#16a34a;         /* borda padrão */
-  --fg:#22c55e;             /* ponto e texto */
-  --g:8px;                  /* intensidade do brilho, ajustada no JS */
-
-  left:50%; transform:translateX(-50%);
+  --fg:#e7edf3;     /* texto */
+  --dot:#9fe870;    /* ponto padrão */
+  --glow:8px;       /* raio do brilho */
+  position:absolute; left:50%; transform:translateX(-50%);
   top:calc(100% + var(--gap-label));
   display:inline-flex; align-items:center; gap:.45em;
   padding:calc(var(--chip-py) + 2px) calc(var(--chip-px) + 8px);
   font-family:"Inter Tight",system-ui,sans-serif;
   font-size:var(--chip-fs); font-weight:700; letter-spacing:.02em;
   color:var(--fg); font-variant-numeric:tabular-nums;
-  background:linear-gradient(180deg,#101820 0%,#0b1118 70%,#0d141a 100%);
-  border:1px solid var(--accent);
+  background:radial-gradient(120% 140% at 30% 20%, #1b2430 0%, #0f141b 55%, #0b1016 100%);
+  border:none;                          /* sem contorno colorido */
   border-radius:14px;
-  /* base sem glow color-mix; navegadores legados mantêm este visual */
-  box-shadow:inset 0 1px 1px rgba(255,255,255,.06), 0 2px 8px rgba(0,0,0,.36);
-  backdrop-filter:saturate(120%) blur(1.5px);
-  text-shadow:none;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 10px 22px rgba(0,0,0,.40);        /* sombra externa suave */
+  backdrop-filter:saturate(120%) blur(2px);
+  text-shadow:0 1px 0 rgba(0,0,0,.35);
   opacity:0; transform:translate(-50%,6px);
-  animation:fadeUp .4s ease forwards;
+  animation:fadeUp .35s ease forwards;
 }
 .player .stat:hover,.player .alt-stat:hover{ transform:translate(-50%,4px) }
 
-/* Glow por faixa — usa --g como raio */
+/* Glow por faixa (sem borda) */
 .player .stat:not(.amber):not(.red),
 .player .alt-stat:not(.amber):not(.red){
+  --dot:#9fe870;
   box-shadow:
-    0 0 4px rgba(34,197,94,.6),
-    0 0 14px rgba(34,197,94,.5),
-    0 2px 10px rgba(0,0,0,.5);
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 10px 22px rgba(0,0,0,.40),
+    0 0 var(--glow) rgba(159,232,112,.35);
 }
-
 .player .stat.amber,.player .alt-stat.amber{
-  --accent:#f59e0b; --fg:#facc15;
+  --dot:#ffd166;
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.06),
-    0 2px 8px rgba(0,0,0,.36),
-    0 0 var(--g) rgba(250,204,21,.45);
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 10px 22px rgba(0,0,0,.40),
+    0 0 var(--glow) rgba(255,209,102,.28);
 }
 .player .stat.red,.player .alt-stat.red{
-  --accent:#ef4444; --fg:#ef4444;
+  --dot:#ff6767;
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.06),
-    0 2px 8px rgba(0,0,0,.36),
-    0 0 var(--g) rgba(239,68,68,.45);
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 10px 22px rgba(0,0,0,.40),
+    0 0 var(--glow) rgba(255,103,103,.25);
 }
 
 /* Ponto de status */
 .player .stat::before,.player .alt-stat::before{
   content:"";
   inline-size:.55em; block-size:.55em; border-radius:50%;
-  background:var(--fg);
-  box-shadow:0 0 0 2px rgba(255,255,255,.08) inset;
+  background:var(--dot);
+  box-shadow:0 0 0 2px rgba(255,255,255,.08) inset, 0 0 8px var(--dot);
 }
 
 /* Filete luminoso superior */
 .player .stat::after,.player .alt-stat::after{
-  content:""; position:absolute; inset:1px 2px auto 2px; height:30%;
-  border-radius:12px; background:linear-gradient(#ffffff12,#ffffff03);
+  content:""; position:absolute; inset:1px 2px auto 2px; height:28%;
+  border-radius:12px; background:linear-gradient(#ffffff14,#ffffff03);
 }
+
 
 /* Toggle M */
 .pitch.hide-stat .player .stat,
@@ -391,10 +392,13 @@ function updateCardStat(pitch, el, mode){
   const m = currentStatValue(pitch, id, mode);
   const is5 = pitch.dataset.last5 === '1';
 
-  // ✅ string formatada corretamente
+  // sem "5J" no texto, mas preserva no title
   stat.textContent = Number.isFinite(m)
-    ? `Média${is5 ? ' 5J' : ''}: ${m.toFixed(1).replace('.', ',')}`
-    : `Média${is5 ? ' 5J' : ''}: —`;
+    ? `Média: ${m.toFixed(1).replace('.', ',')}`
+    : `Média: —`;
+  stat.title = Number.isFinite(m)
+    ? (is5 ? `Média (últimos 5 jogos): ${m.toFixed(1)}` : `Média: ${m.toFixed(1)}`)
+    : 'Sem média';
 
   setStatVisual(stat, m);
 }
@@ -408,13 +412,17 @@ function updateAltStat(pitch, el){
   const m     = Number.isFinite(altId) ? currentStatValue(pitch, altId, mode) : NaN;
   const is5   = pitch.dataset.last5 === '1';
 
-  // ✅ idem aqui
+  // sem "5J" no texto, mas preserva no title
   alt.textContent = Number.isFinite(m)
-    ? `Média${is5 ? ' 5J' : ''}: ${m.toFixed(1).replace('.', ',')}`
-    : `Média${is5 ? ' 5J' : ''}: —`;
+    ? `Média: ${m.toFixed(1).replace('.', ',')}`
+    : `Média: —`;
+  alt.title = Number.isFinite(m)
+    ? (is5 ? `Média (últimos 5 jogos): ${m.toFixed(1)}` : `Média: ${m.toFixed(1)}`)
+    : 'Sem média';
 
   setStatVisual(alt, m);
 }
+
 
   /* =========================================================================
      POPOVER "ÚLTIMOS JOGOS"
