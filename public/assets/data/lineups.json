@@ -21,7 +21,7 @@
         },
         {
           "slot": "ZAG-R",
-          "id": 125488,
+          "id": 92440,
           "x": 65,
           "y": 71,
           "sit": "provavel"
@@ -45,8 +45,7 @@
           "id": 96342,
           "x": 50,
           "y": 55,
-          "sit": "duvida",
-          "duvida_com": 122396
+          "sit": "provavel"
         },
         {
           "slot": "MEI-L",
@@ -175,7 +174,7 @@
         },
         {
           "slot": "LAT-R",
-          "id": 107554,
+          "id": 100084,
           "x": 85,
           "y": 46,
           "sit": "provavel"
@@ -372,42 +371,38 @@
         },
         {
           "slot": "ZAG-R",
-          "id": 97867,
+          "id": 69783,
           "x": 65,
           "y": 71,
           "sit": "provavel"
         },
         {
           "slot": "LAT-L",
-          "id": 61987,
+          "id": 88393,
           "x": 15,
           "y": 66,
-          "sit": "duvida",
-          "duvida_com": 88393
+          "sit": "provavel"
         },
         {
           "slot": "LAT-R",
           "id": 96870,
           "x": 85,
           "y": 66,
-          "sit": "duvida",
-          "duvida_com": 84816
+          "sit": "provavel"
         },
         {
           "slot": "ATA-C",
           "id": 109096,
           "x": 50,
           "y": 12,
-          "sit": "duvida",
-          "duvida_com": 90285
+          "sit": "provavel"
         },
         {
           "slot": "ATA-R",
-          "id": 82627,
+          "id": 105436,
           "x": 80,
           "y": 20,
-          "sit": "duvida",
-          "duvida_com": 105436
+          "sit": "provavel"
         },
         {
           "slot": "ATA-L",
@@ -425,7 +420,7 @@
         },
         {
           "slot": "MEI-L",
-          "id": 84735,
+          "id": 99228,
           "x": 25,
           "y": 45,
           "sit": "provavel"
@@ -436,7 +431,7 @@
           "x": 75,
           "y": 45,
           "sit": "duvida",
-          "duvida_com": 115914
+          "duvida_com": 91473
         },
         {
           "slot": "GOL",
@@ -459,7 +454,7 @@
       "titulares": [
         {
           "slot": "ZAG-L",
-          "id": 111466,
+          "id": 92182,
           "x": 25,
           "y": 71,
           "sit": "provavel"
@@ -490,7 +485,8 @@
           "id": 107989,
           "x": 35,
           "y": 12,
-          "sit": "provavel"
+          "sit": "duvida",
+          "duvida_com": 92854
         },
         {
           "slot": "ATA-R",
@@ -536,7 +532,7 @@
         },
         {
           "slot": "MEI-R",
-          "id": 136306,
+          "id": 107174,
           "x": 65,
           "y": 50,
           "sit": "provavel"
@@ -555,11 +551,10 @@
         },
         {
           "slot": "ZAG-L",
-          "id": 104085,
+          "id": 97653,
           "x": 35,
           "y": 71,
-          "sit": "duvida",
-          "duvida_com": 97653
+          "sit": "provavel"
         },
         {
           "slot": "ZAG-R",
@@ -591,10 +586,11 @@
         },
         {
           "slot": "MEI-R",
-          "id": 108683,
+          "id": 112869,
           "x": 50,
           "y": 58,
-          "sit": "provavel"
+          "sit": "duvida",
+          "duvida_com": 104085
         },
         {
           "slot": "ATA-C",
@@ -615,11 +611,12 @@
           "id": 70592,
           "x": 18.4577,
           "y": 31.0069,
-          "sit": "provavel"
+          "sit": "duvida",
+          "duvida_com": 112863
         },
         {
           "slot": "MEI-C",
-          "id": 105647,
+          "id": 141451,
           "x": 81.5516,
           "y": 31.0069,
           "sit": "provavel"
@@ -823,21 +820,21 @@
         },
         {
           "slot": "MEI-L",
-          "id": 99440,
+          "id": 104330,
           "x": 35,
           "y": 50,
           "sit": "provavel"
         },
         {
           "slot": "ATA-R",
-          "id": 90703,
+          "id": 97810,
           "x": 75,
           "y": 21.2291,
           "sit": "provavel"
         },
         {
           "slot": "ATA-L",
-          "id": 97810,
+          "id": 93411,
           "x": 25,
           "y": 21.2291,
           "sit": "provavel"
@@ -872,7 +869,7 @@
         },
         {
           "slot": "LAT-R",
-          "id": 71680,
+          "id": 145510,
           "x": 85,
           "y": 46,
           "sit": "provavel"
@@ -954,7 +951,7 @@
         },
         {
           "slot": "ATA-C",
-          "id": 105568,
+          "id": 99248,
           "x": 50,
           "y": 12,
           "sit": "provavel"
@@ -1030,7 +1027,7 @@
         },
         {
           "slot": "MEI-C",
-          "id": 96353,
+          "id": 105214,
           "x": 50,
           "y": 35,
           "sit": "provavel"
@@ -1052,7 +1049,7 @@
         },
         {
           "slot": "ATA-R",
-          "id": 105214,
+          "id": 95799,
           "x": 80,
           "y": 20,
           "sit": "provavel"
@@ -1106,7 +1103,7 @@
         },
         {
           "slot": "MEI-R",
-          "id": 95662,
+          "id": 95357,
           "x": 75,
           "y": 45,
           "sit": "provavel"
@@ -1141,7 +1138,7 @@
         },
         {
           "slot": "ZAG-R",
-          "id": 83048,
+          "id": 141996,
           "x": 65,
           "y": 71,
           "sit": "provavel"
@@ -1274,8 +1271,7 @@
           "id": 91772,
           "x": 65,
           "y": 71,
-          "sit": "duvida",
-          "duvida_com": 105373
+          "sit": "provavel"
         },
         {
           "slot": "LAT-L",
@@ -1368,11 +1364,10 @@
         },
         {
           "slot": "LAT-R",
-          "id": 110715,
+          "id": 113157,
           "x": 85,
           "y": 66,
-          "sit": "duvida",
-          "duvida_com": 113157
+          "sit": "provavel"
         },
         {
           "slot": "MEI-L",
@@ -1393,7 +1388,8 @@
           "id": 78605,
           "x": 75,
           "y": 45,
-          "sit": "provavel"
+          "sit": "duvida",
+          "duvida_com": 111760
         },
         {
           "slot": "ATA-C",
@@ -1404,21 +1400,21 @@
         },
         {
           "slot": "ATA-L",
-          "id": 94968,
+          "id": 112886,
           "x": 20,
           "y": 20,
           "sit": "provavel"
         },
         {
           "slot": "LAT-L",
-          "id": 107236,
+          "id": 94968,
           "x": 15,
           "y": 66,
           "sit": "provavel"
         },
         {
           "slot": "ATA-R",
-          "id": 112886,
+          "id": 103014,
           "x": 80,
           "y": 20,
           "sit": "provavel"
@@ -1475,7 +1471,8 @@
           "id": 99032,
           "x": 25,
           "y": 45,
-          "sit": "provavel"
+          "sit": "duvida",
+          "duvida_com": 86536
         },
         {
           "slot": "MEI-C",
@@ -1571,7 +1568,8 @@
           "id": 116447,
           "x": 75,
           "y": 45,
-          "sit": "provavel"
+          "sit": "duvida",
+          "duvida_com": 82463
         },
         {
           "slot": "ATA-L",
@@ -1585,8 +1583,7 @@
           "id": 110759,
           "x": 50,
           "y": 12,
-          "sit": "duvida",
-          "duvida_com": 79631
+          "sit": "provavel"
         },
         {
           "slot": "ATA-R",
@@ -1605,7 +1602,7 @@
       ]
     },
     "juventude_v2": {
-      "formacao": "4-3-3",
+      "formacao": "3-5-2",
       "titulares": [
         {
           "slot": "GOL",
@@ -1616,80 +1613,82 @@
         },
         {
           "slot": "ZAG-L",
-          "id": 91509,
-          "x": 35,
+          "id": 72801,
+          "x": 25,
           "y": 71,
+          "sit": "provavel"
+        },
+        {
+          "slot": "ZAG-C",
+          "id": 91509,
+          "x": 50,
+          "y": 70,
           "sit": "provavel"
         },
         {
           "slot": "ZAG-R",
           "id": 105807,
-          "x": 65,
+          "x": 75,
           "y": 71,
           "sit": "provavel"
         },
         {
           "slot": "LAT-L",
-          "id": 63110,
+          "id": 82639,
           "x": 15,
-          "y": 66,
+          "y": 46,
           "sit": "duvida",
-          "duvida_com": 82639
+          "duvida_com": 63110
         },
         {
           "slot": "LAT-R",
           "id": 106708,
           "x": 85,
-          "y": 66,
-          "sit": "provavel"
-        },
-        {
-          "slot": "VOL",
-          "id": 90588,
-          "x": 50,
-          "y": 55,
+          "y": 46,
           "sit": "provavel"
         },
         {
           "slot": "MEI-L",
           "id": 101651,
-          "x": 25,
-          "y": 45,
+          "x": 35,
+          "y": 50,
           "sit": "provavel"
         },
         {
+          "slot": "MEI-C",
+          "id": 38913,
+          "x": 50,
+          "y": 30,
+          "sit": "duvida",
+          "duvida_com": 112906
+        },
+        {
           "slot": "MEI-R",
-          "id": 121866,
-          "x": 75,
-          "y": 45,
+          "id": 90588,
+          "x": 65,
+          "y": 50,
           "sit": "provavel"
         },
         {
           "slot": "ATA-L",
-          "id": 107516,
-          "x": 20,
-          "y": 20,
-          "sit": "provavel"
-        },
-        {
-          "slot": "ATA-C",
           "id": 61188,
-          "x": 50,
+          "x": 35,
           "y": 12,
-          "sit": "provavel"
+          "sit": "duvida",
+          "duvida_com": 103764
         },
         {
           "slot": "ATA-R",
           "id": 103576,
-          "x": 80,
-          "y": 20,
+          "x": 65,
+          "y": 12,
           "sit": "provavel"
         },
         {
           "slot": "TEC",
           "id": 106147,
-          "x": 10,
-          "y": 87.5,
+          "x": 10.5,
+          "y": 88,
           "sit": "provavel"
         }
       ]
@@ -1785,5 +1784,5 @@
       ]
     }
   },
-  "updated_at": "2025-10-31T16:13:15.011Z"
+  "updated_at": "2025-11-01T18:11:39.478Z"
 }
