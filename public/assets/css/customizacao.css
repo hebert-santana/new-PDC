@@ -352,8 +352,8 @@
 }
 
 /* Market bar ajustes locais */
-#market-bar .mb-label{ font-weight:700 }
-#market-bar .dot{ display:none }
+#status-mercado .mb-label{ font-weight:700 }
+#status-mercado .dot{ display:none }
 
 /* Reduz elementos no mobile para respiração */
 @media (max-width:768px){
@@ -474,21 +474,21 @@
    - Indicador compacto de status do mercado
    ========================================================================== */
 
-.market-chip{
+.status-mercado-chip{
   display:inline-flex; align-items:center; gap:.4rem;
   padding:.35rem .9rem; border-radius:9999px;
   background:#fff; border:1px solid #e5e7eb;
   box-shadow:0 2px 4px rgba(0,0,0,.05);
   font-size:.9rem; font-weight:500; color:#111827;
 }
-.market-chip i{ font-size:1rem; color:#4b5563 }
-.market-chip .mb-label{ opacity:.8 }
-.market-chip .mb-status{ font-weight:700; margin-left:2px }
-.market-chip .mb-status.open{ color:#16a34a }
-.market-chip .mb-status.closed{ color:#dc2626 }
-.market-chip .mb-status.waiting{ color:#6b7280 }
-.market-chip .dot{ opacity:.5 }
-.market-chip .mb-countdown{ font-size:.85rem; color:#374151 }
+.status-mercado-chip i{ font-size:1rem; color:#4b5563 }
+.status-mercado-chip .mb-label{ opacity:.8 }
+.status-mercado-chip .mb-status{ font-weight:700; margin-left:2px }
+.status-mercado-chip .mb-status.open{ color:#16a34a }
+.status-mercado-chip .mb-status.closed{ color:#dc2626 }
+.status-mercado-chip .mb-status.waiting{ color:#6b7280 }
+.status-mercado-chip .dot{ opacity:.5 }
+.status-mercado-chip .mb-countdown{ font-size:.85rem; color:#374151 }
 
 /* =============================================================================
    REFRESH BUTTONS
@@ -722,16 +722,7 @@
     box-sizing:border-box;
   }
 
-  /* grid dos escudos centralizado e 100% */
-  .club-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(86px,1fr));
-    justify-content:center;
-    gap:12px;
-    width:100%;
-    margin-inline:auto;
-    box-sizing:border-box;
-  }
+ 
 
   /* botões laranja centralizados */
   .hero-buttons{
@@ -778,17 +769,6 @@
     box-sizing:border-box;
   }
 
-  /* GRID DE ESCUDOS — centraliza sem esticar os itens */
-  .club-grid{
-    display:flex;               /* troca grid por flex no mobile */
-    flex-wrap:wrap;
-    justify-content:center;     /* centraliza o conjunto */
-    gap:12px;
-    width:100%;
-    margin-inline:auto;
-  }
-  .club-grid > *{ flex:0 0 auto; }  /* mantém largura intrínseca das placas */
-
   /* BOTÕES DA NAV — centralizados, sem largura cheia */
   .hero-buttons{
     display:flex;
@@ -812,23 +792,6 @@
   }
 }
 
-
-/* CLUBS: 5 por linha no mobile, sem esticar itens */
-@media (max-width:768px){
-  .club-grid{
-    display:grid !important;
-    grid-template-columns:repeat(5, 1fr) !important; /* 5 colunas fixas */
-    gap:12px;
-    width:100%;
-    margin-inline:auto;
-    justify-items:center;  /* não estica horizontal */
-    align-items:center;    /* não estica vertical */
-  }
-  .club-grid > *{
-    justify-self:center;
-    align-self:center;     /* mantém o tamanho intrínseco da “placa” */
-  }
-}
 
 /* Mobile: remove o gutter da coluna que envolve a club-grid */
 @media (max-width:768px){

@@ -333,22 +333,22 @@ header p{margin-bottom:0}
   width:var(--rail-w);max-width:var(--rail-max);margin:6px auto 14px;
   display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;box-sizing:border-box
 }
-.market-bar{
+.status-mercado{
   display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--cinza-claro);
   background:linear-gradient(180deg,#fff 0%,#f9fafb 100%);border:1px solid rgba(0,0,0,.06);
   border-radius:10px;padding:6px 10px;box-shadow:var(--shadow-2);white-space:nowrap
 }
-.market-bar i{color:var(--azul)}
-.market-bar .mb-status{color:var(--cinza-escuro);font-weight:800}
-.market-bar .sep{opacity:.45}
+.status-mercado i{color:var(--azul)}
+.status-mercado .mb-status{color:var(--cinza-escuro);font-weight:800}
+.status-mercado .sep{opacity:.45}
 .mb-countdown{display:inline-flex;align-items:center;gap:.25rem;padding:3px 8px;border-radius:999px;background:#fff;border:1px solid rgba(0,0,0,.06);color:var(--cinza-escuro);font-weight:700}
 .mb-countdown i{font-size:.95rem;color:var(--cinza-escuro)}
-.market-bar.-open i{color:var(--verde)}
-.market-bar.-closed i{color:#999}
-.market-bar.-maint i{color:var(--azul)}
-.market-bar.-soon .mb-countdown{background:rgba(251,89,4,.10);border-color:rgba(251,89,4,.28);color:var(--laranja);font-weight:800}
-.market-bar.-urgent .mb-countdown{background:rgba(220,53,69,.10);border-color:rgba(220,53,69,.28);color:#DC3545;font-weight:800}
-.market-bar.-error{border-color:#f7c6c6;background:#fff6f6}
+.status-mercado.-open i{color:var(--verde)}
+.status-mercado.-closed i{color:#999}
+.status-mercado.-maint i{color:var(--azul)}
+.status-mercado.-soon .mb-countdown{background:rgba(251,89,4,.10);border-color:rgba(251,89,4,.28);color:var(--laranja);font-weight:800}
+.status-mercado.-urgent .mb-countdown{background:rgba(220,53,69,.10);border-color:rgba(220,53,69,.28);color:#DC3545;font-weight:800}
+.status-mercado.-error{border-color:#f7c6c6;background:#fff6f6}
 
 /* ============================================================================
    LINEUPS / DESFALQUES
@@ -489,46 +489,6 @@ header p{margin-bottom:0}
 @keyframes pulse-dot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.6}}
 .btn-live:hover,.btn-live:focus{animation-play-state:paused;background:#fff!important;color:#DC3545!important;border-color:#DC3545}
 .btn-live:hover::before,.btn-live:focus::before{animation-play-state:paused}
-
-/* ============================================================================
-   PLANTÃO LIVE (pa-*)
-   ============================================================================ */
-.pa-lane{width:90%;max-width:1280px;margin:14px auto;box-sizing:border-box}
-.pa-card{
-  position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding:14px 16px;border-radius:14px;background:linear-gradient(90deg,#fffbe9,#fff7d1);
-  border:1px solid #ffc107;box-shadow:0 6px 16px rgba(0,0,0,.08)
-}
-.pa-card::before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:var(--laranja)}
-.pa-topbar{
-  position:absolute;left:0;right:0;top:0;height:4px;
-  background:repeating-linear-gradient(135deg,rgba(251,89,4,.0) 0 10px,rgba(251,89,4,.22) 10px 20px,rgba(22,163,74,.22) 20px 30px);
-  transform:translateX(0);animation:pa-slide 6s linear infinite
-}
-@keyframes pa-slide{to{transform:translateX(-120px)}}
-.pa-live.is-active{box-shadow:0 8px 24px rgba(251,89,4,.16),inset 0 0 32px rgba(255,184,108,.15)}
-.pa-left{flex:1;display:grid;grid-template-columns:24px 1fr;column-gap:10px;align-items:start;color:#5c4400}
-.pa-left i{grid-column:1;margin-top:2px;font-size:1.35rem;color:var(--laranja);animation:pa-pulse 2s infinite}
-@keyframes pa-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
-.pa-text{grid-column:2;display:flex;flex-direction:column;gap:4px;min-width:0}
-.pa-onair{
-  display:inline-flex;align-items:center;gap:.45rem;font:900 .78rem/1.1 system-ui;letter-spacing:.4px;color:#b91c1c;background:#fff;border:1px solid rgba(185,28,28,.25);
-  padding:4px 8px;border-radius:999px;width:max-content;box-shadow:0 1px 0 rgba(0,0,0,.04),0 0 0 4px rgba(185,28,28,.06) inset;margin:0 0 2px
-}
-.pa-onair .dot{width:10px;height:10px;border-radius:50%;background:#ef4444;box-shadow:0 0 0 0 rgba(239,68,68,.55);animation:pa-dot 1.2s ease-out infinite}
-@keyframes pa-dot{0%{transform:scale(.9);box-shadow:0 0 0 0 rgba(239,68,68,.55)}70%{transform:scale(1.15);box-shadow:0 0 0 8px rgba(239,68,68,0)}100%{transform:scale(.9);box-shadow:0 0 0 0 rgba(239,68,68,0)}}
-.pa-text strong{margin:0;line-height:1.15;font-weight:900;color:#3d2e00;font-size:1.05rem}
-.pa-text .pa-on{color:#16a34a;font-weight:900}
-.pa-text span{line-height:1.3}
-.pa-text span:last-child{font-size:.86rem}
-.pa-btn{
-  margin-left:auto;display:inline-flex;align-items:center;gap:.4rem;padding:6px 14px;border-radius:999px;background:#25d366;color:#fff;
-  font-weight:800;text-decoration:none;white-space:nowrap;box-shadow:0 4px 12px rgba(37,211,102,.25);
-  transition:transform .15s,filter .15s,box-shadow .15s;animation:pa-btnpulse 3s ease-in-out infinite
-}
-.pa-btn:hover{transform:translateY(-1px);filter:saturate(1.05)}
-.pa-btn i{font-size:1rem}
-@keyframes pa-btnpulse{0%,100%{box-shadow:0 4px 12px rgba(37,211,102,.25)}50%{box-shadow:0 8px 22px rgba(37,211,102,.35)}}
 
 /* ============================================================================
    UTILIDADES
@@ -696,9 +656,9 @@ header p{margin-bottom:0}
   .custom-provaveis-item .provaveis-image ~ .arb-wrap.container-avisosize{margin-top:-70px}
   #jogo-01 .arb-wrap.container-avisosize{margin-top:10px}
 
-  .market-bar{width:max-content;margin:6px 0 12px auto;padding:6px 10px;border-radius:10px;gap:.45rem;font-size:.82rem}
+  .status-mercado{width:max-content;margin:6px 0 12px auto;padding:6px 10px;border-radius:10px;gap:.45rem;font-size:.82rem}
   .marketbar-lane{justify-content:flex-end;margin:2px auto 24px}
-  .market-bar .mb-label{display:none}
+  .status-mercado .mb-label{display:none}
   .mb-countdown{padding:3px 8px;font-size:.78rem;border-radius:999px}
   .mb-countdown i{font-size:.95rem;margin-right:.2rem}
 
@@ -716,7 +676,7 @@ header p{margin-bottom:0}
 }
 
 /* Oculta MarketBar em telas pequenas */
-@media (max-width:991.98px){.marketbar-lane,.marketbar-lane .market-bar{display:none!important}}
+@media (max-width:991.98px){.marketbar-lane,.marketbar-lane .status-mercado{display:none!important}}
 
 /* Footer responsivo */
 @media (max-width:768px){.social{width:40px;height:40px}.social i{font-size:18px}.aviso-legal{font-size:.68rem}}

@@ -339,7 +339,7 @@
    ========================================================= */
 @keyframes floatY{0%,100%{transform:translate3d(-50%,-50%,0) translateY(0)}50%{transform:translate3d(-50%,-50%,0) translateY(-3px)}}
 @keyframes floatYInline{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
-.pitch,.pitch-bg,.pitch-safe,.marketbar-lane,.market-bar{animation:none!important}
+.pitch,.pitch-bg,.pitch-safe,.marketbar-lane,.status-mercado{animation:none!important}
 @media (prefers-reduced-motion:reduce){.player,.byline-credit{animation:none!important}}
 
 /* =========================================================

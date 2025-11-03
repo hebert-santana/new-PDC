@@ -1,10 +1,6 @@
 /* ===========================================================
-   Club Grid — grade de escudos para navegação rápida
+   Club Grid — grade de escudos para navegação rápida (CANÔNICA)
    =========================================================== */
-
-/* Rolagem suave + compensação do header */
-html { scroll-behavior: smooth; }
-.jogo { scroll-margin-top: 80px; } /* ajuste conforme o header real */
 
 /* =================== Trilho (desktop) =================== */
 .club-grid {
@@ -57,7 +53,7 @@ html { scroll-behavior: smooth; }
   max-width: 80px;
   height: auto;
   object-fit: contain;
-  pointer-events: none; /* evita seleção acidental */
+  pointer-events: none;
 }
 
 /* =================== Interações =================== */
@@ -86,13 +82,6 @@ html { scroll-behavior: smooth; }
   box-shadow:
     0 8px 22px rgba(251,89,4,.18),
     inset 0 0 0 2px rgba(255,255,255,.85);
-}
-
-/* Destino da âncora em foco */
-:target.jogo {
-  outline: 3px solid #fb5904;
-  outline-offset: 4px;
-  border-radius: 10px;
 }
 
 /* =================== Mobile (≤768px) =================== */
