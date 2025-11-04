@@ -281,6 +281,20 @@
 .games-pop .amber { color:#f59e0b; font-weight:700; }  /* 0–5 */
 .games-pop .neg   { color:#ef4444; font-weight:700; }  /* abaixo de 0 */
 
+/* Desenho de setas */
+.pitch.draw-on{ cursor:crosshair; }
+.draw-layer{ position:absolute; inset:0; pointer-events:none; }
+.draw-layer svg{ width:100%; height:100%; }
+.draw-path{
+  fill:none;
+  stroke:#fff;
+  stroke-width:2.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 1px 1px rgba(0,0,0,.45));
+}
+
+
 
 /* Micro-anim */
 @keyframes fadeUp{ to{ opacity:1; transform:translate(-50%,0); } }
@@ -343,6 +357,13 @@
     }
   });
 }
+
+function clearArrows(pitch){
+  const g = pitch.querySelector('.draw-layer .paths');
+  if (g) g.innerHTML = '';
+}
+
+
   async function jget(url){
     const r = await fetch(url, { cache:'no-store' });
     if(!r.ok) throw new Error(`fetch ${url} ${r.status}`);
@@ -771,6 +792,16 @@ pitch.appendChild(pop);
     };
     tb.appendChild(aBtn);
 
+    // ✏️ Desenhar setas
+const drawBtn = document.createElement('button');
+drawBtn.type='button';
+drawBtn.className='btn-chip';
+drawBtn.innerHTML = '<i class="bi bi-arrow-up-right"></i>';
+drawBtn.title='Desenhar setas (clique e arraste)';
+drawBtn.onclick = ()=> toggleDrawMode(pitch, drawBtn);
+tb.appendChild(drawBtn);
+
+
     // 🔁 Novo botão Reset (voltar posições originais)
     const rBtn = document.createElement('button');
     rBtn.type = 'button';
@@ -795,7 +826,11 @@ pitch.appendChild(pop);
       const slot = el.dataset.slot;
       place(el, slot, null, pitch.dataset.formacao || '');
     }
-  });
+
+    clearArrows(pitch);             // limpa as setas também
+  pitch.classList.add('reset-blink');
+  setTimeout(()=>pitch.classList.remove('reset-blink'), 600);
+});
   // feedback sutil opcional (1s)
   pitch.classList.add('reset-blink');
   setTimeout(()=>pitch.classList.remove('reset-blink'), 600);
@@ -809,6 +844,132 @@ pitch.appendChild(pop);
     pitch.dataset.last5 = '0';
 
   }
+
+
+// Layer SVG e controle do modo
+
+function getDrawLayer(pitch){
+  let layer = pitch.querySelector('.draw-layer');
+  if (!layer){
+    layer = document.createElement('div');
+    layer.className = 'draw-layer';
+ layer.innerHTML = `
+  <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+    <g class="paths"></g>
+  </svg>`;
+    pitch.appendChild(layer);
+  }
+  return layer;
+}
+
+function toggleDrawMode(pitch, btn){
+  const on = !pitch.classList.contains('draw-on');
+  pitch.classList.toggle('draw-on', on);
+  btn.classList.toggle('active', on);
+  if (on) enableDraw(pitch); else disableDraw(pitch);
+}
+
+function pctFromClientInPitch(pitch, cx, cy){
+  const r = pitch.getBoundingClientRect();
+  const x = ((cx - r.left) / r.width ) * 100;
+  const y = ((cy - r.top ) / r.height) * 100;
+  return { x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) };
+}
+
+
+
+
+function enableDraw(pitch){
+  // evita mover jogadores enquanto desenha
+  pitch.querySelectorAll('.player').forEach(p=>p.style.pointerEvents='none');
+
+  // bloqueia menu do botão direito só quando draw-on
+  const stopCtx = e => { if (pitch.classList.contains('draw-on')) e.preventDefault(); };
+  pitch.addEventListener('contextmenu', stopCtx);
+
+  const svg = getDrawLayer(pitch).querySelector('svg');
+  const g   = svg.querySelector('.paths');
+  let drawing=false, pathEl=null, pts=[];
+
+  const pct = (cx, cy)=>{
+    const r = pitch.getBoundingClientRect();
+    return { x: Math.max(0, Math.min(100, ((cx-r.left)/r.width )*100)),
+             y: Math.max(0, Math.min(100, ((cy-r.top )/r.height)*100)) };
+  };
+
+  // Suavização Catmull-Rom → Cubic Bezier
+  function smoothPath(points, tension=0.5){
+    if (points.length<2) return '';
+    if (points.length===2){
+      return `M ${points[0].x},${points[0].y} L ${points[1].x},${points[1].y}`;
+    }
+    let d = `M ${points[0].x},${points[0].y}`;
+    for (let i=0;i<points.length-1;i++){
+      const p0 = points[i-1] || points[i];
+      const p1 = points[i];
+      const p2 = points[i+1];
+      const p3 = points[i+2] || p2;
+
+      const cp1x = p1.x + (p2.x - p0.x) * tension / 6;
+      const cp1y = p1.y + (p2.y - p0.y) * tension / 6;
+      const cp2x = p2.x - (p3.x - p1.x) * tension / 6;
+      const cp2y = p2.y - (p3.y - p1.y) * tension / 6;
+
+      d += ` C ${cp1x},${cp1y} ${cp2x},${cp2y} ${p2.x},${p2.y}`;
+    }
+    return d;
+  }
+
+  function down(e){
+    if (!pitch.classList.contains('draw-on')) return;
+    if (e.button !== 2) return;          // apenas botão direito
+    e.preventDefault();
+    drawing=true;
+    pts=[pct(e.clientX,e.clientY)];
+    pathEl=document.createElementNS('http://www.w3.org/2000/svg','path');
+    pathEl.setAttribute('class','draw-path');
+    g.appendChild(pathEl);
+  }
+
+  function move(e){
+    if(!drawing) return;
+    const p=pct(e.clientX,e.clientY);
+    // amostragem leve para não pesar
+    const last=pts[pts.length-1];
+    if (!last || Math.hypot(p.x-last.x, p.y-last.y) > 0.6){ // 0.6% do pitch
+      pts.push(p);
+      if(pts.length>400) pts.shift();
+      pathEl.setAttribute('d', smoothPath(pts, 0.6));
+    }
+  }
+
+  function up(){
+    if(!drawing) return;
+    drawing=false;
+    if((pts?.length||0)<2){ pathEl.remove(); }
+  }
+
+  pitch.__drawHandlers={down,move,up,stopCtx};
+  pitch.addEventListener('pointerdown',down);
+  window.addEventListener('pointermove',move);
+  window.addEventListener('pointerup',up);
+}
+
+function disableDraw(pitch){
+  pitch.querySelectorAll('.player').forEach(p=>p.style.pointerEvents='');
+  const h=pitch.__drawHandlers;
+  if(!h) return;
+  pitch.removeEventListener('pointerdown',h.down);
+  window.removeEventListener('pointermove',h.move);
+  window.removeEventListener('pointerup',h.up);
+  pitch.removeEventListener('contextmenu',h.stopCtx);
+  pitch.__drawHandlers=null;
+}
+
+
+
+
+
 
   /* =========================================================================
      RESET DE POSIÇÃO VIA CLIQUE NO NOME
