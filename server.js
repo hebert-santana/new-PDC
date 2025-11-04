@@ -7,7 +7,9 @@ import process from 'node:process';
 const app = express();
 app.use(express.json());
 
-// gate para /influencers.html
+/* ============================================================================
+   Gate simples para /influencers.html
+   ============================================================================ */
 function getCookie(req, name){
   const c = req.headers.cookie || "";
   const m = c.match(new RegExp('(?:^|; )'+name+'=([^;]*)'));
@@ -22,7 +24,6 @@ function isTokenValid(tok) {
     return false;
   }
 }
-
 app.use((req,res,next)=>{
   if (req.path === '/influencers.html') {
     const tok = getCookie(req,'influ_auth');
@@ -34,17 +35,18 @@ app.use((req,res,next)=>{
   next();
 });
 
-
-
-// site/painel estático
+/* ============================================================================
+   Site/painel estático
+   ============================================================================ */
 app.use(express.static('public', { extensions: ['html'] }));
 
-// paths
+/* ============================================================================
+   Paths e utilidades de JSON
+   ============================================================================ */
 const DATA_DIR = path.join(process.cwd(), 'public', 'assets', 'data');
 const LINEUPS  = path.join(DATA_DIR, 'lineups.json');
 const TEAM_UPD = path.join(DATA_DIR, 'team-updates.json');
 
-// utils
 async function readJsonSafe(p, fallback = { version:1, tz:'-03:00', teams:{} }) {
   try { return JSON.parse(await fs.readFile(p, 'utf8')); }
   catch { return structuredClone(fallback); }
@@ -56,16 +58,22 @@ async function writeJsonAtomic(p, obj) {
   await fs.rename(tmp, p);
 }
 
-// health
+/* ============================================================================
+   Health
+   ============================================================================ */
 app.get('/api/ping', (_req,res) => res.json({ ok:true }));
 
-// GET lineups
+/* ============================================================================
+   GET lineups
+   ============================================================================ */
 app.get('/api/lineups', async (_req,res) => {
   const cur = await readJsonSafe(LINEUPS);
   res.json(cur);
 });
 
-// POST lineups + marca update por time
+/* ============================================================================
+   POST lineups + marca update por time
+   ============================================================================ */
 app.post('/api/lineups', async (req, res) => {
   const { merge, teams, rodada, jogos } = req.body || {};
 
@@ -105,8 +113,9 @@ app.post('/api/lineups', async (req, res) => {
   return res.status(400).json({ ok:false, error:'payload inválido' });
 });
 
-
-// NOVA ROTA — Atualizar horário manualmente via botão
+/* ============================================================================
+   NOVA ROTA — Atualizar horário manualmente via botão
+   ============================================================================ */
 app.post('/api/team-updates', async (req, res) => {
   try {
     const { teamKey, alert = "" } = req.body || {};
@@ -130,7 +139,70 @@ app.post('/api/team-updates', async (req, res) => {
   }
 });
 
+/* ============================================================================
+   NOVA ROTA — Proxy Cartola atletas/mercado → mapa { atleta_id: status_id }
+   Cache em memória por 60s para reduzir chamadas e evitar CORS no browser.
+   ============================================================================ */
+const CARTOLA_URL = 'https://api.cartola.globo.com/atletas/mercado';
+const CARTOLA_TTL_MS = 60_000;
 
-// start
+let __cartolaCache = { ts: 0, payload: null };
+
+async function fetchCartolaMercado() {
+  const now = Date.now();
+  if (__cartolaCache.payload && now - __cartolaCache.ts < CARTOLA_TTL_MS) {
+    return __cartolaCache.payload;
+  }
+
+  const r = await fetch(CARTOLA_URL, {
+    headers: {
+      // Alguns endpoints são sensíveis a UA.
+      'User-Agent': 'ProvaveisDoCartola/1.0 (+admin-panel)'
+    }
+  });
+
+  if (!r.ok) {
+    const errPayload = { error: `HTTP ${r.status}`, captured_at: new Date().toISOString() };
+    __cartolaCache = { ts: now, payload: errPayload }; // evita tempestade de requests
+    return errPayload;
+  }
+
+  const json = await r.json();
+  const map = {};
+  let total = 0;
+  const by_status = {};
+
+  for (const a of json.atletas || []) {
+    map[a.atleta_id] = a.status_id;
+    total++;
+    by_status[a.status_id] = (by_status[a.status_id] || 0) + 1;
+  }
+
+  const payload = {
+    captured_at: new Date().toISOString(),
+    rodada: json.rodada || json.rodada_atual || null,
+    total,
+    by_status,
+    map // { [atleta_id]: status_id }
+  };
+
+  __cartolaCache = { ts: now, payload };
+  return payload;
+}
+
+app.get('/api/cartola-mercado', async (_req, res) => {
+  try {
+    const payload = await fetchCartolaMercado();
+    // cache client-side curto também
+    res.set('Cache-Control', 'public, max-age=30'); // opcional
+    res.json(payload);
+  } catch (e) {
+    res.status(500).json({ error: String(e) });
+  }
+});
+
+/* ============================================================================
+   Start
+   ============================================================================ */
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`[painel] http://localhost:${PORT}`));

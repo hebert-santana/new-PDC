@@ -180,24 +180,58 @@
 }
 
 /* Toolbar */
+/* ===== Chips compactos com botão Reset extra ===== */
 .pitch-toolbar{
-  position:absolute; right:.5rem; top:.2rem;
-  display:flex; align-items:center; gap:.5rem; z-index:9;
+  position:absolute; right:.5rem; top:.2rem; z-index:9;
+  display:flex; align-items:center; gap:.38rem;
 }
 .pitch-toolbar .btn-chip{
-  width:var(--chip-size); height:var(--chip-size);
-  border-radius:999px; display:inline-flex; align-items:center; justify-content:center;
-  font:800 clamp(10px,.9vw,12px)/1 system-ui; color:var(--chip-fg);
-  background:rgba(255,255,255,.96);
-  border:2px solid rgba(11,25,43,.22);
-  box-shadow:0 1px 4px rgba(2,6,23,.14), 0 0 0 2px rgba(255,255,255,.6) inset;
-  cursor:pointer; padding:0; user-select:none;
+  width:25px; height:25px;
+  border-radius:999px;
+  display:inline-flex; align-items:center; justify-content:center;
+  font:700 10px/1 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  letter-spacing:.2px;
+  color:#1e293b;
+  background:#fff;
+  border:1px solid #d9dee6;
+  box-shadow:0 1px 2px rgba(0,0,0,.05);
+  cursor:pointer; user-select:none;
+  transition:background .15s ease, color .15s ease,
+             border-color .15s ease, box-shadow .15s ease, transform .04s;
 }
+.pitch-toolbar .btn-chip:hover{
+  background:#f3f6fa; border-color:#cdd5df;
+}
+.pitch-toolbar .btn-chip:active{ transform:translateY(1px); }
+
 .pitch-toolbar .btn-chip.active{
-  color:#111; background:linear-gradient(135deg,#ffd37a,#ffb24e 60%,#ffa34a);
-  border-color:rgba(251,89,4,.35);
-  box-shadow:0 2px 10px rgba(251,89,4,.22), 0 0 0 2px var(--chip-ring) inset;
+  color:#fff;
+  background:var(--laranja, #FB5904);
+  border-color:transparent;
+  box-shadow:0 2px 6px rgba(251,89,4,.22);
 }
+
+/* Botão Reset vermelho fixo */
+.pitch-toolbar .btn-reset{
+  background:#dc2626;
+  border-color:#dc2626;
+  color:#fff;
+}
+.pitch-toolbar .btn-reset:hover{
+  background:#b91c1c;
+  border-color:#b91c1c;
+}
+.pitch-toolbar .btn-reset i{
+  font-size:13px;
+  line-height:1;
+}
+
+/* Mobile */
+@media (max-width:430px){
+  .pitch-toolbar .btn-chip{ width:23px; height:23px; font-size:9.5px; }
+  .pitch-toolbar .btn-reset i{ font-size:12px; }
+}
+
 
 /* Marcador de Pênalti (P) */
 .pen-marker{
@@ -294,6 +328,21 @@
   /* =========================================================================
      HELPERS DE DADOS
      ========================================================================= */
+
+     function resetPitchToOriginal(pitch){
+  pitch.querySelectorAll('.player').forEach(el=>{
+    // apaga qualquer coord livre do drag
+    el.removeAttribute('data-free-x');
+    el.removeAttribute('data-free-y');
+
+    const x0 = parseFloat(el.dataset.x0);
+    const y0 = parseFloat(el.dataset.y0);
+    if (Number.isFinite(x0) && Number.isFinite(y0)){
+      el.style.left = `${x0}%`;
+      el.style.top  = `${y0}%`;
+    }
+  });
+}
   async function jget(url){
     const r = await fetch(url, { cache:'no-store' });
     if(!r.ok) throw new Error(`fetch ${url} ${r.status}`);
@@ -344,15 +393,31 @@
   /* =========================================================================
      POSICIONAMENTO
      ========================================================================= */
-  function place(el, slot, xy, formacao){
-    let p = xy || POS[slot] || POS['MEI-C'];
-    if (IS_MOBILE) {
-      const mp = (MPRESETS[formacao] || {})[slot];
-      if (Array.isArray(mp)) p = { x: clamp(+mp[0]), y: clamp(+mp[1]) };
-    }
-    el.style.left = PCT(p.x);
-    el.style.top  = PCT(p.y);
+function resolvePos(slot, xy, formacao){
+  // 1) Se o admin mandou x/y válidos, use-os e pronto
+  if (xy && Number.isFinite(+xy.x) && Number.isFinite(+xy.y)){
+    return { x: clamp(+xy.x), y: clamp(+xy.y) };
   }
+  // 2) Caso contrário, caia nos presets
+  let p = POS[slot] || POS['MEI-C'];
+  if (IS_MOBILE){
+    const mp = (MPRESETS[formacao] || {})[slot];
+    if (Array.isArray(mp)) p = { x:+mp[0], y:+mp[1] };
+  }
+  return { x: clamp(+p.x), y: clamp(+p.y) };
+}
+
+
+function place(el, slot, xy, formacao, remember=false){
+  const p = resolvePos(slot, xy, formacao);
+  el.style.left = `${p.x}%`;
+  el.style.top  = `${p.y}%`;
+  if (remember && (el.dataset.x0 == null || el.dataset.y0 == null)){
+    el.dataset.x0 = String(p.x);
+    el.dataset.y0 = String(p.y);
+  }
+}
+
 
   /* =========================================================================
      LÓGICA DE ESTATÍSTICAS
@@ -542,7 +607,7 @@ pitch.appendChild(pop);
 
     m = document.createElement('div');
     m.className = 'pen-marker docked';
-    m.textContent = 'P';
+    m.textContent = '⚽';
     m.title = 'Arraste para o cobrador. Duplo clique para voltar para a barra.';
     toolbar.appendChild(m);
 
@@ -693,68 +758,143 @@ pitch.appendChild(pop);
     };
     tb.appendChild(j5Btn);
 
-    // A — modo avançado
+       // A — modo avançado
     const aBtn = document.createElement('button');
-    aBtn.type='button'; aBtn.className='btn-chip'; aBtn.textContent='A';
+    aBtn.type='button';
+    aBtn.className='btn-chip';
+    aBtn.textContent='A';
     aBtn.title='Modo avançado: duplo clique mostra últimos jogos';
-    aBtn.onclick = toggleAdv;
+    aBtn.onclick = ()=>{
+      pitch.dataset.adv = pitch.dataset.adv==='1' ? '0' : '1';
+      aBtn.classList.toggle('active', pitch.dataset.adv==='1');
+      closeAnyPop();
+    };
     tb.appendChild(aBtn);
+
+    // 🔁 Novo botão Reset (voltar posições originais)
+    const rBtn = document.createElement('button');
+    rBtn.type = 'button';
+    rBtn.className = 'btn-chip btn-reset';
+    rBtn.innerHTML = '<i class="bi bi-arrow-repeat" aria-hidden="true"></i>';
+    rBtn.title = 'Resetar posições originais';
+   rBtn.onclick = () => {
+  // só este campinho
+  pitch.querySelectorAll('.player').forEach(el=>{
+    // limpar coords livres de drag
+    el.removeAttribute('data-free-x');
+    el.removeAttribute('data-free-y');
+
+    const x0 = parseFloat(el.dataset.x0);
+    const y0 = parseFloat(el.dataset.y0);
+
+    if (Number.isFinite(x0) && Number.isFinite(y0)){
+      el.style.left = `${x0}%`;
+      el.style.top  = `${y0}%`;
+    } else {
+      // fallback raro: resolve pela formação atual
+      const slot = el.dataset.slot;
+      place(el, slot, null, pitch.dataset.formacao || '');
+    }
+  });
+  // feedback sutil opcional (1s)
+  pitch.classList.add('reset-blink');
+  setTimeout(()=>pitch.classList.remove('reset-blink'), 600);
+};
+
+    tb.appendChild(rBtn);
 
     // Estado inicial
     pitch.dataset.modeStat = 'ALL';
     pitch.dataset.adv = '0';
     pitch.dataset.last5 = '0';
+
   }
 
   /* =========================================================================
      RESET DE POSIÇÃO VIA CLIQUE NO NOME
      ========================================================================= */
-  function bindCapReset(pitch){
-    pitch.querySelectorAll('.player .cap').forEach(cap=>{
-      cap.onclick = (e)=>{
-        const el = e.currentTarget.closest('.player');
-        el.removeAttribute('data-free-x'); el.removeAttribute('data-free-y');
+function bindCapReset(pitch){
+  pitch.querySelectorAll('.player .cap').forEach(cap=>{
+    cap.onclick = (e)=>{
+      const el = e.currentTarget.closest('.player');
+      el.removeAttribute('data-free-x'); el.removeAttribute('data-free-y');
+
+      const x0 = parseFloat(el.dataset.x0);
+      const y0 = parseFloat(el.dataset.y0);
+      if (Number.isFinite(x0) && Number.isFinite(y0)){
+        el.style.left = `${x0}%`;
+        el.style.top  = `${y0}%`;
+      }else{
+        // fallback extremo (se não houver x0/y0 por algum motivo)
         const slot = el.dataset.slot;
-        place(el, slot, null, pitch.dataset.formacao||'');
-        updateCardStat(pitch, el, pitch.dataset.modeStat || 'ALL');
-        updateAltStat(pitch, el); closeAnyPop();
-      };
-    });
-  }
+        const pos  = resolvePos(slot, null, pitch.dataset.formacao || '');
+        el.style.left = `${pos.x}%`;
+        el.style.top  = `${pos.y}%`;
+      }
+
+      updateCardStat(pitch, el, pitch.dataset.modeStat || 'ALL');
+      updateAltStat(pitch, el);
+      closeAnyPop();
+    };
+  });
+}
+
 
   /* =========================================================================
      DESENHA TIME
      ========================================================================= */
-  function drawPitch(pitch, team){
-    pitch.querySelectorAll('.player[id^="p-"]').forEach(n=>n.remove());
+function drawPitch(pitch, team){
+  // limpa apenas os jogadores deste pitch
+  pitch.querySelectorAll('.player[id^="p-"]').forEach(n=>n.remove());
 
-    const lista = Array.isArray(team.titulares) ? team.titulares : [];
-    const seenIds = new Set();
+  const lista   = Array.isArray(team.titulares) ? team.titulares : [];
+  const seenIds = new Set();
 
-    for (const p of lista){
-      const id = Number(p.id); if (!Number.isFinite(id)) continue;
-      const slot = String(p.slot || 'MEI-C').toUpperCase();
-      const sit  = (p.sit || 'provavel').toLowerCase();
+  for (const p of lista){
+    const id   = Number(p.id); if (!Number.isFinite(id)) continue;
+    const slot = String(p.slot || 'MEI-C').toUpperCase();
+    const sit  = (p.sit || 'provavel').toLowerCase();
 
-      const el = ensurePlayerEl(pitch, { id, slot, sit, duvidaCom: p.duvida_com });
-      const xy = (p.x!=null && p.y!=null) ? {x:+p.x, y:+p.y} : null;
-      place(el, slot, xy, team.formacao || '');
-      seenIds.add(`p-${id}`);
-    }
+    const el = ensurePlayerEl(pitch, { id, slot, sit, duvidaCom: p.duvida_com });
 
-    const hasCoach = lista.some(p => String(p.slot||'').toUpperCase() === 'TEC');
-    if (!hasCoach && Number.isFinite(+team.tecnico)){
-      const el = ensurePlayerEl(pitch, { id:+team.tecnico, slot:'TEC', sit:'normal' });
-      place(el, 'TEC', null, team.formacao || '');
-      seenIds.add(`p-${+team.tecnico}`);
-    }
+    // coords do admin, se existirem
+    const xyAdmin = (p.x != null && p.y != null) ? { x:+p.x, y:+p.y } : null;
 
-    pitch.querySelectorAll('.player[id^="p-"]').forEach(el=>{
-      if (!seenIds.has(el.id)) el.remove();
-    });
+    // resolve posição e grava originais
+    const pos = resolvePos(slot, xyAdmin, team.formacao || '');
+    el.dataset.x0 = String(pos.x);
+    el.dataset.y0 = String(pos.y);
 
-    bindCapReset(pitch);
+    // aplica posição atual
+    el.style.left = `${pos.x}%`;
+    el.style.top  = `${pos.y}%`;
+
+    seenIds.add(`p-${id}`);
   }
+
+  // técnico (sem variáveis vazando)
+  const hasCoach = lista.some(p => String(p.slot||'').toUpperCase() === 'TEC');
+  if (!hasCoach && Number.isFinite(+team.tecnico)){
+    const idTec = +team.tecnico;
+    const el = ensurePlayerEl(pitch, { id:idTec, slot:'TEC', sit:'normal' });
+
+    const pos = resolvePos('TEC', null, team.formacao || '');
+    el.dataset.x0 = String(pos.x);
+    el.dataset.y0 = String(pos.y);
+    el.style.left = `${pos.x}%`;
+    el.style.top  = `${pos.y}%`;
+
+    seenIds.add(`p-${idTec}`);
+  }
+
+  // remove restos
+  pitch.querySelectorAll('.player[id^="p-"]').forEach(el=>{
+    if (!seenIds.has(el.id)) el.remove();
+  });
+
+  bindCapReset(pitch);
+}
+
 
   /* =========================================================================
      LINEUPS + OVERRIDES LOCAIS
@@ -771,45 +911,54 @@ pitch.appendChild(pop);
   /* =========================================================================
      ORQUESTRAÇÃO
      ========================================================================= */
-  async function drawAll() {
-    const CURRENT = await loadLineups();
-    window.CURRENT_LINEUPS = CURRENT;
+async function drawAll() {
+  const CURRENT = await loadLineups();
+  window.CURRENT_LINEUPS = CURRENT;
 
-    await new Promise(res=>{
-      const tick = ()=> document.querySelectorAll('.pitch[data-team]').length ? res() : setTimeout(tick,40);
-      tick();
+  await new Promise(res=>{
+    const tick = ()=> document.querySelectorAll('.pitch[data-team]').length ? res() : setTimeout(tick,40);
+    tick();
+  });
+
+  const pitches = document.querySelectorAll('.pitch[data-team]');
+
+  // 1. desenha normalmente
+  pitches.forEach(pitch=>{
+    const rawKey = pitch.getAttribute('data-team') || '';
+    const team = CURRENT?.teams?.[rawKey];
+    const key  = team ? rawKey : (Object.keys(CURRENT.teams || {})[0] || rawKey);
+
+    pitch.dataset.scope = key;
+    pitch.dataset.formacao = team?.formacao || '';
+
+    if (!team){ pitch.innerHTML=''; return; }
+
+    pitch.classList.add('pitch');
+    pitch.classList.add('hide-stat');
+    if (!pitch.style.position) pitch.style.position = 'relative';
+
+    ensureToolbar(pitch);
+    drawPitch(pitch, team);
+
+    pitch.addEventListener('click', e=>{
+      if (!e.target.closest('.games-pop') && !e.target.closest('.player')) closeAnyPop();
     });
+  });
 
-    document.querySelectorAll('.pitch[data-team]').forEach(pitch=>{
-      const rawKey = pitch.getAttribute('data-team') || '';
-      const team = CURRENT?.teams?.[rawKey];
-      const key  = team ? rawKey : (Object.keys(CURRENT.teams || {})[0] || rawKey);
+  // 2. AGORA sim: depois de tudo renderizado, reseta todos
+  setTimeout(()=>{
+    document.querySelectorAll('.pitch[data-team]').forEach(p=>resetPitchToOriginal(p));
+  }, 250);
 
-      pitch.dataset.scope = key;
-      pitch.dataset.formacao = team?.formacao || '';
+  try{
+    localStorage.removeItem(SAVE_KEY);
+    localStorage.removeItem('pitch_drag_positions');
+    sessionStorage.removeItem('pitch_drag_positions');
+  }catch{}
 
-      if (!team){ pitch.innerHTML=''; return; }
+  window.dispatchEvent(new Event('pitch:ready'));
+}
 
-      pitch.classList.add('pitch');
-      pitch.classList.add('hide-stat');             // médias ocultas por padrão
-      if (!pitch.style.position) pitch.style.position = 'relative';
-
-      ensureToolbar(pitch);
-      drawPitch(pitch, team);
-
-      pitch.addEventListener('click', (e)=>{
-        if (!e.target.closest('.games-pop') && !e.target.closest('.player')) closeAnyPop();
-      });
-    });
-
-    try{
-      localStorage.removeItem(SAVE_KEY);
-      localStorage.removeItem('pitch_drag_positions');
-      sessionStorage.removeItem('pitch_drag_positions');
-    }catch{}
-
-    window.dispatchEvent(new Event('pitch:ready'));
-  }
 
   /* =========================================================================
      BOOTSTRAP
