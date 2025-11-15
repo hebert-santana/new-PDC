@@ -117,46 +117,14 @@ function render() {
   const root = document.getElementById("jogos-root");
   if (!root || !Array.isArray(window.JOGOS)) return;
 
-  const htmlParts = window.JOGOS.map((jogo, idx) => {
-    let block = jogoSection(jogo);
+const htmlParts = window.JOGOS.map((jogo) => {
+  return jogoSection(jogo);
+});
 
-    // anúncios entre as sections: após jogo 3 e 8
-    if (idx === 2 || idx === 7) {
-      block += `
-      <div class="ad-slot ad-inpage">
-        <ins class="adsbygoogle"
-             style="display:block;min-height:280px"
-             data-ad-client="ca-pub-6711749988476379"
-             data-ad-slot="9988923934"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-      </div>`;
-    }
-    return block;
-  });
 
   // injeta tudo na página
   root.innerHTML = htmlParts.join("\n");
 
-  // Lazy-load: ativa o bloco ~400px antes de entrar no viewport
-  (function lazyInitAds() {
-    const slots = document.querySelectorAll('.ad-inpage');
-    if (!slots.length) return;
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        const ins = e.target.querySelector('ins.adsbygoogle');
-        // só dá push se o bloco ainda não foi inicializado
-        if (ins && !ins.dataset.adStatus) {
-          try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch {}
-        }
-        io.unobserve(e.target);
-      });
-    }, { rootMargin: '400px 0px', threshold: 0.01 });
-
-    slots.forEach(s => io.observe(s));
-  })();
 
   // segue fluxo normal
   preloadEscalacoes();
