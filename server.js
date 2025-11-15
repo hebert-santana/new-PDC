@@ -43,9 +43,10 @@ app.use(express.static('public', { extensions: ['html'] }));
 /* ============================================================================
    Paths e utilidades de JSON
    ============================================================================ */
-const DATA_DIR = path.join(process.cwd(), 'public', 'assets', 'data');
-const LINEUPS  = path.join(DATA_DIR, 'lineups.json');
-const TEAM_UPD = path.join(DATA_DIR, 'team-updates.json');
+const DATA_DIR      = path.join(process.cwd(), 'public', 'assets', 'data');
+const LINEUPS       = path.join(DATA_DIR, 'lineups.json');
+const TEAM_UPD      = path.join(DATA_DIR, 'team-updates.json');
+const MAIS_INDICADOS = path.join(DATA_DIR, 'mais-indicados.json');
 
 async function readJsonSafe(p, fallback = { version:1, tz:'-03:00', teams:{} }) {
   try { return JSON.parse(await fs.readFile(p, 'utf8')); }
@@ -112,6 +113,64 @@ app.post('/api/lineups', async (req, res) => {
 
   return res.status(400).json({ ok:false, error:'payload inválido' });
 });
+
+/* ============================================================================
+   API Mais Indicados — lê/grava mais-indicados.json
+   ============================================================================ */
+
+// GET atual
+app.get('/api/mais-indicados', async (_req, res) => {
+  // fallback básico para não quebrar se o arquivo ainda não existir
+  const fallback = {
+    comingSoon: true,
+    message: 'O levantamento das indicações está em andamento! — entre no nosso canal e receba o aviso em primeira mão 😉',
+    hideWhenSoon: false,
+    useSkeleton: true,
+    rodada: null,
+    time: {},
+    banco: []
+  };
+
+  try {
+    const cur = await readJsonSafe(MAIS_INDICADOS, fallback);
+    res.json(cur);
+  } catch (err) {
+    console.error('Erro ao ler mais-indicados.json:', err);
+    res.status(500).json({ error: 'Erro ao ler mais-indicados.json' });
+  }
+});
+
+// POST para salvar (sobrescreve o JSON) — versão simplificada
+app.post('/api/mais-indicados', async (req, res) => {
+  try {
+    const body = req.body || {};
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      return res.status(400).json({ ok: false, error: 'JSON inválido no body' });
+    }
+
+    body.atualizado_em = new Date().toISOString();
+
+    // garante que a pasta exista
+    await fs.mkdir(DATA_DIR, { recursive: true });
+
+    // escreve direto, sem rename temporário
+    await fs.writeFile(
+      MAIS_INDICADOS,
+      JSON.stringify(body, null, 2),
+      'utf8'
+    );
+
+    return res.json({ ok: true, atualizado_em: body.atualizado_em });
+  } catch (err) {
+    console.error('Erro ao salvar mais-indicados.json:', err);
+    return res.status(500).json({
+      ok: false,
+      error: String(err && err.message || err)
+    });
+  }
+});
+
+
 
 /* ============================================================================
    NOVA ROTA — Atualizar horário manualmente via botão

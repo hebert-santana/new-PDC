@@ -1,0 +1,140 @@
+{
+  "comingSoon": false,
+  "message": "O levantamento das indicações está em andamento! — entre no nosso canal e receba o aviso em primeira mão 😉",
+  "hideWhenSoon": false,
+  "useSkeleton": true,
+  "rodada": 34,
+  "delta": {
+    "badge": "Nossos Indicados estão goleando por",
+    "sub": "vs Mais Escalados do Cartola",
+    "diff": 113.4,
+    "unit": "pts",
+    "indicados": 2999.99,
+    "escalados": 777.33
+  },
+  "time": {
+    "GOL": {
+      "nome": "Walter",
+      "clube": "mirassol",
+      "percentual": 35,
+      "capitao": false
+    },
+    "DEF": [
+      {
+        "nome": "William",
+        "clube": "cruzeiro",
+        "percentual": 56,
+        "capitao": false
+      },
+      {
+        "nome": "F. Bruno",
+        "clube": "cruzeiro",
+        "percentual": 50,
+        "capitao": false
+      },
+      {
+        "nome": "Villalba",
+        "clube": "cruzeiro",
+        "percentual": 55,
+        "capitao": false
+      },
+      {
+        "nome": "Reinaldo",
+        "clube": "mirassol",
+        "percentual": 88,
+        "capitao": false
+      }
+    ],
+    "MEI": [
+      {
+        "nome": "Mathes P.",
+        "clube": "cruzeiro",
+        "percentual": 95,
+        "capitao": false
+      },
+      {
+        "nome": "Arrascaeta",
+        "clube": "flamengo",
+        "percentual": 91,
+        "capitao": false
+      },
+      {
+        "nome": "A. Patrick",
+        "clube": "internacional",
+        "percentual": 93,
+        "capitao": false
+      }
+    ],
+    "ATA": [
+      {
+        "nome": "Yuri",
+        "clube": "corinthians",
+        "percentual": 78,
+        "capitao": true
+      },
+      {
+        "nome": "Rayan",
+        "clube": "vasco",
+        "percentual": 71,
+        "capitao": false
+      },
+      {
+        "nome": "Pedro",
+        "clube": "flamengo",
+        "percentual": 61,
+        "capitao": false
+      }
+    ],
+    "TEC": {
+      "nome": "L. Jardim",
+      "clube": "cruzeiro",
+      "percentual": 64,
+      "capitao": false
+    }
+  },
+  "banco": [
+    {
+      "nome": "Brazão",
+      "clube": "santos",
+      "pos": "GOL",
+      "percentual": 30,
+      "luxo": false
+    },
+    {
+      "nome": "Luan P.",
+      "clube": "santos",
+      "pos": "ZAG",
+      "percentual": 10,
+      "luxo": false
+    },
+    {
+      "nome": "Bernabei",
+      "clube": "internacional",
+      "pos": "LAT",
+      "percentual": 19,
+      "luxo": false
+    },
+    {
+      "nome": "Barreal",
+      "clube": "santos",
+      "pos": "MEI",
+      "percentual": 11,
+      "luxo": false
+    },
+    {
+      "nome": "MATANZA",
+      "clube": "palmeiras",
+      "pos": "ATA",
+      "percentual": 43,
+      "luxo": false
+    },
+    {
+      "nome": "Hulk",
+      "clube": "fortaleza",
+      "pos": "ATA",
+      "percentual": 60,
+      "luxo": true
+    }
+  ],
+  "atualizado_em": "2025-11-14T14:28:58.579Z"
+}

@@ -144,8 +144,31 @@ body.admin .slot-list{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr
   <div class="d-flex align-items-center gap-3">
     <strong>Admin de Lineups</strong><span class="badge bg-info">Beta</span>
   </div>
-  <div class="mini text-muted">Canvas 631×892 • área útil 575×813</div>
+
+  <div class="d-flex align-items-center gap-3">
+    <nav class="nav-admin mini">
+      <a href="/admin.html" class="is-active">Lineups</a>
+      <a href="/admin-mais-indicados.html">Mais Indicados</a>
+    </nav>
+    <div class="mini text-muted">Canvas 631×892 • área útil 575×813</div>
+  </div>
 </header>
+
+<style>
+  .nav-admin a{
+    margin-right:4px;
+    text-decoration:none;
+    padding:2px 8px;
+    border-radius:999px;
+    border:1px solid #0d6efd;
+    color:#0d6efd;
+  }
+  .nav-admin a.is-active{
+    background:#0d6efd;
+    color:#fff;
+  }
+</style>
+
 
 <div class="wrap">
   <!-- ======================== Coluna: Campo (Canvas) ======================== -->
