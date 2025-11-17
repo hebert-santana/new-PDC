@@ -52,6 +52,8 @@
   <link rel="stylesheet" href="/assets/css/build/styles.css" />
   <link rel="stylesheet" href="/assets/css/build/club-grid.css" />
   <link rel="stylesheet" href="/assets/css/customizacao.css?v=31" />
+  <link rel="stylesheet" href="/assets/css/build/navbar.css?v=32">
+
 
   <!-- ======================================================================
      GA4
@@ -162,6 +164,15 @@
   </header>
 
   <!-- ======================================================================
+     CONTEÚDO PRINCIPAL
+     - includes client-side
+     - raiz de jogos
+     ====================================================================== -->
+  <main class="container" id="provaveis-container">
+    <!-- navegação superior -->
+    <div data-include="navbar"></div>
+
+      <!-- ======================================================================
      CHIPS SUPERIORES: acertos + status do mercado
      ====================================================================== -->
   <div class="container">
@@ -172,7 +183,6 @@
         <b id="acertos-num">+33</b> acertos
         <small>a mais que o aplicativo oficial</small>
         <span class="tip" role="tooltip">
-          Contabilizado a partir da rodada 22 |
           <b class="k-ok">88,0% de taxa de acertos</b> (site Prováveis)
         </span>
       </span>
@@ -188,14 +198,7 @@
     </div>
   </div>
 
-  <!-- ======================================================================
-     CONTEÚDO PRINCIPAL
-     - includes client-side
-     - raiz de jogos
-     ====================================================================== -->
-  <main class="container" id="provaveis-container">
-    <!-- navegação superior -->
-    <div data-include="botoes-nav"></div>
+  <!-- Navbar Equipes -->
     <div data-include="navbar-equipes"></div>
 
     <!-- utilidades / ad placeholders -->
@@ -248,5 +251,36 @@
 
   <!-- Pitch renderer único -->
   <script defer src="/assets/js/pitch-render.js"></script>
+
+
+
+  <!-- ==================== ANÚNCIO CLEVER ==================== -->
+  
+  <!-- ANÚNCIO FAKE – SOMENTE EM DESENVOLVIMENTO -->
+<script>
+(function(){
+  // Só simula em ambiente local
+  const isLocal =
+    location.hostname === 'localhost' ||
+    location.hostname === '127.0.0.1';
+
+  if (!isLocal) return;
+
+  // cria um "sticky footer" fake parecido com o da Clever
+  const fake = document.createElement('div');
+  fake.className = 'dev-sticky-footer';
+  fake.textContent = 'Simulação anúncio sticky-footer 320x50';
+
+  document.body.appendChild(fake);
+
+  // avisa para o CSS que tem anúncio embaixo
+  document.body.classList.add('has-bottom-ad');
+})();
+</script>
+
+
+
+
+
 </body>
 </html>

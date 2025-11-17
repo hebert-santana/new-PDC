@@ -8,31 +8,29 @@
 
   const css = `
 /* ===================== VARIÁVEIS GERAIS ===================== */
+/* ===================== VARIÁVEIS GERAIS ===================== */
 :root{
   /* Fonte padrão */
   --font-ui: system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Arial,sans-serif;
 
-  /* Tamanho fluido dos avatares (camisas dos jogadores) */
-  --img: clamp(56px, 4.5vw, 92px);          /* jogador */
-  --img-coach: clamp(44px, 2vw, 70px);      /* técnico */
+  /* DESKTOP: tamanho fixo (igual ao print desejado) */
+  --img: 78px;          /* jogador */
+  --img-coach: 50px;    /* técnico */
 
-  /* Tamanhos de fonte das pílulas (nome e subtítulo) */
-  --cap-fs: clamp(8.5px, 0.8vw, 13px);     /* nome principal */
-  --altcap-fs: clamp(8px, .8vw, 12px);     /* subtítulo abaixo */
+  --cap-fs: 10px;       /* nome principal */
+  --altcap-fs: 10px;    /* subtítulo abaixo */
 
-  /* Espaçamento interno das pílulas (em unidades relativas ao texto) */
   --cap-pad-y: .35em;   --cap-pad-x: .8em;
   --altcap-pad-y: .3em; --altcap-pad-x: .7em;
 
-  /* Largura máxima das pílulas baseada no tamanho do avatar */
   --cap-max: calc(var(--img) * 1.6);
 
-  /* Espessura e cores do anel (contorno de status) */
   --ring-w: .18em;
-  --ring-ok:#16a34a;     /* provável */
-  --ring-duv:#f59e0b;    /* dúvida */
-  --ring:#16a34a;        /* default */
+  --ring-ok:#16a34a;
+  --ring-duv:#f59e0b;
+  --ring:#16a34a;
 }
+
 
 /* ===================== BASE GLOBAL ===================== */
 html,body,.player .cap,.player .alt-cap,.status-card{
@@ -40,6 +38,7 @@ html,body,.player .cap,.player .alt-cap,.status-card{
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
+
 
 /* ===================== AVATAR (IMAGEM DO JOGADOR) ===================== */
 .player{
@@ -51,7 +50,6 @@ html,body,.player .cap,.player .alt-cap,.status-card{
   overflow:visible;
 }
 
-/* Círculo da camisa */
 .player img{
   display:block;
   width:var(--img);
@@ -64,7 +62,8 @@ html,body,.player .cap,.player .alt-cap,.status-card{
   transition:transform .12s ease;
 }
 
-/* ===================== SOMBRA OVAL (EFEITO 3D ABAIXO DO JOGADOR) ===================== */
+
+/* ===================== SOMBRA OVAL 3D ===================== */
 .player::before{
   content:"";
   position:absolute;
@@ -72,27 +71,41 @@ html,body,.player .cap,.player .alt-cap,.status-card{
   top:100%;
   transform:translate(-50%,-38%);
   width:76%;
-  height:clamp(6px, 2.2vw, 18px);
+  height:14px;                 /* FIXO — elimina a variação entre telas */
   background:radial-gradient(ellipse at center, rgba(0,0,0,.28) 0%, rgba(0,0,0,0) 70%);
-  filter:blur(clamp(2px, .6vw, 5px));
+  filter:blur(4px);            /* FIXO */
   opacity:.55;
   pointer-events:none;
   z-index:0;
 }
 
-/* Garante que nome e imagem fiquem acima da sombra */
-.player img,.player .cap,.player .alt-cap{
+
+/* Nome e imagem acima da sombra */
+.player img,
+.player .cap,
+.player .alt-cap{
   position:relative;
   z-index:1;
 }
 
-/* ===================== PÍLULA PRINCIPAL (NOME DO JOGADOR) ===================== */
-.player .cap{
+
+/* ===================== BLOCO DAS PÍLULAS ===================== */
+.player-labels{
   position:absolute;
   left:50%;
   top:100%;
   transform:translateX(-50%);
-  margin-top:.45em;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.08em;      /* espaço entre nome e pílula secundária */
+  margin-top:.08em;  /* distância do avatar até a primeira pílula */
+}
+
+
+/* ===================== PÍLULA PRINCIPAL ===================== */
+.player .cap{
+  position:static;
   padding:var(--cap-pad-y) var(--cap-pad-x);
   font-size:var(--cap-fs);
   font-weight:600;
@@ -110,12 +123,10 @@ html,body,.player .cap,.player .alt-cap,.status-card{
   backdrop-filter:saturate(120%) blur(2px);
 }
 
-/* ===================== PÍLULA SECUNDÁRIA (MÉDIA, POSIÇÃO ETC.) ===================== */
+
+/* ===================== PÍLULA SECUNDÁRIA ===================== */
 .player .alt-cap{
-  position:absolute;
-  left:50%;
-  top:calc(100% + 2.2em);
-  transform:translateX(-50%);
+  position:static;
   padding:var(--altcap-pad-y) var(--altcap-pad-x);
   font-size:var(--altcap-fs);
   font-weight:500;
@@ -128,7 +139,8 @@ html,body,.player .cap,.player .alt-cap,.status-card{
   white-space:nowrap;
 }
 
-/* ===================== STATUS (ANEL COLORIDO EM VOLTA DO JOGADOR) ===================== */
+
+/* ===================== STATUS ===================== */
 .player.ok img{
   box-shadow:0 0 0 var(--ring-w) var(--ring-ok), 0 .6em .9em rgba(0,0,0,.28);
 }
@@ -136,7 +148,8 @@ html,body,.player .cap,.player .alt-cap,.status-card{
   box-shadow:0 0 0 var(--ring-w) var(--ring-duv), 0 .6em .9em rgba(0,0,0,.28);
 }
 
-/* ===================== TÉCNICO (AVATAR MENOR) ===================== */
+
+/* ===================== TÉCNICO (MENOR) ===================== */
 .player.coach{
   width:var(--img-coach);
   height:var(--img-coach);
@@ -147,22 +160,26 @@ html,body,.player .cap,.player .alt-cap,.status-card{
   margin:0 auto;
 }
 
-/* ===================== HOVER (EFEITO AO PASSAR MOUSE) ===================== */
+
+/* ===================== HOVER ===================== */
 @media (hover:hover){
   .pitch .player:hover img{ transform:scale(1.03); }
 }
 
-/* ===================== CHIPS DE STATUS (OUTRAS INFORMAÇÕES NA TELA) ===================== */
+
+/* ===================== TAGS DE STATUS ===================== */
 .status-card .sg-title{ font-weight:700 }
+
 .status-card .tag-list{
   display:flex;
   flex-wrap:wrap;
   gap:.4em;
 }
+
 .status-card .tag-list>*{
   display:inline-block;
   padding:.35em .75em;
-  font-size:clamp(11px, .95vw, 13px);
+  font-size:12px;
   font-weight:600;
   line-height:1.05;
   letter-spacing:.01em;
@@ -173,33 +190,39 @@ html,body,.player .cap,.player .alt-cap,.status-card{
   box-shadow:0 .25em .6em rgba(2,6,23,.10);
 }
 
-/* ===================== AJUSTES RESPONSIVOS ===================== */
-/* Tablets e telas médias */
-@media (max-width:768px){
+
+/* ===================== BREAKPOINTS ===================== */
+
+/* Notebooks/tablets médios */
+@media (max-width:1024px){
   :root{
-    --cap-fs: clamp(9px, 1.9vw, 11px);
-    --altcap-fs: clamp(8px, 1.7vw, 10px);
-    --cap-max: calc(var(--img) * 1.8);
+    --img: 70px;
+    --img-coach: 46px;
+    --cap-fs: 10px;
+    --altcap-fs: 9px;
+    --cap-max: calc(var(--img) * 1.6);
   }
-  .player .alt-cap{ top:calc(100% + 1.8em); }
 }
 
-/* Celulares pequenos */
+/* Celulares */
 @media (max-width:480px){
   :root{
-    --img: clamp(40px,9vw,56px); } /* avatar menor */
-    --cap-fs: clamp(8px, 1.6vw, 10px);
-    --altcap-fs: clamp(7.8px, 2.4vw, 9.5px);
+    --img: 56px;
+    --img-coach: 44px;
+    --cap-fs: 10px;
+    --altcap-fs: 9px;
     --cap-max: calc(var(--img) * 1.05);
   }
-  .player .cap{ margin-top:.2em; }
-  .player .alt-cap{ top:calc(100% + 1.2em); }
 }
 
-/* Ajuste final para telas muito estreitas */
 @media (max-width:420px){
-  :root{ --cap-max: calc(var(--img) * 1.3); }
+  :root{
+    --cap-max: calc(var(--img) * 1.3);
+  }
 }
+
+
+
 `;
 
   // injeta no documento
@@ -279,44 +302,52 @@ const clamp = (v,a=0,b=100)=>Math.max(a,Math.min(b,v));
   };
 
   // ===== Elemento do jogador =====
-  function playerEl({id, slot, sit, duvidaCom}){
-    const el = document.createElement('figure');
-    el.className = 'player ' + (sit === 'duvida' ? 'doubt' : 'ok');
-    if (slot === 'TEC') el.classList.add('coach');
-    el.dataset.id = id;
-    el.dataset.slot = slot;
+function playerEl({id, slot, sit, duvidaCom}){
+  const el = document.createElement('figure');
+  el.className = 'player ' + (sit === 'duvida' ? 'doubt' : 'ok');
+  if (slot === 'TEC') el.classList.add('coach');
+  el.dataset.id = id;
+  el.dataset.slot = slot;
 
-    const img = document.createElement('img');
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.width = 92; img.height = 92;
-    img.alt = `${nome(id)}`;
-    img.src = foto(id);
-    img.onerror = () => { img.onerror = null; img.src = `/assets/img/escudos/cartola/${clubIdOf(id)}.jpg`; };
+  const img = document.createElement('img');
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.width = 92; img.height = 92;
+  img.alt = `${nome(id)}`;
+  img.src = foto(id);
+  img.onerror = () => {
+    img.onerror = null;
+    img.src = `/assets/img/escudos/cartola/${clubIdOf(id)}.jpg`;
+  };
 
-    const cap = document.createElement('figcaption');
-    cap.className = 'cap';
-    cap.textContent = nome(id);
+  const cap = document.createElement('figcaption');
+  cap.className = 'cap';
+  cap.textContent = nome(id);
 
-    el.appendChild(img);
-    el.appendChild(cap);
+  // bloco que empilha nome + “em dúvida com”
+  const labels = document.createElement('div');
+  labels.className = 'player-labels';
+  labels.appendChild(cap);
 
-    if (sit === 'duvida' && Number.isFinite(+duvidaCom)) {
-      const alt = document.createElement('div');
-      alt.className = 'alt-cap';
-      alt.textContent = nome(+duvidaCom);
-      el.appendChild(alt);
-    }
-
-    if (SHOW_SLOT_CHIP) {
-      const chip = document.createElement('span');
-      chip.className = 'slot-chip';
-      chip.textContent = slot;
-      el.appendChild(chip);
-    }
-
-    return el;
+  if (sit === 'duvida' && Number.isFinite(+duvidaCom)) {
+    const alt = document.createElement('div');
+    alt.className = 'alt-cap';
+    alt.textContent = nome(+duvidaCom);
+    labels.appendChild(alt);
   }
+
+  if (SHOW_SLOT_CHIP) {
+    const chip = document.createElement('span');
+    chip.className = 'slot-chip';
+    chip.textContent = slot;
+    labels.appendChild(chip);
+  }
+
+  el.appendChild(img);
+  el.appendChild(labels);
+
+  return el;
+}
 
  function place(el, slot, xy, formacao){
    let p = xy || POS[slot] || POS['MEI-C'];

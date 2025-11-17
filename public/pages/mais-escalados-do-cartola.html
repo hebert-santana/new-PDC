@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="og:locale" content="pt_BR">
+
+  <title>Mais Escalados do Cartola 2025 — Exclusivo</title>
+  <meta name="description" content="EXCLUSIVO: Mais escalados do Cartola FC 2025 (oficial). Percentuais, capitão e reservas de luxo em um só lugar. Atualizações durante a semana.">
+
+  <!-- Bootstrap + Ícones -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- CSS do projeto (mesma ordem das outras páginas) -->
+  <link rel="stylesheet" href="/assets/css/build/styles.css?v=32">
+  <link rel="stylesheet" href="/assets/css/customizacao.css?v=31">
+  <link rel="stylesheet" href="/assets/css/build/mais-indicados.css?v=32"><!-- reaproveita tokens e componentes -->
+  <link rel="stylesheet" href="/assets/css/build/navbar.css?v=1">
+
+<style>
+/* RESET COMPLETO SÓ NO MAIS ESCALADOS */
+body.page-mais-escalados #pitch-escalados-safe .player .shirt {
+  border-radius: 0 !important;
+  background: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* o player também recebe reset */
+body.page-mais-escalados #pitch-escalados-safe .player {
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* remove qualquer frame/quadrado que venha de .player::before ou wrappers */
+body.page-mais-escalados #pitch-escalados-safe .player::before,
+body.page-mais-escalados #pitch-escalados-safe .player::after {
+  display: none !important;
+}
+
+/* remove molduras que vêm do tema de indicados */
+body.page-mais-escalados #pitch-escalados-safe .player img.shirt {
+  outline: none !important;
+}
+</style>
+
+
+
+  <!-- GA e Vercel Insights -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6TJ11HJVRG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-6TJ11HJVRG');
+  </script>
+
+  <link rel="icon" href="/assets/img/icons/icon.ico" type="image/x-icon">
+</head>
+
+<body class="page-mais-escalados">
+  <!-- ======================================================================
+       HEADER
+       ====================================================================== -->
+  <header class="container" id="main-image-container">
+    <div class="col-12 d-flex justify-content-center">
+      <h1 id="header-especialista" class="custom-provaveis-item">
+        <span class="visually-hidden">Prováveis do Cartola FC — Escalações da Rodada</span>
+        <img
+          src="/assets/img/ui/provaveisdocartola.svg"
+          alt=""
+          role="presentation"
+          class="provaveis-image"
+          width="600" height="200"
+          loading="eager" decoding="async" />
+      </h1>
+    </div>
+  </header>
+
+  <div data-include="navbar"></div>
+
+  <script defer src="/assets/js/jogos.data.js"></script>
+
+  <!-- HERO -->
+  <section class="mic-mast" aria-labelledby="mastTitle">
+    <div class="mic-rail">
+      <h1 id="mastTitle" class="mast-title">
+        Mais Escalados do <span class="mast-brand">Cartola FC</span>
+        <span class="mast-help">
+          <button class="btn-help" aria-expanded="false" aria-controls="mastHelp" aria-haspopup="dialog">
+            <i class="bi bi-info-lg" aria-hidden="true"></i>
+            <span class="visually-hidden">O que é?</span>
+          </button>
+          <div id="mastHelp" class="help-card" role="dialog" aria-labelledby="mastTitle" hidden>
+            <p class="help-title">O que é?</p>
+            <ul class="help-list">
+              <li>Partimos do <strong>número bruto de escalações</strong> do próprio Cartola FC.</li>
+              <li>Dividimos pelo <strong>total de times ativos no mercado.</strong></li>
+              <li>Esse número mostra em quantos % dos elencos aquele jogador está presente.</li>
+            </ul>
+            <p class="help-foot">
+              <i class="bi bi-shield-check"></i> Atualizações durante a semana!
+            </p>
+          </div>
+        </span>
+      </h1>
+
+      <div id="rodadaChip" class="mast-chip" role="status" aria-live="polite">
+        Rodada —
+      </div>
+
+      <h2 class="mast-sub">
+        Lista atualizada dos jogadores mais escalados no Cartola FC 2025.
+        O percentual mostra a “posse” de cada atleta: dividimos o número bruto de escalações oficial
+        pelo total de times ativos no mercado.
+      </h2>
+    </div>
+  </section>
+
+  <!-- AVISO CANAL -->
+  <div id="canal-whats-lane" class="canal-whats-lane" hidden>
+    <div class="canal-whats-card" role="region" aria-label="Levantamento em andamento">
+      <span class="cw-ribbon">ATUALIZANDO…</span>
+      <div class="cw-left">
+        <i class="bi bi-hourglass-split" aria-hidden="true"></i>
+        <div class="cw-text">
+          <strong id="soon-strong">O levantamento oficial está em processamento.</strong>
+          <span id="soon-sub">Entre no nosso canal do WhatsApp e receba o aviso em primeira mão.</span>
+        </div>
+      </div>
+      <div class="cw-highlights" aria-hidden="true">
+        <span class="cw-chip"><i class="bi bi-bell-fill"></i> Notificação</span>
+        <span class="cw-chip"><i class="bi bi-lightning-charge-fill"></i> Sem spam</span>
+        <span class="cw-chip"><i class="bi bi-shield-check"></i> Oficial do site</span>
+      </div>
+      <a id="cw-btn" class="cw-btn" href="https://whatsapp.com/channel/0029VbBFrZ4Gk1FxlriZ7R2I" target="_blank" rel="noopener">
+        Entrar no Canal <i class="bi bi-whatsapp" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO EXCLUSIVO: PITCH + RESERVAS -->
+  <section id="campinho-mais-indicados" class="mic-rail" aria-label="Mais escalados (oficial)">
+    <article>
+      <div class="pitch" id="pitch-escalados">
+        <picture>
+          <source type="image/avif" srcset="/assets/img/campinhos/campinho-800.avif 800w, /assets/img/campinhos/campinho-1200.avif 1200w">
+          <source type="image/webp" srcset="/assets/img/campinhos/campinho-800.webp 800w, /assets/img/campinhos/campinho-1200.webp 1200w">
+          <img class="pitch-bg" src="/assets/img/campinhos/campinho.png" width="1200" height="1207" alt="Campinho oficial" decoding="async">
+        </picture>
+
+        <div class="pitch-safe" id="pitch-escalados-safe">
+          <!-- slots fixos — o JS preenche -->
+          <div class="player -atk" style="--x:20; --y:8;">
+            <div class="badge">—%</div>
+            <img class="shirt" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">
+            <div class="name">ATA-L</div>
+          </div>
+          <div class="player -atk" style="--x:50; --y:4;">
+            <div class="badge">—%</div>
+            <img class="shirt" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">
+            <div class="name">ATA-C</div>
+          </div>
+          <div class="player -atk" style="--x:80; --y:8;">
+            <div class="badge">—%</div>
+            <img class="shirt" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">
+            <div class="name">ATA-R</div>
+          </div>
+
+          <div class="player -mid" style="--x:28; --y:36;">
+            <div class="badge">—%</div>
+            <img class="shirt" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">
+            <div class="name">MEI-L</div>
+          </div>
+          <div class="player -mid" style="--x:50; --y:34;">
+            <div class="badge">—%</div>
+            <img class="shirt" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">
+            <div class="name">MEI-C</div>
+          </div>
+          <div class="player -mid" style="--x:72; --y:36;">
+            <div class="badge">—%</div>
+            <img class="shirt" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">
+            <div class="name">MEI-R</div>
+          </div>
+
+          <div class="player -def" style="--x:16; --y:62;">
+            <div class="badge">—%</div>
+            <img class="shirt" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">
+            <div class="name">LAT-L</div>
+          </div>
+          <div class="player -def" style="--x:36; --y:67;">
+            <div class="badge">—%</div>
+            <img class="shirt" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">
+            <div class="name">ZAG-L</div>
+          </div>
+          <div class="player -def" style="--x:64; --y:67;">
+            <div class="badge">—%</div>
+            <img class="shirt" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">
+            <div class="name">ZAG-R</div>
+          </div>
+          <div class="player -def" style="--x:86; --y:62;">
+            <div class="badge">—%</div>
+            <img class="shirt" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">
+            <div class="name">LAT-R</div>
+          </div>
+
+          <div class="player -gk" style="--x:50; --y:88;">
+            <div class="badge">—%</div>
+            <img class="shirt" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">
+            <div class="name">GOL</div>
+          </div>
+          <div class="player -coach" style="--x:10; --y:92;">
+            <div class="badge">—%</div>
+            <img class="shirt" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">
+            <div class="name">TEC</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Banco imediatamente abaixo do pitch -->
+      <div class="reserves-card" aria-labelledby="reservesTitle2">
+        <h3 id="reservesTitle2" class="reserves-title">
+          Banco de reservas <small class="text-muted">(oficial)</small>
+        </h3>
+        <div class="resv-row -x6" id="resv-escalados">
+          <div class="resv-player" data-locked="1">
+            <div class="resv-badge">12%</div>
+            <img class="resv-shirt" src="/assets/img/uniformes/MIR.png" alt="">
+            <div class="resv-name">Walter</div>
+            <div class="resv-role">GOL</div>
+          </div>
+          <div class="resv-player">
+            <div class="resv-badge">—%</div>
+            <img class="resv-shirt" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="">
+            <div class="resv-name">ZAG</div>
+            <div class="resv-role">ZAG</div>
+          </div>
+          <div class="resv-player">
+            <div class="resv-badge">—%</div>
+            <img class="resv-shirt" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="">
+            <div class="resv-name">LAT</div>
+            <div class="resv-role">LAT</div>
+          </div>
+          <div class="resv-player">
+            <div class="resv-badge">—%</div>
+            <img class="resv-shirt" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="">
+            <div class="resv-name">MEI</div>
+            <div class="resv-role">MEI</div>
+          </div>
+          <div class="resv-player">
+            <div class="resv-badge">—%</div>
+            <img class="resv-shirt" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="">
+            <div class="resv-name">ATA</div>
+            <div class="resv-role">ATA</div>
+          </div>
+          <div class="resv-player -lux">
+            <div class="resv-badge">—%</div>
+            <img class="resv-shirt" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="">
+            <div class="resv-name">ATA</div>
+            <div class="resv-role">ATA</div>
+            <span class="resv-tag">Reserva de luxo</span>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- depois da seção do campinho -->
+  <div class="mic-rail" id="updateLane">
+    <div id="updateChip" class="mast-chip" role="status" aria-live="polite">
+      Atualizado —
+    </div>
+  </div>
+
+  <!-- CTA e Footer -->
+  <div data-include="cta"></div>
+  <div data-include="footer"></div>
+
+  <!-- Utilitário: rodada atual no chip -->
+  <script>
+    (function () {
+      function getRodada() {
+        var J = window.JOGOS || {};
+        return (J.meta && J.meta.rodada) || J.rodada || window.RODADA || null;
+      }
+      document.addEventListener('DOMContentLoaded', function () {
+        var r = getRodada();
+        var chip = document.getElementById('rodadaChip');
+        if (chip && r) chip.textContent = 'Rodada ' + r;
+        window.__RODADA_ATUAL__ = r;
+      });
+      window.getRodadaAtual = getRodada;
+    })();
+
+    // Popover help
+    (function () {
+      const btn  = document.querySelector('.btn-help');
+      const card = document.getElementById('mastHelp');
+      if (!btn || !card) return;
+
+      function toggle(open) {
+        const show = (open ?? card.hasAttribute('hidden'));
+        card.toggleAttribute('hidden', !show);
+        btn.setAttribute('aria-expanded', String(show));
+      }
+
+      btn.addEventListener('click', () => toggle());
+      document.addEventListener('click', (e) => {
+        if (!card.contains(e.target) && !btn.contains(e.target)) toggle(false);
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') toggle(false);
+      });
+    })();
+
+    // util: formata para BRT
+    function fmtBRT(input) {
+      const d = (typeof input === 'number')
+        ? new Date(input * 1000)   // epoch em segundos
+        : new Date(input);         // ISO
+      if (Number.isNaN(+d)) return '—';
+      const f = new Intl.DateTimeFormat('pt-BR', {
+        timeZone : 'America/Sao_Paulo',
+        hour12   : false,
+        day      : '2-digit',
+        month    : '2-digit',
+        year     : 'numeric',
+        hour     : '2-digit',
+        minute   : '2-digit'
+      });
+      return f.format(d).replace(',', '');
+    }
+  </script>
+
+  <script defer src="/assets/js/layout.js"></script>
+  <script defer src="/assets/js/market-bar.js"></script>
+
+  <!-- ===== Loader do OFICIAL: preenche pitch e banco ===== -->
+  <script>
+    (async () => {
+      try {
+        const res = await fetch('/assets/data/mais-escalados.json?_=' + Date.now(), {
+          cache: 'no-store'
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const j = await res.json();
+
+        // chip de última atualização
+        const whenISO  = j.captured_at?.iso   ?? null;
+        const whenUnix = j.captured_at?.epoch ?? null;
+        const $upd     = document.getElementById('updateChip');
+        if ($upd) {
+          const label = whenISO
+            ? fmtBRT(whenISO)
+            : Number.isFinite(whenUnix)
+              ? fmtBRT(whenUnix)
+              : '—';
+          $upd.textContent = `Atualizado ${label}`;
+        }
+
+        // Meta
+        const rodada = j.rodada_atual    ?? null;
+        const total  = j.times_escalados ?? 0;
+        const when   = j.captured_at?.iso || null;
+
+        const $rod   = document.getElementById('rodadaChip');
+        if ($rod && rodada) $rod.textContent = 'Rodada ' + rodada;
+
+        const $times = document.getElementById('info-times');
+        if ($times) $times.textContent = total
+          ? `${total.toLocaleString('pt-BR')} times escalados`
+          : '—';
+
+        const $hora  = document.getElementById('info-hora');
+        if ($hora) $hora.textContent = when
+          ? `Atualizado ${new Date(when).toLocaleString('pt-BR', { hour12:false })}`
+          : 'Atualizado —';
+
+        // Dados
+        const data = Array.isArray(j.data) ? j.data : [];
+
+        // Agrupa por posição e ordena por pct desc / escalacoes desc
+        const by = { GOL:[], ZAG:[], LAT:[], MEI:[], ATA:[], TEC:[] };
+        for (const it of data) {
+          const k = String(it.posicao_abreviacao || '').toUpperCase();
+          if (by[k]) by[k].push(it);
+        }
+        for (const k of Object.keys(by)) {
+          by[k].sort(
+            (a, b) =>
+              (Number(b.pct) - Number(a.pct)) ||
+              ((b.escalacoes || 0) - (a.escalacoes || 0))
+          );
+        }
+
+        const ata = by.ATA;
+        const mei = by.MEI;
+        const lat = by.LAT;
+        const zag = by.ZAG;
+        const gol = by.GOL;
+        const tec = by.TEC;
+
+        // mapa de slots -> jogador (central = mais escalado)
+        const slotMap = {
+          'ATA-C': ata[0] || null,
+          'ATA-L': ata[1] || ata[0] || null,
+          'ATA-R': ata[2] || ata[1] || ata[0] || null,
+
+          'MEI-C': mei[0] || null,
+          'MEI-L': mei[1] || mei[0] || null,
+          'MEI-R': mei[2] || mei[1] || mei[0] || null,
+
+          'LAT-L': lat[0] || null,
+          'LAT-R': lat[1] || lat[0] || null,
+
+          'ZAG-L': zag[0] || null,
+          'ZAG-R': zag[1] || zag[0] || null,
+
+          'GOL':   gol[0] || null,
+          'TEC':   tec[0] || null
+        };
+
+        const SLOT_ORDER = [
+          'ATA-L','ATA-C','ATA-R',
+          'MEI-L','MEI-C','MEI-R',
+          'LAT-L','ZAG-L','ZAG-R','LAT-R',
+          'GOL','TEC'
+        ];
+
+        const starting = SLOT_ORDER.map(slot => slotMap[slot] || null);
+
+        // Banco (usa os próximos de cada posição)
+        const bench = [
+          null,                        // índice 0 reservado/manual
+          zag[2] || zag[1] || null,    // ZAG
+          lat[2] || lat[1] || null,    // LAT
+          mei[3] || mei[2] || null,    // MEI
+          ata[3] || ata[2] || null,    // ATA
+          ata[4] || ata[3] || ata[2] || null // Reserva de luxo ATA
+        ];
+
+        const pctTxt = v => {
+          const n = Number(v);
+          return Number.isFinite(n) ? `${Math.round(n)}%` : '—%';
+        };
+
+        const shortName = it =>
+          it?.Atleta?.apelido_abreviado ??
+          it?.Atleta?.apelido ??
+          it?.Atleta?.nome?.split(' ')[0] ??
+          '';
+
+        // sempre uniforme local
+        const shirtSrcFrom = it => {
+          const sigla = String(it?.clube ?? '').toUpperCase();
+          return sigla
+            ? `/assets/img/uniformes/${sigla}.png`
+            : 'data:image/gif;base64,R0lGODlhAQABAAAAACw=';
+        };
+
+        // Preenche titulares + técnico (oficial)
+        document.querySelectorAll('#pitch-escalados-safe .player').forEach((el, i) => {
+          const it     = starting[i] || null;
+          const $badge = el.querySelector('.badge');
+          const $name  = el.querySelector('.name');
+          const $shirt = el.querySelector('.shirt');
+
+          if ($badge) $badge.textContent = pctTxt(it?.pct);
+          if ($name)  $name.textContent  = it ? shortName(it) : $name.textContent;
+          if ($shirt && it) {
+            $shirt.src = shirtSrcFrom(it);
+            $shirt.alt = it.clube || '';
+          }
+        });
+
+        // Preenche banco (índice 0 preservado/manual)
+        document.querySelectorAll('#resv-escalados .resv-player').forEach((el, i) => {
+          if (i === 0 || el.hasAttribute('data-locked')) return;
+
+          const it     = bench[i] || null;
+          const $badge = el.querySelector('.resv-badge');
+          const $name  = el.querySelector('.resv-name');
+          const $shirt = el.querySelector('.resv-shirt');
+
+          if ($badge) $badge.textContent = pctTxt(it?.pct);
+          if ($name && it) $name.textContent = shortName(it);
+          if ($shirt && it) {
+            $shirt.src = shirtSrcFrom(it);
+            $shirt.alt = it.clube || '';
+          }
+        });
+
+      } catch (e) {
+        console.warn('[oficial] falha ao carregar/renderizar:', e);
+      }
+    })();
+  </script>
+</body>
+</html>

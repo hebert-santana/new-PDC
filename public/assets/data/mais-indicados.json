@@ -15,32 +15,32 @@
   "time": {
     "GOL": {
       "nome": "Walter",
-      "clube": "mirassol",
+      "clube": "MIR",
       "percentual": 35,
       "capitao": false
     },
     "DEF": [
       {
         "nome": "William",
-        "clube": "cruzeiro",
+        "clube": "CRU",
         "percentual": 56,
         "capitao": false
       },
       {
         "nome": "F. Bruno",
-        "clube": "cruzeiro",
+        "clube": "CRU",
         "percentual": 50,
         "capitao": false
       },
       {
         "nome": "Villalba",
-        "clube": "cruzeiro",
+        "clube": "CRU",
         "percentual": 55,
         "capitao": false
       },
       {
         "nome": "Reinaldo",
-        "clube": "mirassol",
+        "clube": "MIR",
         "percentual": 88,
         "capitao": false
       }
@@ -48,19 +48,19 @@
     "MEI": [
       {
         "nome": "Mathes P.",
-        "clube": "cruzeiro",
+        "clube": "CRU",
         "percentual": 95,
         "capitao": false
       },
       {
         "nome": "Arrascaeta",
-        "clube": "flamengo",
+        "clube": "FLA",
         "percentual": 91,
         "capitao": false
       },
       {
         "nome": "A. Patrick",
-        "clube": "internacional",
+        "clube": "INT",
         "percentual": 93,
         "capitao": false
       }
@@ -68,26 +68,26 @@
     "ATA": [
       {
         "nome": "Yuri",
-        "clube": "corinthians",
+        "clube": "COR",
         "percentual": 78,
         "capitao": true
       },
       {
         "nome": "Rayan",
-        "clube": "vasco",
+        "clube": "VAS",
         "percentual": 71,
         "capitao": false
       },
       {
         "nome": "Pedro",
-        "clube": "flamengo",
+        "clube": "FLA",
         "percentual": 61,
         "capitao": false
       }
     ],
     "TEC": {
       "nome": "L. Jardim",
-      "clube": "cruzeiro",
+      "clube": "CRU",
       "percentual": 64,
       "capitao": false
     }
@@ -95,42 +95,42 @@
   "banco": [
     {
       "nome": "Brazão",
-      "clube": "santos",
+      "clube": "SAN",
       "pos": "GOL",
       "percentual": 30,
       "luxo": false
     },
     {
       "nome": "Luan P.",
-      "clube": "santos",
+      "clube": "SAN",
       "pos": "ZAG",
       "percentual": 10,
       "luxo": false
     },
     {
       "nome": "Bernabei",
-      "clube": "internacional",
+      "clube": "INT",
       "pos": "LAT",
       "percentual": 19,
       "luxo": false
     },
     {
       "nome": "Barreal",
-      "clube": "santos",
+      "clube": "SAN",
       "pos": "MEI",
       "percentual": 11,
       "luxo": false
     },
     {
       "nome": "MATANZA",
-      "clube": "palmeiras",
+      "clube": "PAL",
       "pos": "ATA",
       "percentual": 43,
       "luxo": false
     },
     {
       "nome": "Hulk",
-      "clube": "fortaleza",
+      "clube": "FOR",
       "pos": "ATA",
       "percentual": 60,
       "luxo": true

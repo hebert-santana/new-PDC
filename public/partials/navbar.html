@@ -1,0 +1,89 @@
+<!-- /partials/botoes-nav.html -->
+
+<!-- DESKTOP -->
+<div class="container d-none d-md-block">
+  <nav class="hero-buttons" aria-label="Navegação de páginas">
+
+    <a href="/" class="btn-nav">
+      <i class="bi bi-people-fill" aria-hidden="true"></i>
+      <span>Prováveis</span>
+    </a>
+
+    <a href="/pages/partidas.html" class="btn-nav">
+      <i class="bi bi-calendar2-event" aria-hidden="true"></i>
+      <span>Partidas</span>
+    </a>
+
+    <a href="/pages/mais-indicados-do-cartola.html" class="btn-nav">
+      <i class="bi bi-star-fill" aria-hidden="true"></i>
+      <span>Indicados</span>
+    </a>
+
+    <a href="/pages/mais-escalados-do-cartola.html" class="btn-nav">
+      <i class="bi bi-graph-up-arrow" aria-hidden="true"></i>
+      <span>Escalados</span>
+    </a>
+
+    <!-- BIA+ DESKTOP (destaque sutil) -->
+    <a href="https://www.biascore.com.br"
+       class="btn-nav btn-bia"
+       target="_blank" rel="noopener">
+      <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i>
+      <span>BIAScore</span>
+    </a>
+
+  </nav>
+</div>
+
+<!-- ==================== NAVBAR MOBILE FIXA (mantém) ==================== -->
+<nav class="nav-shortcuts d-md-none" aria-label="Navegação mobile">
+  <a href="/" class="nav-shortcut">
+    <i class="bi bi-people-fill"></i>
+    <span>Prováveis</span>
+  </a>
+  <a href="/pages/partidas.html" class="nav-shortcut">
+    <i class="bi bi-calendar-event"></i>
+    <span>Partidas</span>
+  </a>
+  <a href="/pages/mais-indicados-do-cartola.html" class="nav-shortcut">
+    <i class="bi bi-star-fill"></i>
+    <span>Indicados</span>
+  </a>
+  <a href="/pages/mais-escalados-do-cartola.html" class="nav-shortcut">
+    <i class="bi bi-graph-up-arrow"></i>
+    <span>Escalados</span>
+  </a>
+  <a href="https://www.biascore.com.br"
+     class="nav-shortcut nav-shortcut-bia"
+     target="_blank" rel="noopener">
+    <i class="bi bi-lightning-charge-fill"></i>
+    <span>BIA+</span>
+  </a>
+</nav>
+
+<!-- SCRIPT: marca link ativo -->
+<script>
+(function () {
+  function norm(u) {
+    return new URL(u, location.origin)
+      .pathname.replace(/\/index\.html$/, '/');
+  }
+
+  const here = norm(location.href);
+
+  // desktop – hero buttons
+  document.querySelectorAll('.hero-buttons .btn-nav').forEach(a => {
+    if (norm(a.href) === here) {
+      a.setAttribute('aria-current', 'page');
+      a.classList.add('is-active');
+    }
+  });
+
+  // mobile
+  document.querySelectorAll('.nav-shortcut').forEach(a => {
+    if (norm(a.href) === here) {
+      a.classList.add('is-active');
+    }
+  });
+})();
+</script>
