@@ -2,11 +2,33 @@
 (() => {
   'use strict';
 
-  // Produção lê do /data; (se quiser, adicione '/assets/data/team-updates.json')
+  // Produção lê do /assets/data
   const SOURCES = ['/assets/data/team-updates.json'];
 
+  // ================== CACHE EM MEMÓRIA ==================
+  let _updatesCache = null;
+
+  async function loadUpdates() {
+    for (const url of SOURCES) {
+      try {
+        const r = await fetch(url, { cache: 'no-store' });
+        if (r.ok) return await r.json();
+      } catch {}
+    }
+    console.warn('[team-updates] JSON não encontrado.');
+    return null;
+  }
+
+  // usa cache por padrão; permite "force" pra recarregar quando precisar
+  async function loadUpdatesOnce(force = false) {
+    if (!force && _updatesCache) return _updatesCache;
+    const data = await loadUpdates();
+    _updatesCache = data || { teams: {} };
+    return _updatesCache;
+  }
+
   /* =============== UI helpers (chips) =============== */
-  function ensureChipRow(colEl){
+  function ensureChipRow(colEl) {
     let row = colEl.querySelector(':scope > .chip-stack');
     if (row) return row;
 
@@ -15,7 +37,7 @@
     row.className = 'chip-stack';
 
     if (card) {
-      card.appendChild(row);                 // dentro do card (z-index correto)
+      card.appendChild(row); // dentro do card (z-index correto)
     } else {
       const img = colEl.querySelector('.lineup-img');
       if (img) img.insertAdjacentElement('afterend', row);
@@ -24,16 +46,16 @@
     return row;
   }
 
-  function renderUpdatedChip(colEl, label){
+  function renderUpdatedChip(colEl, label) {
     if (!label) return;
     const row  = ensureChipRow(colEl);
     const chip = document.createElement('span');
     chip.className = 'upd-chip';
-    chip.innerHTML = `<i class="bi bi-clock-history" aria-hidden="true"></i> ${label}`; /* removi Atualizado */
+    chip.innerHTML = `<i class="bi bi-clock-history" aria-hidden="true"></i> Atualizado ${label}`;
     row.appendChild(chip);
   }
 
-  function renderAlertChip(colEl, alertData){
+  function renderAlertChip(colEl, alertData) {
     if (!alertData) return;
 
     let text = '';
@@ -48,7 +70,10 @@
 
     let emoji = '', msg = text;
     const m = msg.match(/^(\p{Emoji_Presentation}|\p{Extended_Pictographic})/u);
-    if (m){ emoji = m[0]; msg = msg.slice(emoji.length).trim(); }
+    if (m) {
+      emoji = m[0];
+      msg = msg.slice(emoji.length).trim();
+    }
 
     const chip = document.createElement('span');
     chip.className = 'chip-alert';
@@ -74,7 +99,8 @@
       const hhmm = `${pad(dt.getHours())}h${pad(dt.getMinutes())}`;
 
       const sameDay = now.toDateString() === dt.toDateString();
-      const yest = new Date(now); yest.setDate(now.getDate() - 1);
+      const yest = new Date(now); 
+      yest.setDate(now.getDate() - 1);
       const isYest = yest.toDateString() === dt.toDateString();
 
       if (sameDay) return `Hoje ${hhmm}`;
@@ -83,23 +109,13 @@
       const dd = pad(dt.getDate());
       const mo = pad(dt.getMonth() + 1);
       return `${dd}/${mo} ${hhmm}`;
-    } catch { return null; }
-  }
-
-  /* =============== Dados =============== */
-  async function loadUpdates() {
-    for (const url of SOURCES) {
-      try {
-        const r = await fetch(url, { cache:'no-store' });
-        if (r.ok) return await r.json();
-      } catch {}
+    } catch {
+      return null;
     }
-    console.warn('[team-updates] JSON não encontrado.');
-    return null;
   }
 
   // HEAD na imagem (usar apenas localmente)
-  async function getImgLastModified(imgEl){
+  async function getImgLastModified(imgEl) {
     if (!imgEl) return null;
     const url = imgEl.currentSrc || imgEl.src;
     try {
@@ -107,13 +123,15 @@
       if (!r.ok) return null;
       const lm = r.headers.get('Last-Modified') || r.headers.get('last-modified');
       return lm ? new Date(lm).toISOString() : null;
-    } catch { return null; }
+    } catch {
+      return null;
+    }
   }
 
-  function waitLineups(maxTries=30){
-    return new Promise(res=>{
+  function waitLineups(maxTries = 30) {
+    return new Promise(res => {
       let tries = 0;
-      (function tick(){
+      (function tick() {
         if (document.querySelector('.lineup-col') || tries++ >= maxTries) return res();
         setTimeout(tick, 50);
       })();
@@ -121,11 +139,11 @@
   }
 
   /* =============== Render por coluna/time =============== */
-  async function injectChips(data){
+  async function injectChips(data) {
     await waitLineups();
     const cols = document.querySelectorAll('.lineup-col');
 
-    for (const col of cols){
+    for (const col of cols) {
       const imgEl = col.querySelector('.lineup-img');
 
       // key do time por data-team (preferência) ou pelo nome do arquivo
@@ -154,56 +172,57 @@
     }
   }
 
+  function clearChips(col) {
+    col.querySelectorAll('.upd-chip,.chip-alert').forEach(n => n.remove());
+  }
 
+  function applyChipsForTeam(col, updTeam) {
+    clearChips(col);
+    const label = fmtHuman(updTeam?.last_update);
+    if (label) renderUpdatedChip(col, label);
+    const alertVal = updTeam?.alert ?? updTeam?.alert_msg ?? null;
+    if (alertVal) renderAlertChip(col, alertVal);
+  }
 
-  async function loadUpdatesOnce(){ return (await loadUpdates()) || { teams:{} }; }
+  // Reaplica apenas para um teamKey (força recarregar JSON)
+  async function refreshTeam(teamKey) {
+    const data = await loadUpdatesOnce(true); // force = true → refetch
+    const updTeam = data?.teams?.[teamKey] || null;
+    document
+      .querySelectorAll(`.lineup-col .status-card[data-team="${teamKey}"]`)
+      .forEach(sc => applyChipsForTeam(sc.closest('.lineup-col'), updTeam));
+  }
 
-function clearChips(col){
-  col.querySelectorAll('.upd-chip,.chip-alert').forEach(n=>n.remove());
-}
-
-function applyChipsForTeam(col, updTeam){
-  clearChips(col);
-  const label = fmtHuman(updTeam?.last_update);
-  if (label) renderUpdatedChip(col, label);
-  const alertVal = updTeam?.alert ?? updTeam?.alert_msg ?? null;
-  if (alertVal) renderAlertChip(col, alertVal);
-}
-
-// Reaplica apenas para um teamKey
-async function refreshTeam(teamKey){
-  const data = await loadUpdatesOnce();
-  const updTeam = data?.teams?.[teamKey] || null;
-  document.querySelectorAll(`.lineup-col .status-card[data-team="${teamKey}"]`)
-    .forEach(sc => applyChipsForTeam(sc.closest('.lineup-col'), updTeam));
-}
-
-// canal: recebe {type:'refresh', teamKey}
-try{
-  const ch = new BroadcastChannel('lineups');
-  ch.onmessage = (e) => {
-    const k = e?.data?.teamKey || null;
-    if (e?.data?.type === 'refresh' && k) refreshTeam(k);
-  };
-}catch{}
-
+  // canal: recebe {type:'refresh', teamKey}
+  try {
+    const ch = new BroadcastChannel('lineups');
+    ch.onmessage = (e) => {
+      const k = e?.data?.teamKey || null;
+      if (e?.data?.type === 'refresh' && k) refreshTeam(k);
+    };
+  } catch {}
 
   /* =============== Bootstrap =============== */
- document.addEventListener('DOMContentLoaded', async () => {
-  const data = await loadUpdates();
-  await injectChips(data || {});
-});
+  document.addEventListener('DOMContentLoaded', async () => {
+    const data = await loadUpdatesOnce(false); // usa cache normal
+    await injectChips(data || {});
+  });
 
   // util para gerar esqueleto no console
   window.TeamUpdates = {
-    printSkeleton(){
+    printSkeleton() {
       const set = new Set();
-      for (const s of (window.JOGOS || [])){
-        set.add(s.home.key); set.add(s.away.key);
+      for (const s of (window.JOGOS || [])) {
+        set.add(s.home.key);
+        set.add(s.away.key);
       }
-      const teams = [...set].sort()
-        .reduce((acc,k)=>{ acc[k]={ last_update:"", alert:"" }; return acc; }, {});
-      console.log(JSON.stringify({version:1, tz:"-03:00", teams}, null, 2));
+      const teams = [...set]
+        .sort()
+        .reduce((acc, k) => {
+          acc[k] = { last_update: '', alert: '' };
+          return acc;
+        }, {});
+      console.log(JSON.stringify({ version: 1, tz: '-03:00', teams }, null, 2));
     }
   };
 })();

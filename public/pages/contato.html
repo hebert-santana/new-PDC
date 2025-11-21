@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:locale" content="pt_BR">
-  <meta name="generator" content="handmade" />
+  <meta name="generator" content="handmade">
 
   <!-- Visualizações -->
   <script defer src="/_vercel/insights/script.js"></script>
@@ -20,33 +20,342 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config','G-6TJ11HJVRG', { page_title: 'Contato' });
+    gtag('config','G-6TJ11HJVRG', { page_title: 'Contato Comercial' });
   </script>
 
   <!-- SEO -->
-  <title>Contato — Prováveis do Cartola | Hebert Santana</title>
+  <title>Contato Comercial — Prováveis do Cartola | Hebert Santana</title>
   <link rel="canonical" href="https://www.provaveisdocartola.com.br/contato.html">
-  <meta name="description" content="Entre em contato com Hebert Santana — Prováveis do Cartola. Propostas comerciais, mídia kit, parcerias e campanhas. Canais oficiais e exclusivos.">
-  <meta name="keywords" content="contato, Prováveis do Cartola, parcerias, mídia kit, comercial, Hebert Santana">
+  <meta name="description" content="Contato comercial do Prováveis do Cartola. Propostas de mídia, integrações e campanhas segmentadas em futebol e fantasy.">
+  <meta name="keywords" content="contato, Prováveis do Cartola, parcerias, comercial, Hebert Santana">
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Prováveis do Cartola FC">
-  <meta property="og:title" content="Contato — Prováveis do Cartola | Hebert Santana">
-  <meta property="og:description" content="Canais oficiais de contato para propostas comerciais, mídia kit e campanhas do Prováveis do Cartola.">
+  <meta property="og:title" content="Contato Comercial — Prováveis do Cartola | Hebert Santana">
+  <meta property="og:description" content="Canais oficiais para propostas de mídia, integrações e campanhas com o Prováveis do Cartola.">
   <meta property="og:url" content="https://www.provaveisdocartola.com.br/contato.html">
   <meta property="og:image" content="https://www.provaveisdocartola.com.br/assets/img/ui/og-cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Contato — Prováveis do Cartola | Hebert Santana">
-  <meta name="twitter:description" content="Propostas comerciais, mídia kit e parcerias oficiais do Prováveis do Cartola.">
+  <meta name="twitter:title" content="Contato Comercial — Prováveis do Cartola | Hebert Santana">
+  <meta name="twitter:description" content="Contato para parcerias e campanhas do Prováveis do Cartola.">
   <meta name="twitter:image" content="https://www.provaveisdocartola.com.br/assets/img/ui/og-cover.jpg">
 
-  <!-- CSS -->
+  <!-- CSS base do site -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
   <link rel="stylesheet" href="/assets/css/build/styles.css">
-  <link rel="stylesheet" href="/assets/css/build/sobre-mim.css">
+ <link rel="stylesheet" href="/assets/css/build/navbar.css">
+
+  <!-- Estilos específicos da página -->
+  <style>
+    :root{
+      --blk-radius:18px;
+      --blk-pad:24px;
+    }
+
+    body.sobre-ultra{
+      background:#ffffff;
+      color:var(--cinza-escuro);
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,Helvetica,sans-serif;
+    }
+
+    .page-wrap{
+      max-width:1120px;
+      margin:28px auto 40px;
+      padding:0 22px;
+    }
+
+    .sobre-card{
+      background:#fff;
+      border-radius:var(--blk-radius);
+      padding:var(--blk-pad);
+      box-shadow:0 14px 40px rgba(15,23,42,.08);
+    }
+
+    /* HERO */
+    .sobre-hero{
+      display:grid;
+      grid-template-columns:120px 1fr;
+      gap:18px;
+      align-items:center;
+      margin-bottom:18px;
+    }
+
+    .sobre-foto{
+      width:120px;
+      height:120px;
+      border-radius:20px;
+      overflow:hidden;
+      background:#0f172a;
+      display:grid;
+      place-items:center;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+
+    .sobre-foto img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .sobre-titulo{
+      margin:0 0 4px;
+      font-size:1.6rem;
+      font-weight:800;
+      color:var(--cinza-escuro);
+    }
+
+    .sobre-sub{
+      margin:0;
+      font-size:.95rem;
+      color:var(--cinza-claro);
+      max-width:640px;
+      line-height:1.45;
+    }
+
+    /* separador de bloco */
+    .blk{
+      margin-top:24px;
+      padding-top:20px;
+      border-top:1px solid #f0f0f2;
+    }
+
+    .section-title{
+      font-size:.9rem;
+      font-weight:800;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color:var(--laranja);
+      margin:0 0 10px;
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .section-title::before{
+      content:"";
+      display:block;
+      width:24px;
+      height:2px;
+      border-radius:999px;
+      background:var(--laranja);
+    }
+
+    .section-lead{
+      margin:0 0 12px;
+      font-size:.9rem;
+      color:#4b5563;
+    }
+
+    /* KPIs AUDIÊNCIA */
+    .kpi-strip{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-top:8px;
+    }
+
+    .kpi-card{
+      padding:14px 14px 12px;
+      border-radius:16px;
+      background:#fafafa;
+      border:1px solid #e5e7eb;
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+    }
+
+    .kpi-icon{
+      width:30px;
+      height:30px;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      background:#ffffff;
+      border:1px solid #e5e7eb;
+      flex-shrink:0;
+    }
+
+    .kpi-icon i{
+      font-size:1rem;
+      color:#ea580c;
+    }
+
+    .kpi-main{
+      font-size:.92rem;
+      font-weight:800;
+      color:#111827;
+      margin-bottom:2px;
+    }
+
+    .kpi-sub{
+      font-size:.8rem;
+      color:#6b7280;
+    }
+
+    /* GRID CONTATO + PERFIL */
+    .grid-2{
+      display:grid;
+      grid-template-columns:2fr 1.3fr;
+      gap:18px;
+      align-items:flex-start;
+    }
+
+    .grid-2 > div,
+    .grid-2 > section,
+    .grid-2 > aside{
+      min-width:0;
+    }
+
+    .contact-cols{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+
+    /* CARDS DE CONTATO */
+    .contact-card{
+      position:relative;
+      padding:14px;
+      border-radius:14px;
+      border:1px solid #e5e7eb;
+      background:#fff;
+      box-shadow:0 5px 18px rgba(15,23,42,.04);
+      text-decoration:none;
+      color:var(--cinza-escuro);
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      font-size:.9rem;
+      min-height:130px;
+    }
+
+    .contact-card:hover{
+      border-color:var(--laranja);
+      box-shadow:0 10px 24px rgba(15,23,42,.10);
+      text-decoration:none;
+    }
+
+    .contact-card i{
+      font-size:1.25rem;
+      color:var(--laranja);
+    }
+
+    .contact-label{
+      font-weight:800;
+      margin:2px 0 0;
+      font-size:.96rem;
+    }
+
+    .contact-text{
+      margin:0;
+      color:#4b5563;
+      font-size:.9rem;
+    }
+
+    .contact-tag{
+      position:absolute;
+      top:10px;
+      right:10px;
+      font-size:.62rem;
+      font-weight:800;
+      padding:4px 7px;
+      border-radius:999px;
+      background:#f9fafb;
+      border:1px solid #e5e7eb;
+      color:#6b7280;
+    }
+
+    .contact-email{
+      margin:6px 0 0;
+      font-size:.86rem;
+      font-weight:600;
+      color:#111827;
+      word-break:break-all;
+    }
+
+    .info-note{
+      margin:10px 0 0;
+      font-size:.86rem;
+      color:#6b7280;
+    }
+
+    .info-note i{
+      margin-right:4px;
+      color:var(--azul);
+    }
+
+    /* PERFIL DE AUDIÊNCIA */
+    .aud-card{
+      border-radius:16px;
+      border:1px solid #e5e7eb;
+      background:#f7f9fc;
+      padding:14px 16px 12px;
+      box-shadow:0 6px 18px rgba(15,23,42,.04);
+      font-size:.9rem;
+      color:#111827;
+    }
+
+    .aud-title{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:800;
+      margin:0 0 6px;
+      font-size:.95rem;
+    }
+
+    .aud-title i{
+      font-size:1rem;
+      color:#2563eb;
+    }
+
+    .aud-lead{
+      margin:0 0 8px;
+      font-size:.88rem;
+      color:#4b5563;
+    }
+
+    .aud-list{
+      margin:0;
+      padding-left:1.1rem;
+      font-size:.86rem;
+      color:#374151;
+    }
+
+    .aud-list li + li{
+      margin-top:4px;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width:900px){
+      .sobre-hero{
+        grid-template-columns:1fr;
+        text-align:left;
+      }
+      .sobre-foto{
+        margin:0 0 4px;
+      }
+      .grid-2{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:700px){
+      .page-wrap{
+        padding:0 16px;
+      }
+      .kpi-strip{
+        grid-template-columns:1fr;
+      }
+      .contact-cols{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
 
   <!-- ícone -->
   <link rel="icon" href="/assets/img/icons/icon.ico" type="image/x-icon">
@@ -56,24 +365,23 @@
     Este site usa JS para alguns recursos (copiar e-mail, market bar).
   </noscript>
 
-  <!-- HEADER via partial -->
-  <div data-include="header"></div>
-
-  <!-- market bar (compartilhado) -->
-  <div class="container">
-    <div class="marketbar-lane">
-      <div id="market-bar" class="market-bar" role="status" aria-live="polite">
-        <i class="bi bi-graph-up-arrow" aria-hidden="true"></i>
-        <span class="mb-label">Status do mercado:</span>
-        <strong class="mb-status">—</strong>
-        <span class="sep">•</span>
-        <span class="mb-countdown" title="" aria-label="">
-          <i class="bi bi-clock" aria-hidden="true"></i>
-          <span class="mb-ctxt">carregando…</span>
-        </span>
-      </div>
+  <!-- ======================================================================
+       HEADER
+       ====================================================================== -->
+  <header class="container" id="main-image-container">
+    <div class="col-12 d-flex justify-content-center">
+      <h1 id="header-especialista" class="custom-provaveis-item">
+        <span class="visually-hidden">Prováveis do Cartola FC — Escalações da Rodada</span>
+        <img
+          src="/assets/img/ui/provaveisdocartola.svg"
+          alt=""
+          role="presentation"
+          class="provaveis-image"
+          width="600" height="200"
+          loading="eager" decoding="async" />
+      </h1>
     </div>
-  </div>
+  </header>
 
   <!-- botões -->
   <div data-include="navbar"></div>
@@ -82,66 +390,108 @@
 
   <main class="page-wrap">
     <section class="sobre-card">
+      <!-- HERO -->
       <div class="sobre-hero">
         <div class="sobre-foto">
-          <img src="/assets/img/hebert/contato.webp" alt="Foto de Contato" loading="lazy" decoding="async">
+          <img src="/assets/img/hebert/provaveis.webp" alt="Logo Prováveis do Cartola" loading="lazy" decoding="async">
         </div>
         <div>
-          <h1 class="sobre-titulo">Contato Oficial</h1>
-          <p class="sobre-sub">Não é sobre ser <strong>herói</strong> ou <strong>vilão</strong>... é sobre fechar a parceria que Gotham precisa. 🦇</p>
+          <h1 class="sobre-titulo">Contato Comercial &amp; Parcerias</h1>
+          <p class="sobre-sub">
+            Plataforma focada em prováveis escalações, status de jogadores e leitura rápida
+            para decisão no fantasy. Ambiente preparado para campanhas segmentadas em futebol e esportes.
+          </p>
+
+          <!-- KPIs (médias mensais estimadas) -->
+          <div class="kpi-strip" aria-label="Resumo de audiência">
+            <div class="kpi-card">
+              <div class="kpi-icon"><i class="bi bi-graph-up"></i></div>
+              <div>
+                <div class="kpi-main">≈ 550 mil visualizações / mês</div>
+                <div class="kpi-sub">estimativa de tráfego mensal recente do site.</div>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon"><i class="bi bi-people"></i></div>
+              <div>
+                <div class="kpi-main">≈ 27 mil usuários ativos / mês</div>
+                <div class="kpi-sub">base recorrente focada em futebol e fantasy.</div>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon"><i class="bi bi-clock-history"></i></div>
+              <div>
+                <div class="kpi-main">9 min 46 s de engajamento médio</div>
+                <div class="kpi-sub">tempo médio de interação por usuário ativo.</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="sobre-body">
-        <!-- contato -->
-        <section class="contato-cta" aria-labelledby="contatoTitle">
-          <h2 id="contatoTitle">Canais de Contato</h2>
+      <!-- CANAIS OFICIAIS + PERFIL -->
+      <section class="blk" aria-labelledby="canaisTitle">
+        <div class="grid-2">
+          <!-- Coluna: canais -->
+          <div>
+            <h2 id="canaisTitle" class="section-title">Canais oficiais</h2>
+            <p class="section-lead">
+              Use os canais abaixo para propostas comerciais, campanhas e integrações.
+            </p>
 
-          <div class="contato-grid">
-            <!-- WhatsApp -->
-            <a class="cont-card -whats"
-               href="https://wa.me/5537991645699?text=Olá!%20Gostaria%20de%20falar%20sobre%20uma%20parceria%20com%20o%20Prováveis%20do%20Cartola."
-               target="_blank" rel="noopener">
-              <i class="bi bi-whatsapp"></i>
-              <span>WhatsApp</span>
-              <small>Que a Força esteja na sua mensagem…</small>
-              <em class="cont-badge">somente comercial</em>
-            </a>
+            <div class="contact-cols">
+              <!-- WhatsApp -->
+              <a class="contact-card"
+                 href="https://wa.me/5537999414795?text=Olá!%20Gostaria%20de%20falar%20sobre%20uma%20parceria%20com%20o%20Prováveis%20do%20Cartola."
+                 target="_blank" rel="noopener">
+                <i class="bi bi-whatsapp"></i>
+                <div class="contact-label">WhatsApp Comercial</div>
+                <p class="contact-text">
+                  Atendimento direto para mídia, campanhas e negociações.
+                </p>
+                <span class="contact-tag">somente comercial</span>
+              </a>
 
-            <!-- Email -->
-            <a class="cont-card -email"
-               href="mailto:contato@provaveisdocartola.com.br?subject=Proposta%20comercial%20%E2%80%94%20Prov%C3%A1veis%20do%20Cartola"
-               data-mailto="mailto:contato@provaveisdocartola.com.br?subject=Proposta%20comercial%20%E2%80%94%20Prov%C3%A1veis%20do%20Cartola"
-               data-gmail="https://mail.google.com/mail/?view=cm&fs=1&to=contato@provaveisdocartola.com.br&su=Proposta%20comercial%20%E2%80%94%20Prov%C3%A1veis%20do%20Cartola"
-               target="_blank" rel="noopener"
-               aria-label="E-mail Comercial — solicitar mídia kit e propostas">
-              <i class="bi bi-envelope"></i>
-              <span>E-mail</span>
-              <small>Enquanto não temos a JARVIS, vamos de e-mail.</small>
-              <em class="cont-badge">somente comercial</em>
+              <!-- E-mail -->
+              <a class="contact-card cont-card-email -email"
+                 href="mailto:contato@provaveisdocartola.com.br?subject=Proposta%20comercial%20%E2%80%94%20Prov%C3%A1veis%20do%20Cartola"
+                 data-mailto="mailto:contato@provaveisdocartola.com.br?subject=Proposta%20comercial%20%E2%80%94%20Prov%C3%A1veis%20do%20Cartola"
+                 data-gmail="https://mail.google.com/mail/?view=cm&fs=1&to=contato@provaveisdocartola.com.br&su=Proposta%20comercial%20%E2%80%94%20Prov%C3%A1veis%20do%20Cartola"
+                 target="_blank" rel="noopener"
+                 aria-label="E-mail comercial — envio de propostas">
+                <i class="bi bi-envelope"></i>
+                <div class="contact-label">E-mail Comercial</div>
+                <p class="contact-text">
+                  Envios de propostas, formatos e condições comerciais.
+                </p>
+                <span class="contact-tag">somente comercial</span>
+                <p class="contact-email">contato@provaveisdocartola.com.br</p>
+              </a>
+            </div>
 
-              <div class="cont-email">
-                contato@provaveisdocartola.com.br
-                <button type="button" class="copy-btn" data-copy="contato@provaveisdocartola.com.br" title="Copiar e-mail">
-                  <i class="bi bi-clipboard"></i><span>copiar</span>
-                </button>
-              </div>
-            </a>
-
-            <!-- Instagram -->
-            <a class="cont-card -ig" href="https://instagram.com/canal_especialista" target="_blank" rel="noopener">
-              <i class="bi bi-instagram"></i>
-              <span>DM Instagram</span>
-              <small>@canal_especialista</small>
-            </a>
+            <p class="info-note">
+              <i class="bi bi-info-circle"></i>
+              Dúvidas sobre escalações e conteúdo do site são priorizadas nas <strong>lives</strong> e nos <strong>posts oficiais</strong>.
+            </p>
           </div>
 
-          <p class="contato-note">
-            <i class="bi bi-info-circle"></i>
-           Suporte às escalações: siga o <strong>coelho branco</strong> nos comentários das <strong>lives</strong> e <strong>posts</strong>.
-          </p>
-        </section>
-      </div>
+          <!-- Coluna: perfil de audiência -->
+          <aside class="aud-card" aria-label="Perfil de audiência">
+            <p class="aud-title">
+              <i class="bi bi-people-fill"></i>
+              <span>Perfil de audiência</span>
+            </p>
+            <p class="aud-lead">
+              Público concentrado em futebol, fantasy e conteúdo esportivo digital, com forte intenção de consumo de informação em dias de rodada.
+            </p>
+            <ul class="aud-list">
+              <li>picos de acesso em dias de fechamento de mercado;</li>
+              <li>usuários recorrentes ao longo de toda a temporada;</li>
+              <li>cenário adequado para marcas ligadas a esportes, dados, produtos digitais e apostas regulamentadas.</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
     </section>
   </main>
 
@@ -152,41 +502,21 @@
   <script defer src="/assets/js/layout.js"></script>
   <script defer src="/assets/js/market-bar.js"></script>
 
-  <!-- js da página (curto e direto) -->
+  <!-- js da página (apenas ajuste mailto/gmail) -->
   <script>
-  (() => {
-    // Gmail em desktop; mailto no mobile
-    const link = document.querySelector('.cont-card.-email');
-    if (link){
-      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-      const gmail = link.dataset.gmail, mailto = link.dataset.mailto || link.href;
-      link.href = isMobile ? mailto : (gmail || mailto);
-    }
-
-    // copiar e-mail
-    const copyBtn = document.querySelector('.copy-btn');
-    if (copyBtn){
-      copyBtn.addEventListener('click', async (e) => {
-        e.preventDefault();
-        const txt = copyBtn.dataset.copy || 'contato@provaveisdocartola.com.br';
-        try{
-          await navigator.clipboard.writeText(txt);
-          const old = copyBtn.innerHTML;
-          copyBtn.innerHTML = '<i class="bi bi-check2-circle"></i><span>copiado!</span>';
-          setTimeout(() => copyBtn.innerHTML = old, 1500);
-        }catch(_){
-          // fallback (seleciona pro usuário)
-          const s = window.getSelection();
-          const r = document.createRange();
-          const emailEl = copyBtn.parentElement.firstChild; // texto do e-mail
-          r.selectNode(emailEl); s.removeAllRanges(); s.addRange(r);
-        }
-      });
-    }
-  })();
+    (() => {
+      // Gmail em desktop; mailto no mobile
+      const link = document.querySelector('.cont-card-email');
+      if (link){
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        const gmail = link.dataset.gmail;
+        const mailto = link.dataset.mailto || link.href;
+        link.href = isMobile ? mailto : (gmail || mailto);
+      }
+    })();
   </script>
 
-  <!-- ld+json (contato) -->
+  <!-- ld+json (contato + organização) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",

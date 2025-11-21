@@ -90,10 +90,22 @@
       </div>
       <p class="exclusive-note" id="live-ticker" hidden>Sincronizando com a sala…</p>
 
-      <form id="login-form" novalidate>
+      <!-- FORM AGORA ENVIA PARA O BACKEND -->
+      <form id="login-form" method="POST" action="/login" novalidate>
+        <input type="hidden" name="next" id="nextField" value="/influencers.html" />
+
         <div class="mb-3">
           <label for="email" class="form-label">E-mail</label>
-          <input type="email" inputmode="email" id="email" class="form-control" placeholder="seuemail@dominio.com" autocomplete="username" required />
+          <input
+            type="email"
+            inputmode="email"
+            id="email"
+            name="email"
+            class="form-control"
+            placeholder="seuemail@dominio.com"
+            autocomplete="username"
+            required
+          />
         </div>
 
         <div class="mb-1">
@@ -102,7 +114,15 @@
             <button type="button" class="toggle-pass" id="toggle-pass" aria-controls="senha" aria-expanded="false">mostrar</button>
           </label>
           <div class="input-group">
-            <input type="password" id="senha" class="form-control" placeholder="••••••••••" autocomplete="current-password" required />
+            <input
+              type="password"
+              id="senha"
+              name="password"
+              class="form-control"
+              placeholder="••••••••••"
+              autocomplete="current-password"
+              required
+            />
           </div>
         </div>
 
@@ -135,138 +155,97 @@
   </footer>
 
   <script>
-    // ===== Config =====
-    const URLP = new URLSearchParams(location.search);
-    const PASS_B64 = "YW1pZ29zZG9zcHJvdmF2ZWlz";
+  (function(){
+    const params = new URLSearchParams(window.location.search);
 
+    // next (redirect após login)
+    const nextField = document.getElementById('nextField');
+    const nextParam = params.get('next') || '/influencers.html';
+    if (nextField) nextField.value = nextParam;
 
-
-
-
-    
-    const ALLOWED_EMAILS_B64 = new Set([
-      "aW5mbHVlbmNlckBleGVtcGxvLmNvbQ==",
-      "aGViZXJ0LmZzYW50YW5hQGdtYWlsLmNvbQ==",
-    ]);
-
-    // ===== Base64 seguro (Unicode) =====
-    const toB64 = (s) => btoa(String.fromCharCode(...new TextEncoder().encode((s || "").trim())));
-    const fromB64 = (b) => new TextDecoder().decode(Uint8Array.from(atob(b), c => c.charCodeAt(0)));
-
-    // ===== Decodifique constantes e prepare conjuntos =====
-    const PASS_PLAIN = fromB64(PASS_B64);
-    const ALLOWED_EMAILS = new Set([...ALLOWED_EMAILS_B64].map(fromB64));
-
-    // ===== Token com TTL =====
-    function issueToken(email, ttlHours = 12) {
-      const now = Date.now();
-      return toB64(JSON.stringify({ email, iat: now, exp: now + ttlHours * 3600 * 1000 }));
-    }
-    function isTokenValid(tok) {
-      try { const { exp } = JSON.parse(fromB64(tok)); return Date.now() < exp; } catch { return false; }
-    }
-    function saveSession(token, remember) {
-      const key = "influ_auth";
-      if (remember) { localStorage.setItem(key, token); sessionStorage.removeItem(key); }
-      else { sessionStorage.setItem(key, token); localStorage.removeItem(key); }
+    // mensagens de erro vindas do servidor (?error=1/2/3)
+    const errParam = params.get('error');
+    const errBox = document.getElementById('err');
+    if (errParam && errBox) {
+      let msg = 'Não foi possível realizar o login.';
+      if (errParam === '1') msg = 'E-mail ou senha inválidos.';
+      else if (errParam === '2') msg = 'Este e-mail não está autorizado para acesso.';
+      else if (errParam === '3') msg = 'Erro interno ao processar o login. Tente novamente.';
+      errBox.textContent = msg;
+      errBox.style.display = 'block';
     }
 
-    // ===== Toggle senha =====
+    // foco inicial no e-mail
+    const emailInput = document.getElementById('email');
+    if (emailInput) emailInput.focus();
+
+    // toggle mostrar/ocultar senha
     const passInput = document.getElementById('senha');
     const toggle = document.getElementById('toggle-pass');
-    toggle.addEventListener('click', () => {
-      const isText = passInput.type === 'text';
-      passInput.type = isText ? 'password' : 'text';
-      toggle.textContent = isText ? 'mostrar' : 'ocultar';
-      toggle.setAttribute('aria-expanded', String(!isText));
-    });
+    if (passInput && toggle) {
+      toggle.addEventListener('click', () => {
+        const isText = passInput.type === 'text';
+        passInput.type = isText ? 'password' : 'text';
+        toggle.textContent = isText ? 'mostrar' : 'ocultar';
+        toggle.setAttribute('aria-expanded', String(!isText));
+      });
+    }
 
-    // ===== Login =====
+    // validação mínima no front (só pra UX)
     const form = document.getElementById('login-form');
-    const errBox = document.getElementById('err');
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  errBox.style.display = 'none';
+    if (form && errBox) {
+      form.addEventListener('submit', (e) => {
+        if (!emailInput.value.trim() || !passInput.value.trim()) {
+          e.preventDefault();
+          errBox.textContent = 'Preencha e-mail e senha.';
+          errBox.style.display = 'block';
+        }
+      });
+    }
 
-  const rawEmail = (document.getElementById('email').value || '');
-  const rawPass  = (document.getElementById('senha').value || '');
-  const remember = document.getElementById('remember').checked;
-
-  const email = rawEmail.trim().toLowerCase();
-  const senha = rawPass.trim();
-
-  if (!email || !senha) {
-    errBox.textContent = 'Preencha e-mail e senha.'; errBox.style.display = 'block'; return;
-  }
-
-  // declare primeiro, use depois
-  const emailOk = ALLOWED_EMAILS.has(email);
-  const passOk  = senha === PASS_PLAIN;
-
-  // debug SÓ depois de inicializar
-  // console.log({ email, PASS_PLAIN, allowed:[...ALLOWED_EMAILS], emailOk, passOk });
-
-  if (!emailOk || !passOk) {
-    errBox.textContent = 'Credenciais inválidas.'; errBox.style.display = 'block'; return;
-  }
-
-  const token = issueToken(email, remember ? 720 : 12);
-  saveSession(token, remember);
-
-  const maxAge = (remember ? 720 : 12) * 3600;
-  document.cookie = `influ_auth=${encodeURIComponent(token)}; Path=/; Max-Age=${maxAge}; SameSite=Lax${location.protocol === 'https:' ? '; Secure' : ''}`;
-
-  const next = URLP.get('next');
-  location.href = next || '/influencers.html';
-});
-
-
-    // ===== Auto-bypass se já logado =====
-    (function autoBypass() {
-      const tok = localStorage.getItem('influ_auth') || sessionStorage.getItem('influ_auth');
-      if (!tok || !isTokenValid(tok)) return;
-      const next = URLP.get('next');
-      location.replace(next || '/influencers.html');
-    })();
-
-    // ===== Modo LIVE =====
-    const LIVE = URLP.get('live') === '1';
-    (function applyLive() {
-      const card = document.querySelector('.login-card');
-      const pill = document.getElementById('live-pill');
-      const meta = document.getElementById('live-meta');
-      const btn = document.getElementById('btn-login');
+    // MODO LIVE (visual, igual antes)
+    const LIVE = params.get('live') === '1';
+    if (LIVE) {
+      const card   = document.querySelector('.login-card');
+      const pill   = document.getElementById('live-pill');
+      const meta   = document.getElementById('live-meta');
+      const btn    = document.getElementById('btn-login');
       const ticker = document.getElementById('live-ticker');
-      if (!LIVE || !card || !pill || !meta || !btn) return;
 
-      document.body.classList.add('bg-vignette');
-      card.classList.add('live');
-      btn.classList.add('live');
-      btn.innerHTML = '<i class="bi bi-broadcast-pin"></i> Entrar na LIVE';
-      pill.hidden = false;
-      meta.hidden = false;
-      ticker.hidden = false;
+      if (card && pill && meta && btn && ticker) {
+        document.body.classList.add('bg-vignette');
+        card.classList.add('live');
+        btn.classList.add('live');
+        btn.innerHTML = '<i class="bi bi-broadcast-pin"></i> Entrar na LIVE';
+        pill.hidden = false;
+        meta.hidden = false;
+        ticker.hidden = false;
 
-      const start = new Date();
-      const hh = String(start.getHours()).padStart(2, '0');
-      const mm = String(start.getMinutes()).padStart(2, '0');
-      document.getElementById('live-start').textContent = `${hh}:${mm}`;
+        const start = new Date();
+        const hh = String(start.getHours()).padStart(2, '0');
+        const mm = String(start.getMinutes()).padStart(2, '0');
+        const liveStartEl = document.getElementById('live-start');
+        if (liveStartEl) liveStartEl.textContent = `${hh}:${mm}`;
 
-      let viewers = 128 + Math.floor(Math.random() * 40);
-      const viewersEl = document.getElementById('live-viewers');
-      viewersEl.textContent = `${viewers} assistindo`;
-      setInterval(() => {
-        viewers += (Math.random() < .5 ? -1 : 1) * Math.floor(Math.random() * 3);
-        viewers = Math.max(1, viewers);
-        viewersEl.textContent = `${viewers} assistindo`;
-      }, 3000);
+        let viewers = 128 + Math.floor(Math.random() * 40);
+        const viewersEl = document.getElementById('live-viewers');
+        if (viewersEl) {
+          viewersEl.textContent = `${viewers} assistindo`;
+          setInterval(() => {
+            viewers += (Math.random() < .5 ? -1 : 1) * Math.floor(Math.random() * 3);
+            viewers = Math.max(1, viewers);
+            viewersEl.textContent = `${viewers} assistindo`;
+          }, 3000);
+        }
 
-      let dots = 0;
-      setInterval(() => {
-        dots = (dots + 1) % 4;
-        ticker.textContent = 'Sincronizando com a sala' + '.'.repeat(dots);
-      }, 900);
-    })();
+        let dots = 0;
+        setInterval(() => {
+          dots = (dots + 1) % 4;
+          ticker.textContent = 'Sincronizando com a sala' + '.'.repeat(dots);
+        }, 900);
+      }
+    }
+  })();
   </script>
 </body>
 </html>

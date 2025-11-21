@@ -1,7 +1,5 @@
 {
-  "comingSoon": true,
+  "comingSoon": false,
   "message": "O levantamento das escalações está em andamento! — entre no nosso canal e receba o aviso em primeira mão 😉",
-  "hideWhenSoon": false,
-  "useSkeleton": true,
-  "showBiascore": false
+  "hideWhenSoon": true 
 }

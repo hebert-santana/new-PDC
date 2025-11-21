@@ -1495,3 +1495,39 @@ body.has-bottom-ad .nav-shortcuts{
     margin-inline:auto;
   }
 }
+
+
+
+/* DESKTOP: botão Ligas em degradê verde */
+@media (min-width:768px){
+  .hero-buttons .btn-nav-ligas{
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+    box-shadow:0 4px 10px rgba(22,163,74,0.28);
+  }
+
+  .hero-buttons .btn-nav-ligas:hover{
+    filter:brightness(1.04);
+    box-shadow:0 6px 14px rgba(22,163,74,0.36);
+  }
+
+  .hero-buttons .btn-nav-ligas.is-active,
+  .hero-buttons .btn-nav-ligas[aria-current="page"]{
+    filter:brightness(1.08);
+    box-shadow:
+      0 7px 18px rgba(22,163,74,0.42),
+      0 0 0 1px rgba(255,255,255,0.9);
+  }
+}
+
+
+/* MOBILE: atalho Ligas em verde */
+.nav-shortcut-ligas{
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  box-shadow:0 2px 6px rgba(22,163,74,0.32);
+}
+
+.nav-shortcut-ligas.is-active{
+  background:linear-gradient(135deg,#16a34a,#16a34a);
+}
+
+

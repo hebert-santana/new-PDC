@@ -20,3 +20,6 @@ Thumbs.db
 # testes/coverage
 coverage/
 !public/data/team-updates.json
+
+# senhas
+.env
