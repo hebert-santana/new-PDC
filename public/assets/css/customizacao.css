@@ -1091,3 +1091,9 @@
     margin-bottom:18px;
   }
 }
+
+
+/* editando o balão dos desfalques */
+.status-head{
+  display:none !important;
+}

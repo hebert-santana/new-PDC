@@ -5,140 +5,50 @@
     "destaques": "https://api.cartola.globo.com/auth/mercado/destaques"
   },
   "captured_at": {
-    "iso": "2025-11-15T15:12:07.990Z",
-    "epoch": 1763219527
+    "iso": "2025-11-21T19:51:28.625Z",
+    "epoch": 1763754688
   },
-  "rodada_atual": 34,
+  "rodada_atual": 35,
   "status_mercado": 1,
-  "fechamento_timestamp": 1763598540,
-  "times_escalados": 223350,
+  "fechamento_timestamp": 1763850540,
+  "times_escalados": 178349,
   "status_error": "auth_status_fallback: HTTP 404 https://api.cartola.globo.com/auth/mercado/status :: 404 page not found\n",
   "data": [
     {
-      "posicao": "Atacante",
-      "posicao_abreviacao": "ATA",
-      "clube": "CRU",
-      "clube_nome": "CRU",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/CRU/60x60.png",
-      "Atleta": {
-        "nome": "Kaio Jorge Pinto Ramos",
-        "apelido": "Kaio Jorge",
-        "apelido_abreviado": "K. Jorge",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/CRU/FORMATO.png",
-        "atleta_id": 103445,
-        "preco_editorial": 9
-      },
-      "clube_id": 283,
-      "escalacoes": 165289,
-      "pct": 74
-    },
-    {
       "posicao": "Meia",
       "posicao_abreviacao": "MEI",
-      "clube": "SAN",
-      "clube_nome": "SAN",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/SAN/60x60.png",
-      "Atleta": {
-        "nome": "Neymar da Silva Santos Júnior",
-        "apelido": "Neymar",
-        "apelido_abreviado": "Neymar",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/SAN/FORMATO.png",
-        "atleta_id": 63007,
-        "preco_editorial": 25
-      },
-      "clube_id": 277,
-      "escalacoes": 108644,
-      "pct": 49
-    },
-    {
-      "posicao": "Zagueiro",
-      "posicao_abreviacao": "ZAG",
-      "clube": "CRU",
-      "clube_nome": "CRU",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/CRU/60x60.png",
-      "Atleta": {
-        "nome": "Lucas Hernán Villalba",
-        "apelido": "Villalba",
-        "apelido_abreviado": "Villalba",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/CRU/FORMATO.png",
-        "atleta_id": 106593,
-        "preco_editorial": 3
-      },
-      "clube_id": 283,
-      "escalacoes": 94734,
-      "pct": 42
-    },
-    {
-      "posicao": "Atacante",
-      "posicao_abreviacao": "ATA",
-      "clube": "GRE",
-      "clube_nome": "GRE",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/GRE/60x60.png",
-      "Atleta": {
-        "nome": "Carlos Vinícius Alves Morais",
-        "apelido": "Carlos Vinícius",
-        "apelido_abreviado": "C. Vinícius",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/GRE/FORMATO.png",
-        "atleta_id": 105563,
-        "preco_editorial": 9
-      },
-      "clube_id": 284,
-      "escalacoes": 90568,
-      "pct": 41
-    },
-    {
-      "posicao": "Zagueiro",
-      "posicao_abreviacao": "ZAG",
       "clube": "FLA",
       "clube_nome": "FLA",
       "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/FLA/60x60.png",
       "Atleta": {
-        "nome": "Leonardo Pereira",
-        "apelido": "Léo Pereira",
-        "apelido_abreviado": "L. Pereira",
+        "nome": "Giorgian Daniel de Arrascaeta Benedetti",
+        "apelido": "Arrascaeta",
+        "apelido_abreviado": "Arrascaeta",
         "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/FLA/FORMATO.png",
-        "atleta_id": 83528,
-        "preco_editorial": 10
+        "atleta_id": 87863,
+        "preco_editorial": 17
       },
       "clube_id": 262,
-      "escalacoes": 87558,
-      "pct": 39
+      "escalacoes": 140220,
+      "pct": 79
     },
     {
-      "posicao": "Meia",
-      "posicao_abreviacao": "MEI",
-      "clube": "BAH",
-      "clube_nome": "BAH",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/BAH/60x60.png",
+      "posicao": "Atacante",
+      "posicao_abreviacao": "ATA",
+      "clube": "PAL",
+      "clube_nome": "PAL",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/PAL/60x60.png",
       "Atleta": {
-        "nome": "Jean Lucas de Souza Oliveira",
-        "apelido": "Jean Lucas",
-        "apelido_abreviado": "J. Lucas",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/BAH/FORMATO.png",
-        "atleta_id": 98517,
-        "preco_editorial": 6
+        "nome": "Vitor Hugo Roque Ferreira",
+        "apelido": "Vitor Roque",
+        "apelido_abreviado": "V. Roque",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/PAL/FORMATO.png",
+        "atleta_id": 114802,
+        "preco_editorial": 15
       },
-      "clube_id": 265,
-      "escalacoes": 87254,
-      "pct": 39
-    },
-    {
-      "posicao": "Lateral",
-      "posicao_abreviacao": "LAT",
-      "clube": "CRU",
-      "clube_nome": "CRU",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/CRU/60x60.png",
-      "Atleta": {
-        "nome": "Kaiki Bruno da Silva",
-        "apelido": "Kaiki Bruno",
-        "apelido_abreviado": "K. Bruno",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/CRU/FORMATO.png",
-        "atleta_id": 112709,
-        "preco_editorial": 5
-      },
-      "clube_id": 283,
-      "escalacoes": 85438,
-      "pct": 38
+      "clube_id": 275,
+      "escalacoes": 135035,
+      "pct": 76
     },
     {
       "posicao": "Lateral",
@@ -155,206 +65,80 @@
         "preco_editorial": 9
       },
       "clube_id": 2305,
-      "escalacoes": 79233,
-      "pct": 35
+      "escalacoes": 123833,
+      "pct": 69
     },
     {
-      "posicao": "Técnico",
-      "posicao_abreviacao": "TEC",
+      "posicao": "Atacante",
+      "posicao_abreviacao": "ATA",
       "clube": "CRU",
       "clube_nome": "CRU",
       "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/CRU/60x60.png",
       "Atleta": {
-        "nome": "José Leonardo Nunes Alves Sousa Jardim",
-        "apelido": "Leonardo Jardim",
-        "apelido_abreviado": "L. Jardim",
+        "nome": "Kaio Jorge Pinto Ramos",
+        "apelido": "Kaio Jorge",
+        "apelido_abreviado": "K. Jorge",
         "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/CRU/FORMATO.png",
-        "atleta_id": 88963,
-        "preco_editorial": 8
-      },
-      "clube_id": 283,
-      "escalacoes": 76422,
-      "pct": 34
-    },
-    {
-      "posicao": "Meia",
-      "posicao_abreviacao": "MEI",
-      "clube": "INT",
-      "clube_nome": "INT",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/INT/60x60.png",
-      "Atleta": {
-        "nome": "Alan Patrick Lourenço",
-        "apelido": "Alan Patrick",
-        "apelido_abreviado": "A. Patrick",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/INT/FORMATO.png",
-        "atleta_id": 68685,
-        "preco_editorial": 18
-      },
-      "clube_id": 285,
-      "escalacoes": 76395,
-      "pct": 34
-    },
-    {
-      "posicao": "Lateral",
-      "posicao_abreviacao": "LAT",
-      "clube": "CRU",
-      "clube_nome": "CRU",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/CRU/60x60.png",
-      "Atleta": {
-        "nome": "Willian de Asevedo Furtado",
-        "apelido": "William",
-        "apelido_abreviado": "William",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/CRU/FORMATO.png",
-        "atleta_id": 89275,
-        "preco_editorial": 13
-      },
-      "clube_id": 283,
-      "escalacoes": 66927,
-      "pct": 30
-    },
-    {
-      "posicao": "Atacante",
-      "posicao_abreviacao": "ATA",
-      "clube": "BAH",
-      "clube_nome": "BAH",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/BAH/60x60.png",
-      "Atleta": {
-        "nome": "Willian José da Silva",
-        "apelido": "Willian José",
-        "apelido_abreviado": "W. José",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/BAH/FORMATO.png",
-        "atleta_id": 68996,
-        "preco_editorial": 11
-      },
-      "clube_id": 265,
-      "escalacoes": 64344,
-      "pct": 29
-    },
-    {
-      "posicao": "Goleiro",
-      "posicao_abreviacao": "GOL",
-      "clube": "CRU",
-      "clube_nome": "CRU",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/CRU/60x60.png",
-      "Atleta": {
-        "nome": "Cássio Roberto Ramos",
-        "apelido": "Cássio",
-        "apelido_abreviado": "Cássio",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/CRU/FORMATO.png",
-        "atleta_id": 42234,
-        "preco_editorial": 8
-      },
-      "clube_id": 283,
-      "escalacoes": 60251,
-      "pct": 27
-    },
-    {
-      "posicao": "Atacante",
-      "posicao_abreviacao": "ATA",
-      "clube": "COR",
-      "clube_nome": "COR",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/COR/60x60.png",
-      "Atleta": {
-        "nome": "Yuri Alberto Monteiro da Silva",
-        "apelido": "Yuri Alberto",
-        "apelido_abreviado": "Y. Alberto",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/COR/FORMATO.png",
-        "atleta_id": 100652,
-        "preco_editorial": 16
-      },
-      "clube_id": 264,
-      "escalacoes": 51905,
-      "pct": 23
-    },
-    {
-      "posicao": "Atacante",
-      "posicao_abreviacao": "ATA",
-      "clube": "VAS",
-      "clube_nome": "VAS",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/VAS/60x60.png",
-      "Atleta": {
-        "nome": "Rayan Vitor Simplício Rocha",
-        "apelido": "Rayan",
-        "apelido_abreviado": "Rayan",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/VAS/FORMATO.png",
-        "atleta_id": 122486,
-        "preco_editorial": 5
-      },
-      "clube_id": 267,
-      "escalacoes": 50051,
-      "pct": 22
-    },
-    {
-      "posicao": "Atacante",
-      "posicao_abreviacao": "ATA",
-      "clube": "FLA",
-      "clube_nome": "FLA",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/FLA/60x60.png",
-      "Atleta": {
-        "nome": "Samuel Dias Lino",
-        "apelido": "Samuel Lino",
-        "apelido_abreviado": "S. Lino",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/FLA/FORMATO.png",
-        "atleta_id": 98873,
-        "preco_editorial": 15
-      },
-      "clube_id": 262,
-      "escalacoes": 50012,
-      "pct": 22
-    },
-    {
-      "posicao": "Meia",
-      "posicao_abreviacao": "MEI",
-      "clube": "SAN",
-      "clube_nome": "SAN",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/SAN/60x60.png",
-      "Atleta": {
-        "nome": "Álvaro Martín Barreal",
-        "apelido": "Barreal",
-        "apelido_abreviado": "Barreal",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/SAN/FORMATO.png",
-        "atleta_id": 126471,
-        "preco_editorial": 6
-      },
-      "clube_id": 277,
-      "escalacoes": 44265,
-      "pct": 20
-    },
-    {
-      "posicao": "Meia",
-      "posicao_abreviacao": "MEI",
-      "clube": "VAS",
-      "clube_nome": "VAS",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/VAS/60x60.png",
-      "Atleta": {
-        "nome": "Philippe Coutinho Correia",
-        "apelido": "Philippe Coutinho",
-        "apelido_abreviado": "P. Coutinho",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/VAS/FORMATO.png",
-        "atleta_id": 68899,
-        "preco_editorial": 14
-      },
-      "clube_id": 267,
-      "escalacoes": 41134,
-      "pct": 18
-    },
-    {
-      "posicao": "Goleiro",
-      "posicao_abreviacao": "GOL",
-      "clube": "FLA",
-      "clube_nome": "FLA",
-      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/FLA/60x60.png",
-      "Atleta": {
-        "nome": "Agustín Daniel Rossi",
-        "apelido": "Rossi",
-        "apelido_abreviado": "Rossi",
-        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/FLA/FORMATO.png",
-        "atleta_id": 99552,
+        "atleta_id": 103445,
         "preco_editorial": 9
       },
+      "clube_id": 283,
+      "escalacoes": 119119,
+      "pct": 67
+    },
+    {
+      "posicao": "Meia",
+      "posicao_abreviacao": "MEI",
+      "clube": "CRU",
+      "clube_nome": "CRU",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/CRU/60x60.png",
+      "Atleta": {
+        "nome": "Matheus Fellipe Costa Pereira",
+        "apelido": "Matheus Pereira",
+        "apelido_abreviado": "M. Pereira",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/CRU/FORMATO.png",
+        "atleta_id": 96610,
+        "preco_editorial": 19
+      },
+      "clube_id": 283,
+      "escalacoes": 100857,
+      "pct": 57
+    },
+    {
+      "posicao": "Zagueiro",
+      "posicao_abreviacao": "ZAG",
+      "clube": "FLA",
+      "clube_nome": "FLA",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/FLA/60x60.png",
+      "Atleta": {
+        "nome": "Leonardo Pereira",
+        "apelido": "Léo Pereira",
+        "apelido_abreviado": "L. Pereira",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/FLA/FORMATO.png",
+        "atleta_id": 83528,
+        "preco_editorial": 10
+      },
       "clube_id": 262,
-      "escalacoes": 39814,
-      "pct": 18
+      "escalacoes": 91638,
+      "pct": 51
+    },
+    {
+      "posicao": "Zagueiro",
+      "posicao_abreviacao": "ZAG",
+      "clube": "PAL",
+      "clube_nome": "PAL",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/PAL/60x60.png",
+      "Atleta": {
+        "nome": "Gustavo Raúl Gómez Portillo",
+        "apelido": "Gustavo Gómez",
+        "apelido_abreviado": "G. Gómez",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/PAL/FORMATO.png",
+        "atleta_id": 71684,
+        "preco_editorial": 11
+      },
+      "clube_id": 275,
+      "escalacoes": 78654,
+      "pct": 44
     },
     {
       "posicao": "Técnico",
@@ -371,8 +155,224 @@
         "preco_editorial": 12
       },
       "clube_id": 262,
-      "escalacoes": 38414,
+      "escalacoes": 73554,
+      "pct": 41
+    },
+    {
+      "posicao": "Meia",
+      "posicao_abreviacao": "MEI",
+      "clube": "INT",
+      "clube_nome": "INT",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/INT/60x60.png",
+      "Atleta": {
+        "nome": "Alan Patrick Lourenço",
+        "apelido": "Alan Patrick",
+        "apelido_abreviado": "A. Patrick",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/INT/FORMATO.png",
+        "atleta_id": 68685,
+        "preco_editorial": 18
+      },
+      "clube_id": 285,
+      "escalacoes": 62291,
+      "pct": 35
+    },
+    {
+      "posicao": "Atacante",
+      "posicao_abreviacao": "ATA",
+      "clube": "PAL",
+      "clube_nome": "PAL",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/PAL/60x60.png",
+      "Atleta": {
+        "nome": "José Manuel Alberto López",
+        "apelido": "Flaco López",
+        "apelido_abreviado": "F. López",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/PAL/FORMATO.png",
+        "atleta_id": 113103,
+        "preco_editorial": 9
+      },
+      "clube_id": 275,
+      "escalacoes": 61023,
+      "pct": 34
+    },
+    {
+      "posicao": "Lateral",
+      "posicao_abreviacao": "LAT",
+      "clube": "CRU",
+      "clube_nome": "CRU",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/CRU/60x60.png",
+      "Atleta": {
+        "nome": "Kaiki Bruno da Silva",
+        "apelido": "Kaiki Bruno",
+        "apelido_abreviado": "K. Bruno",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/CRU/FORMATO.png",
+        "atleta_id": 112709,
+        "preco_editorial": 5
+      },
+      "clube_id": 283,
+      "escalacoes": 50342,
+      "pct": 28
+    },
+    {
+      "posicao": "Atacante",
+      "posicao_abreviacao": "ATA",
+      "clube": "BAH",
+      "clube_nome": "BAH",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/BAH/60x60.png",
+      "Atleta": {
+        "nome": "Willian José da Silva",
+        "apelido": "Willian José",
+        "apelido_abreviado": "W. José",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/BAH/FORMATO.png",
+        "atleta_id": 68996,
+        "preco_editorial": 11
+      },
+      "clube_id": 265,
+      "escalacoes": 49868,
+      "pct": 28
+    },
+    {
+      "posicao": "Goleiro",
+      "posicao_abreviacao": "GOL",
+      "clube": "MIR",
+      "clube_nome": "MIR",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/MIR/60x60.png",
+      "Atleta": {
+        "nome": "Walter Leandro Capeloza Artune",
+        "apelido": "Walter",
+        "apelido_abreviado": "Walter",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/MIR/FORMATO.png",
+        "atleta_id": 51413,
+        "preco_editorial": 6
+      },
+      "clube_id": 2305,
+      "escalacoes": 42018,
+      "pct": 24
+    },
+    {
+      "posicao": "Meia",
+      "posicao_abreviacao": "MEI",
+      "clube": "FLA",
+      "clube_nome": "FLA",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/FLA/60x60.png",
+      "Atleta": {
+        "nome": "Jorge Andrés Carrascal Guardo",
+        "apelido": "Carrascal",
+        "apelido_abreviado": "Carrascal",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/FLA/FORMATO.png",
+        "atleta_id": 105436,
+        "preco_editorial": 9
+      },
+      "clube_id": 262,
+      "escalacoes": 41487,
+      "pct": 23
+    },
+    {
+      "posicao": "Meia",
+      "posicao_abreviacao": "MEI",
+      "clube": "SAN",
+      "clube_nome": "SAN",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/SAN/60x60.png",
+      "Atleta": {
+        "nome": "Neymar da Silva Santos Júnior",
+        "apelido": "Neymar",
+        "apelido_abreviado": "Neymar",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/SAN/FORMATO.png",
+        "atleta_id": 63007,
+        "preco_editorial": 25
+      },
+      "clube_id": 277,
+      "escalacoes": 38406,
+      "pct": 22
+    },
+    {
+      "posicao": "Atacante",
+      "posicao_abreviacao": "ATA",
+      "clube": "SAO",
+      "clube_nome": "SAO",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/SAO/60x60.png",
+      "Atleta": {
+        "nome": "Luciano da Rocha Neves",
+        "apelido": "Luciano",
+        "apelido_abreviado": "Luciano",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/SAO/FORMATO.png",
+        "atleta_id": 80287,
+        "preco_editorial": 12
+      },
+      "clube_id": 276,
+      "escalacoes": 37985,
+      "pct": 21
+    },
+    {
+      "posicao": "Goleiro",
+      "posicao_abreviacao": "GOL",
+      "clube": "FLA",
+      "clube_nome": "FLA",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/FLA/60x60.png",
+      "Atleta": {
+        "nome": "Agustín Daniel Rossi",
+        "apelido": "Rossi",
+        "apelido_abreviado": "Rossi",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/FLA/FORMATO.png",
+        "atleta_id": 99552,
+        "preco_editorial": 9
+      },
+      "clube_id": 262,
+      "escalacoes": 36074,
+      "pct": 20
+    },
+    {
+      "posicao": "Lateral",
+      "posicao_abreviacao": "LAT",
+      "clube": "PAL",
+      "clube_nome": "PAL",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/PAL/60x60.png",
+      "Atleta": {
+        "nome": "Joaquín Piquerez Moreira",
+        "apelido": "Piquerez",
+        "apelido_abreviado": "Piquerez",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/PAL/FORMATO.png",
+        "atleta_id": 102130,
+        "preco_editorial": 12
+      },
+      "clube_id": 275,
+      "escalacoes": 30770,
       "pct": 17
+    },
+    {
+      "posicao": "Zagueiro",
+      "posicao_abreviacao": "ZAG",
+      "clube": "BOT",
+      "clube_nome": "BOT",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/BOT/60x60.png",
+      "Atleta": {
+        "nome": "Alexander Nahuel Barboza Ullúa",
+        "apelido": "Alexander Barboza",
+        "apelido_abreviado": "A. Barboza",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/BOT/FORMATO.png",
+        "atleta_id": 99274,
+        "preco_editorial": 10
+      },
+      "clube_id": 263,
+      "escalacoes": 30767,
+      "pct": 17
+    },
+    {
+      "posicao": "Zagueiro",
+      "posicao_abreviacao": "ZAG",
+      "clube": "CRU",
+      "clube_nome": "CRU",
+      "escudo_clube": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/CRU/60x60.png",
+      "Atleta": {
+        "nome": "Fabrício Bruno Soares de Faria",
+        "apelido": "Fabrício Bruno",
+        "apelido_abreviado": "F. Bruno",
+        "foto": "https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/silhuetas/CRU/FORMATO.png",
+        "atleta_id": 90768,
+        "preco_editorial": 11
+      },
+      "clube_id": 283,
+      "escalacoes": 28536,
+      "pct": 16
     }
   ]
 }

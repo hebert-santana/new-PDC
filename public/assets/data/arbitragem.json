@@ -1,70 +1,70 @@
 {
   "comingSoon": false,
   "hideWhenSoon": false,
-  "style": "stealth",
-  "message": "Arbitragem da 29ª rodada definida.",
+  "style": "micro",
+  "message": "Arbitragem da 35ª rodada definida.",
   "enabled": true,
-  "updated_at": "2025-10-17T17:00:00-03:00",
+  "updated_at": "2025-11-08T12:00:00-03:05",
   "matches": {
     "jogo-01": {
-      "home": "Corinthians",
+      "home": "Sport",
       "away": "Atlético Mineiro",
-      "referee": "Alex Gomes Stefano",
-      "stats": { "fouls": 34.29, "yellows": 5.29, "reds": 0.35, "pens": 0.41 }
+      "referee": "Felipe Fernandes",
+      "stats": { "fouls": 29.5, "yellows": 5.5, "reds": 0.20, "pens": 0.30 }
     },
     "jogo-02": {
-      "home": "Cruzeiro",
-      "away": "Fortaleza",
-      "referee": "Rodrigo Pereira de Lima",
-      "stats": { "fouls": 28.89, "yellows": 5.44, "reds": 0.11, "pens": 0.22 }
+      "home": "Vasco da Gama",
+      "away": "Juventude",
+      "referee": "Fernando de Salles",
+      "stats": { "fouls": 29.5, "yellows": 4.2, "reds": 1.0, "pens": 0.30 }
     },
     "jogo-03": {
-      "home": "Flamengo",
-      "away": "Palmeiras",
-      "referee": "Wilton Pereira Sampaio",
-      "stats": { "fouls": 27.50, "yellows": 5.44, "reds": 0.31, "pens": 0.19 }
+      "home": "Internacional",
+      "away": "Bahia",
+      "referee": "Jonathan Benkenstein",
+      "stats": { "fouls": 24.5, "yellows": 2.9, "reds": 0.0, "pens": 0.00 }
     },
     "jogo-04": {
-      "home": "Mirassol",
-      "away": "São Paulo",
-      "referee": "Matheus Candançan",
-      "stats": { "fouls": 26.77, "yellows": 3.15, "reds": 0.54, "pens": 0.15 }
+      "home": "São Paulo",
+      "away": "Red Bull Bragantino",
+      "referee": "André Luiz",
+      "stats": { "fouls": 32.2, "yellows": 6.2, "reds": 0.35, "pens": 0.55 }
     },
     "jogo-05": {
-      "home": "Internacional",
-      "away": "Sport",
-      "referee": "Lucas Paulo Torezin",
-      "stats": { "fouls": 25.93, "yellows": 5.14, "reds": 0.21, "pens": 0.43 }
+      "home": "Corinthians",
+      "away": "Ceará",
+      "referee": "Jefferson de Moraes",
+      "stats": { "fouls": 24.5, "yellows": 5.0, "reds": 0.7, "pens": 0.20 }
     },
     "jogo-06": {
-      "home": "Ceará",
-      "away": "Botafogo",
-      "referee": "Davi de Oliveira Lacerda",
-      "stats": { "fouls": 23.32, "yellows": 4.41, "reds": 0.09, "pens": 0.23 }
+      "home": "Cruzeiro",
+      "away": "Fluminense",
+      "referee": "Yuri Ferreira",
+      "stats": { "fouls": 33.0, "yellows": 6.7, "reds": 0.10, "pens": 0.35 }
     },
     "jogo-07": {
-      "home": "Bahia",
-      "away": "Grêmio",
-      "referee": "Raphael Claus",
-      "stats": { "fouls": 23.19, "yellows": 4.06, "reds": 0.19, "pens": 0.38 }
+      "home": "Vitória",
+      "away": "Botafogo",
+      "referee": "Alex Stefano",
+      "stats": { "fouls": 30.6, "yellows": 5.1, "reds": 0.30, "pens": 0.30 }
     },
     "jogo-08": {
-      "home": "Juventude",
-      "away": "Red Bull Bragantino",
-      "referee": "Felipe Fernandes de Lima",
-      "stats": { "fouls": 30.07, "yellows": 4.21, "reds": 0.07, "pens": 0.29 }
+      "home": "Flamengo",
+      "away": "Santos",
+      "referee": "Lucas Casagrande",
+      "stats": { "fouls": 27.5, "yellows": 5.1, "reds": 0.20, "pens": 0.35 }
     },
     "jogo-09": {
-      "home": "Vasco da Gama",
-      "away": "Fluminense",
-      "referee": "Wagner do Nascimento Magalhães",
-      "stats": { "fouls": 27.67, "yellows": 6.00, "reds": 0.00, "pens": 0.33 }
+      "home": "Mirassol",
+      "away": "Palmeiras",
+      "referee": "Davi de Oliveira",
+      "stats": { "fouls": 22.5, "yellows": 4.50, "reds": 0.10, "pens": 0.25 }
     },
     "jogo-10": {
-      "home": "Santos",
-      "away": "Vitória",
-      "referee": "Rafael Rodrigo Klein",
-      "stats": { "fouls": 29.13, "yellows": 4.38, "reds": 0.13, "pens": 0.06 }
+      "home": "Fortaleza",
+      "away": "Grêmio",
+      "referee": "Jefferson Ferreira de Moraes",
+      "stats": { "fouls": 23.9, "yellows": 4.75, "reds": 0.63, "pens": 0.25 }
     }
   }
 }

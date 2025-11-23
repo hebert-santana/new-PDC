@@ -14,3 +14,9 @@ ARBITRAGEM
 HOST
 
 npm start
+
+
+
+
+
+python cdn.py --cdn https://cdn.provaveisdocartola.com.br

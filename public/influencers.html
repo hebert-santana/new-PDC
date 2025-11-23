@@ -30,7 +30,6 @@
   <link rel="stylesheet" href="/assets/css/build/styles.css" />
   <link rel="stylesheet" href="/assets/css/build/club-grid.css" />
   <link rel="stylesheet" href="/assets/css/customizacao.css?v=29">
-    <link rel="stylesheet" href="/assets/css/influencers.css">
 
   <!-- GA4 (opcional; manter se quiser medir uso da página privada) -->
   <link rel="preconnect" href="https://www.google-analytics.com" />
@@ -126,6 +125,17 @@
 @media (max-width:576px){
   .influ-banner{font-size:.92rem;padding:8px 10px}
 }
+
+  /* Override local: deixar os balões de desfalques maiores nesta página */
+  .status-card .tag{
+    font-size:.7rem;
+    padding:4px 10px;
+    border-radius:999px;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.08);
+    box-shadow:0 1px 4px rgba(0,0,0,.04);
+    font-weight:500;
+  }
 
   </style>
 </head>

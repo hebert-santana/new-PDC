@@ -1,5 +1,5 @@
-// jogos.data.js — Rodada 29
-window.RODADA = 29;
+// jogos.data.js
+window.RODADA = 35;
 
 window.CLUBES = {
   262:{key:'FLA',name:'Flamengo',escudo:'https://s3.glbimg.com/v1/AUTH_58d78b787ec34892b5aaa0c7a146155f/clubes_2025/escudos/FLA/60x60.png'},
@@ -57,17 +57,44 @@ window.SLUG_TO_ID = {
   vasco:267, fluminense:266, santos:277, vitoria:287
 };
 
-// lista de jogos - 31ª rodada (ordem correta)
+// lista de jogos
+
 window.JOGOS = [
-  { id:"jogo-01", home:{ key:"santos_v2", name:"Santos", slug:"santos" }, away:{ key:"fortaleza_v2", name:"Fortaleza", slug:"fortaleza" } },
-  { id:"jogo-02", home:{ key:"cruzeiro_v2", name:"Cruzeiro", slug:"cruzeiro" }, away:{ key:"vitoria_v2", name:"Vitória", slug:"vitoria" } },
-  { id:"jogo-03", home:{ key:"mirassol_v2", name:"Mirassol", slug:"mirassol" }, away:{ key:"botafogo_v2", name:"Botafogo", slug:"botafogo" } },
-  { id:"jogo-04", home:{ key:"flamengo_v2", name:"Flamengo", slug:"flamengo" }, away:{ key:"sport_v2", name:"Sport", slug:"sport" } },
-  { id:"jogo-05", home:{ key:"corinthians_v2", name:"Corinthians", slug:"corinthians" }, away:{ key:"gremio_v2", name:"Grêmio", slug:"gremio" } },
-  { id:"jogo-06", home:{ key:"bahia_v2", name:"Bahia", slug:"bahia" }, away:{ key:"bragantino_v2", name:"Red Bull Bragantino", slug:"bragantino" } },
-  { id:"jogo-07", home:{ key:"ceara_v2", name:"Ceará", slug:"ceara" }, away:{ key:"fluminense_v2", name:"Fluminense", slug:"fluminense" } },
-  { id:"jogo-08", home:{ key:"internacional_v2", name:"Internacional", slug:"internacional" }, away:{ key:"atletico-mg_v2", name:"Atlético-MG", slug:"atletico" } },
-  { id:"jogo-09", home:{ key:"juventude_v2", name:"Juventude", slug:"juventude" }, away:{ key:"palmeiras_v2", name:"Palmeiras", slug:"palmeiras" } },
-  { id:"jogo-10", home:{ key:"vasco_v2", name:"Vasco", slug:"vasco" }, away:{ key:"sao-paulo_v2", name:"São Paulo", slug:"saopaulo" } }
+  { id:"jogo-01",
+    home:{ key:"botafogo_v2", name:"Botafogo", slug:"botafogo" },
+    away:{ key:"gremio_v2", name:"Grêmio", slug:"gremio" }
+  },
+  { id:"jogo-02",
+    home:{ key:"flamengo_v2", name:"Flamengo", slug:"flamengo" },
+    away:{ key:"bragantino_v2", name:"Red Bull Bragantino", slug:"bragantino" }
+  },
+  { id:"jogo-03",
+    home:{ key:"palmeiras_v2", name:"Palmeiras", slug:"palmeiras" },
+    away:{ key:"fluminense_v2", name:"Fluminense", slug:"fluminense" }
+  },
+  { id:"jogo-04",
+    home:{ key:"sao-paulo_v2", name:"São Paulo", slug:"saopaulo" },
+    away:{ key:"juventude_v2", name:"Juventude", slug:"juventude" }
+  },
+  { id:"jogo-05",
+    home:{ key:"bahia_v2", name:"Bahia", slug:"bahia" },
+    away:{ key:"vasco_v2", name:"Vasco", slug:"vasco" }
+  },
+  { id:"jogo-06",
+    home:{ key:"sport_v2", name:"Sport", slug:"sport" },
+    away:{ key:"vitoria_v2", name:"Vitória", slug:"vitoria" }
+  },
+  { id:"jogo-07",
+    home:{ key:"cruzeiro_v2", name:"Cruzeiro", slug:"cruzeiro" },
+    away:{ key:"corinthians_v2", name:"Corinthians", slug:"corinthians" }
+  },
+  { id:"jogo-08",
+    home:{ key:"mirassol_v2", name:"Mirassol", slug:"mirassol" },
+    away:{ key:"ceara_v2", name:"Ceará", slug:"ceara" }
+  },
+  { id:"jogo-09",
+    home:{ key:"internacional_v2", name:"Internacional", slug:"internacional" },
+    away:{ key:"santos_v2", name:"Santos", slug:"santos" }
+  }
 ];
 
