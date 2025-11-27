@@ -51,6 +51,19 @@
   display:block;
 }
 
+/* Header centralizado no trilho (todas as páginas) */
+header .provaveis-image,
+.custom-provaveis-item .provaveis-image,
+.provaveis-image.banner-assine{
+  display:block;
+  width:var(--rail-w);      /* 90% */
+  max-width:var(--rail-max);/* 1280px */
+  margin:16px auto 24px;    /* centralizado */
+  height:auto;
+  border-radius:22px;
+}
+
+
 /* Esconde o balão padrão de desfalques */
 .status-head{display:none !important}
 
@@ -161,16 +174,6 @@ main.provaveis-container{
     max-width:none;
   }
 
-  /* HEADER/BANNER full-bleed */
-  header .provaveis-image,
-  .custom-provaveis-item .provaveis-image{
-    display:block;
-    width:100vw;
-    max-width:100vw;
-    margin-inline:calc(50% - 50vw);
-    height:auto;
-    border-radius:0;
-  }
 
   /* MOBILE: banner ocupa todo o “cartão” branco */
   .custom-provaveis-item{padding:0}
