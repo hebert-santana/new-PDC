@@ -49,13 +49,8 @@ app.use((req,res,next)=>{
 /* ============================================================================
    Rotas para servir os arquivos admin fora do /public (SEM LOGIN)
    ========================================================================== */
-app.get('/admin.html', (_req, res) => {
-  res.sendFile(ADMIN_HTML);
-});
-
-app.get('/admin-mais-indicados.html', (_req, res) => {
-  res.sendFile(ADMIN_MI_HTML);
-});
+app.get('/admin.html', (_req, res) => res.sendFile(ADMIN_HTML));
+app.get('/admin-mais-indicados.html', (_req, res) => res.sendFile(ADMIN_MI_HTML));
 
 /* ============================================================================
    Servir arquivos do site (públicos)
@@ -65,10 +60,11 @@ app.use(express.static('public', { extensions: ['html'] }));
 /* ============================================================================
    Paths e utilidades de JSON
    ========================================================================== */
-const DATA_DIR       = path.join(ROOT_DIR, 'public', 'assets', 'data');
-const LINEUPS        = path.join(DATA_DIR, 'lineups.json');
-const TEAM_UPD       = path.join(DATA_DIR, 'team-updates.json');
-const MAIS_INDICADOS = path.join(DATA_DIR, 'mais-indicados.json');
+const DATA_DIR         = path.join(ROOT_DIR, 'public', 'assets', 'data');
+const LINEUPS          = path.join(DATA_DIR, 'lineups.json');
+const LINEUPS_VERSION  = path.join(DATA_DIR, 'lineups.version.json');
+const TEAM_UPD         = path.join(DATA_DIR, 'team-updates.json');
+const MAIS_INDICADOS   = path.join(DATA_DIR, 'mais-indicados.json');
 
 const PRIVATE_DIR        = path.join(ROOT_DIR, 'data-privado');
 const INFLUENCERS_FILE   = path.join(PRIVATE_DIR, 'influencers-email.json');
@@ -106,39 +102,33 @@ app.post('/login', async (req, res) => {
     const { email, password, next } = req.body || {};
 
     if (!email || !password) return res.redirect('/login.html?error=1');
-
-    if (!INFLU_PASS || password !== INFLU_PASS)
-      return res.redirect('/login.html?error=1');
+    if (!INFLU_PASS || password !== INFLU_PASS) return res.redirect('/login.html?error=1');
 
     const allowed = await isAllowedInfluencer(email);
     if (!allowed) return res.redirect('/login.html?error=2');
 
     const expMs = Date.now() + 24 * 60 * 60 * 1000;
 
-    const payload = {
+    const token = Buffer.from(JSON.stringify({
       email: normalizeEmail(email),
       exp: expMs
-    };
-
-    const token = Buffer.from(JSON.stringify(payload), 'utf8').toString('base64');
+    }), 'utf8').toString('base64');
 
     const parts = [
       `influ_auth=${encodeURIComponent(token)}`,
       'Path=/',
       'HttpOnly',
       'SameSite=Lax',
-      `Max-Age=${24 * 60 * 60}`
+      `Max-Age=${24*60*60}`
     ];
     if (process.env.NODE_ENV === 'production') parts.push('Secure');
 
     res.setHeader('Set-Cookie', parts.join('; '));
 
     const safeNext =
-      typeof next === 'string' &&
-      next.startsWith('/') &&
-      !next.startsWith('//')
-        ? next
-        : '/influencers.html';
+      typeof next === 'string' && next.startsWith('/') && !next.startsWith('//')
+      ? next
+      : '/influencers.html';
 
     return res.redirect(safeNext);
 
@@ -161,47 +151,79 @@ app.get('/api/lineups', async (_req,res) => {
   res.json(cur);
 });
 
+
+
 /* ============================================================================
-   POST lineups
+   POST lineups — VERSÃO FINAL (com version bump + version.json)
    ========================================================================== */
 app.post('/api/lineups', async (req, res) => {
   const { merge, teams, rodada, jogos } = req.body || {};
 
-  if (teams && typeof teams === 'object') {
+  try {
+    let cur = await readJsonSafe(LINEUPS);
     const nowISO = new Date().toISOString();
 
-    const cur = await readJsonSafe(LINEUPS);
-    cur.teams = { ...(merge ? (cur.teams || {}) : {}), ...teams };
-    cur.updated_at = nowISO;
-    await writeJsonAtomic(LINEUPS, cur);
+    if (!cur || typeof cur !== 'object')
+      cur = { version:1, tz:'-03:00', teams:{} };
 
-    const keys = Object.keys(teams);
-    const upd  = await readJsonSafe(TEAM_UPD);
-    upd.version = 1; upd.tz = '-03:00'; upd.teams = upd.teams || {};
+    cur.teams   = cur.teams || {};
+    cur.tz      = cur.tz || '-03:00';
+    cur.version = Number.isFinite(+cur.version) ? +cur.version : 1;
 
-    for (const k of keys) {
-      const prev = upd.teams[k] || {};
-      upd.teams[k] = { ...prev, last_update: nowISO };
+    let touched = false;
+
+    // ===== Atualizou times =====
+    if (teams && typeof teams === 'object') {
+      cur.teams = { ...(merge ? (cur.teams || {}) : {}), ...teams };
+      touched = true;
+
+      const keys = Object.keys(teams);
+      const upd = await readJsonSafe(TEAM_UPD);
+      upd.version = 1;
+      upd.tz = '-03:00';
+      upd.teams = upd.teams || {};
+
+      for (const k of keys) {
+        const prev = upd.teams[k] || {};
+        upd.teams[k] = { ...prev, last_update: nowISO };
+      }
+
+      await writeJsonAtomic(TEAM_UPD, upd);
     }
-    await writeJsonAtomic(TEAM_UPD, upd);
 
-    return res.json({ ok:true, changed: keys, updated_at: nowISO });
-  }
+    // ===== Atualizou rodada/jogos =====
+    if (Number.isInteger(rodada) && Array.isArray(jogos)) {
+      cur.rodada = rodada;
+      cur.jogos  = jogos;
+      touched = true;
+    }
 
-  if (Number.isInteger(rodada) && Array.isArray(jogos)) {
-    const cur = await readJsonSafe(LINEUPS);
-    cur.rodada = rodada;
-    cur.jogos  = jogos;
-    cur.updated_at = new Date().toISOString();
+    if (!touched) {
+      return res.status(400).json({ ok:false, error:'payload inválido' });
+    }
+
+    // ===== BUMP DE VERSÃO =====
+    cur.version = cur.version + 1;
+    cur.updated_at = nowISO;
+
     await writeJsonAtomic(LINEUPS, cur);
-    return res.json({ ok:true, updated_at: cur.updated_at });
-  }
+    await writeJsonAtomic(LINEUPS_VERSION, { version: cur.version });
 
-  return res.status(400).json({ ok:false, error:'payload inválido' });
+    return res.json({
+      ok:true,
+      version: cur.version,
+      updated_at: cur.updated_at
+    });
+
+  } catch (err) {
+    console.error('Erro em POST /api/lineups', err);
+    return res.status(500).json({ ok:false, error:'erro interno' });
+  }
 });
 
+
 /* ============================================================================
-   GET /api/mais-indicados
+   GET mais-indicados
    ========================================================================== */
 app.get('/api/mais-indicados', async (_req, res) => {
   const fallback = {
@@ -224,42 +246,33 @@ app.get('/api/mais-indicados', async (_req, res) => {
 });
 
 /* ============================================================================
-   POST /api/mais-indicados
+   POST mais-indicados
    ========================================================================== */
 app.post('/api/mais-indicados', async (req, res) => {
   try {
     const body = req.body || {};
-    if (!body || typeof body !== 'object' || Array.isArray(body)) {
-      return res.status(400).json({ ok: false, error: 'JSON inválido no body' });
-    }
+    if (!body || typeof body !== 'object' || Array.isArray(body))
+      return res.status(400).json({ ok:false, error:'JSON inválido no body' });
 
     body.atualizado_em = new Date().toISOString();
 
-    await fs.mkdir(DATA_DIR, { recursive: true });
+    await fs.mkdir(DATA_DIR, { recursive:true });
+    await fs.writeFile(MAIS_INDICADOS, JSON.stringify(body, null, 2), 'utf8');
 
-    await fs.writeFile(
-      MAIS_INDICADOS,
-      JSON.stringify(body, null, 2),
-      'utf8'
-    );
-
-    return res.json({ ok: true, atualizado_em: body.atualizado_em });
+    return res.json({ ok:true, atualizado_em: body.atualizado_em });
   } catch (err) {
     console.error('Erro ao salvar mais-indicados.json:', err);
-    return res.status(500).json({
-      ok: false,
-      error: String(err?.message || err)
-    });
+    return res.status(500).json({ ok:false, error:String(err?.message || err) });
   }
 });
 
 /* ============================================================================
-   POST /api/team-updates
+   POST team-updates
    ========================================================================== */
 app.post('/api/team-updates', async (req, res) => {
   try {
     const { teamKey, alert = "" } = req.body || {};
-    if (!teamKey) return res.status(400).json({ error: 'teamKey required' });
+    if (!teamKey) return res.status(400).json({ error:'teamKey required' });
 
     const nowISO = new Date().toISOString();
     const upd = await readJsonSafe(TEAM_UPD);
@@ -272,11 +285,11 @@ app.post('/api/team-updates', async (req, res) => {
     upd.teams[teamKey] = { ...prev, last_update: nowISO, alert };
 
     await writeJsonAtomic(TEAM_UPD, upd);
-    res.json({ ok: true, teamKey, last_update: nowISO });
 
+    res.json({ ok:true, teamKey, last_update: nowISO });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: String(err?.message || err) });
+    res.status(500).json({ error:String(err?.message || err) });
   }
 });
 
@@ -290,17 +303,17 @@ let __cartolaCache = { ts: 0, payload: null };
 
 async function fetchCartolaMercado() {
   const now = Date.now();
-  if (__cartolaCache.payload && now - __cartolaCache.ts < CARTOLA_TTL_MS) {
+
+  if (__cartolaCache.payload && now - __cartolaCache.ts < CARTOLA_TTL_MS)
     return __cartolaCache.payload;
-  }
 
   const r = await fetch(CARTOLA_URL, {
     headers: { 'User-Agent': 'ProvaveisDoCartola/1.0 (+admin-panel)' }
   });
 
   if (!r.ok) {
-    const errPayload = { error: `HTTP ${r.status}`, captured_at: new Date().toISOString() };
-    __cartolaCache = { ts: now, payload: errPayload };
+    const errPayload = { error:`HTTP ${r.status}`, captured_at:new Date().toISOString() };
+    __cartolaCache = { ts:now, payload:errPayload };
     return errPayload;
   }
 
@@ -313,7 +326,7 @@ async function fetchCartolaMercado() {
   for (const a of json.atletas || []) {
     map[a.atleta_id] = a.status_id;
     total++;
-    by_status[a.status_id] = (by_status[a.status_id] || 0) + 1;
+    by_status[a.status_id] = (by_status[a.status_id]||0) + 1;
   }
 
   const payload = {
@@ -324,7 +337,7 @@ async function fetchCartolaMercado() {
     map
   };
 
-  __cartolaCache = { ts: now, payload };
+  __cartolaCache = { ts:now, payload };
   return payload;
 }
 
@@ -334,7 +347,7 @@ app.get('/api/cartola-mercado', async (_req, res) => {
     res.set('Cache-Control', 'public, max-age=30');
     res.json(payload);
   } catch (e) {
-    res.status(500).json({ error: String(e) });
+    res.status(500).json({ error:String(e) });
   }
 });
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +8,8 @@
 
 
   <title>Mais Escalados do Cartola 2025</title>
-  <meta name="description" content="Jogadores mais escalados do Cartola FC 2025 pelos influenciadores. Ranking atualizado com percentuais de escalação, capitão mais escolhido e reservas de luxo.">
+  <meta name="description"
+    content="Jogadores mais escalados do Cartola FC 2025 pelos influenciadores. Ranking atualizado com percentuais de escalação, capitão mais escolhido e reservas de luxo.">
 
   <!-- Bootstrap -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
@@ -15,17 +17,17 @@
 
   <!-- CSS do projeto -->
   <link rel="stylesheet" href="/assets/css/build/styles.css">
+  <link rel="stylesheet" href="/assets/css/build/mais-indicados.css">
+  <link rel="stylesheet" href="/assets/css/build/navbar.css">
   <link rel="stylesheet" href="/assets/css/customizacao.css">
-  <link rel="stylesheet" href="/assets/css/build/mais-indicados.css?v=2">
-  <link rel="stylesheet" href="/assets/css/build/navbar.css?v=1">
 
-  
+
 
   <!-- GA -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6TJ11HJVRG"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-6TJ11HJVRG');
   </script>
@@ -37,173 +39,166 @@
 
 </head>
 
-<body class="page-mais-indicados">
-  <!-- ======================================================================
-       HEADER
-       ====================================================================== -->
-  <header class="container" id="main-image-container">
-    <div class="col-12 d-flex justify-content-center">
-      <h1 id="header-especialista" class="custom-provaveis-item">
-        <span class="visually-hidden">Prováveis do Cartola FC — Escalações da Rodada</span>
-        <img
-          src="/assets/img/ui/provaveisdocartola.svg"
-          alt=""
-          role="presentation"
-          class="provaveis-image"
-          width="600" height="200"
-          loading="eager" decoding="async" />
-      </h1>
-    </div>
-  </header>
-
-
-  <div data-include="navbar"></div>
+<body>
+  <noscript style="display:block;padding:8px;background:#222;color:#eee;text-align:center">
+    Esta página precisa de JavaScript para listar as partidas da rodada.
+  </noscript>
 
   <!-- Ainda usa jogos.data.js (rodada etc.) -->
-  <script defer src="/assets/js/jogos.data.js"></script>
+    <script defer src="/assets/js/jogos.data.js"></script>
 
-  <!-- HERO -->
-  <section class="mic-mast" aria-labelledby="mastTitle">
-    <div class="mic-rail">
-      <h1 id="mastTitle" class="mast-title">
-        Mais Indicados do <span class="mast-brand">Cartola FC</span>
-        <span class="mast-help">
-          <button class="btn-help" aria-expanded="false" aria-controls="mastHelp" aria-haspopup="dialog">
-            <i class="bi bi-info-lg" aria-hidden="true"></i>
-            <span class="visually-hidden">O que é?</span>
-          </button>
-          <div id="mastHelp" class="help-card" role="dialog" aria-labelledby="mastTitle" hidden>
-            <p class="help-title">O que é?</p>
-            <ul class="help-list">
-              <li><strong>Curadoria semanal</strong> com os mais escalados da rodada.</li>
-              <li><strong>%</strong> = proporção de fontes que citaram o jogador.</li>
-              <li>Alternativa aos <strong>Mais Escalados</strong> do site oficial, busque diferenciais.</li>
-              <li class="help-credit">
-                <i class="bi bi-patch-check-fill" aria-hidden="true"></i>
-                Conteúdo por <strong>Diego Gadonski</strong> —
-                <a class="help-ig" href="https://instagram.com/mundocartolanews" target="_blank" rel="noopener">@mundocartolanews</a>.
-              </li>
-            </ul>
-            <p class="help-foot"><i class="bi bi-shield-check"></i> Atualizações durante a semana!</p>
-          </div>
-        </span>
-      </h1>
+  <!-- header -->
+  <div data-include="header"></div>
 
-      <div id="rodadaChip" class="mast-chip" role="status" aria-live="polite">Rodada —</div>
-      <h2 class="mast-sub">Lista atualizada dos jogadores <strong>mais escalados no Cartola FC 2025</strong> com percentuais e ranking baseado nas escalações dos principais influenciadores.</h2>
-    </div>
-  </section>
-
-  <!-- AVISO: QUADRADO, CENTRALIZADO — aparece quando o JS remover o hidden -->
-  <div id="canal-whats-lane" class="canal-whats-lane" hidden>
-    <div class="canal-whats-card" role="region" aria-label="Levantamento em andamento">
-      <span class="cw-ribbon">ATUALIZANDO…</span>
-
-      <div class="cw-left">
-        <i class="bi bi-hourglass-split" aria-hidden="true"></i>
-        <div class="cw-text">
-          <strong id="soon-strong">O levantamento das indicações está em andamento!</strong>
-          <span id="soon-sub">Entre no nosso canal do WhatsApp e receba o aviso em primeira mão quando atualizarmos.</span>
-        </div>
-      </div>
-
-      <div class="cw-highlights" aria-hidden="true">
-        <span class="cw-chip"><i class="bi bi-bell-fill"></i> Notificação instantânea</span>
-        <span class="cw-chip"><i class="bi bi-lightning-charge-fill"></i> Sem spam</span>
-        <span class="cw-chip"><i class="bi bi-shield-check"></i> Oficial do site</span>
-      </div>
-
-      <a id="cw-btn" class="cw-btn"
-         href="https://whatsapp.com/channel/0029VbBFrZ4Gk1FxlriZ7R2I"
-         target="_blank" rel="noopener">
-        Entrar no Canal <i class="bi bi-whatsapp" aria-hidden="true"></i>
-      </a>
-    </div>
+  <!-- NAVBAR alinhada ao trilho 96%/1600px -->
+  <div id="navbar-rail">
+    <div data-include="navbar"></div>
   </div>
 
-  <!-- CAMPINHO -->
-  <section class="container" id="campinho-mais-indicados">
-    <div class="pitch" id="pitch">
-      <picture>
-        <!-- AVIF primeiro -->
-        <source type="image/avif" srcset="/assets/img/campinhos/campinho-800.avif 800w,
-            /assets/img/campinhos/campinho-1200.avif 1200w">
-        <!-- WebP como segunda opção -->
-        <source type="image/webp" srcset="/assets/img/campinhos/campinho-800.webp 800w,
-            /assets/img/campinhos/campinho-1200.webp 1200w">
-        <!-- Fallback (PNG/JPG). Pode reutilizar o seu PNG antigo -->
-        <img class="pitch-bg" src="/assets/img/campinhos/campinho.png" width="1200" height="1207" alt="Campinho"
-          decoding="async" sizes="(max-width: 768px) 92vw, 800px">
-      </picture>
+  <!-- CONTEÚDO PRINCIPAL NO TRILHO LARGO -->
+  <main id="provaveis-container">
+      <div class="mic-rail">
+        <h1 id="mastTitle" class="mast-title">
+          Mais Indicados do <span class="mast-brand">Cartola FC</span>
+          <span class="mast-help">
+            <button class="btn-help" aria-expanded="false" aria-controls="mastHelp" aria-haspopup="dialog">
+              <i class="bi bi-info-lg" aria-hidden="true"></i>
+              <span class="visually-hidden">O que é?</span>
+            </button>
+            <div id="mastHelp" class="help-card" role="dialog" aria-labelledby="mastTitle" hidden>
+              <p class="help-title">O que é?</p>
+              <ul class="help-list">
+                <li><strong>Curadoria semanal</strong> com os mais escalados da rodada.</li>
+                <li><strong>%</strong> = proporção de fontes que citaram o jogador.</li>
+                <li>Alternativa aos <strong>Mais Escalados</strong> do site oficial, busque diferenciais.</li>
+                <li class="help-credit">
+                  <i class="bi bi-patch-check-fill" aria-hidden="true"></i>
+                  Conteúdo por <strong>Diego Gadonski</strong> —
+                  <a class="help-ig" href="https://instagram.com/mundocartolanews" target="_blank"
+                    rel="noopener">@mundocartolanews</a>.
+                </li>
+              </ul>
+              <p class="help-foot"><i class="bi bi-shield-check"></i> Atualizações durante a semana!</p>
+            </div>
+          </span>
+        </h1>
 
-      <!-- Agora o JS preenche -->
-      <div class="pitch-safe" id="pitchSafe">
-        <!-- preenchido via JS a partir de /assets/data/mais-indicados.json -->
+        <div id="rodadaChip" class="mast-chip" role="status" aria-live="polite">Rodada —</div>
+        <h2 class="mast-sub">Lista atualizada dos jogadores <strong>mais escalados no Cartola FC 2025</strong> com
+          percentuais e ranking baseado nas escalações dos principais influenciadores.</h2>
       </div>
-    </div>
-  </section>
 
-  <!-- BANCO DE RESERVAS -->
-  <section class="container">
-    <div class="reserves-card" aria-labelledby="reservesTitle">
-      <h3 id="reservesTitle" class="reserves-title">Banco de reservas</h3>
+    <!-- AVISO: QUADRADO, CENTRALIZADO — aparece quando o JS remover o hidden -->
+    <div id="canal-whats-lane" class="canal-whats-lane" hidden>
+      <div class="canal-whats-card" role="region" aria-label="Levantamento em andamento">
+        <span class="cw-ribbon">ATUALIZANDO…</span>
 
-      <div class="resv-row -x6" id="reservesRow">
-        <!-- preenchido via JS a partir de /assets/data/mais-indicados.json -->
-      </div>
-    </div>
-  </section>
-
-  <!-- DELTA v5 — scoreboard (valores serão preenchidos via JSON) -->
-  <div class="delta-lane">
-    <figure class="delta-card v5" role="status" aria-live="polite">
-      <img class="delta-trophy" src="/assets/img/icons/trofeu-especialistas.webp"
-           alt="" loading="lazy" decoding="async">
-
-      <figcaption class="delta-info">
-        <span class="delta-badge" id="deltaBadge">Nossos Indicados estão goleando por</span>
-
-        <div class="delta-value-row">
-          <strong class="delta-value" id="deltaDiff">+113,40</strong>
-          <span class="delta-unit" id="deltaUnit">pts</span>
-        </div>
-
-        <span class="delta-sub" id="deltaSub"><i>vs Mais Escalados do Cartola</i></span>
-
-        <!-- placar estilo scoreboard -->
-        <div class="delta-scoreboard">
-          <div class="score-box g">
-            <span class="label">Mais Indicados</span>
-            <span class="num" id="deltaMI">2489,73</span>
-          </div>
-          <span class="sep">×</span>
-          <div class="score-box r">
-            <span class="label">Mais Escalados</span>
-            <span class="num" id="deltaME">2376,33</span>
+        <div class="cw-left">
+          <i class="bi bi-hourglass-split" aria-hidden="true"></i>
+          <div class="cw-text">
+            <strong id="soon-strong">O levantamento das indicações está em andamento!</strong>
+            <span id="soon-sub">Entre no nosso canal do WhatsApp e receba o aviso em primeira mão quando
+              atualizarmos.</span>
           </div>
         </div>
-      </figcaption>
-    </figure>
-  </div>
 
-  <!-- Assinatura / crédito -->
-  <div class="container">
-    <div class="byline-lane">
-      <div class="byline-credit">
-        <i class="bi bi-patch-check-fill byl-ico" aria-hidden="true"></i>
-        <span class="byl-label -full">Conteúdo auditado por</span>
-        <span class="byl-label -short">Auditado por</span>
-        <span class="byl-name">Diego Gadonski</span>
-        <a class="byl-ig" href="https://instagram.com/mundocartolanews" target="_blank" rel="noopener">
-          <i class="bi bi-instagram"></i> @mundocartolanews
+        <div class="cw-highlights" aria-hidden="true">
+          <span class="cw-chip"><i class="bi bi-bell-fill"></i> Notificação instantânea</span>
+          <span class="cw-chip"><i class="bi bi-lightning-charge-fill"></i> Sem spam</span>
+          <span class="cw-chip"><i class="bi bi-shield-check"></i> Oficial do site</span>
+        </div>
+
+        <a id="cw-btn" class="cw-btn" href="https://whatsapp.com/channel/0029VbBFrZ4Gk1FxlriZ7R2I" target="_blank"
+          rel="noopener">
+          Entrar no Canal <i class="bi bi-whatsapp" aria-hidden="true"></i>
         </a>
       </div>
     </div>
-  </div>
 
-  <!-- CTA e FOOTER -->
-  <div data-include="cta"></div>
-  <div data-include="footer"></div>
+    <!-- CAMPINHO -->
+    <section class="container" id="campinho-mais-indicados">
+      <div class="pitch" id="pitch">
+        <picture>
+          <!-- AVIF primeiro -->
+          <source type="image/avif" srcset="/assets/img/campinhos/campinho-800.avif 800w,
+            /assets/img/campinhos/campinho-1200.avif 1200w">
+          <!-- WebP como segunda opção -->
+          <source type="image/webp" srcset="/assets/img/campinhos/campinho-800.webp 800w,
+            /assets/img/campinhos/campinho-1200.webp 1200w">
+          <!-- Fallback (PNG/JPG). Pode reutilizar o seu PNG antigo -->
+          <img class="pitch-bg" src="/assets/img/campinhos/campinho.png" width="1200" height="1207" alt="Campinho"
+            decoding="async" sizes="(max-width: 768px) 92vw, 800px">
+        </picture>
+
+        <!-- Agora o JS preenche -->
+        <div class="pitch-safe" id="pitchSafe">
+          <!-- preenchido via JS a partir de /assets/data/mais-indicados.json -->
+        </div>
+      </div>
+    </section>
+
+    <!-- BANCO DE RESERVAS -->
+    <section class="container">
+      <div class="reserves-card" aria-labelledby="reservesTitle">
+        <h3 id="reservesTitle" class="reserves-title">Banco de reservas</h3>
+
+        <div class="resv-row -x6" id="reservesRow">
+          <!-- preenchido via JS a partir de /assets/data/mais-indicados.json -->
+        </div>
+      </div>
+    </section>
+
+    <!-- DELTA v5 — scoreboard (valores serão preenchidos via JSON) -->
+    <div class="delta-lane">
+      <figure class="delta-card v5" role="status" aria-live="polite">
+        <img class="delta-trophy" src="/assets/img/icons/trofeu-especialistas.webp" alt="" loading="lazy"
+          decoding="async">
+
+        <figcaption class="delta-info">
+          <span class="delta-badge" id="deltaBadge">Nossos Indicados estão goleando por</span>
+
+          <div class="delta-value-row">
+            <strong class="delta-value" id="deltaDiff">+113,40</strong>
+            <span class="delta-unit" id="deltaUnit">pts</span>
+          </div>
+
+          <span class="delta-sub" id="deltaSub"><i>vs Mais Escalados do Cartola</i></span>
+
+          <!-- placar estilo scoreboard -->
+          <div class="delta-scoreboard">
+            <div class="score-box g">
+              <span class="label">Mais Indicados</span>
+              <span class="num" id="deltaMI">2489,73</span>
+            </div>
+            <span class="sep">×</span>
+            <div class="score-box r">
+              <span class="label">Mais Escalados</span>
+              <span class="num" id="deltaME">2376,33</span>
+            </div>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- Assinatura / crédito -->
+    <div class="container">
+      <div class="byline-lane">
+        <div class="byline-credit">
+          <i class="bi bi-patch-check-fill byl-ico" aria-hidden="true"></i>
+          <span class="byl-label -full">Conteúdo auditado por</span>
+          <span class="byl-label -short">Auditado por</span>
+          <span class="byl-name">Diego Gadonski</span>
+          <a class="byl-ig" href="https://instagram.com/mundocartolanews" target="_blank" rel="noopener">
+            <i class="bi bi-instagram"></i> @mundocartolanews
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA e FOOTER -->
+    <div data-include="cta"></div>
+    <div data-include="footer"></div>
+  </main>
 
   <!-- Scripts da página (inline para reduzir chamadas) -->
   <script>
@@ -229,7 +224,7 @@
       const btn = document.querySelector('.btn-help');
       const card = document.getElementById('mastHelp');
       if (!btn || !card) return;
-      function toggle(open){
+      function toggle(open) {
         const show = (open ?? card.hasAttribute('hidden'));
         card.toggleAttribute('hidden', !show);
         btn.setAttribute('aria-expanded', String(show));
@@ -245,49 +240,49 @@
 
     // Renderização dos Mais Indicados a partir de /assets/data/mais-indicados.json
     (function () {
-      async function loadMaisIndicados(){
+      async function loadMaisIndicados() {
         const res = await fetch('/assets/data/mais-indicados.json', { cache: 'no-store' });
         if (!res.ok) throw new Error('Erro ao carregar mais-indicados.json');
         return res.json();
       }
 
-      function camisaSrc(clube){
+      function camisaSrc(clube) {
         return '/assets/img/uniformes/' + clube + '.png';
       }
 
       const coords = {
         ATA: [
-          {x:20, y:8},
-          {x:50, y:4},
-          {x:80, y:8}
+          { x: 20, y: 8 },
+          { x: 50, y: 4 },
+          { x: 80, y: 8 }
         ],
         MEI: [
-          {x:28, y:36},
-          {x:50, y:34},
-          {x:72, y:36}
+          { x: 28, y: 36 },
+          { x: 50, y: 34 },
+          { x: 72, y: 36 }
         ],
         DEF: [
-          {x:16, y:62},
-          {x:36, y:67},
-          {x:64, y:67},
-          {x:86, y:62}
+          { x: 16, y: 62 },
+          { x: 36, y: 67 },
+          { x: 64, y: 67 },
+          { x: 86, y: 62 }
         ],
-        GOL: {x:50, y:88},
-        TEC: {x:10, y:92}
+        GOL: { x: 50, y: 88 },
+        TEC: { x: 10, y: 92 }
       };
 
-      function createPlayer(nome, clube, percentual, capitao, tipoLinha, idx){
+      function createPlayer(nome, clube, percentual, capitao, tipoLinha, idx) {
         const wrap = document.createElement('div');
         wrap.className = 'player ' + tipoLinha;
 
         let c;
-        if (tipoLinha === '-atk')   c = coords.ATA[idx];
-        if (tipoLinha === '-mid')   c = coords.MEI[idx];
-        if (tipoLinha === '-def')   c = coords.DEF[idx];
-        if (tipoLinha === '-gk')    c = coords.GOL;
+        if (tipoLinha === '-atk') c = coords.ATA[idx];
+        if (tipoLinha === '-mid') c = coords.MEI[idx];
+        if (tipoLinha === '-def') c = coords.DEF[idx];
+        if (tipoLinha === '-gk') c = coords.GOL;
         if (tipoLinha === '-coach') c = coords.TEC;
 
-        if (c){
+        if (c) {
           wrap.style.setProperty('--x', c.x);
           wrap.style.setProperty('--y', c.y);
         }
@@ -303,7 +298,7 @@
         img.alt = nome;
         wrap.appendChild(img);
 
-        if (capitao){
+        if (capitao) {
           const mark = document.createElement('span');
           mark.className = 'mark -cap';
           mark.textContent = 'C';
@@ -321,7 +316,7 @@
         return wrap;
       }
 
-      function renderCampinho(cfg){
+      function renderCampinho(cfg) {
         const pitchSafe = document.getElementById('pitchSafe');
         if (!pitchSafe) return;
         pitchSafe.innerHTML = '';
@@ -329,7 +324,7 @@
         const t = cfg.time || {};
 
         // ATACANTES (3)
-        (t.ATA || []).forEach(function(j, i){
+        (t.ATA || []).forEach(function (j, i) {
           if (!j || !j.nome || !j.clube) return;
           pitchSafe.appendChild(
             createPlayer(j.nome, j.clube, j.percentual, j.capitao, '-atk', i)
@@ -337,7 +332,7 @@
         });
 
         // MEIAS (3)
-        (t.MEI || []).forEach(function(j, i){
+        (t.MEI || []).forEach(function (j, i) {
           if (!j || !j.nome || !j.clube) return;
           pitchSafe.appendChild(
             createPlayer(j.nome, j.clube, j.percentual, j.capitao, '-mid', i)
@@ -345,7 +340,7 @@
         });
 
         // DEFENSORES (4)
-        (t.DEF || []).forEach(function(j, i){
+        (t.DEF || []).forEach(function (j, i) {
           if (!j || !j.nome || !j.clube) return;
           pitchSafe.appendChild(
             createPlayer(j.nome, j.clube, j.percentual, j.capitao, '-def', i)
@@ -353,14 +348,14 @@
         });
 
         // GOLEIRO
-        if (t.GOL && t.GOL.nome && t.GOL.clube){
+        if (t.GOL && t.GOL.nome && t.GOL.clube) {
           pitchSafe.appendChild(
             createPlayer(t.GOL.nome, t.GOL.clube, t.GOL.percentual, t.GOL.capitao, '-gk', 0)
           );
         }
 
         // TÉCNICO
-        if (t.TEC && t.TEC.nome && t.TEC.clube){
+        if (t.TEC && t.TEC.nome && t.TEC.clube) {
           pitchSafe.appendChild(
             createPlayer(t.TEC.nome, t.TEC.clube, t.TEC.percentual, t.TEC.capitao, '-coach', 0)
           );
@@ -413,20 +408,20 @@
       }
 
       // Scoreboard / delta (valores vêm do JSON)
-      function renderDelta(cfg){
+      function renderDelta(cfg) {
         const card = document.querySelector('.delta-card');
         if (!card) return;
 
         const d = cfg.delta || {};
-        const diffEl  = document.getElementById('deltaDiff');
-        const unitEl  = document.getElementById('deltaUnit');
-        const miEl    = document.getElementById('deltaMI');
-        const meEl    = document.getElementById('deltaME');
+        const diffEl = document.getElementById('deltaDiff');
+        const unitEl = document.getElementById('deltaUnit');
+        const miEl = document.getElementById('deltaMI');
+        const meEl = document.getElementById('deltaME');
         const badgeEl = document.getElementById('deltaBadge');
-        const subEl   = document.getElementById('deltaSub');
+        const subEl = document.getElementById('deltaSub');
 
-        function isNum(v){ return typeof v === 'number' && Number.isFinite(v); }
-        function fmt(v, frac){
+        function isNum(v) { return typeof v === 'number' && Number.isFinite(v); }
+        function fmt(v, frac) {
           if (!isNum(v)) return '';
           return v.toLocaleString('pt-BR', {
             minimumFractionDigits: frac,
@@ -435,43 +430,43 @@
         }
 
         // Diferença (com sinal)
-        if (diffEl && isNum(d.diff)){
+        if (diffEl && isNum(d.diff)) {
           const sign = d.diff > 0 ? '+' : (d.diff < 0 ? '−' : '');
           diffEl.textContent = sign + fmt(Math.abs(d.diff), 2);
         }
 
-        if (unitEl && d.unit){
+        if (unitEl && d.unit) {
           unitEl.textContent = d.unit;
         }
 
-        if (miEl && isNum(d.indicados)){
+        if (miEl && isNum(d.indicados)) {
           miEl.textContent = fmt(d.indicados, 2);
         }
 
-        if (meEl && isNum(d.escalados)){
+        if (meEl && isNum(d.escalados)) {
           meEl.textContent = fmt(d.escalados, 2);
         }
 
-        if (badgeEl && d.badge){
+        if (badgeEl && d.badge) {
           badgeEl.textContent = d.badge;
         }
 
-        if (subEl && d.sub){
+        if (subEl && d.sub) {
           subEl.innerHTML = '<i>' + d.sub + '</i>';
         }
       }
 
-      function aplicaComingSoon(cfg){
+      function aplicaComingSoon(cfg) {
         const lane = document.getElementById('canal-whats-lane');
         const msgEl = document.getElementById('soon-strong');
 
         if (!lane) return;
 
-        if (cfg.comingSoon){
+        if (cfg.comingSoon) {
           lane.hidden = false;
           if (msgEl && cfg.message) msgEl.textContent = cfg.message;
 
-          if (cfg.hideWhenSoon){
+          if (cfg.hideWhenSoon) {
             const camp = document.getElementById('campinho-mais-indicados');
             if (camp) camp.hidden = true;
             const resvCard = document.querySelector('.reserves-card');
@@ -484,9 +479,9 @@
         }
       }
 
-      function initMaisIndicados(){
+      function initMaisIndicados() {
         loadMaisIndicados()
-          .then(function(cfg){
+          .then(function (cfg) {
             cfg = cfg || {};
             aplicaComingSoon(cfg);
 
@@ -497,7 +492,7 @@
             renderBanco(cfg);
             renderDelta(cfg);
           })
-          .catch(function(err){
+          .catch(function (err) {
             console.warn('Erro ao renderizar Mais Indicados:', err && err.message ? err.message : err);
           });
       }
@@ -508,7 +503,9 @@
 
   <!-- Parciais globais -->
   <script defer src="/assets/js/layout.js"></script>
+  <script defer src="/assets/js/navbar.js"></script>
   <script defer src="/assets/js/market-bar.js"></script>
 
 </body>
+
 </html>

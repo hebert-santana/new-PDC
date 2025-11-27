@@ -28,8 +28,10 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" rel="stylesheet" />
   <link rel="stylesheet" href="/assets/css/build/styles.css" />
-  <link rel="stylesheet" href="/assets/css/build/club-grid.css" />
-  <link rel="stylesheet" href="/assets/css/customizacao.css?v=29">
+  <link rel="stylesheet" href="https://cdn.provaveisdocartola.com.br/css/club-grid.css" />
+  <link rel="stylesheet" href="/assets/css/build/navbar.css">
+
+  <link rel="stylesheet" href="/assets/css/customizacao.css">
 
   <!-- GA4 (opcional; manter se quiser medir uso da página privada) -->
   <link rel="preconnect" href="https://www.google-analytics.com" />
@@ -101,8 +103,9 @@
 
   <style>
     /* substituir o CSS de .influ-hint */
-.influ-banner{
-  max-width:90%;
+   .influ-banner{
+  width:var(--rail-w);
+  max-width:var(--rail-max);
   margin:0 auto 20px;
   padding:8px 14px;
   text-align:center;
@@ -115,84 +118,64 @@
   box-shadow:0 10px 30px rgba(0,0,0,.35);
   animation:fadeSlide .35s ease-out;
 }
-.influ-banner .bi{color:#2ee59d;margin-right:6px}
-.influ-banner .sep{opacity:.5;margin:0 8px}
-.influ-banner kbd{
-  background:#0b1420;border:1px solid #1e2b3c;color:#eaf3ff;
-  padding:1px 6px;border-radius:6px
-}
-@keyframes fadeSlide{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
-@media (max-width:576px){
-  .influ-banner{font-size:.92rem;padding:8px 10px}
-}
 
-  /* Override local: deixar os balões de desfalques maiores nesta página */
-  .status-card .tag{
-    font-size:.7rem;
-    padding:4px 10px;
-    border-radius:999px;
-    background:#fff;
-    border:1px solid rgba(0,0,0,.08);
-    box-shadow:0 1px 4px rgba(0,0,0,.04);
-    font-weight:500;
-  }
+    .influ-banner .bi{color:#2ee59d;margin-right:6px}
+    .influ-banner .sep{opacity:.5;margin:0 8px}
+    .influ-banner kbd{
+      background:#0b1420;border:1px solid #1e2b3c;color:#eaf3ff;
+      padding:1px 6px;border-radius:6px
+    }
+    @keyframes fadeSlide{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+    @media (max-width:576px){
+      .influ-banner{font-size:.92rem;padding:8px 10px}
+    }
 
+    /* Override local: deixar os balões de desfalques maiores nesta página */
+    .status-card .tag{
+      font-size:.7rem;
+      padding:4px 10px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid rgba(0,0,0,.08);
+      box-shadow:0 1px 4px rgba(0,0,0,.04);
+      font-weight:500;
+    }
   </style>
 </head>
 
 <body>
   <noscript style="display:block;padding:8px;background:#222;color:#eee;text-align:center">
-    Esta página precisa de JavaScript para renderizar as escalações.
+    Esta página precisa de JavaScript para listar as partidas da rodada.
   </noscript>
 
-  <!-- header -->
-  <header class="container" id="main-image-container">
-    <div class="col-12 d-flex justify-content-center">
-      <h1 id="header-especialista" class="custom-provaveis-item">
-        <span class="visually-hidden">Influenciadores — Campinho Interativo</span>
-        <img src="/assets/img/ui/provaveisdocartola.svg" alt="" role="presentation" class="provaveis-image" width="600" height="200" loading="eager" decoding="async" />
-      </h1>
-    </div>
-  </header>
+  <script>
+    try {
+      localStorage.setItem('pdc_influ_mode', '1');
+    } catch (e) {}
+  </script>
 
-  <div class="container">
-    <!-- substituir a .influ-hint atual -->
-<div class="influ-banner" role="status" aria-live="polite">
-  <i class="bi bi-shield-lock-fill" aria-hidden="true"></i>
-  <strong>Área exclusiva para influenciadores</strong>
-  <span class="sep">•</span>
-  <span>Arraste os jogadores no campinho</span>
-  <span class="sep d-none d-sm-inline">•</span>
-  <span class="d-none d-sm-inline">Dica: <kbd>duplo clique</kbd> restaura a posição</span>
-</div>
+  <!-- header -->
+  <div data-include="header"></div>
+
+  <!-- NAVBAR alinhada ao trilho 96%/1600px -->
+  <div id="navbar-rail">
+    <div data-include="navbar"></div>
   </div>
 
-  <!-- include: botões -->
-  <div class="container" id="provaveis-container">
-<div class="container">
-  
-  <nav class="hero-buttons" aria-label="Navegação de páginas">     
-    <a href="/influencers.html" class="btn-noticia btn-nav">
-      <i class="bi bi-people-fill me-1" aria-hidden="true"></i>
-      Prováveis Escalações
-    </a>
-  </nav>
-  
-</div>
+  <!-- CONTEÚDO PRINCIPAL NO TRILHO LARGO -->
+  <main id="provaveis-container">
+    <section class="mic-mast" aria-labelledby="mastTitle">
+      <div class="mic-rail">
+      <div class="influ-banner" role="status" aria-live="polite">
+        <i class="bi bi-shield-lock-fill" aria-hidden="true"></i>
+        <strong>Área exclusiva para influenciadores</strong>
+        <span class="sep">•</span>
+        <span>Arraste os jogadores no campinho</span>
+        <span class="sep d-none d-sm-inline">•</span>
+        <span class="d-none d-sm-inline">Dica: <kbd>duplo clique</kbd> restaura a posição</span>
+      </div>
 
-<script>
-  // marca o botão da página atual
-  (function () {
-    const norm = (u) => new URL(u, location.origin).pathname.replace(/\/index\.html$/, '/');
-    const here = norm(location.href);
-    document.querySelectorAll('.hero-buttons a.btn-nav').forEach(a => {
-      if (norm(a.href) === here) {
-        a.setAttribute('aria-current', 'page');
-        a.classList.add('is-active');
-      }
-    });
-  })();
-</script>
+    <!-- usa a mesma navbar do site -->
     <div data-include="navbar-equipes"></div>
 
     <div class="esconde-campinho" hidden></div>
@@ -204,23 +187,25 @@
     <!-- includes: CTA e footer -->
     <div data-include="aviso-apoiadores"></div>
     <div data-include="footer"></div>
-  </div>
+  </main>
 
   <!-- JS (ordem) -->
   <script defer src="/assets/js/layout.js"></script>
-  <script defer src="/assets/js/market-bar.js?v=1"></script>
+  <script defer src="/assets/js/navbar.js"></script>
+  <script defer src="/assets/js/market-bar.js"></script>
+  
 
   <!-- dados dos jogos -->
   <script defer src="/assets/js/jogos.data.js"></script>
 
   <!-- render dos jogos -->
-  <script defer src="/assets/js/render-jogos.js?v=2"></script>
+  <script defer src="/assets/js/render-jogos.js"></script>
   <script defer src="/assets/js/club-grid.js"></script>
 
   <!-- meta de atualização / desfalques / arbitragem -->
   <script defer src="/assets/js/team-updates.js"></script>
   <script defer src="/assets/js/desfalques.js"></script>
-  <script defer src="/assets/js/arbitragem.js?v=28"></script>
+  <script defer src="/assets/js/arbitragem.js"></script>
   <script defer src="/assets/js/aviso-escalacoes.js"></script>
 
   <!-- loader de mercado (corrigido para /assets/data) -->
@@ -235,71 +220,70 @@
   })();
   </script>
 
-<script>window.DRAG_ENABLED = true;</script>
-<script src="/assets/js/pitch-render-influencers.js" defer></script>
-<script src="/assets/js/drag-players.js" defer></script>
+  <script>window.DRAG_ENABLED = true;</script>
+  <script src="/assets/js/pitch-render-influencers.js" defer></script>
+  <script src="/assets/js/drag-players.js" defer></script>
 
-<script>
-// mapa base de posições
-const POS = {
-  GOL:{x:50,y:90},
-  'ZAG-L':{x:35,y:75}, 'ZAG-C':{x:50,y:75}, 'ZAG-R':{x:65,y:75},
-  'LAT-L':{x:20,y:78}, 'LAT-R':{x:80,y:78},
-  VOL:{x:50,y:65},
-  'MEI-L':{x:30,y:58}, 'MEI-C':{x:50,y:55}, 'MEI-R':{x:70,y:58},
-  'ATA-L':{x:35,y:30}, 'ATA-C':{x:50,y:25}, 'ATA-R':{x:65,y:30},
-  TEC:{x:92,y:96}
-};
+  <script>
+  // mapa base de posições
+  const POS = {
+    GOL:{x:50,y:90},
+    'ZAG-L':{x:35,y:75}, 'ZAG-C':{x:50,y:75}, 'ZAG-R':{x:65,y:75},
+    'LAT-L':{x:20,y:78}, 'LAT-R':{x:80,y:78},
+    VOL:{x:50,y:65},
+    'MEI-L':{x:30,y:58}, 'MEI-C':{x:50,y:55}, 'MEI-R':{x:70,y:58},
+    'ATA-L':{x:35,y:30}, 'ATA-C':{x:50,y:25}, 'ATA-R':{x:65,y:30},
+    TEC:{x:92,y:96}
+  };
 
-// limpa qualquer persistência local de drag
-function clearDragStorage(){
-  localStorage.removeItem('pitch_drag_positions');
-  sessionStorage.removeItem('pitch_drag_positions');
-}
+  // limpa qualquer persistência local de drag
+  function clearDragStorage(){
+    try {
+      localStorage.removeItem('pitch_drag_positions');
+      sessionStorage.removeItem('pitch_drag_positions');
+    } catch (e) {}
+  }
 
-// aplica posição do preset no elemento
-function applyPresetPos(el){
-  const slot = el.dataset.slot; // ex.: "MEI-C"
-  const p = POS[slot];
-  if (!p) return;
-  el.style.left = p.x + '%';
-  el.style.top  = p.y + '%';
-}
+  // aplica posição do preset no elemento
+  function applyPresetPos(el){
+    const slot = el.dataset.slot; // ex.: "MEI-C"
+    const p = POS[slot];
+    if (!p) return;
+    el.style.left = p.x + '%';
+    el.style.top  = p.y + '%';
+  }
 
-// reseta todos os jogadores
-function resetAllPlayers(){
-  document.querySelectorAll('.player').forEach(el=>{
-    // remove coordenadas livres e inline anteriores
-    el.removeAttribute('data-free-x');
-    el.removeAttribute('data-free-y');
-    el.style.left = '';
-    el.style.top  = '';
-    applyPresetPos(el);
-  });
-}
-
-// F5: volta sempre para o preset
-window.addEventListener('DOMContentLoaded', () => {
-  clearDragStorage();
-  resetAllPlayers();
-
-  // clique único no nome para resetar aquele jogador
-  document.querySelectorAll('.player .cap').forEach(cap=>{
-    cap.addEventListener('click', (e)=>{
-      const el = e.currentTarget.closest('.player');
+  // reseta todos os jogadores
+  function resetAllPlayers(){
+    document.querySelectorAll('.player').forEach(el=>{
       el.removeAttribute('data-free-x');
       el.removeAttribute('data-free-y');
       el.style.left = '';
       el.style.top  = '';
       applyPresetPos(el);
-    }, {once:false});
+    });
+  }
+
+  // F5: volta sempre para o preset
+  window.addEventListener('DOMContentLoaded', () => {
+    clearDragStorage();
+    resetAllPlayers();
+
+    // clique único no nome para resetar aquele jogador
+    document.querySelectorAll('.player .cap').forEach(cap=>{
+      cap.addEventListener('click', (e)=>{
+        const el = e.currentTarget.closest('.player');
+        el.removeAttribute('data-free-x');
+        el.removeAttribute('data-free-y');
+        el.style.left = '';
+        el.style.top  = '';
+        applyPresetPos(el);
+      }, {once:false});
+    });
   });
-});
 
-// Se usa drag com salvamento, garanta que o módulo de drag NÃO grave no storage nesta página.
-// Caso precise manter no admin somente, condicione por pathname ou ?persist=1.
-</script>
-
-
+  // Drag com salvamento, garante que o módulo de drag NÃO grave no storage nesta página.
+  // Caso precisar manter no admin somente, condicionar por pathname ou ?persist=1.
+  </script>
 </body>
 </html>

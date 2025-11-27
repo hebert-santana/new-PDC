@@ -129,8 +129,6 @@
 /* =========================================================
    HEADER / RODADA + AJUDA
    ========================================================= */
-.mic-mast{background:linear-gradient(180deg,rgba(0,0,0,.02),transparent 60%);padding:12px 0 8px;margin:6px 0 4px}
-.mic-mast .mic-rail{width:90%;max-width:1280px;margin:0 auto;text-align:center}
 .mast-title{margin:4px 0 10px;font-weight:900;font-size:clamp(1.8rem,1.05rem + 3vw,3rem);letter-spacing:.01em;color:var(--cinza-escuro)}
 .mast-title .mast-brand{color:var(--laranja)}
 .mast-title i{font-size:.9em;opacity:.9;vertical-align:middle}
@@ -286,12 +284,6 @@
    ========================================================= */
 .page-mais-indicados #canal-whats-lane[hidden]{display:none!important}
 
-/* Trilho consistente e centralização */
-.page-mais-indicados .canal-whats-lane{
-  width:var(--rail-w);max-width:var(--rail-max);margin:16px auto 20px;padding:0 12px;box-sizing:border-box;
-  display:grid;place-items:center
-}
-
 /* Cartão quadrado central */
 .page-mais-indicados .canal-whats-card{
   width:min(560px,100%);aspect-ratio:1/1;min-height:360px;margin:0 auto;border-radius:22px;border:1px solid #FFE08A;
@@ -352,7 +344,6 @@
 #ad-lateral-esq{left:20px}#ad-lateral-dir{right:20px}
 @media (min-width:1400px){
   #ad-lateral-esq,#ad-lateral-dir{width:300px;height:600px}
-  body{margin-left:320px;margin-right:320px}
 }
 @media (max-width:1200px){
   #ad-lateral-esq,#ad-lateral-dir{display:none!important}
@@ -383,19 +374,18 @@
 .ad-guard + div:has(> ins.adsbygoogle),
 .ad-guard + div:has(> iframe[id^="aswift_"]){display:none!important}
 
+/* =========================================================
+   AJUSTES ESPECÍFICOS (SEM QUEBRAR OUTRAS PÁGINAS)
+   ========================================================= */
 
-
-
-
-/* troque o seletor global */
+/* Avatares de lineups: restringe ao cartão de lineup (não afeta campinho) */
 .lineup-card .player img{
   width:var(--img); height:var(--img); border-radius:50%;
   box-shadow:0 4px 14px rgba(0,0,0,.28);
   border:2px solid #fff; background:#fff;
 }
 
-
-/* coloque em mais-indicados.css após os imports */
+/* Remove borda/moldura das camisas no mais-indicados/mais-escalados */
 .page-mais-indicados .player .shirt,
 .page-mais-indicados .resv-shirt{
   border-radius:0 !important;
@@ -404,19 +394,18 @@
   box-shadow:none !important;
 }
 
-
-/* CAPITÃO: posicionado relativo ao centro (que coincide com a camisa) */
-#campinho-mais-indicados .player { position:absolute; }
+/* CAPITÃO: posicionado relativo ao centro da camisa */
+#campinho-mais-indicados .player{position:absolute;}
 #campinho-mais-indicados .player .mark{
   position:absolute;
-  left:40%;              /* eixo no centro da camisa */
-  top:20%;                 /* topo da camisa */
+  left:40%;
+  top:20%;
   transform:
     translate(
-      calc(var(--shirt-size-desktop)/2 - 6px),  /* empurra até a quina direita */
-      -40%                                     /* sobe um pouco */
+      calc(var(--shirt-size-desktop)/2 - 6px),
+      -40%
     );
-  right:auto;            /* cancela antigos right:-8px */
+  right:auto;
 }
 
 /* Mobile: usa o tamanho de camisa do mobile */

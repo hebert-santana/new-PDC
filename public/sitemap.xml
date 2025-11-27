@@ -12,6 +12,15 @@
   </url>
 
   <url>
+    <loc>https://www.provaveisdocartola.com.br/pages/mais-escalados-do-cartola.html</loc>
+    <lastmod>2025-08-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.provaveisdocartola.com.br/pages/mais-escalados-do-cartola.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.provaveisdocartola.com.br/pages/mais-escalados-do-cartola.html"/>
+  </url>
+
+  <url>
     <loc>https://www.provaveisdocartola.com.br/pages/mais-indicados-do-cartola.html</loc>
     <lastmod>2025-08-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -21,12 +30,12 @@
   </url>
 
   <url>
-    <loc>https://www.provaveisdocartola.com.br/pages/sobre-mim.html</loc>
+    <loc>https://www.provaveisdocartola.com.br/pages/partidas.html</loc>
     <lastmod>2025-08-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.provaveisdocartola.com.br/pages/sobre-mim.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.provaveisdocartola.com.br/pages/sobre-mim.html"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.provaveisdocartola.com.br/pages/partidas.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.provaveisdocartola.com.br/pages/partidas.html"/>
   </url>
 
   <url>

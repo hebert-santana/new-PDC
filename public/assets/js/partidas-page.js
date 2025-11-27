@@ -123,7 +123,7 @@ function createMatchCard(p, clubes) {
 
 async function loadPartidas() {
   try {
-    const res = await fetch(JSON_URL, { cache: 'no-store' });
+    const res = await fetch(JSON_URL);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
 

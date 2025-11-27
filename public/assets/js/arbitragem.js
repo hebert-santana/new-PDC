@@ -1,4 +1,4 @@
-// assets/js/arb.js
+// assets/js/arbitragem.js
 (() => {
   const SRC = 'assets/data/arbitragem.json';
 
@@ -107,7 +107,7 @@
   // ---------- pass 2: fetch + render micro/back-to-top ----------
   const renderArbitragem = async () => {
     try {
-      const r = await fetch(SRC, { cache: 'no-store' });
+      const r = await fetch(SRC);
       if (!r.ok) return;
       const data = await r.json();
 

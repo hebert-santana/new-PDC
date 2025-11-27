@@ -1,7 +1,8 @@
 <!-- /partials/botoes-nav.html -->
 
 <!-- DESKTOP -->
-<div class="container d-none d-md-block">
+<div class="d-none d-md-block" id="navbar-rail">
+
   <nav class="hero-buttons" aria-label="Navegação de páginas">
 
     <a href="/" class="btn-nav">
@@ -24,25 +25,14 @@
       <span>Escalados</span>
     </a>
 
-    <!-- LIGAS ANUAIS COM CLASSE PRÓPRIA -->
-    <a href="/pages/ligas-cartola.html" class="btn-nav btn-nav-ligas">
-      <i class="bi bi-trophy-fill" aria-hidden="true"></i>
-      <span>Ligas Anuais</span>
+    <a href="https://whatsapp.com/channel/0029VbBFrZ4Gk1FxlriZ7R2I" class="btn-nav" target="_blank" rel="noopener">
+      <i class="bi bi-whatsapp me-1" aria-hidden="true"></i>
+      <span>Canal</span>
     </a>
-
-    <!-- BIA+ DESKTOP (destaque sutil) -->
-   <!-- <a href="https://www.biascore.com.br"
-       class="btn-nav btn-bia"
-       target="_blank" rel="noopener">
-      <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i>
-      <span>BIAScore</span>
-    </a> -->
-
   </nav>
 </div>
 
-
-<!-- ==================== NAVBAR MOBILE FIXA (mantém) ==================== -->
+<!-- NAVBAR MOBILE FIXA -->
 <nav class="nav-shortcuts d-md-none" aria-label="Navegação mobile">
   <a href="/" class="nav-shortcut">
     <i class="bi bi-people-fill"></i>
@@ -64,43 +54,8 @@
     <span>Escalados</span>
   </a>
 
-  <a href="/pages/ligas-cartola.html" class="nav-shortcut nav-shortcut-ligas">
-    <i class="bi bi-trophy-fill"></i>
-    <span>Ligas</span>
+  <a href="https://whatsapp.com/channel/0029VbBFrZ4Gk1FxlriZ7R2I" class="nav-shortcut">
+    <i class="bi bi-whatsapp me-1"></i>
+    <span>Canal</span>
   </a>
-
-  <!-- <a href="https://www.biascore.com.br"
-     class="nav-shortcut nav-shortcut-bia"
-     target="_blank" rel="noopener">
-    <i class="bi bi-lightning-charge-fill"></i>
-    <span>BIA+</span>
-  </a> -->
 </nav>
-
-
-<!-- SCRIPT: marca link ativo -->
-<script>
-(function () {
-  function norm(u) {
-    return new URL(u, location.origin)
-      .pathname.replace(/\/index\.html$/, '/');
-  }
-
-  const here = norm(location.href);
-
-  // desktop – hero buttons
-  document.querySelectorAll('.hero-buttons .btn-nav').forEach(a => {
-    if (norm(a.href) === here) {
-      a.setAttribute('aria-current', 'page');
-      a.classList.add('is-active');
-    }
-  });
-
-  // mobile
-  document.querySelectorAll('.nav-shortcut').forEach(a => {
-    if (norm(a.href) === here) {
-      a.classList.add('is-active');
-    }
-  });
-})();
-</script>

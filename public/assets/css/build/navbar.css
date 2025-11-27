@@ -11,6 +11,19 @@
   /* Avatares responsivos */
   --img:clamp(56px,9vw,92px);
   --img-coach:clamp(44px,7vw,70px);
+
+  
+  --rail-w:90%;
+  --rail-max:1280px;
+
+}
+
+
+/* trilho padrão para a barra laranja */
+.nav-rail{
+  width:var(--rail-w);
+  max-width:var(--rail-max);
+  margin:0 auto 12px;
 }
 
 /* ===== Ajustes pontuais ===== */

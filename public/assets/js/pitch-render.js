@@ -8,7 +8,6 @@
 
   const css = `
 /* ===================== VARIÁVEIS GERAIS ===================== */
-/* ===================== VARIÁVEIS GERAIS ===================== */
 :root{
   /* Fonte padrão */
   --font-ui: system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Arial,sans-serif;
@@ -268,10 +267,11 @@ const clamp = (v,a=0,b=100)=>Math.max(a,Math.min(b,v));
 
   // ===== Util =====
   async function jget(url){
-    const r = await fetch(url, { cache:'no-store' });
-    if(!r.ok) throw new Error(`fetch ${url} ${r.status}`);
-    return r.json();
-  }
+  const r = await fetch(url, { cache:'force-cache' });
+  if (!r.ok) throw new Error(`fetch ${url} ${r.status}`);
+  return r.json();
+}
+
 
   // Carrega mercado
   async function loadMercado(){
@@ -359,15 +359,47 @@ function playerEl({id, slot, sit, duvidaCom}){
     el.style.top  = PCT(p.y);
   }
 
-  // ===== Lineups + override =====
-  async function loadLineups(){
-    const base = await jget(`/assets/data/lineups.json?t=${Date.now()}`).catch(()=>({version:1,tz:"-03:00",teams:{}}));
-    try{
-      const ov = JSON.parse(localStorage.getItem('lineups_override') || 'null');
-      if (ov && ov.teams) base.teams = Object.assign(base.teams||{}, ov.teams);
-    }catch{}
-    return base;
+
+// ===== Lineups + override =====
+async function loadLineups(){
+  // 1) tenta pegar cache local
+  let cache = null;
+  try {
+    cache = JSON.parse(localStorage.getItem('lineups_cache') || 'null');
+  } catch {}
+
+  // 2) pega versão atual do servidor (arquivo minúsculo) SEM cache
+  let serverVersion = 0;
+  try {
+    const v = await fetch('/assets/data/lineups.version.json', {
+      cache: 'no-store'          // <--- TROQUEI AQUI
+    }).then(r => r.json());
+    serverVersion = Number(v.version) || 0;
+  } catch {
+    // se não deu pra pegar versão, mas tenho cache, uso o cache
+    if (cache) return cache.data;
+    throw new Error('Falha ao obter versão do lineups');
   }
+
+  // 3) se cache existe e está na mesma versão → usa cache
+  if (cache && cache.version === serverVersion) {
+    return cache.data;
+  }
+
+  // 4) senão, baixa o lineups.json SEM cache
+  const fresh = await fetch('/assets/data/lineups.json', {
+    cache: 'no-store'            // <--- E AQUI
+  }).then(r => r.json());
+
+  // 5) salva no localStorage
+  localStorage.setItem('lineups_cache', JSON.stringify({
+    version: serverVersion,
+    data: fresh
+  }));
+
+  return fresh;
+}
+
 
   let CURRENT = null;
 

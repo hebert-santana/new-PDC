@@ -7,45 +7,41 @@
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), accelerometer=(), gyroscope=(), magnetometer=()" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' data: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.googleadservices.com https://stats.g.doubleclick.net; connect-src 'self' https://api.cartola.globo.com https://api.cartolafc.globo.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.google.com https://*.googleadservices.com https://stats.g.doubleclick.net https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://pagead2.googlesyndication.com https://www.googletagmanager.com https://adservice.google.com https://adservice.google.com.br; worker-src 'self' blob:; upgrade-insecure-requests" }
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), accelerometer=(), gyroscope=(), magnetometer=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.provaveisdocartola.com.br; font-src 'self' data: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.googleadservices.com https://stats.g.doubleclick.net; connect-src 'self' https://api.cartola.globo.com https://api.cartolafc.globo.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.google.com https://*.googleadservices.com https://stats.g.doubleclick.net https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://pagead2.googlesyndication.com https://www.googletagmanager.com https://adservice.google.com https://adservice.google.com.br; worker-src 'self' blob:; upgrade-insecure-requests"
+        }
       ]
     },
 
-    { "source": "/assets/data/lineups.json",               "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
-    { "source": "/assets/data/escalacoes/(.*)\\.json",     "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
-    { "source": "/assets/data/(.*)\\.json",                "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
 
-    { "source": "/assets/img/atletas/(.*)",                "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
-    { "source": "/assets/img/campinhos/(.*)",              "headers": [{ "key": "Cache-Control", "value": "public, max-age=7884000, immutable" }] },
-    { "source": "/assets/img/escudos/(.*)",                "headers": [{ "key": "Cache-Control", "value": "public, max-age=7884000, immutable" }] },
-    { "source": "/assets/img/ui/(.*)",                     "headers": [{ "key": "Cache-Control", "value": "public, max-age=7884000, immutable" }] },
-    { "source": "/assets/img/icons/(.*)",                  "headers": [{ "key": "Cache-Control", "value": "public, max-age=7884000, immutable" }] },
+    { "source": "/assets/data/desfalques.json",        "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
+    { "source": "/assets/data/lineups.version.json",   "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
 
-    { "source": "/assets/img/escalacoes/manifest.json",
-      "headers": [
-        { "key": "Content-Type", "value": "application/json; charset=utf-8" },
-        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate" }
-      ]
-    },
+   
+    { "source": "/assets/data/mercado.images.json",    "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }] },
 
-    { "source": "/assets/js/render-jogos\\.js",            "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
-    { "source": "/assets/js/team-updates\\.js",            "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
-    { "source": "/assets/js/arbitragem\\.js",              "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
-    { "source": "/assets/js/arb-meta\\.js",                "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
+   
+    { "source": "/assets/img/campinhos/(.*)",          "headers": [{ "key": "Cache-Control", "value": "public, max-age=7884000, immutable" }] },
+    { "source": "/assets/img/escudos/(.*)",            "headers": [{ "key": "Cache-Control", "value": "public, max-age=7884000, immutable" }] },
+    { "source": "/assets/img/ui/(.*)",                 "headers": [{ "key": "Cache-Control", "value": "public, max-age=7884000, immutable" }] },
+    { "source": "/assets/img/icons/(.*)",              "headers": [{ "key": "Cache-Control", "value": "public, max-age=7884000, immutable" }] },
 
-    { "source": "/assets/img/escalacoes/(.*)\\.png",       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
-
-    { "source": "/:path*.html",                            "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }] }
+    
+    { "source": "/:path*.html",                        "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }] }
   ],
 
-    "redirects": [
+  "redirects": [
     { "source": "/mais-indicados-do-cartola.html", "destination": "/pages/mais-indicados-do-cartola.html", "permanent": false },
-    { "source": "/sobre-mim.html",                 "destination": "/pages/sobre-mim.html",                 "permanent": false },
+    { "source": "/mais-escalados-do-cartola.html", "destination": "/pages/mais-escalados-do-cartola.html", "permanent": false },
     { "source": "/contato.html",                   "destination": "/pages/contato.html",                   "permanent": false },
     { "source": "/partidas.html",                  "destination": "/pages/partidas.html",                  "permanent": false },
-    { "source": "/index.html", "destination": "/", "permanent": true },
-    { "source": "/pages/index.html", "destination": "/", "permanent": true },
-    { "source": "/admin.html", "destination": "/404", "permanent": false }
+    { "source": "/index.html",                     "destination": "/",                                     "permanent": true },
+    { "source": "/pages/index.html",               "destination": "/",                                     "permanent": true },
+    { "source": "/admin.html",                     "destination": "/404",                                  "permanent": false }
   ]
 }

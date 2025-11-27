@@ -29,286 +29,6 @@
      - Micro animação de entrada
      - Preserva aparência do marcador “P”
      ========================================================================= */
-  
-   // CSS INJETADO — sempre atualiza o <style id="pitch-view-style">
-(() => {
-  const css = `
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&display=swap');
-
-:root{
-  --img:120px; --img-coach:56px; --gap-label:26px;
-  --cap-fs:11px; --altcap-fs:10px; --chip-fs:11px;
-  --cap-py:.3em; --cap-px:.6em; --altcap-py:.25em; --altcap-px:.6em;
-  --chip-py:.14em; --chip-px:.16em;
-  --cap-max:calc(var(--img) * 1.6);
-  --ring-w:.18em; --ring-ok:#16a34a; --ring-duv:#f59e0b;
-  --chip-size:26px; --chip-ring:#ffd54a; --chip-fg:#0b192b;
-}
-
-.pitch{ container-type:inline-size; }
-@supports (width:1cqi){
-  .pitch{
-    --img:       clamp(76px, 11cqi, 100px);
-    --img-coach: clamp(44px, 7.5cqi, 66px);
-    --gap-label: clamp(24px, 3.5cqi, 30px);
-    --cap-fs:    clamp(12px, 1.5cqi, 16px);
-    --altcap-fs: clamp(12px, 1.5cqi, 16px);
-    --chip-fs:   clamp(10px, 1.4cqi, 14px);
-    --chip-size: clamp(22px, 3.2cqi, 28px);
-  }
-}
-
-/* Avatar */
-.pitch .player,.pitch .jogador{ cursor:grab }
-.pitch .player:active,.pitch .jogador:active{ cursor:grabbing }
-.player{
-  position:absolute; transform:translate(-50%,-50%);
-  text-align:center; width:var(--img); height:var(--img);
-  overflow:visible; touch-action:manipulation;
-}
-.player img{
-  display:block; width:var(--img); height:var(--img);
-  border-radius:50%; background:#fff; border:.12em solid #fff;
-  outline:1px solid rgba(15,23,42,.08);
-  box-shadow:0 .35em .9em rgba(0,0,0,.28);
-  pointer-events:none; user-select:none; transition:transform .12s ease;
-}
-@media (hover:hover){ .pitch .player:hover img{ transform:scale(1.03) } }
-.player.ok img{   box-shadow:0 0 0 var(--ring-w) var(--ring-ok), 0 .6em .9em rgba(0,0,0,.28) }
-.player.doubt img{box-shadow:0 0 0 var(--ring-w) var(--ring-duv), 0 .6em .9em rgba(0,0,0,.28) }
-.player.coach{ width:var(--img-coach); height:var(--img-coach) }
-.player.coach img{ width:var(--img-coach); height:var(--img-coach) }
-
-/* Pílulas base */
-.player .cap,.player .stat,.player .alt-cap,.player .alt-stat{
-  position:absolute; left:50%; transform:translateX(-50%);
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  max-width:var(--cap-max); pointer-events:none;
-}
-.player .cap{
-  top:calc(100% + 0px);
-  padding:var(--cap-py) var(--cap-px);
-  font-size:var(--cap-fs); font-weight:600; line-height:1.05; letter-spacing:.015em;
-  color:#0a1324; background:rgba(255,255,255,.98);
-  border:1px solid rgba(15,23,42,.14); border-radius:16px;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 .35em .8em rgba(2,6,23,.18);
-  backdrop-filter:saturate(120%) blur(2px);
-}
-
-/* ===== Balões de MÉDIA — DARK GLASS, SEM BORDA ===== */
-.player .stat,
-.player .alt-stat{
-  --fg:#e7edf3;     /* texto */
-  --dot:#9fe870;    /* ponto padrão */
-  --glow:8px;       /* raio do brilho */
-  position:absolute; left:50%; transform:translateX(-50%);
-  top:calc(100% + var(--gap-label));
-  display:inline-flex; align-items:center; gap:.45em;
-  padding:calc(var(--chip-py) + 2px) calc(var(--chip-px) + 8px);
-  font-family:"Inter Tight",system-ui,sans-serif;
-  font-size:var(--chip-fs); font-weight:700; letter-spacing:.02em;
-  color:var(--fg); font-variant-numeric:tabular-nums;
-  background:radial-gradient(120% 140% at 30% 20%, #1b2430 0%, #0f141b 55%, #0b1016 100%);
-  border:none;                          /* sem contorno colorido */
-  border-radius:14px;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.06),
-    0 10px 22px rgba(0,0,0,.40);        /* sombra externa suave */
-  backdrop-filter:saturate(120%) blur(2px);
-  text-shadow:0 1px 0 rgba(0,0,0,.35);
-  opacity:0; transform:translate(-50%,6px);
-  animation:fadeUp .35s ease forwards;
-}
-.player .stat:hover,.player .alt-stat:hover{ transform:translate(-50%,4px) }
-
-/* Glow por faixa (sem borda) */
-.player .stat:not(.amber):not(.red),
-.player .alt-stat:not(.amber):not(.red){
-  --dot:#9fe870;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.06),
-    0 10px 22px rgba(0,0,0,.40),
-    0 0 var(--glow) rgba(159,232,112,.35);
-}
-.player .stat.amber,.player .alt-stat.amber{
-  --dot:#ffd166;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.06),
-    0 10px 22px rgba(0,0,0,.40),
-    0 0 var(--glow) rgba(255,209,102,.28);
-}
-.player .stat.red,.player .alt-stat.red{
-  --dot:#ff6767;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.06),
-    0 10px 22px rgba(0,0,0,.40),
-    0 0 var(--glow) rgba(255,103,103,.25);
-}
-
-/* Ponto de status */
-.player .stat::before,.player .alt-stat::before{
-  content:"";
-  inline-size:.55em; block-size:.55em; border-radius:50%;
-  background:var(--dot);
-  box-shadow:0 0 0 2px rgba(255,255,255,.08) inset, 0 0 8px var(--dot);
-}
-
-/* Filete luminoso superior */
-.player .stat::after,.player .alt-stat::after{
-  content:""; position:absolute; inset:1px 2px auto 2px; height:28%;
-  border-radius:12px; background:linear-gradient(#ffffff14,#ffffff03);
-}
-
-
-/* Toggle M */
-.pitch.hide-stat .player .stat,
-.pitch.hide-stat .player .alt-stat{ display:none }
-.pitch.hide-stat .player .alt-cap{ top:calc(100% + var(--gap-label)) }
-
-/* Alt-cap e posição quando há alt-stat */
-.player .alt-cap{
-  top:calc(100% + (var(--gap-label) * 1.8));
-  padding:var(--altcap-py) var(--altcap-px);
-  font-size:var(--altcap-fs); font-weight:600; line-height:1.05; color:#111;
-  background:rgba(255,255,255,.96);
-  border:1px solid rgba(15,23,42,.12); border-radius:10px;
-  box-shadow:0 3px 8px rgba(2,6,23,.14);
-}
-.player .alt-stat{ display:none }
-.pitch:not(.hide-stat):not(.hide-doubt) .player .alt-cap + .alt-stat{
-  display:block; top:calc(100% + (var(--gap-label) * 2.55));
-}
-
-/* Toolbar */
-/* ===== Chips compactos com botão Reset extra ===== */
-.pitch-toolbar{
-  position:absolute; right:.5rem; top:.2rem; z-index:9;
-  display:flex; align-items:center; gap:.38rem;
-}
-.pitch-toolbar .btn-chip{
-  width:25px; height:25px;
-  border-radius:999px;
-  display:inline-flex; align-items:center; justify-content:center;
-  font:700 10px/1 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  letter-spacing:.2px;
-  color:#1e293b;
-  background:#fff;
-  border:1px solid #d9dee6;
-  box-shadow:0 1px 2px rgba(0,0,0,.05);
-  cursor:pointer; user-select:none;
-  transition:background .15s ease, color .15s ease,
-             border-color .15s ease, box-shadow .15s ease, transform .04s;
-}
-.pitch-toolbar .btn-chip:hover{
-  background:#f3f6fa; border-color:#cdd5df;
-}
-.pitch-toolbar .btn-chip:active{ transform:translateY(1px); }
-
-.pitch-toolbar .btn-chip.active{
-  color:#fff;
-  background:var(--laranja, #FB5904);
-  border-color:transparent;
-  box-shadow:0 2px 6px rgba(251,89,4,.22);
-}
-
-/* Botão Reset vermelho fixo */
-.pitch-toolbar .btn-reset{
-  background:#dc2626;
-  border-color:#dc2626;
-  color:#fff;
-}
-.pitch-toolbar .btn-reset:hover{
-  background:#b91c1c;
-  border-color:#b91c1c;
-}
-.pitch-toolbar .btn-reset i{
-  font-size:13px;
-  line-height:1;
-}
-
-/* Mobile */
-@media (max-width:430px){
-  .pitch-toolbar .btn-chip{ width:23px; height:23px; font-size:9.5px; }
-  .pitch-toolbar .btn-reset i{ font-size:12px; }
-}
-
-
-/* Marcador de Pênalti (P) */
-.pen-marker{
-  box-sizing:border-box; user-select:none; touch-action:none;
-  font:800 clamp(10px,.9vw,12px)/1 system-ui;
-}
-.pitch-toolbar .pen-marker.docked{
-  width:var(--chip-size); height:var(--chip-size);
-  display:inline-flex; align-items:center; justify-content:center;
-  border-radius:999px; color:#0b192b;
-  background:radial-gradient(circle at 30% 30%, #fff, #ffe68a);
-  border:2px solid rgba(11,25,43,.22);
-  box-shadow:0 1px 4px rgba(2,6,23,.14), 0 0 0 2px rgba(255,255,255,.6) inset;
-  cursor:grab;
-}
-.pen-marker:not(.docked){
-  position:absolute; z-index:4; transform:translate(-50%,-50%);
-  width:clamp(24px,2.6vw,30px); height:clamp(24px,2.6vw,30px);
-  display:flex; align-items:center; justify-content:center;
-  border-radius:50%; color:#111;
-  background:radial-gradient(circle at 30% 30%, #fffab0, #ffd54a);
-  border:2px solid #111;
-  box-shadow:0 6px 16px rgba(0,0,0,.30), 0 0 0 2px var(--chip-ring) inset;
-  cursor:grab;
-}
-.pen-marker.attached{
-  box-shadow:0 6px 16px rgba(0,0,0,.30), 0 0 0 2px var(--chip-ring) inset, 0 0 10px rgba(255,213,74,.55);
-}
-.pen-marker:active{ cursor:grabbing }
-
-/* Popover */
-.games-pop{
-  position:absolute; z-index:20; transform:translate(-50%,-8px);
-  min-width:180px; max-width:260px;
-  background:#fff; color:#0b192b;
-  border:1px solid rgba(15,23,42,.14); border-radius:10px;
-  padding:8px; font:600 12px/1.35 system-ui;
-  box-shadow:0 10px 24px rgba(0,0,0,.25); max-height:60vh; overflow:auto;
-}
-.games-pop h4{ margin:0 0 6px 0; font:800 12px/1 system-ui }
-.games-pop ul{ margin:0; padding:0; list-style:none }
-.games-pop li{ padding:3px 0; border-top:1px solid rgba(2,6,23,.06) }
-.games-pop li:first-child{ border-top:0 }
-.games-pop .loc{ font-weight:800 } .games-pop .neg{ color:#b91c1c } .games-pop .pos{ color:#15803d }
-
-.games-pop .pos   { color:#16a34a; font-weight:700; }  /* verde >5 */
-.games-pop .amber { color:#f59e0b; font-weight:700; }  /* 0–5 */
-.games-pop .neg   { color:#ef4444; font-weight:700; }  /* abaixo de 0 */
-
-/* Desenho de setas */
-.pitch.draw-on{ cursor:crosshair; }
-.draw-layer{ position:absolute; inset:0; pointer-events:none; }
-.draw-layer svg{ width:100%; height:100%; }
-.draw-path{
-  fill:none;
-  stroke:#fff;
-  stroke-width:2.4;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  filter:drop-shadow(0 1px 1px rgba(0,0,0,.45));
-}
-
-
-
-/* Micro-anim */
-@keyframes fadeUp{ to{ opacity:1; transform:translate(-50%,0); } }
-`;
-
-  let s = document.getElementById('pitch-view-style');
-  if (!s) {
-    s = document.createElement('style');
-    s.id = 'pitch-view-style';
-    document.head.appendChild(s);
-  }
-  s.textContent = css;
-})();
-  
 
 
 
@@ -883,24 +603,46 @@ function enableDraw(pitch){
   // evita mover jogadores enquanto desenha
   pitch.querySelectorAll('.player').forEach(p=>p.style.pointerEvents='none');
 
-  // bloqueia menu do botão direito só quando draw-on
+  // impedir menu do botão direito durante desenho
   const stopCtx = e => { if (pitch.classList.contains('draw-on')) e.preventDefault(); };
   pitch.addEventListener('contextmenu', stopCtx);
 
+  // SVG
   const svg = getDrawLayer(pitch).querySelector('svg');
   const g   = svg.querySelector('.paths');
+
+  /* ======================================
+     COR ATUAL  (white / red / green)
+     ====================================== */
+  let currentColor = 'white';
+
+  function handleKeyDown(e){
+    if (e.key === 'r' || e.key === 'R') currentColor = 'red';
+    if (e.key === 'g' || e.key === 'G') currentColor = 'green';
+  }
+  function handleKeyUp(e){
+    if (e.key === 'r' || e.key === 'R') currentColor = 'white';
+    if (e.key === 'g' || e.key === 'G') currentColor = 'white';
+  }
+
+  window.addEventListener('keydown', handleKeyDown);
+  window.addEventListener('keyup',   handleKeyUp);
+
   let drawing=false, pathEl=null, pts=[];
 
+  /* converter mouse → % dentro do pitch */
   const pct = (cx, cy)=>{
     const r = pitch.getBoundingClientRect();
-    return { x: Math.max(0, Math.min(100, ((cx-r.left)/r.width )*100)),
-             y: Math.max(0, Math.min(100, ((cy-r.top )/r.height)*100)) };
+    return {
+      x: Math.max(0, Math.min(100, ((cx-r.left)/r.width )*100)),
+      y: Math.max(0, Math.min(100, ((cy-r.top )/r.height)*100))
+    };
   };
 
-  // Suavização Catmull-Rom → Cubic Bezier
+  // suavização da curva
   function smoothPath(points, tension=0.5){
-    if (points.length<2) return '';
-    if (points.length===2){
+    if (points.length < 2) return '';
+    if (points.length === 2){
       return `M ${points[0].x},${points[0].y} L ${points[1].x},${points[1].y}`;
     }
     let d = `M ${points[0].x},${points[0].y}`;
@@ -922,49 +664,66 @@ function enableDraw(pitch){
 
   function down(e){
     if (!pitch.classList.contains('draw-on')) return;
-    if (e.button !== 2) return;          // apenas botão direito
+    if (e.button !== 2) return; // somente botão direito
     e.preventDefault();
+
     drawing=true;
-    pts=[pct(e.clientX,e.clientY)];
+    pts=[pct(e.clientX, e.clientY)];
+
     pathEl=document.createElementNS('http://www.w3.org/2000/svg','path');
-    pathEl.setAttribute('class','draw-path');
+    pathEl.setAttribute('class', `draw-path ${currentColor}`);
     g.appendChild(pathEl);
   }
 
   function move(e){
-    if(!drawing) return;
-    const p=pct(e.clientX,e.clientY);
-    // amostragem leve para não pesar
-    const last=pts[pts.length-1];
-    if (!last || Math.hypot(p.x-last.x, p.y-last.y) > 0.6){ // 0.6% do pitch
+    if (!drawing) return;
+    const p = pct(e.clientX, e.clientY);
+    const last = pts[pts.length-1];
+
+    if (!last || Math.hypot(p.x-last.x, p.y-last.y) > 0.6){
       pts.push(p);
-      if(pts.length>400) pts.shift();
+      if (pts.length > 400) pts.shift();
       pathEl.setAttribute('d', smoothPath(pts, 0.6));
     }
   }
 
   function up(){
-    if(!drawing) return;
+    if (!drawing) return;
     drawing=false;
-    if((pts?.length||0)<2){ pathEl.remove(); }
+    if ((pts?.length || 0) < 2 && pathEl){
+      pathEl.remove();
+    }
   }
 
-  pitch.__drawHandlers={down,move,up,stopCtx};
-  pitch.addEventListener('pointerdown',down);
-  window.addEventListener('pointermove',move);
-  window.addEventListener('pointerup',up);
+  // salvar handlers para remoção posterior
+  pitch.__drawHandlers = {
+    down, move, up, stopCtx, handleKeyDown, handleKeyUp
+  };
+
+  pitch.addEventListener('pointerdown', down);
+  window.addEventListener('pointermove', move);
+  window.addEventListener('pointerup',   up);
 }
 
 function disableDraw(pitch){
+  // reativa drag dos jogadores
   pitch.querySelectorAll('.player').forEach(p=>p.style.pointerEvents='');
-  const h=pitch.__drawHandlers;
-  if(!h) return;
-  pitch.removeEventListener('pointerdown',h.down);
-  window.removeEventListener('pointermove',h.move);
-  window.removeEventListener('pointerup',h.up);
-  pitch.removeEventListener('contextmenu',h.stopCtx);
-  pitch.__drawHandlers=null;
+
+  const h = pitch.__drawHandlers;
+  if (!h) return;
+
+  pitch.removeEventListener('pointerdown', h.down);
+  window.removeEventListener('pointermove', h.move);
+  window.removeEventListener('pointerup',   h.up);
+
+  pitch.removeEventListener('contextmenu', h.stopCtx);
+
+  window.removeEventListener('keydown', h.handleKeyDown);
+  window.removeEventListener('keyup',   h.handleKeyUp);
+
+  pitch.__drawHandlers = null;
 }
+
 
 
 
