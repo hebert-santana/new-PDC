@@ -32,32 +32,20 @@
   --chip-size:26px;
   --chip-ring:#ffd54a;
   --chip-fg:#0b192b;
-
-  /* Trilho global */
-  --rail-w:90%;
-  --rail-max:1280px;
-  --rail-pad-x:0; /* se quiser respiro lateral, troca para 8px/12px */
 }
 
 /* Ajustes pontuais hero */
 .hero-buttons .btn-nav{white-space:nowrap}
 .hero-buttons .cw-btn{margin-left:auto}
 
-/* Logo do header padronizada */
-#header-especialista .provaveis-image{
-  max-width:600px;
-  width:100%;
-  height:auto;
-  display:block;
-}
 
 /* Header centralizado no trilho (todas as páginas) */
 header .provaveis-image,
 .custom-provaveis-item .provaveis-image,
 .provaveis-image.banner-assine{
   display:block;
-  width:var(--rail-w);      /* 90% */
-  max-width:var(--rail-max);/* 1280px */
+  width:var(--rail-w);      /* 96% */
+  max-width:var(--rail-max);/* 1400px */
   margin:16px auto 24px;    /* centralizado */
   height:auto;
   border-radius:22px;
@@ -142,11 +130,6 @@ main.provaveis-container{
 
 /* Mobile */
 @media (max-width:768px){
-  :root{
-    --rail-w:100vw;
-    --rail-max:100vw;
-  }
-
   /* containers principais */
   #provaveis-container.container,
   #provaveis-container,
@@ -173,7 +156,6 @@ main.provaveis-container{
     width:auto;
     max-width:none;
   }
-
 
   /* MOBILE: banner ocupa todo o “cartão” branco */
   .custom-provaveis-item{padding:0}
@@ -1427,4 +1409,26 @@ main.provaveis-container{
 .nav-shortcut-bia i{font-size:16px}
 .nav-shortcut-bia.is-active{
   background:#6A28D6;
+}
+
+.status-card .tag{
+  font-size:.7rem;
+  padding:4px 10px;
+  border-radius:999px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow:0 1px 4px rgba(0,0,0,.04);
+  font-weight:500;
+}
+
+/* ============================================================================
+   AJUSTES FINOS: ALT-CAP (JOGADOR EM DÚVIDA)
+   ========================================================================== */
+
+.pitch .player .alt-cap{
+  top:calc(100% + (var(--gap-label) * 1.35));
+}
+
+.pitch:not(.hide-stat):not(.hide-doubt) .player .alt-cap + .alt-stat{
+  top:calc(100% + (var(--gap-label) * 2.1));
 }

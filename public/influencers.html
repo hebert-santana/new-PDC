@@ -130,16 +130,6 @@
       .influ-banner{font-size:.92rem;padding:8px 10px}
     }
 
-    /* Override local: deixar os balões de desfalques maiores nesta página */
-    .status-card .tag{
-      font-size:.7rem;
-      padding:4px 10px;
-      border-radius:999px;
-      background:#fff;
-      border:1px solid rgba(0,0,0,.08);
-      box-shadow:0 1px 4px rgba(0,0,0,.04);
-      font-weight:500;
-    }
   </style>
 </head>
 
@@ -164,18 +154,21 @@
 
   <!-- CONTEÚDO PRINCIPAL NO TRILHO LARGO -->
   <main id="provaveis-container">
+    <!-- faixa de aviso apenas para influenciadores -->
     <section class="mic-mast" aria-labelledby="mastTitle">
       <div class="mic-rail">
-      <div class="influ-banner" role="status" aria-live="polite">
-        <i class="bi bi-shield-lock-fill" aria-hidden="true"></i>
-        <strong>Área exclusiva para influenciadores</strong>
-        <span class="sep">•</span>
-        <span>Arraste os jogadores no campinho</span>
-        <span class="sep d-none d-sm-inline">•</span>
-        <span class="d-none d-sm-inline">Dica: <kbd>duplo clique</kbd> restaura a posição</span>
+        <div class="influ-banner" role="status" aria-live="polite">
+          <i class="bi bi-shield-lock-fill" aria-hidden="true"></i>
+          <strong>Área exclusiva para influenciadores</strong>
+          <span class="sep">•</span>
+          <span>Arraste os jogadores no campinho</span>
+          <span class="sep d-none d-sm-inline">•</span>
+          <span class="d-none d-sm-inline">Dica: <kbd>duplo clique</kbd> restaura a posição</span>
+        </div>
       </div>
+    </section>
 
-    <!-- usa a mesma navbar do site -->
+    <!-- mesma navbar de equipes do site principal -->
     <div data-include="navbar-equipes"></div>
 
     <div class="esconde-campinho" hidden></div>
@@ -188,6 +181,7 @@
     <div data-include="aviso-apoiadores"></div>
     <div data-include="footer"></div>
   </main>
+
 
   <!-- JS (ordem) -->
   <script defer src="/assets/js/layout.js"></script>
